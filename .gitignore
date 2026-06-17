@@ -1,0 +1,11 @@
+# Xcode / build
+.build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+
+# Genereret af XcodeGen — kør `xcodegen generate` for at genskabe
+Walkful.xcodeproj/
+
+# macOS
+.DS_Store
