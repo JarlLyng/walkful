@@ -3,6 +3,15 @@ import SwiftUI
 struct SettingsView: View {
     @Bindable var settings: AppSettings
 
+    private func resync() {
+        let enabled = settings.nudgesEnabled
+        let start = settings.nudgeStartHour
+        let end = settings.nudgeEndHour
+        Task { await NudgeScheduler.reschedule(enabled: enabled, startHour: start, endHour: end) }
+    }
+
+    private func hourLabel(_ h: Int) -> String { String(format: "%02d:00", h) }
+
     var body: some View {
         Form {
             Section("Daily goal") {
@@ -17,9 +26,21 @@ struct SettingsView: View {
 
             Section("Nudges") {
                 Toggle("Move reminders", isOn: $settings.nudgesEnabled)
-                    .onChange(of: settings.nudgesEnabled) { _, enabled in
-                        Task { await NudgeScheduler.reschedule(enabled: enabled) }
+                    .onChange(of: settings.nudgesEnabled) { _, _ in resync() }
+
+                if settings.nudgesEnabled {
+                    Picker("From", selection: $settings.nudgeStartHour) {
+                        ForEach(5..<13) { Text(hourLabel($0)).tag($0) }
                     }
+                    .onChange(of: settings.nudgeStartHour) { _, _ in resync() }
+                    Picker("Until", selection: $settings.nudgeEndHour) {
+                        ForEach(15..<24) { Text(hourLabel($0)).tag($0) }
+                    }
+                    .onChange(of: settings.nudgeEndHour) { _, _ in resync() }
+                    Text("Walkful only reminds you when you've actually been sitting a while, within these hours — at most a couple of times a day.")
+                        .font(.system(size: Tokens.FontSize.xs))
+                        .foregroundStyle(Tokens.Palette.textTertiary)
+                }
             }
 
             Section("Privacy") {

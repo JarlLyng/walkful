@@ -5,6 +5,7 @@ import SwiftData
 struct WalkfulApp: App {
     init() {
         MetricsSubscriber.shared.start()
+        SedentaryMonitor.register()   // must register before launch completes
     }
 
     var body: some Scene {
