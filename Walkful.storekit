@@ -1,0 +1,28 @@
+{
+  "identifier" : "WALKFUL-STOREKIT-CONFIG",
+  "nonRenewingSubscriptions" : [],
+  "products" : [
+    {
+      "displayPrice" : "29.00",
+      "familyShareable" : false,
+      "internalID" : "WALKFUL-PRO-0001",
+      "localizations" : [
+        {
+          "description" : "Unlock Insights and the interval-walking coach. A one-time purchase.",
+          "displayName" : "Walkful Pro",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.iamjarl.walkful.pro",
+      "referenceName" : "Walkful Pro",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+  },
+  "subscriptionGroups" : [],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

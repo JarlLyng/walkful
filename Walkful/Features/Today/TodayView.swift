@@ -4,8 +4,10 @@ import WidgetKit
 struct TodayView: View {
     var settings: AppSettings
     var health: HealthKitService
+    var store: Store
 
     @State private var showingCoach = false
+    @State private var showingPaywall = false
 
     private var goal: Int { settings.dailyGoal }
     private var progress: Double {
@@ -30,6 +32,7 @@ struct TodayView: View {
         .background(Tokens.Palette.appBackground)
         .safeAreaInset(edge: .top) { header }
         .sheet(isPresented: $showingCoach) { CoachView() }
+        .sheet(isPresented: $showingPaywall) { PaywallView(store: store) }
         .task {
             if health.authState == .authorized {
                 await health.refreshToday()
@@ -78,7 +81,7 @@ struct TodayView: View {
             }
 
             Button {
-                showingCoach = true
+                if store.isPro { showingCoach = true } else { showingPaywall = true }
             } label: {
                 HStack(spacing: Tokens.Spacing.md) {
                     Image(systemName: "figure.walk.motion")
@@ -93,7 +96,7 @@ struct TodayView: View {
                             .foregroundStyle(Tokens.Palette.textSecondary)
                     }
                     Spacer()
-                    Image(systemName: "chevron.right")
+                    Image(systemName: store.isPro ? "chevron.right" : "lock.fill")
                         .font(.system(size: Tokens.FontSize.sm))
                         .foregroundStyle(Tokens.Palette.textTertiary)
                 }
