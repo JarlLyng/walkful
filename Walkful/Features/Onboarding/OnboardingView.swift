@@ -103,7 +103,9 @@ struct OnboardingView: View {
         if step >= 3 {
             settings.hasOnboarded = true
             let enabled = settings.nudgesEnabled
-            Task { await NudgeScheduler.reschedule(enabled: enabled) }
+            let startHour = settings.nudgeStartHour
+            let endHour = settings.nudgeEndHour
+            Task { await NudgeScheduler.reschedule(enabled: enabled, startHour: startHour, endHour: endHour) }
         } else {
             withAnimation { step += 1 }
         }

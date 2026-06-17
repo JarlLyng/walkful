@@ -39,8 +39,10 @@ struct RootView: View {
                 .tabItem { Label("Settings", systemImage: "gearshape") }
         }
         .task {
-            // Hold planlagte nudges i sync med brugerens valg ved app-start.
-            await NudgeScheduler.reschedule(enabled: settings.nudgesEnabled)
+            // Hold planlagte nudges + sedentary-monitor i sync ved app-start.
+            await NudgeScheduler.reschedule(enabled: settings.nudgesEnabled,
+                                            startHour: settings.nudgeStartHour,
+                                            endHour: settings.nudgeEndHour)
         }
     }
 }

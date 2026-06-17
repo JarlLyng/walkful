@@ -6,6 +6,7 @@ xcuserdata/
 
 # Genereret af XcodeGen — kør `xcodegen generate` for at genskabe
 Walkful.xcodeproj/
+Walkful/Info.plist
 
 # macOS
 .DS_Store
