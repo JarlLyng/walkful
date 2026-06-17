@@ -6,6 +6,7 @@ All notable changes to Walkful are documented here. Format based on
 ## [Unreleased]
 
 ### Added
+- **Interval-walking coach** — a guided session alternating easy/brisk phases with haptic cues and a configurable number of rounds, launched from Today. On-device, grounded in Bente Klarlund Pedersen's advice (#1).
 - Today **dashboard**: progress ring with an evidence-based "meaning" line, stat chips (distance, active minutes, floors, week average), this-week bars, and a streak card.
 - **Insights** tab: consistency heatmap, best time of day, resting heart rate, brisk-minute 4-week trend, lifetime distance milestone.
 - Marketing **website** (`website/`) with SEO + GEO (structured data, FAQ schema) and a privacy policy page.
