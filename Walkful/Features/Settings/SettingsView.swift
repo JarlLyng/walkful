@@ -2,6 +2,9 @@ import SwiftUI
 
 struct SettingsView: View {
     @Bindable var settings: AppSettings
+    var store: Store
+
+    @State private var showingPaywall = false
 
     private func resync() {
         let enabled = settings.nudgesEnabled
@@ -43,6 +46,19 @@ struct SettingsView: View {
                 }
             }
 
+            Section("Walkful Pro") {
+                if store.isPro {
+                    Label("Pro unlocked — thank you!", systemImage: "checkmark.seal.fill")
+                        .font(.system(size: Tokens.FontSize.sm))
+                        .foregroundStyle(Tokens.Palette.textSecondary)
+                } else {
+                    Button("Unlock Walkful Pro") { showingPaywall = true }
+                        .foregroundStyle(Tokens.Palette.primary)
+                    Button("Restore purchase") { Task { await store.restore() } }
+                        .foregroundStyle(Tokens.Palette.textSecondary)
+                }
+            }
+
             Section("Privacy") {
                 Label("All data stays on your device", systemImage: "lock.fill")
                     .font(.system(size: Tokens.FontSize.sm))
@@ -50,5 +66,6 @@ struct SettingsView: View {
             }
         }
         .tint(Tokens.Palette.primary)
+        .sheet(isPresented: $showingPaywall) { PaywallView(store: store) }
     }
 }

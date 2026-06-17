@@ -75,3 +75,15 @@ targets:
         GENERATE_INFOPLIST_FILE: NO
         PRODUCT_BUNDLE_IDENTIFIER: com.iamjarl.walkful.widget
         TARGETED_DEVICE_FAMILY: "1"
+
+schemes:
+  Walkful:
+    build:
+      targets:
+        Walkful: all
+        WalkfulWidget: all
+    run:
+      config: Debug
+      storeKitConfiguration: Walkful.storekit
+    archive:
+      config: Release

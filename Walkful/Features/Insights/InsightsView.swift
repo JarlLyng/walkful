@@ -3,36 +3,63 @@ import SwiftUI
 struct InsightsView: View {
     var settings: AppSettings
     var health: HealthKitService
+    var store: Store
 
+    @State private var showingPaywall = false
     private let window = 30
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Tokens.Spacing.xl) {
-                if health.authState == .authorized {
+                if health.authState != .authorized {
+                    connectCard
+                } else if !store.isPro {
+                    locked
+                } else {
                     consistency
                     chips
                     activeMinutes
                     lifetime
-                } else {
-                    Card {
-                        VStack(alignment: .leading, spacing: Tokens.Spacing.sm) {
-                            Text("Connect Apple Health")
-                                .font(.system(size: Tokens.FontSize.lg, weight: .semibold))
-                                .foregroundStyle(Tokens.Palette.textPrimary)
-                            Text("Connect on the Today tab to unlock your insights.")
-                                .font(.system(size: Tokens.FontSize.sm))
-                                .foregroundStyle(Tokens.Palette.textSecondary)
-                        }
-                    }
                 }
             }
             .padding(Tokens.Spacing.lg)
         }
         .background(Tokens.Palette.appBackground)
         .safeAreaInset(edge: .top) { header }
+        .sheet(isPresented: $showingPaywall) { PaywallView(store: store) }
         .task {
-            if health.authState == .authorized { await health.loadInsights() }
+            if health.authState == .authorized, store.isPro { await health.loadInsights() }
+        }
+    }
+
+    private var locked: some View {
+        Card {
+            VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
+                Image(systemName: "chart.bar.fill")
+                    .font(.system(size: 28))
+                    .foregroundStyle(Tokens.Palette.primary)
+                Text("Insights are part of Walkful Pro")
+                    .font(.system(size: Tokens.FontSize.lg, weight: .semibold))
+                    .foregroundStyle(Tokens.Palette.textPrimary)
+                Text("Consistency heatmap, best time of day, brisk-minute trends and lifetime distance. A one-time unlock.")
+                    .font(.system(size: Tokens.FontSize.sm))
+                    .foregroundStyle(Tokens.Palette.textSecondary)
+                PrimaryButton(title: "Unlock Walkful Pro") { showingPaywall = true }
+                    .padding(.top, Tokens.Spacing.xs)
+            }
+        }
+    }
+
+    private var connectCard: some View {
+        Card {
+            VStack(alignment: .leading, spacing: Tokens.Spacing.sm) {
+                Text("Connect Apple Health")
+                    .font(.system(size: Tokens.FontSize.lg, weight: .semibold))
+                    .foregroundStyle(Tokens.Palette.textPrimary)
+                Text("Connect on the Today tab to unlock your insights.")
+                    .font(.system(size: Tokens.FontSize.sm))
+                    .foregroundStyle(Tokens.Palette.textSecondary)
+            }
         }
     }
 
