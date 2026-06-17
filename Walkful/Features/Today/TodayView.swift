@@ -1,4 +1,5 @@
 import SwiftUI
+import WidgetKit
 
 struct TodayView: View {
     var settings: AppSettings
@@ -33,8 +34,10 @@ struct TodayView: View {
             if health.authState == .authorized {
                 await health.refreshToday()
                 await health.loadHistory()
+                publishToWidget()
             }
         }
+        .onChange(of: health.todaySteps) { _, _ in publishToWidget() }
     }
 
     // MARK: - Dashboard
@@ -140,6 +143,11 @@ struct TodayView: View {
                 }
             }
         }
+    }
+
+    private func publishToWidget() {
+        SharedStore.save(steps: health.todaySteps, goal: goal)
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     private var meaning: String {

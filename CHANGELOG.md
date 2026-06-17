@@ -6,6 +6,7 @@ All notable changes to Walkful are documented here. Format based on
 ## [Unreleased]
 
 ### Added
+- **Home Screen & Lock Screen widgets** (WidgetKit) — a step-progress widget in `systemSmall` plus Lock Screen accessory families (circular, inline, rectangular). The app publishes today's snapshot to a shared App Group; the widget reads it. On-device (#3).
 - **Smarter, sedentary-aware nudges** — a background check (BackgroundTasks + HealthKit) fires a gentle reminder only when you've actually been still, within a user-set active-hours window, rate-limited to ~once per 2h. Quiet-hours pickers added to Settings (#2).
 - **Interval-walking coach** — a guided session alternating easy/brisk phases with haptic cues and a configurable number of rounds, launched from Today. On-device, grounded in Bente Klarlund Pedersen's advice (#1).
 - Today **dashboard**: progress ring with an evidence-based "meaning" line, stat chips (distance, active minutes, floors, week average), this-week bars, and a streak card.
