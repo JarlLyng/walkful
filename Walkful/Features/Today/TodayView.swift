@@ -4,6 +4,8 @@ struct TodayView: View {
     var settings: AppSettings
     var health: HealthKitService
 
+    @State private var showingCoach = false
+
     private var goal: Int { settings.dailyGoal }
     private var progress: Double {
         goal > 0 ? Double(health.todaySteps) / Double(goal) : 0
@@ -26,6 +28,7 @@ struct TodayView: View {
         }
         .background(Tokens.Palette.appBackground)
         .safeAreaInset(edge: .top) { header }
+        .sheet(isPresented: $showingCoach) { CoachView() }
         .task {
             if health.authState == .authorized {
                 await health.refreshToday()
@@ -70,6 +73,33 @@ struct TodayView: View {
                 StatChip(value: "\(health.todayFloors)", unit: nil, label: "floors")
                 StatChip(value: health.weekAveragePerDay.stepsFormatted, unit: nil, label: "week avg")
             }
+
+            Button {
+                showingCoach = true
+            } label: {
+                HStack(spacing: Tokens.Spacing.md) {
+                    Image(systemName: "figure.walk.motion")
+                        .font(.system(size: 22))
+                        .foregroundStyle(Tokens.Palette.primary)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Start an interval walk")
+                            .font(.system(size: Tokens.FontSize.base, weight: .semibold))
+                            .foregroundStyle(Tokens.Palette.textPrimary)
+                        Text("3 min easy / 3 min brisk — boost your fitness")
+                            .font(.system(size: Tokens.FontSize.sm))
+                            .foregroundStyle(Tokens.Palette.textSecondary)
+                    }
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: Tokens.FontSize.sm))
+                        .foregroundStyle(Tokens.Palette.textTertiary)
+                }
+                .padding(Tokens.Spacing.lg)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Tokens.Palette.primary.opacity(0.10))
+                .clipShape(RoundedRectangle(cornerRadius: Tokens.Radius.lg))
+            }
+            .buttonStyle(.plain)
 
             VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
                 HStack {
