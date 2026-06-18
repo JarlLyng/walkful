@@ -105,6 +105,8 @@ walking-app/
 
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** — how the code is organised and how data flows.
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** — setup, conventions, workflow, release.
+- **[docs/ROADMAP.md](docs/ROADMAP.md)** — project status, how work is tracked, and where to start (handoff).
+- **[docs/app-store-release.md](docs/app-store-release.md)** — App Store listing copy + submit checklist.
 - **[CHANGELOG.md](CHANGELOG.md)** — notable changes.
 - **[PRD.md](PRD.md)** · **[RESEARCH.md](RESEARCH.md)** · **[TECH_PLAN.md](TECH_PLAN.md)** — product spec, market/science research, technical plan (Danish).
 - **[website/](website/)** — marketing site + privacy policy.
