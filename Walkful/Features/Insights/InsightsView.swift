@@ -6,7 +6,13 @@ struct InsightsView: View {
     var store: Store
 
     @State private var showingPaywall = false
-    private let window = 30
+    @State private var range: TrendRange = .month
+    private let heatmapDays = 364
+
+    enum TrendRange: String, CaseIterable, Identifiable {
+        case week = "Week", month = "Month", year = "Year"
+        var id: String { rawValue }
+    }
 
     var body: some View {
         ScrollView {
@@ -16,7 +22,8 @@ struct InsightsView: View {
                 } else if !store.isPro {
                     locked
                 } else {
-                    consistency
+                    trends
+                    yearHeatmap
                     chips
                     activeMinutes
                     lifetime
@@ -63,11 +70,41 @@ struct InsightsView: View {
         }
     }
 
-    // MARK: - Consistency heatmap
+    // MARK: - Trends (week / month / year)
 
-    private var consistency: some View {
-        let days = health.recentDays(window)
-        let atGoal = health.daysAtGoal(lastDays: window, goal: settings.dailyGoal)
+    private var trendValues: [Int] {
+        switch range {
+        case .week: return health.recentDays(7).map(\.steps)
+        case .month: return health.recentDays(30).map(\.steps)
+        case .year: return health.monthlyTotals(12)
+        }
+    }
+
+    private var trendCaption: String {
+        let vals = trendValues
+        guard !vals.isEmpty else { return "No data yet" }
+        let avg = vals.reduce(0, +) / vals.count
+        return "Steps · avg \(avg.stepsFormatted)/\(range == .year ? "month" : "day")"
+    }
+
+    private var trends: some View {
+        VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
+            Picker("Range", selection: $range) {
+                ForEach(TrendRange.allCases) { Text($0.rawValue).tag($0) }
+            }
+            .pickerStyle(.segmented)
+            Text(trendCaption)
+                .font(.system(size: Tokens.FontSize.xs))
+                .foregroundStyle(Tokens.Palette.textTertiary)
+            TrendChartView(values: trendValues)
+        }
+    }
+
+    // MARK: - Consistency (year heatmap)
+
+    private var yearHeatmap: some View {
+        let days = health.recentDays(heatmapDays)
+        let atGoal = health.daysAtGoal(lastDays: heatmapDays, goal: settings.dailyGoal)
         return VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
             HStack {
                 Text("Consistency")
@@ -78,9 +115,9 @@ struct InsightsView: View {
                     .font(.system(size: Tokens.FontSize.xs))
                     .foregroundStyle(Tokens.Palette.textTertiary)
             }
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 10), spacing: 4) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 3), count: 19), spacing: 3) {
                 ForEach(days) { day in
-                    RoundedRectangle(cornerRadius: 3)
+                    RoundedRectangle(cornerRadius: 2)
                         .fill(cellColor(day.steps))
                         .aspectRatio(1, contentMode: .fit)
                 }

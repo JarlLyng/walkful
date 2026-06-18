@@ -20,6 +20,34 @@ struct Card<Content: View>: View {
     }
 }
 
+// MARK: - TrendChart (bars + average line)
+
+struct TrendChartView: View {
+    var values: [Int]
+    var height: CGFloat = 96
+
+    private var scaleMax: Int { max(values.max() ?? 1, 1) }
+    private var average: Int { values.isEmpty ? 0 : values.reduce(0, +) / values.count }
+
+    var body: some View {
+        HStack(alignment: .bottom, spacing: 3) {
+            ForEach(Array(values.enumerated()), id: \.offset) { _, v in
+                RoundedRectangle(cornerRadius: 2)
+                    .fill(Tokens.Palette.primary)
+                    .frame(height: max(3, height * CGFloat(v) / CGFloat(scaleMax)))
+                    .frame(maxWidth: .infinity)
+            }
+        }
+        .frame(height: height, alignment: .bottom)
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(Tokens.Palette.accentText.opacity(0.55))
+                .frame(height: 1)
+                .padding(.bottom, height * CGFloat(average) / CGFloat(scaleMax))
+        }
+    }
+}
+
 // MARK: - PrimaryButton
 
 struct PrimaryButton: View {
