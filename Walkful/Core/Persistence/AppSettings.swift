@@ -5,13 +5,17 @@ import SwiftData
 /// Vi behandler den som en singleton (én række).
 @Model
 final class AppSettings {
-    var dailyGoal: Int
-    var nudgesEnabled: Bool
-    var hasOnboarded: Bool
+    // NB: inline default values are REQUIRED for SwiftData lightweight migration.
+    // A default only in init() is not enough — adding a non-optional property
+    // without an inline default fails to open an existing store (white screen on
+    // upgrade). Keep an inline default on every property.
+    var dailyGoal: Int = 7_000
+    var nudgesEnabled: Bool = true
+    var hasOnboarded: Bool = false
 
     /// Aktiv-tidsvindue for nudges (quiet hours uden for). 24-timers ur.
-    var nudgeStartHour: Int
-    var nudgeEndHour: Int
+    var nudgeStartHour: Int = 9
+    var nudgeEndHour: Int = 21
 
     init(dailyGoal: Int = 7_000,
          nudgesEnabled: Bool = true,
