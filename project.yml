@@ -76,6 +76,18 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.iamjarl.walkful.widget
         TARGETED_DEVICE_FAMILY: "1"
 
+  WalkfulTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests
+    dependencies:
+      - target: Walkful
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.iamjarl.walkful.tests
+
 schemes:
   Walkful:
     build:
@@ -85,5 +97,8 @@ schemes:
     run:
       config: Debug
       storeKitConfiguration: Walkful.storekit
+    test:
+      targets:
+        - WalkfulTests
     archive:
       config: Release
