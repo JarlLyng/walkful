@@ -27,6 +27,8 @@ struct InsightsView: View {
                     chips
                     mobility
                     activeMinutes
+                    records
+                    recap
                     lifetime
                 }
             }
@@ -206,6 +208,66 @@ struct InsightsView: View {
                          height: 48)
             }
         }
+    }
+
+    // MARK: - Records gallery
+
+    private var records: some View {
+        VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
+            Text("Records")
+                .font(.system(size: Tokens.FontSize.sm, weight: .semibold))
+                .foregroundStyle(Tokens.Palette.textPrimary)
+            VStack(spacing: 0) {
+                recordRow("Best day", health.bestDaySteps.stepsFormatted)
+                recordRow("Best week", health.bestWeekTotal.stepsFormatted)
+                recordRow("Best month", health.bestMonthSteps.stepsFormatted)
+                recordRow("Longest streak", "\(health.longestStreak(goal: settings.dailyGoal)) days")
+                recordRow("Most floors", "\(health.mostFloorsInADay)")
+            }
+        }
+    }
+
+    private func recordRow(_ label: String, _ value: String) -> some View {
+        HStack {
+            Text(label)
+                .font(.system(size: Tokens.FontSize.sm))
+                .foregroundStyle(Tokens.Palette.textPrimary)
+            Spacer()
+            Text(value)
+                .font(.system(size: Tokens.FontSize.sm, weight: .semibold))
+                .foregroundStyle(Tokens.Palette.accentText)
+        }
+        .padding(.vertical, Tokens.Spacing.sm)
+        .overlay(alignment: .bottom) {
+            Rectangle().fill(Tokens.Palette.borderSubtle).frame(height: 0.5)
+        }
+    }
+
+    // MARK: - Monthly recap
+
+    @ViewBuilder private var recap: some View {
+        if health.thisMonthSteps > 0 {
+            Card {
+                VStack(alignment: .leading, spacing: Tokens.Spacing.xs) {
+                    Text("This month")
+                        .font(.system(size: Tokens.FontSize.sm))
+                        .foregroundStyle(Tokens.Palette.textSecondary)
+                    Text("\(health.thisMonthSteps.stepsFormatted) steps")
+                        .font(.system(size: Tokens.FontSize.xl, weight: .semibold))
+                        .foregroundStyle(Tokens.Palette.accentText)
+                    Text(recapDelta)
+                        .font(.system(size: Tokens.FontSize.sm))
+                        .foregroundStyle(Tokens.Palette.textPrimary)
+                }
+            }
+        }
+    }
+
+    private var recapDelta: String {
+        guard health.lastMonthSteps > 0 else { return "Your first month of data — every step counts." }
+        let diff = health.thisMonthSteps - health.lastMonthSteps
+        let pct = Int((Double(abs(diff)) / Double(health.lastMonthSteps) * 100).rounded())
+        return diff >= 0 ? "Up \(pct)% on last month." : "Down \(pct)% on last month — keep going."
     }
 
     // MARK: - Lifetime milestone
