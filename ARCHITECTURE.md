@@ -19,24 +19,30 @@ WalkfulApp (@main)
         └─ RootView         (if hasOnboarded)        // TabView: Today / Insights / Settings
 ```
 
-- `WalkfulApp.init()` starts `MetricsSubscriber` (MetricKit).
-- `RootContainer` owns the single `HealthKitService` instance and injects it into both onboarding and the tabs, so the authorization granted during onboarding is shared app-wide.
+- `WalkfulApp.init()` starts `MetricsSubscriber` (MetricKit) and registers the `SedentaryMonitor` background task.
+- `RootContainer` owns the single `HealthKitService` and `Store` instances and injects them into the tabs (and `HealthKitService` into onboarding), so authorization and Pro entitlement are shared app-wide. It calls `store.load()` on appear.
 
 ## Modules
 
 | Path | Responsibility |
 |------|----------------|
-| `Core/Health/HealthKitService.swift` | `@MainActor @Observable` service. Read-only HealthKit access (steps, distance, flights, active minutes, resting HR). Today's totals, weekly history, insights (consistency, best time of day, lifetime distance, streaks). Live updates via `HKObserverQuery`. |
-| `Core/Persistence/AppSettings.swift` | SwiftData `@Model` singleton: `dailyGoal`, `nudgesEnabled`, `hasOnboarded`. |
-| `Core/Notifications/NudgeScheduler.swift` | Local `UserNotifications` only. Schedules/cancels gentle movement reminders based on `nudgesEnabled`. |
+| `Core/Health/HealthKitService.swift` | `@MainActor @Observable` service. Read-only HealthKit access (steps, distance, flights, active minutes, resting HR, walking speed/steadiness, VO₂max). Today's totals, ~1 year of daily history, monthly totals, trends, records (best day/week/month, streaks, most floors), best time of day, lifetime distance. Live updates via `HKObserverQuery`. |
+| `Core/Persistence/AppSettings.swift` | SwiftData `@Model` singleton: `dailyGoal`, `nudgesEnabled`, `hasOnboarded`, `nudgeStartHour`/`nudgeEndHour` (active-hours window). |
+| `Core/Notifications/NudgeScheduler.swift` | Local `UserNotifications`. Baseline reminders clamped to the active-hours window; keeps `SedentaryMonitor`'s mirrored settings in sync. |
+| `Core/Notifications/SedentaryMonitor.swift` | `BackgroundTasks` (`BGAppRefreshTask`) + HealthKit. The smart layer: nudges only when actually sedentary, in-window, rate-limited (~2h). |
+| `Core/Store/Store.swift` | StoreKit 2 (`@MainActor @Observable`). One-time "Walkful Pro" unlock; `isPro` from `Transaction.currentEntitlements`; `purchase()`/`restore()` + updates listener. |
+| `Core/Shared/SharedStore.swift` | Writes today's snapshot (steps + goal) to the App Group (`group.com.iamjarl.walkful`) for the widget. Compiled into both the app and the widget. |
 | `Core/Diagnostics/MetricsSubscriber.swift` | MetricKit subscriber — crash/performance payloads delivered by the OS (no third-party SDK, no servers). |
 | `Core/Theme/WalkfulTheme.swift` | `Tokens` facade over `IAMJARLDesignTokens`; builds light/dark-adaptive `Color`s. |
 | `Core/Theme/Components.swift` | Reusable views: `Card`, `PrimaryButton`, `ProgressRing`, `StatChip`, `WeekBars`. |
-| `Core/Formatters.swift` | `Int.stepsFormatted` (en_US grouping). |
+| `Core/Formatters.swift` | `Int.stepsFormatted` (en_US grouping). Also compiled into the widget. |
 | `Features/Onboarding` | 4-step onboarding; writes goal/nudges to `AppSettings`. |
-| `Features/Today` | Dashboard: ring + meaning line, stat chips, this-week bars, streak. |
-| `Features/Insights` | Consistency heatmap, best time / resting HR, brisk-minute trend, lifetime milestone. |
-| `Features/Settings` | Goal stepper, nudge toggle, privacy note. |
+| `Features/Today` | Dashboard: ring + meaning line, stat chips, this-week bars, streak, interval-coach CTA. Publishes the widget snapshot. Coach is **Pro-gated** (→ paywall). |
+| `Features/Insights` | **Pro-gated.** Week/month/year trends + year heatmap, best time / longest streak, mobility & fitness (walking speed/steadiness/VO₂max/resting HR), brisk-minute trend, records gallery, monthly recap, lifetime milestone. |
+| `Features/Coach` | `IntervalCoach` (model) + `CoachView` — guided easy/brisk interval walk with haptics. |
+| `Features/Paywall` | `PaywallView` — calm one-time-unlock paywall + restore. |
+| `Features/Settings` | Goal stepper, nudge toggle + active-hours window, Walkful Pro section, privacy note. |
+| `WalkfulWidget/` | WidgetKit extension — `systemSmall` + Lock Screen accessory families. Reads the App Group snapshot via `SharedStore`. |
 
 ## Data flow
 
@@ -66,6 +72,15 @@ AppSettings (@Model, @Bindable) ──▶ goal & prefs drive the ring, streaks, 
 3. Surface it in a view using `Tokens` + an existing component (`StatChip`, `WeekBars`, `Card`).
 4. Handle the empty/zero state gracefully (no Apple Watch → some metrics are absent).
 
+## Freemium & gating
+
+- `Store.isPro` is the single source of truth. The **Today dashboard is free**; the **interval coach** and the **Insights tab** are gated. Locked entry points present `PaywallView`.
+- Entitlement is checked on-device via StoreKit 2 (`Transaction.currentEntitlements`) — no server. A local `Walkful.storekit` config (wired into the run scheme) drives purchases in the simulator; the real IAP (`com.iamjarl.walkful.pro`) must exist in App Store Connect for TestFlight/production.
+
+## Widget & App Group
+
+The app writes a small `DailySnapshot` (steps + goal) to the shared App Group (`group.com.iamjarl.walkful`) via `SharedStore`, then calls `WidgetCenter.reloadAllTimelines()`. The widget reads that snapshot — it does **not** access HealthKit itself. `SharedStore` and `Formatters` are compiled into both targets.
+
 ## Build & generation
 
-The `.xcodeproj` is generated from `project.yml` by XcodeGen and is git-ignored. Capabilities (HealthKit), Info.plist keys (usage strings, export-compliance), signing team, and the SPM dependency all live in `project.yml`.
+The `.xcodeproj` is generated from `project.yml` by XcodeGen and is git-ignored, along with the generated `Walkful/Info.plist` and `WalkfulWidget/Info.plist`. Two targets: the **app** and the **`WalkfulWidget`** extension (embedded). Capabilities (HealthKit, App Groups), Info.plist keys (usage strings, export-compliance, `BGTaskSchedulerPermittedIdentifiers`, `UIBackgroundModes`, widget `NSExtension`), signing team, the SPM dependency, and the run scheme's StoreKit config all live in `project.yml`. Because `BGTaskSchedulerPermittedIdentifiers` has no `INFOPLIST_KEY_` build setting, both targets use a **managed Info.plist** (`GENERATE_INFOPLIST_FILE: NO`).
