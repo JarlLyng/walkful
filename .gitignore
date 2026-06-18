@@ -11,4 +11,4 @@ WalkfulWidget/Info.plist
 
 # macOS
 .DS_Store
-screenshots/
+/screenshots/
