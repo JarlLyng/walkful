@@ -28,6 +28,7 @@ enum NudgeScheduler {
 
     /// Syncs scheduled nudges + the sedentary monitor with the user's settings. Idempotent.
     static func reschedule(enabled: Bool, startHour: Int, endHour: Int) async {
+        if LaunchArgs.screenshots { return } // no permission prompts during screenshots
         // Keep the background monitor's mirrored settings in sync, and (re)queue it.
         SedentaryMonitor.updateSettings(enabled: enabled, startHour: startHour, endHour: endHour)
 

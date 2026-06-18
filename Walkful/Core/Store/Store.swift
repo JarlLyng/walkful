@@ -66,6 +66,11 @@ final class Store {
         isPro = owned
     }
 
+    #if DEBUG
+    /// For App Store screenshots — unlock Pro without a purchase.
+    func forcePro() { isPro = true }
+    #endif
+
     private func listenForTransactions() -> Task<Void, Never> {
         Task { [weak self] in
             for await _ in Transaction.updates {

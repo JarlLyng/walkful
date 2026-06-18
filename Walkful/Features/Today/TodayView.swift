@@ -34,6 +34,7 @@ struct TodayView: View {
         .sheet(isPresented: $showingCoach) { CoachView() }
         .sheet(isPresented: $showingPaywall) { PaywallView(store: store) }
         .task {
+            if LaunchArgs.screenshots { return }
             if health.authState == .authorized {
                 await health.refreshToday()
                 await health.loadHistory()
