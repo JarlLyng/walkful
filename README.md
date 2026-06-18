@@ -2,9 +2,21 @@
 
 > Every step counts.
 
+![Platform](https://img.shields.io/badge/platform-iOS%2018%2B-000000?logo=apple)
+![Swift](https://img.shields.io/badge/Swift-5-F05138?logo=swift&logoColor=white)
+![Status](https://img.shields.io/badge/status-TestFlight-3C3489)
+![Privacy](https://img.shields.io/badge/privacy-Data%20Not%20Collected-2E7D32)
+![License](https://img.shields.io/badge/license-Proprietary-5F5E5A)
+
 A calm, private, evidence-based **step & walking tracker for iPhone and Apple Watch**. Walkful adds a meaningful motivation layer on top of Apple Health — and keeps **everything on your device**: no accounts, no servers, no ads, no data collection.
 
-Made by **IAMJARL**.
+Made by **IAMJARL** · [walkful.iamjarl.com](https://walkful.iamjarl.com)
+
+<p align="center">
+  <img src="docs/assets/today-light.png" width="232" alt="Today screen, light mode" />
+  <img src="docs/assets/today-dark.png" width="232" alt="Today screen, dark mode" />
+  <img src="docs/assets/insights-dark.png" width="232" alt="Insights screen, dark mode" />
+</p>
 
 ---
 
