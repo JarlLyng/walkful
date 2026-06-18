@@ -53,10 +53,10 @@ struct TodayView: View {
                     .frame(width: 200, height: 200)
                 VStack(spacing: 2) {
                     Text(health.todaySteps.stepsFormatted)
-                        .font(Tokens.rounded(Tokens.FontSize.xxl, .bold))
+                        .font(Tokens.TextStyle.hero)
                         .foregroundStyle(Tokens.Palette.textPrimary)
                     Text("of \(goal.stepsFormatted)")
-                        .font(.system(size: Tokens.FontSize.sm))
+                        .font(Tokens.TextStyle.subheadline)
                         .foregroundStyle(Tokens.Palette.textTertiary)
                 }
             }
@@ -67,7 +67,7 @@ struct TodayView: View {
             .accessibilityValue("\(Int(progress * 100)) percent of your goal")
 
             Text(meaning)
-                .font(.system(size: Tokens.FontSize.sm))
+                .font(Tokens.TextStyle.subheadline)
                 .foregroundStyle(Tokens.Palette.accentText)
                 .frame(maxWidth: .infinity)
                 .multilineTextAlignment(.center)
@@ -90,15 +90,15 @@ struct TodayView: View {
                         .foregroundStyle(Tokens.Palette.primary)
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Start an interval walk")
-                            .font(.system(size: Tokens.FontSize.base, weight: .semibold))
+                            .font(Tokens.TextStyle.headline)
                             .foregroundStyle(Tokens.Palette.textPrimary)
                         Text("3 min easy / 3 min brisk — boost your fitness")
-                            .font(.system(size: Tokens.FontSize.sm))
+                            .font(Tokens.TextStyle.subheadline)
                             .foregroundStyle(Tokens.Palette.textSecondary)
                     }
                     Spacer()
                     Image(systemName: store.isPro ? "chevron.right" : "lock.fill")
-                        .font(.system(size: Tokens.FontSize.sm))
+                        .font(Tokens.TextStyle.subheadline)
                         .foregroundStyle(Tokens.Palette.textTertiary)
                 }
                 .padding(Tokens.Spacing.lg)
@@ -111,16 +111,16 @@ struct TodayView: View {
             VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
                 HStack {
                     Text("This week")
-                        .font(.system(size: Tokens.FontSize.sm, weight: .semibold))
+                        .font(Tokens.TextStyle.subheadlineSemibold)
                         .foregroundStyle(Tokens.Palette.textPrimary)
                     Spacer()
                     Text("\(health.thisWeekTotal.stepsFormatted) steps")
-                        .font(.system(size: Tokens.FontSize.sm))
+                        .font(Tokens.TextStyle.subheadline)
                         .foregroundStyle(Tokens.Palette.textTertiary)
                 }
                 if health.weekDays.isEmpty {
                     Text("No steps yet this week.")
-                        .font(.system(size: Tokens.FontSize.sm))
+                        .font(Tokens.TextStyle.subheadline)
                         .foregroundStyle(Tokens.Palette.textTertiary)
                 } else {
                     WeekBars(values: health.weekDays.map(\.steps),
@@ -137,10 +137,10 @@ struct TodayView: View {
                             .foregroundStyle(Tokens.Palette.primary)
                         VStack(alignment: .leading, spacing: 2) {
                             Text("\(streak)-day streak")
-                                .font(.system(size: Tokens.FontSize.base, weight: .semibold))
+                                .font(Tokens.TextStyle.headline)
                                 .foregroundStyle(Tokens.Palette.textPrimary)
                             Text("Your best is \(max(streak, health.longestStreak(goal: goal))) days.")
-                                .font(.system(size: Tokens.FontSize.sm))
+                                .font(Tokens.TextStyle.subheadline)
                                 .foregroundStyle(Tokens.Palette.textSecondary)
                         }
                     }
@@ -172,10 +172,10 @@ struct TodayView: View {
                     .font(.system(size: 28))
                     .foregroundStyle(Tokens.Palette.primary)
                 Text("Connect Apple Health")
-                    .font(.system(size: Tokens.FontSize.lg, weight: .semibold))
+                    .font(Tokens.TextStyle.title)
                     .foregroundStyle(Tokens.Palette.textPrimary)
                 Text("Walkful reads your steps to show today's progress. Your data never leaves your device — we have no servers.")
-                    .font(.system(size: Tokens.FontSize.sm))
+                    .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textSecondary)
                 PrimaryButton(title: "Connect") {
                     Task { await health.requestAuthorization() }
@@ -192,10 +192,10 @@ struct TodayView: View {
                     .font(.system(size: 28))
                     .foregroundStyle(Tokens.Palette.textSecondary)
                 Text(title)
-                    .font(.system(size: Tokens.FontSize.lg, weight: .semibold))
+                    .font(Tokens.TextStyle.title)
                     .foregroundStyle(Tokens.Palette.textPrimary)
                 Text(message)
-                    .font(.system(size: Tokens.FontSize.sm))
+                    .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textSecondary)
             }
         }
@@ -205,10 +205,10 @@ struct TodayView: View {
         HStack {
             VStack(alignment: .leading, spacing: 0) {
                 Text("Today")
-                    .font(.system(size: Tokens.FontSize.lg, weight: .semibold))
+                    .font(Tokens.TextStyle.title)
                     .foregroundStyle(Tokens.Palette.textPrimary)
                 Text(Date.now.formatted(.dateTime.weekday(.abbreviated).day().month(.abbreviated)))
-                    .font(.system(size: Tokens.FontSize.xs))
+                    .font(Tokens.TextStyle.caption)
                     .foregroundStyle(Tokens.Palette.textTertiary)
             }
             Spacer()

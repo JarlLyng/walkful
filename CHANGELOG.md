@@ -5,6 +5,9 @@ All notable changes to Walkful are documented here. Format based on
 
 ## [Unreleased]
 
+### Added
+- **Accessibility** — full Dynamic Type (scalable text styles), VoiceOver support (decorative charts hidden, labelled ring, meaningful text equivalents), Reduced Motion (ring animation respects the setting), and verified contrast in light + dark (#9).
+
 ### Changed
 - **Aurora visual refresh** — a premium layer over the IAMJARL tokens: gradient progress ring with a soft glow, frosted glass cards, gradient-filled trend/week bars, rounded numerals, and a subtle aurora backdrop on Today/Insights. Light = purple→pink, dark = lime→teal→blue (#30).
 

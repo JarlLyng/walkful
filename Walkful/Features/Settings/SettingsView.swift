@@ -23,7 +23,7 @@ struct SettingsView: View {
                         .foregroundStyle(Tokens.Palette.textPrimary)
                 }
                 Text("Every step counts. We suggest ~7,000 — not 10,000, which is a myth.")
-                    .font(.system(size: Tokens.FontSize.xs))
+                    .font(Tokens.TextStyle.caption)
                     .foregroundStyle(Tokens.Palette.textTertiary)
             }
 
@@ -41,7 +41,7 @@ struct SettingsView: View {
                     }
                     .onChange(of: settings.nudgeEndHour) { _, _ in resync() }
                     Text("Walkful only reminds you when you've actually been sitting a while, within these hours — at most a couple of times a day.")
-                        .font(.system(size: Tokens.FontSize.xs))
+                        .font(Tokens.TextStyle.caption)
                         .foregroundStyle(Tokens.Palette.textTertiary)
                 }
             }
@@ -49,7 +49,7 @@ struct SettingsView: View {
             Section("Walkful Pro") {
                 if store.isPro {
                     Label("Pro unlocked — thank you!", systemImage: "checkmark.seal.fill")
-                        .font(.system(size: Tokens.FontSize.sm))
+                        .font(Tokens.TextStyle.subheadline)
                         .foregroundStyle(Tokens.Palette.textSecondary)
                 } else {
                     Button("Unlock Walkful Pro") { showingPaywall = true }
@@ -61,7 +61,7 @@ struct SettingsView: View {
 
             Section("Privacy") {
                 Label("All data stays on your device", systemImage: "lock.fill")
-                    .font(.system(size: Tokens.FontSize.sm))
+                    .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textSecondary)
             }
         }

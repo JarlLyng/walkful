@@ -14,10 +14,10 @@ struct PaywallView: View {
         VStack(alignment: .leading, spacing: Tokens.Spacing.xl) {
             Spacer().frame(height: Tokens.Spacing.sm)
             Text("Walkful Pro")
-                .font(.system(size: Tokens.FontSize.xxl, weight: .semibold))
+                .font(Tokens.TextStyle.bigTitle)
                 .foregroundStyle(Tokens.Palette.textPrimary)
             Text("Unlock the parts that help you move more — once, forever.")
-                .font(.system(size: Tokens.FontSize.base))
+                .font(Tokens.TextStyle.body)
                 .foregroundStyle(Tokens.Palette.textSecondary)
 
             VStack(alignment: .leading, spacing: Tokens.Spacing.lg) {
@@ -29,10 +29,10 @@ struct PaywallView: View {
                             .frame(width: 28)
                         VStack(alignment: .leading, spacing: 2) {
                             Text(b.title)
-                                .font(.system(size: Tokens.FontSize.base, weight: .semibold))
+                                .font(Tokens.TextStyle.headline)
                                 .foregroundStyle(Tokens.Palette.textPrimary)
                             Text(b.body)
-                                .font(.system(size: Tokens.FontSize.sm))
+                                .font(Tokens.TextStyle.subheadline)
                                 .foregroundStyle(Tokens.Palette.textSecondary)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
@@ -56,7 +56,7 @@ struct PaywallView: View {
                 Spacer()
                 Button("Not now") { dismiss() }
             }
-            .font(.system(size: Tokens.FontSize.sm))
+            .font(Tokens.TextStyle.subheadline)
             .foregroundStyle(Tokens.Palette.textSecondary)
         }
         .padding(Tokens.Spacing.xl)

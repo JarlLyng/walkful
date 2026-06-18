@@ -53,6 +53,7 @@ struct TrendChartView: View {
                 .frame(height: 1)
                 .padding(.bottom, height * CGFloat(average) / CGFloat(scaleMax))
         }
+        .accessibilityHidden(true) // decorative; the caption conveys the values
     }
 }
 
@@ -65,7 +66,7 @@ struct PrimaryButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.system(size: Tokens.FontSize.base, weight: .semibold))
+                .font(Tokens.TextStyle.headline)
                 .foregroundStyle(Tokens.Palette.onPrimary)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, Tokens.Spacing.md)
@@ -81,6 +82,8 @@ struct ProgressRing: View {
     var progress: Double
     var lineWidth: CGFloat = 12
 
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
     var body: some View {
         ZStack {
             Circle()
@@ -93,7 +96,7 @@ struct ProgressRing: View {
                 )
                 .rotationEffect(.degrees(-90))
                 .shadow(color: Tokens.Palette.primary.opacity(0.45), radius: 8)
-                .animation(.easeInOut(duration: 0.5), value: progress)
+                .animation(reduceMotion ? nil : .easeInOut(duration: 0.5), value: progress)
         }
     }
 }
@@ -112,16 +115,16 @@ struct StatChip: View {
         VStack(alignment: .leading, spacing: 2) {
             HStack(alignment: .firstTextBaseline, spacing: 3) {
                 Text(value)
-                    .font(Tokens.rounded(Tokens.FontSize.lg))
+                    .font(Tokens.TextStyle.statNumber)
                     .foregroundStyle(fg)
                 if let unit {
                     Text(unit)
-                        .font(.system(size: Tokens.FontSize.xs))
+                        .font(Tokens.TextStyle.caption)
                         .foregroundStyle(accent ? Tokens.Palette.accentText : Tokens.Palette.textTertiary)
                 }
             }
             Text(label)
-                .font(.system(size: Tokens.FontSize.xs))
+                .font(Tokens.TextStyle.caption)
                 .foregroundStyle(accent ? Tokens.Palette.accentText : Tokens.Palette.textTertiary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -138,6 +141,7 @@ struct StatChip: View {
                 .stroke(Tokens.Palette.borderSubtle, lineWidth: 0.5)
         )
         .clipShape(RoundedRectangle(cornerRadius: Tokens.Radius.md))
+        .accessibilityElement(children: .combine)
     }
 }
 
@@ -158,5 +162,6 @@ struct WeekBars: View {
             }
         }
         .frame(height: height, alignment: .bottom)
+        .accessibilityHidden(true) // decorative; totals are shown as text
     }
 }
