@@ -2,6 +2,7 @@
 
 > Every step counts.
 
+[![CI](https://github.com/JarlLyng/walkful/actions/workflows/ci.yml/badge.svg)](https://github.com/JarlLyng/walkful/actions/workflows/ci.yml)
 ![Platform](https://img.shields.io/badge/platform-iOS%2018%2B-000000?logo=apple)
 ![Swift](https://img.shields.io/badge/Swift-5-F05138?logo=swift&logoColor=white)
 ![Status](https://img.shields.io/badge/status-App%20Store%20Review-3C3489)
