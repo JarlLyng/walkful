@@ -5,13 +5,21 @@ struct OnboardingView: View {
     var health: HealthKitService
     @State private var step = 0
 
+    private let icons = ["figure.walk", "heart.text.square", "target", "bell.badge"]
+
     var body: some View {
         VStack(alignment: .leading, spacing: Tokens.Spacing.xl) {
-            Text("Step \(step + 1) of 4")
-                .font(Tokens.TextStyle.caption)
-                .foregroundStyle(Tokens.Palette.primary)
+            progressDots
 
-            content
+            VStack(alignment: .leading, spacing: Tokens.Spacing.lg) {
+                Image(systemName: icons[min(step, icons.count - 1)])
+                    .font(.system(size: 44))
+                    .foregroundStyle(Tokens.Gradient.ring)
+                    .accessibilityHidden(true)
+                content
+            }
+            .id(step)
+            .transition(.opacity)
 
             Spacer()
 
@@ -26,7 +34,21 @@ struct OnboardingView: View {
         }
         .padding(Tokens.Spacing.xl)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .background(Tokens.Palette.appBackground)
+        .background(Tokens.Gradient.heroBackdrop.ignoresSafeArea())
+        .animation(.easeInOut(duration: 0.3), value: step)
+    }
+
+    private var progressDots: some View {
+        HStack(spacing: Tokens.Spacing.sm) {
+            ForEach(0..<4, id: \.self) { i in
+                Capsule()
+                    .fill(i == step ? AnyShapeStyle(Tokens.Gradient.ring)
+                                    : AnyShapeStyle(Tokens.Palette.borderDefault))
+                    .frame(width: i == step ? 24 : 7, height: 7)
+            }
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Step \(step + 1) of 4")
     }
 
     @ViewBuilder private var content: some View {
