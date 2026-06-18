@@ -5,6 +5,10 @@ All notable changes to Walkful are documented here. Format based on
 
 ## [Unreleased]
 
+_Nothing yet._
+
+## [0.2.0] — 2026-06-18 — second TestFlight build
+
 ### Added
 - **Walkful Pro** — a one-time (non-consumable) StoreKit 2 unlock for Insights and the interval-walking coach. Calm paywall, restore purchases, on-device entitlement check (no subscription, no server). Today and Insights stay free; the gated parts show a paywall. Includes a local `Walkful.storekit` config for testing (#5).
 - **Home Screen & Lock Screen widgets** (WidgetKit) — a step-progress widget in `systemSmall` plus Lock Screen accessory families (circular, inline, rectangular). The app publishes today's snapshot to a shared App Group; the widget reads it. On-device (#3).
@@ -29,5 +33,6 @@ All notable changes to Walkful are documented here. Format based on
 - Local movement nudges (UserNotifications).
 - Layered app icon (light/dark/tinted); MetricKit diagnostics; privacy "Data Not Collected".
 
-[Unreleased]: https://github.com/JarlLyng/walkful/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/JarlLyng/walkful/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/JarlLyng/walkful/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/JarlLyng/walkful/releases/tag/v0.1.0

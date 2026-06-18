@@ -10,8 +10,8 @@ Made by **IAMJARL**.
 
 ## Status
 
-- ✅ MVP complete and **shipped to TestFlight**, tested on device.
-- 🚧 Now building toward a paid public launch (active-walking coach, widgets, Watch complication). See **[GitHub Issues](../../issues)** for the live backlog.
+- ✅ **v0.2 on TestFlight** — interval-walking coach, sedentary-aware nudges, Home/Lock Screen widgets, and **Walkful Pro** (one-time unlock) all merged.
+- 🚧 Toward a paid public launch: App Store listing + privacy label, Apple Watch, insight→action, polish. See **[GitHub Issues](../../issues)** for the live backlog.
 
 ## What makes it different
 
@@ -32,6 +32,9 @@ See **[RESEARCH.md](RESEARCH.md)** (market + science) and **[PRD.md](PRD.md)** (
 | Health data | HealthKit (read-only) |
 | Local storage | SwiftData |
 | Notifications | UserNotifications (local only) |
+| Background | BackgroundTasks (sedentary check) + App Group (widget sharing) |
+| Widgets | WidgetKit (Home Screen + Lock Screen) |
+| Monetization | StoreKit 2 — one-time non-consumable ("Walkful Pro") |
 | Diagnostics | MetricKit (Apple-native, no third-party SDK) |
 | Design system | [IAMJARLDesignTokens](https://github.com/JarlLyng/iamjarl-design) via SPM |
 | Project generation | [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`project.yml`) |
@@ -62,22 +65,28 @@ xcodebuild -project Walkful.xcodeproj -scheme Walkful \
 ```
 walking-app/
 ├─ project.yml              # XcodeGen project definition (source of truth)
+├─ Walkful.storekit         # Local StoreKit config (testing only)
 ├─ Walkful/                 # App source
-│  ├─ WalkfulApp.swift      # @main, SwiftData container, MetricKit
+│  ├─ WalkfulApp.swift      # @main, SwiftData container, MetricKit, BG task register
 │  ├─ RootView.swift        # RootContainer (routing) + RootView (tabs)
 │  ├─ Core/
 │  │  ├─ Health/            # HealthKitService
 │  │  ├─ Persistence/       # AppSettings (@Model)
-│  │  ├─ Notifications/     # NudgeScheduler
+│  │  ├─ Notifications/     # NudgeScheduler + SedentaryMonitor (BackgroundTasks)
+│  │  ├─ Store/             # Store (StoreKit 2 — Walkful Pro)
+│  │  ├─ Shared/            # SharedStore (App Group snapshot for the widget)
 │  │  ├─ Diagnostics/       # MetricsSubscriber (MetricKit)
 │  │  ├─ Theme/             # WalkfulTheme (IAMJARL tokens) + Components
 │  │  └─ Formatters.swift
-│  ├─ Features/             # Onboarding / Today / Insights / Settings
+│  ├─ Features/             # Onboarding / Today / Insights / Coach / Paywall / Settings
 │  └─ Resources/            # Assets.xcassets (layered app icon)
+├─ WalkfulWidget/           # WidgetKit extension (Home + Lock Screen)
 ├─ website/                 # Marketing site (static, SEO/GEO)
 ├─ RESEARCH.md PRD.md TECH_PLAN.md   # Product & research docs (Danish)
 └─ ARCHITECTURE.md CONTRIBUTING.md CHANGELOG.md   # Developer docs (English)
 ```
+
+> Generated and git-ignored: `Walkful.xcodeproj`, `Walkful/Info.plist`, `WalkfulWidget/Info.plist`. Run `xcodegen generate` after pulling.
 
 ## Documentation
 
