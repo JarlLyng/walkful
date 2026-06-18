@@ -373,6 +373,52 @@ final class HealthKitService {
         }
     }
 
+    #if DEBUG
+    /// Fills the service with realistic sample data for App Store screenshots.
+    func loadSampleData() {
+        let cal = isoCalendar()
+        let today = cal.startOfDay(for: .now)
+        var hist: [DayStat] = []
+        for i in stride(from: 364, through: 0, by: -1) {
+            let date = cal.date(byAdding: .day, value: -i, to: today) ?? today
+            let x = Double(364 - i)
+            let steps = Int(7200 + 2600 * sin(x / 9.0) + 1500 * sin(x / 40.0))
+            hist.append(DayStat(date: date, steps: max(800, steps)))
+        }
+        dailyHistory = hist
+        authState = .authorized
+
+        todaySteps = hist.last?.steps ?? 8_240
+        todayDistanceKm = Double(todaySteps) * 0.00072
+        todayFloors = 11
+        todayActiveMinutes = 38
+
+        let tws = Self.weekStart(today, cal)
+        var weekly: [Date: Int] = [:]
+        for day in hist { weekly[Self.weekStart(day.date, cal), default: 0] += day.steps }
+        let lws = cal.date(byAdding: .day, value: -7, to: tws) ?? tws
+        thisWeekTotal = weekly[tws] ?? 0
+        lastWeekTotal = weekly[lws] ?? 0
+        bestWeekTotal = weekly.values.max() ?? 0
+        weekDays = hist.filter { $0.date >= tws }
+
+        bestDaySteps = hist.map(\.steps).max() ?? 0
+        let months = monthlyTotals(120)
+        bestMonthSteps = months.max() ?? 0
+        thisMonthSteps = months.last ?? 0
+        lastMonthSteps = months.count >= 2 ? months[months.count - 2] : 0
+        mostFloorsInADay = 28
+
+        bestTimeOfDay = "Mornings"
+        activeMinutesByWeek = [120, 150, 165, 190]
+        restingHeartRate = 58
+        walkingSpeed = 1.4
+        walkingSteadiness = 0.82
+        vo2Max = 43
+        lifetimeDistanceKm = 2_140
+    }
+    #endif
+
     // MARK: - Live opdatering
 
     private func startObserving() {

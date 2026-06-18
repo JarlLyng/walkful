@@ -38,6 +38,7 @@ struct InsightsView: View {
         .safeAreaInset(edge: .top) { header }
         .sheet(isPresented: $showingPaywall) { PaywallView(store: store) }
         .task {
+            if LaunchArgs.screenshots { return }
             if health.authState == .authorized, store.isPro { await health.loadInsights() }
         }
     }

@@ -11,7 +11,7 @@ struct RootContainer: View {
     var body: some View {
         Group {
             if let settings = settingsList.first {
-                if settings.hasOnboarded {
+                if settings.hasOnboarded || LaunchArgs.screenshots {
                     RootView(settings: settings, health: health, store: store)
                 } else {
                     OnboardingView(settings: settings, health: health)
@@ -19,11 +19,24 @@ struct RootContainer: View {
             } else {
                 Tokens.Palette.appBackground
                     .ignoresSafeArea()
-                    .onAppear { context.insert(AppSettings()) }
+                    .onAppear {
+                        let s = AppSettings()
+                        if LaunchArgs.screenshots { s.hasOnboarded = true }
+                        context.insert(s)
+                    }
             }
         }
         .tint(Tokens.Palette.primary)
-        .task { await store.load() }
+        .task {
+            #if DEBUG
+            if LaunchArgs.screenshots {
+                health.loadSampleData()
+                store.forcePro()
+                return
+            }
+            #endif
+            await store.load()
+        }
     }
 }
 
@@ -32,16 +45,33 @@ struct RootView: View {
     var health: HealthKitService
     var store: Store
 
+    @State private var tab: Tab = .today
+
+    enum Tab: Hashable { case today, insights, settings }
+
     var body: some View {
-        TabView {
+        TabView(selection: $tab) {
             TodayView(settings: settings, health: health, store: store)
+                .tag(Tab.today)
                 .tabItem { Label("Today", systemImage: "figure.walk") }
             InsightsView(settings: settings, health: health, store: store)
+                .tag(Tab.insights)
                 .tabItem { Label("Insights", systemImage: "chart.bar") }
             SettingsView(settings: settings, store: store)
+                .tag(Tab.settings)
                 .tabItem { Label("Settings", systemImage: "gearshape") }
         }
+        .onAppear {
+            if LaunchArgs.screenshots {
+                switch LaunchArgs.screen {
+                case "insights": tab = .insights
+                case "settings": tab = .settings
+                default: tab = .today
+                }
+            }
+        }
         .task {
+            if LaunchArgs.screenshots { return }
             // Hold planlagte nudges + sedentary-monitor i sync ved app-start.
             await NudgeScheduler.reschedule(enabled: settings.nudgesEnabled,
                                             startHour: settings.nudgeStartHour,
