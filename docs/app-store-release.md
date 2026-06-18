@@ -43,9 +43,9 @@ Calm, private step tracker
 Every step counts. A calm, private walking tracker that turns your steps into meaning — no ads, no accounts, and nothing ever leaves your phone.
 ```
 
-**Keywords** (≤100 chars, comma-separated, no spaces):
+**Keywords** (≤100 chars, comma-separated, no spaces — this is 97):
 ```
-steps,walking,pedometer,step counter,walk,health,fitness,activity,private,interval,goal,streak,daily
+steps,walking,pedometer,walk,health,fitness,activity,private,interval,goal,streak,counter,tracker
 ```
 
 **Description**:
@@ -86,6 +86,11 @@ The first public release of Walkful — a calm, private, evidence-based walking 
 • Gentle, sedentary-aware reminders
 • Walkful Pro: deep insights, mobility & fitness metrics, records, and an interval-walking coach
 ```
+
+**Other fields:**
+- **Copyright:** `© 2026 IAMJARL`
+- **Primary category:** Health & Fitness
+- **Secondary category** (optional): Lifestyle
 
 ---
 
