@@ -53,6 +53,13 @@ final class HealthKitService {
     var walkingSteadiness: Double? // 0...1
     var vo2Max: Double?            // ml/(kg·min)
 
+    // Rekorder & recap
+    var bestDaySteps = 0
+    var bestMonthSteps = 0
+    var mostFloorsInADay = 0
+    var thisMonthSteps = 0
+    var lastMonthSteps = 0
+
     private var observer: HKObserverQuery?
 
     var isAvailable: Bool { HKHealthStore.isHealthDataAvailable() }
@@ -202,6 +209,7 @@ final class HealthKitService {
         async let speed = discreteAverage(walkingSpeedType, unit: .meter().unitDivided(by: .second()), days: 7)
         async let steady = discreteAverage(steadinessType, unit: .percent(), days: 30)
         async let vo2 = discreteAverage(vo2MaxType, unit: HKUnit(from: "ml/kg*min"), days: 90)
+        async let floors = maxDailyFloors()
         lifetimeDistanceKm = await lifetime
         bestTimeOfDay = await best
         activeMinutesByWeek = await weekly
@@ -209,6 +217,38 @@ final class HealthKitService {
         walkingSpeed = await speed
         walkingSteadiness = await steady
         vo2Max = await vo2
+        mostFloorsInADay = await floors
+
+        // Records & recap (from the loaded daily history)
+        bestDaySteps = dailyHistory.map(\.steps).max() ?? 0
+        let months = monthlyTotals(120)
+        bestMonthSteps = months.max() ?? 0
+        thisMonthSteps = months.last ?? 0
+        lastMonthSteps = months.count >= 2 ? months[months.count - 2] : 0
+    }
+
+    private func maxDailyFloors() async -> Int {
+        let cal = isoCalendar()
+        guard let start = cal.date(byAdding: .day, value: -371, to: cal.startOfDay(for: .now)) else { return 0 }
+        var interval = DateComponents(); interval.day = 1
+        let predicate = HKQuery.predicateForSamples(withStart: start, end: .now)
+        return await withCheckedContinuation { continuation in
+            let query = HKStatisticsCollectionQuery(
+                quantityType: floorsType,
+                quantitySamplePredicate: predicate,
+                options: .cumulativeSum,
+                anchorDate: cal.startOfDay(for: .now),
+                intervalComponents: interval
+            )
+            query.initialResultsHandler = { _, results, _ in
+                var maxFloors = 0.0
+                results?.enumerateStatistics(from: start, to: .now) { stats, _ in
+                    maxFloors = max(maxFloors, stats.sumQuantity()?.doubleValue(for: .count()) ?? 0)
+                }
+                continuation.resume(returning: Int(maxFloors))
+            }
+            store.execute(query)
+        }
     }
 
     private func discreteAverage(_ type: HKQuantityType, unit: HKUnit, days: Int) async -> Double? {
