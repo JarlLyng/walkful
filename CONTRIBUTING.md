@@ -37,7 +37,9 @@ There is no automated test target yet — verify changes by running on a simulat
 ## Code conventions
 
 - **SwiftUI + `@Observable`** (no heavy framework). Keep state simple.
-- **Design tokens only.** Use `Tokens.Palette/Spacing/Radius/FontSize` — never hardcode colors or sizes. Everything must work in light **and** dark mode.
+- **Design tokens only.** Use `Tokens.Palette/Spacing/Radius` and the **Aurora** layer (`Tokens.Gradient.*`, `.glassCard()`) — never hardcode colors or sizes. Everything must work in light **and** dark mode.
+- **Text uses `Tokens.TextStyle.*`** (scalable), never fixed `.system(size:)` — so Dynamic Type works.
+- **Accessibility:** label meaningful views; hide decorative charts (`accessibilityHidden`) when their values exist as text; respect Reduce Motion.
 - **UI strings in English.** Code comments may be Danish.
 - **Reuse components** in `Core/Theme/Components.swift` before adding new ones.
 - **Privacy is non-negotiable.** No networking, no analytics SDKs, no data leaving the device.
@@ -62,6 +64,22 @@ We track all work in **GitHub Issues**.
 - Milestone **v1.0 — public launch** groups everything needed to charge for the app.
 
 Use the issue templates under `.github/ISSUE_TEMPLATE/`.
+
+## Capturing App Store screenshots
+
+A DEBUG-only screenshot mode injects sample data and unlocks Pro, so captures show real UI with data:
+
+```bash
+DEV=$(xcrun simctl list devices available | grep -m1 "iPhone 16 Pro Max" | grep -oE "[0-9A-F-]{36}")
+xcodebuild -project Walkful.xcodeproj -scheme Walkful -destination "id=$DEV" build
+xcrun simctl boot "$DEV"; xcrun simctl install "$DEV" <path/to/Walkful.app>
+xcrun simctl ui "$DEV" appearance dark            # or light
+xcrun simctl launch "$DEV" com.iamjarl.walkful -screenshots -screen insights   # today|insights|settings
+xcrun simctl io "$DEV" screenshot out.png         # 1320×2868 (6.9")
+```
+
+To verify Dynamic Type: `xcrun simctl ui "$DEV" content_size accessibility-extra-large`.
+If a stale notification prompt appears, `xcrun simctl erase "$DEV"` for a clean slate. Output dir `screenshots/` is git-ignored.
 
 ## Release / TestFlight
 

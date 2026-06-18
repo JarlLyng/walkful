@@ -22,8 +22,9 @@ Made by **IAMJARL** · [walkful.iamjarl.com](https://walkful.iamjarl.com)
 
 ## Status
 
-- ✅ **v0.2 on TestFlight** — interval-walking coach, sedentary-aware nudges, Home/Lock Screen widgets, **Walkful Pro** (one-time unlock), and a deep Pro **Insights** tab (week/month/year trends, year heatmap, mobility & fitness, records, monthly recap).
-- 🚧 Toward a paid public launch: App Store listing + privacy label, Apple Watch, insight→action, polish. See **[GitHub Issues](../../issues)** for the live backlog.
+- 🚀 **v0.2 (build 6) submitted to the App Store review.** Free app + a one-time **Walkful Pro** unlock.
+- Shipped: interval-walking coach, sedentary-aware nudges, Home/Lock Screen widgets, a deep Pro **Insights** tab (week/month/year trends, year heatmap, mobility & fitness, records, monthly recap), the **Aurora** visual design, and full **accessibility** (Dynamic Type, VoiceOver, Reduced Motion).
+- 🚧 Next: Apple Watch app/complication, onboarding polish, insight→action. See **[GitHub Issues](../../issues)** for the live backlog.
 
 ## What makes it different
 

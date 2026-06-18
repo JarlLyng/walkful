@@ -5,18 +5,15 @@ All notable changes to Walkful are documented here. Format based on
 
 ## [Unreleased]
 
-### Added
-- **Accessibility** — full Dynamic Type (scalable text styles), VoiceOver support (decorative charts hidden, labelled ring, meaningful text equivalents), Reduced Motion (ring animation respects the setting), and verified contrast in light + dark (#9).
+_Nothing yet._
 
-### Changed
-- **Aurora visual refresh** — a premium layer over the IAMJARL tokens: gradient progress ring with a soft glow, frosted glass cards, gradient-filled trend/week bars, rounded numerals, and a subtle aurora backdrop on Today/Insights. Light = purple→pink, dark = lime→teal→blue (#30).
-
-## [0.2.0] — 2026-06-18 — Pro v2, widgets, coach, nudges
+## [0.2.0] — 2026-06-18 — Pro v2, widgets, coach, nudges, Aurora & accessibility
 
 ### Fixed
 - **White screen on launch when upgrading from v0.1.** `AppSettings`' new properties lacked inline default values, so SwiftData's lightweight migration couldn't open an existing store. Added inline defaults to every property (a default in `init()` is not enough for migration). Build 3.
 
 ### Added
+- **Accessibility** — full Dynamic Type (scalable text styles), VoiceOver support (decorative charts hidden, labelled ring, meaningful text equivalents), Reduced Motion, and verified contrast in light + dark (#9).
 - **Pro: Records & monthly recap** — Insights now has a records gallery (best day, best week, best month, longest streak, most floors) and a calm monthly recap (this month's steps + change vs last month) (#23).
 - **Pro: Mobility & fitness** — Insights now shows walking speed, walking steadiness, cardio fitness (VO₂max) and resting heart rate. Apple Watch-derived metrics hide gracefully when absent (#22).
 - **Pro: Trends & history** — Insights now has week/month/year step trends with an average line, and a full-year consistency heatmap (replacing the 30-day grid). History extended to ~1 year (#21).
@@ -30,6 +27,7 @@ All notable changes to Walkful are documented here. Format based on
 - Developer docs: `README.md`, `ARCHITECTURE.md`, `CONTRIBUTING.md`, this changelog.
 
 ### Changed
+- **Aurora visual refresh** — a premium layer over the IAMJARL tokens: gradient progress ring with a soft glow, frosted glass cards, gradient-filled trend/week bars, rounded numerals, and a subtle aurora backdrop on Today/Insights. Light = purple→pink, dark = lime→teal→blue (#30).
 - Tabs are now **Today / Insights / Settings** (the standalone Week tab was folded into Today + Insights).
 - Design tokens now come from the real `IAMJARLDesignTokens` SPM package (was a local copy).
 

@@ -33,8 +33,9 @@ WalkfulApp (@main)
 | `Core/Store/Store.swift` | StoreKit 2 (`@MainActor @Observable`). One-time "Walkful Pro" unlock; `isPro` from `Transaction.currentEntitlements`; `purchase()`/`restore()` + updates listener. |
 | `Core/Shared/SharedStore.swift` | Writes today's snapshot (steps + goal) to the App Group (`group.com.iamjarl.walkful`) for the widget. Compiled into both the app and the widget. |
 | `Core/Diagnostics/MetricsSubscriber.swift` | MetricKit subscriber — crash/performance payloads delivered by the OS (no third-party SDK, no servers). |
-| `Core/Theme/WalkfulTheme.swift` | `Tokens` facade over `IAMJARLDesignTokens`; builds light/dark-adaptive `Color`s. |
-| `Core/Theme/Components.swift` | Reusable views: `Card`, `PrimaryButton`, `ProgressRing`, `StatChip`, `WeekBars`. |
+| `Core/Theme/WalkfulTheme.swift` | `Tokens` facade over `IAMJARLDesignTokens`; light/dark-adaptive `Color`s, the **Aurora** layer (`Tokens.Gradient.ring/bars/heroBackdrop`), and scalable `Tokens.TextStyle.*` (Dynamic Type). |
+| `Core/Theme/Components.swift` | Reusable views: `Card`/`.glassCard()`, `PrimaryButton`, `ProgressRing` (gradient + glow, respects Reduce Motion), `StatChip`, `WeekBars`, `TrendChartView`. |
+| `Core/Screenshots/ScreenshotSupport.swift` | `LaunchArgs` — `-screenshots`/`-screen` flags for DEBUG sample-data captures. |
 | `Core/Formatters.swift` | `Int.stepsFormatted` (en_US grouping). Also compiled into the widget. |
 | `Features/Onboarding` | 4-step onboarding; writes goal/nudges to `AppSettings`. |
 | `Features/Today` | Dashboard: ring + meaning line, stat chips, this-week bars, streak, interval-coach CTA. Publishes the widget snapshot. Coach is **Pro-gated** (→ paywall). |
@@ -80,6 +81,24 @@ AppSettings (@Model, @Bindable) ──▶ goal & prefs drive the ring, streaks, 
 ## Widget & App Group
 
 The app writes a small `DailySnapshot` (steps + goal) to the shared App Group (`group.com.iamjarl.walkful`) via `SharedStore`, then calls `WidgetCenter.reloadAllTimelines()`. The widget reads that snapshot — it does **not** access HealthKit itself. `SharedStore` and `Formatters` are compiled into both targets.
+
+## Visual design (Aurora)
+
+A premium layer **derived from** the IAMJARL tokens, not hardcoded one-offs:
+- `Tokens.Gradient.ring` / `.bars` / `.heroBackdrop` — adaptive gradients (light purple→pink, dark lime→teal→blue) built from the brand colors.
+- `ProgressRing` strokes with the gradient + a soft glow; `Card`/`StatChip` use `.glassCard()` (`.ultraThinMaterial`); charts fill with the gradient; Today/Insights sit on the aurora backdrop.
+- Keep new UI on these — don't reintroduce flat solid fills or hardcoded hex.
+
+## Accessibility
+
+- **Dynamic Type:** use `Tokens.TextStyle.*` (scalable) for all text — never fixed `.system(size:)`. Verified at `accessibility-extra-large`.
+- **VoiceOver:** decorative charts (week/trend bars, year heatmap) are `accessibilityHidden` because their values exist as text; the progress ring carries a label + value; stat chips combine into single elements.
+- **Reduce Motion:** `ProgressRing` disables its animation when the setting is on.
+- App Store Accessibility labels declared: VoiceOver, Larger Text, Reduced Motion, Dark Interface, Sufficient Contrast.
+
+## Screenshots
+
+A DEBUG-only screenshot mode (`-screenshots [-screen today|insights|settings]`) injects sample data (`HealthKitService.loadSampleData`) and unlocks Pro (`Store.forcePro`); guards skip live HealthKit loads and the notification prompt. Capture on an iPhone 16 Pro Max sim (1320×2868) — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Build & generation
 
