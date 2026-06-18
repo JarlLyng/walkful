@@ -5,6 +5,10 @@ All notable changes to Walkful are documented here. Format based on
 
 ## [Unreleased]
 
+_Nothing yet._
+
+## [0.2.0] — 2026-06-18 — Pro v2, widgets, coach, nudges
+
 ### Fixed
 - **White screen on launch when upgrading from v0.1.** `AppSettings`' new properties lacked inline default values, so SwiftData's lightweight migration couldn't open an existing store. Added inline defaults to every property (a default in `init()` is not enough for migration). Build 3.
 
@@ -35,5 +39,6 @@ All notable changes to Walkful are documented here. Format based on
 - Local movement nudges (UserNotifications).
 - Layered app icon (light/dark/tinted); MetricKit diagnostics; privacy "Data Not Collected".
 
-[Unreleased]: https://github.com/JarlLyng/walkful/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/JarlLyng/walkful/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/JarlLyng/walkful/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/JarlLyng/walkful/releases/tag/v0.1.0
