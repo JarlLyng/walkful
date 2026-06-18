@@ -29,7 +29,7 @@ struct TodayView: View {
             }
             .padding(Tokens.Spacing.lg)
         }
-        .background(Tokens.Palette.appBackground)
+        .background(Tokens.Gradient.heroBackdrop.ignoresSafeArea())
         .safeAreaInset(edge: .top) { header }
         .sheet(isPresented: $showingCoach) { CoachView() }
         .sheet(isPresented: $showingPaywall) { PaywallView(store: store) }
@@ -53,7 +53,7 @@ struct TodayView: View {
                     .frame(width: 200, height: 200)
                 VStack(spacing: 2) {
                     Text(health.todaySteps.stepsFormatted)
-                        .font(.system(size: Tokens.FontSize.xxl, weight: .semibold))
+                        .font(Tokens.rounded(Tokens.FontSize.xxl, .bold))
                         .foregroundStyle(Tokens.Palette.textPrimary)
                     Text("of \(goal.stepsFormatted)")
                         .font(.system(size: Tokens.FontSize.sm))
@@ -215,6 +215,6 @@ struct TodayView: View {
         }
         .padding(.horizontal, Tokens.Spacing.lg)
         .padding(.vertical, Tokens.Spacing.md)
-        .background(Tokens.Palette.appBackground)
+        .background(.ultraThinMaterial)
     }
 }

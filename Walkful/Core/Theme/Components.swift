@@ -1,6 +1,22 @@
 import SwiftUI
 
-// Genbrugelige UI-byggeklodser bygget på IAMJARL-tokens.
+// Genbrugelige UI-byggeklodser bygget på IAMJARL-tokens + Aurora-laget.
+
+// MARK: - Glass card modifier
+
+extension View {
+    /// Frosted "glass" surface used across cards (Aurora).
+    func glassCard(padding: CGFloat = Tokens.Spacing.lg) -> some View {
+        self
+            .padding(padding)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Tokens.Radius.lg))
+            .overlay(
+                RoundedRectangle(cornerRadius: Tokens.Radius.lg)
+                    .stroke(Tokens.Palette.borderSubtle, lineWidth: 0.5)
+            )
+    }
+}
 
 // MARK: - Card
 
@@ -8,19 +24,11 @@ struct Card<Content: View>: View {
     @ViewBuilder var content: Content
 
     var body: some View {
-        content
-            .padding(Tokens.Spacing.lg)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Tokens.Palette.appBackground)
-            .overlay(
-                RoundedRectangle(cornerRadius: Tokens.Radius.lg)
-                    .stroke(Tokens.Palette.borderSubtle, lineWidth: 0.5)
-            )
-            .clipShape(RoundedRectangle(cornerRadius: Tokens.Radius.lg))
+        content.glassCard()
     }
 }
 
-// MARK: - TrendChart (bars + average line)
+// MARK: - TrendChart (gradient bars + average line)
 
 struct TrendChartView: View {
     var values: [Int]
@@ -32,8 +40,8 @@ struct TrendChartView: View {
     var body: some View {
         HStack(alignment: .bottom, spacing: 3) {
             ForEach(Array(values.enumerated()), id: \.offset) { _, v in
-                RoundedRectangle(cornerRadius: 2)
-                    .fill(Tokens.Palette.primary)
+                RoundedRectangle(cornerRadius: 3)
+                    .fill(Tokens.Gradient.bars)
                     .frame(height: max(3, height * CGFloat(v) / CGFloat(scaleMax)))
                     .frame(maxWidth: .infinity)
             }
@@ -61,13 +69,12 @@ struct PrimaryButton: View {
                 .foregroundStyle(Tokens.Palette.onPrimary)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, Tokens.Spacing.md)
-                .background(Tokens.Palette.primary)
-                .clipShape(RoundedRectangle(cornerRadius: Tokens.Radius.md))
+                .background(Tokens.Gradient.ring, in: RoundedRectangle(cornerRadius: Tokens.Radius.md))
         }
     }
 }
 
-// MARK: - ProgressRing
+// MARK: - ProgressRing (gradient + glow)
 
 struct ProgressRing: View {
     /// 0...1
@@ -81,16 +88,17 @@ struct ProgressRing: View {
             Circle()
                 .trim(from: 0, to: max(0, min(progress, 1)))
                 .stroke(
-                    Tokens.Palette.primary,
+                    Tokens.Gradient.ring,
                     style: StrokeStyle(lineWidth: lineWidth, lineCap: .round)
                 )
                 .rotationEffect(.degrees(-90))
-                .animation(.easeInOut(duration: 0.4), value: progress)
+                .shadow(color: Tokens.Palette.primary.opacity(0.45), radius: 8)
+                .animation(.easeInOut(duration: 0.5), value: progress)
         }
     }
 }
 
-// MARK: - StatChip (dashboard)
+// MARK: - StatChip (glass)
 
 struct StatChip: View {
     var value: String
@@ -104,7 +112,7 @@ struct StatChip: View {
         VStack(alignment: .leading, spacing: 2) {
             HStack(alignment: .firstTextBaseline, spacing: 3) {
                 Text(value)
-                    .font(.system(size: Tokens.FontSize.lg, weight: .semibold))
+                    .font(Tokens.rounded(Tokens.FontSize.lg))
                     .foregroundStyle(fg)
                 if let unit {
                     Text(unit)
@@ -118,12 +126,22 @@ struct StatChip: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(Tokens.Spacing.md)
-        .background(accent ? Tokens.Palette.primary.opacity(0.10) : Tokens.Palette.mutedFill)
+        .background {
+            if accent {
+                Tokens.Palette.primary.opacity(0.12)
+            } else {
+                Rectangle().fill(.ultraThinMaterial)
+            }
+        }
+        .overlay(
+            RoundedRectangle(cornerRadius: Tokens.Radius.md)
+                .stroke(Tokens.Palette.borderSubtle, lineWidth: 0.5)
+        )
         .clipShape(RoundedRectangle(cornerRadius: Tokens.Radius.md))
     }
 }
 
-// MARK: - WeekBars
+// MARK: - WeekBars (gradient)
 
 struct WeekBars: View {
     var values: [Int]
@@ -134,7 +152,7 @@ struct WeekBars: View {
         HStack(alignment: .bottom, spacing: Tokens.Spacing.sm) {
             ForEach(Array(values.enumerated()), id: \.offset) { _, v in
                 RoundedRectangle(cornerRadius: Tokens.Radius.sm)
-                    .fill(Tokens.Palette.primary)
+                    .fill(Tokens.Gradient.bars)
                     .frame(height: max(4, height * CGFloat(v) / CGFloat(max(scaleMax, 1))))
                     .frame(maxWidth: .infinity)
             }

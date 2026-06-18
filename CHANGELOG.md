@@ -5,7 +5,8 @@ All notable changes to Walkful are documented here. Format based on
 
 ## [Unreleased]
 
-_Nothing yet._
+### Changed
+- **Aurora visual refresh** — a premium layer over the IAMJARL tokens: gradient progress ring with a soft glow, frosted glass cards, gradient-filled trend/week bars, rounded numerals, and a subtle aurora backdrop on Today/Insights. Light = purple→pink, dark = lime→teal→blue (#30).
 
 ## [0.2.0] — 2026-06-18 — Pro v2, widgets, coach, nudges
 
