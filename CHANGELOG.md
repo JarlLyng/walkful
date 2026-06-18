@@ -9,6 +9,7 @@ All notable changes to Walkful are documented here. Format based on
 - **White screen on launch when upgrading from v0.1.** `AppSettings`' new properties lacked inline default values, so SwiftData's lightweight migration couldn't open an existing store. Added inline defaults to every property (a default in `init()` is not enough for migration). Build 3.
 
 ### Added
+- **Pro: Trends & history** — Insights now has week/month/year step trends with an average line, and a full-year consistency heatmap (replacing the 30-day grid). History extended to ~1 year (#21).
 - **Walkful Pro** — a one-time (non-consumable) StoreKit 2 unlock for Insights and the interval-walking coach. Calm paywall, restore purchases, on-device entitlement check (no subscription, no server). Today and Insights stay free; the gated parts show a paywall. Includes a local `Walkful.storekit` config for testing (#5).
 - **Home Screen & Lock Screen widgets** (WidgetKit) — a step-progress widget in `systemSmall` plus Lock Screen accessory families (circular, inline, rectangular). The app publishes today's snapshot to a shared App Group; the widget reads it. On-device (#3).
 - **Smarter, sedentary-aware nudges** — a background check (BackgroundTasks + HealthKit) fires a gentle reminder only when you've actually been still, within a user-set active-hours window, rate-limited to ~once per 2h. Quiet-hours pickers added to Settings (#2).

@@ -106,7 +106,7 @@ final class HealthKitService {
         cal.dateInterval(of: .weekOfYear, for: date)?.start ?? cal.startOfDay(for: date)
     }
 
-    func loadHistory(weeks: Int = 16) async {
+    func loadHistory(weeks: Int = 53) async {
         let cal = isoCalendar()
         let thisWeekStart = Self.weekStart(cal.startOfDay(for: .now), cal)
         guard let start = cal.date(byAdding: .day, value: -7 * weeks, to: thisWeekStart) else { return }
@@ -167,6 +167,19 @@ final class HealthKitService {
     var weekAveragePerDay: Int {
         guard !weekDays.isEmpty else { return 0 }
         return weekDays.map(\.steps).reduce(0, +) / weekDays.count
+    }
+
+    /// Monthly step totals (oldest→newest) for the year trend.
+    func monthlyTotals(_ months: Int = 12) -> [Int] {
+        let cal = Calendar.current
+        var byMonth: [Date: Int] = [:]
+        for day in dailyHistory {
+            let comps = cal.dateComponents([.year, .month], from: day.date)
+            if let monthStart = cal.date(from: comps) {
+                byMonth[monthStart, default: 0] += day.steps
+            }
+        }
+        return byMonth.keys.sorted().suffix(months).map { byMonth[$0] ?? 0 }
     }
 
     // MARK: - Insights
