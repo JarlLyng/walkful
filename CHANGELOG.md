@@ -5,6 +5,9 @@ All notable changes to Walkful are documented here. Format based on
 
 ## [Unreleased]
 
+### Added
+- **Insight → action** — Insights opens with a contextual card that turns a pattern into a next step: turn on reminders for your weakest weekday, keep an active streak alive, or plan around your best time of day (#6).
+
 ### Changed
 - **Onboarding polish** — Aurora backdrop, a gradient progress indicator, a per-step icon, and a smooth fade between steps (#7).
 

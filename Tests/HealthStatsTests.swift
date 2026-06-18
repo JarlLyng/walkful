@@ -51,6 +51,20 @@ final class HealthStatsTests: XCTestCase {
         XCTAssertEqual(last2.map(\.steps), [30, 40])
     }
 
+    func testWeakestWeekday() {
+        let target = 4 // Wednesday (1 = Sunday)
+        var days: [HealthKitService.DayStat] = []
+        for off in stride(from: -27, through: 0, by: 1) {
+            let date = cal.date(byAdding: .day, value: off, to: cal.startOfDay(for: Date()))!
+            let wd = cal.component(.weekday, from: date)
+            days.append(.init(date: date, steps: wd == target ? 1_000 : 9_000))
+        }
+        let s = service(days)
+        let fmt = DateFormatter()
+        fmt.locale = Locale(identifier: "en_US")
+        XCTAssertEqual(s.weakestWeekday(), fmt.weekdaySymbols[target - 1])
+    }
+
     func testMonthlyTotalsSumsRecentSteps() {
         // Both entries fall within the last 12 months → their steps are summed.
         // (Asserting the grand total avoids flaking on a month boundary.)
