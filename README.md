@@ -4,9 +4,10 @@
 
 ![Platform](https://img.shields.io/badge/platform-iOS%2018%2B-000000?logo=apple)
 ![Swift](https://img.shields.io/badge/Swift-5-F05138?logo=swift&logoColor=white)
-![Status](https://img.shields.io/badge/status-TestFlight-3C3489)
+![Status](https://img.shields.io/badge/status-App%20Store%20Review-3C3489)
 ![Privacy](https://img.shields.io/badge/privacy-Data%20Not%20Collected-2E7D32)
 ![License](https://img.shields.io/badge/license-Proprietary-5F5E5A)
+[![Co-created with AI](https://madebyhuman.iamjarl.com/badges/co-created-white.svg)](https://madebyhuman.iamjarl.com)
 
 A calm, private, evidence-based **step & walking tracker for iPhone and Apple Watch**. Walkful adds a meaningful motivation layer on top of Apple Health — and keeps **everything on your device**: no accounts, no servers, no ads, no data collection.
 
