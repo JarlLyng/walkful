@@ -17,4 +17,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://walkful.app/sitemap.xml
+Sitemap: https://walkful.iamjarl.com/sitemap.xml
