@@ -34,7 +34,7 @@ struct InsightsView: View {
             }
             .padding(Tokens.Spacing.lg)
         }
-        .background(Tokens.Palette.appBackground)
+        .background(Tokens.Gradient.heroBackdrop.ignoresSafeArea())
         .safeAreaInset(edge: .top) { header }
         .sheet(isPresented: $showingPaywall) { PaywallView(store: store) }
         .task {
@@ -304,6 +304,6 @@ struct InsightsView: View {
         }
         .padding(.horizontal, Tokens.Spacing.lg)
         .padding(.vertical, Tokens.Spacing.md)
-        .background(Tokens.Palette.appBackground)
+        .background(.ultraThinMaterial)
     }
 }

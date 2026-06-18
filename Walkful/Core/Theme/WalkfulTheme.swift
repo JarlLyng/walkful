@@ -67,6 +67,41 @@ enum Tokens {
         static let xl = DesignTokens.Typography.Size.xl
         static let xxl = DesignTokens.Typography.Size.xxl
     }
+
+    /// Rounded numerals for the "premium" feel (Aurora).
+    static func rounded(_ size: CGFloat, _ weight: Font.Weight = .semibold) -> Font {
+        .system(size: size, weight: weight, design: .rounded)
+    }
+
+    // MARK: - Aurora — derived gradient/glow layer (built from the brand colors)
+
+    enum Gradient {
+        /// Ring + hero accent. Light: purple→pink · Dark: lime→teal→blue.
+        static let ring = LinearGradient(
+            colors: [
+                Color(light: 0xA435D2, dark: 0xD0FF00),
+                Color(light: 0xE0529C, dark: 0x5DE0A6),
+                Color(light: 0xE0529C, dark: 0x37B6E9)
+            ],
+            startPoint: .topLeading, endPoint: .bottomTrailing
+        )
+        /// Vertical fill for bars.
+        static let bars = LinearGradient(
+            colors: [
+                Color(light: 0xA435D2, dark: 0xD0FF00),
+                Color(light: 0xE0529C, dark: 0x37B6E9)
+            ],
+            startPoint: .top, endPoint: .bottom
+        )
+        /// Subtle aurora screen backdrop.
+        static let heroBackdrop = LinearGradient(
+            colors: [
+                Color(light: 0xFBF6FF, dark: 0x15101F),
+                Color(light: 0xFFFFFF, dark: 0x000000)
+            ],
+            startPoint: .top, endPoint: .bottom
+        )
+    }
 }
 
 // MARK: - Color helpers (light/dark-aware)
