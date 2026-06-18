@@ -25,6 +25,7 @@ struct InsightsView: View {
                     trends
                     yearHeatmap
                     chips
+                    mobility
                     activeMinutes
                     lifetime
                 }
@@ -137,11 +138,53 @@ struct InsightsView: View {
     private var chips: some View {
         HStack(spacing: Tokens.Spacing.sm) {
             StatChip(value: health.bestTimeOfDay ?? "—", unit: nil, label: "best time")
-            if let hr = health.restingHeartRate {
-                StatChip(value: "\(hr)", unit: "bpm", label: "resting HR")
-            } else {
-                StatChip(value: "\(health.longestStreak(goal: settings.dailyGoal))",
-                         unit: "days", label: "longest streak")
+            StatChip(value: "\(health.longestStreak(goal: settings.dailyGoal))",
+                     unit: "days", label: "longest streak")
+        }
+    }
+
+    // MARK: - Mobility & fitness (Apple Watch-derived; cards hidden when absent)
+
+    private struct Metric: Identifiable {
+        let id = UUID()
+        let value: String
+        let unit: String?
+        let label: String
+        var accent = false
+    }
+
+    private var mobilityMetrics: [Metric] {
+        var metrics: [Metric] = []
+        if let speed = health.walkingSpeed {
+            metrics.append(Metric(value: String(format: "%.1f", speed), unit: "m/s", label: "walking speed"))
+        }
+        if let steady = health.walkingSteadiness {
+            let pct = Int((steady * 100).rounded())
+            metrics.append(Metric(value: pct >= 50 ? "OK" : "Low", unit: nil,
+                                  label: "steadiness", accent: pct >= 50))
+        }
+        if let vo2 = health.vo2Max {
+            metrics.append(Metric(value: "\(Int(vo2.rounded()))", unit: nil, label: "cardio (VO₂max)"))
+        }
+        if let hr = health.restingHeartRate {
+            metrics.append(Metric(value: "\(hr)", unit: "bpm", label: "resting HR"))
+        }
+        return metrics
+    }
+
+    @ViewBuilder private var mobility: some View {
+        let metrics = mobilityMetrics
+        if !metrics.isEmpty {
+            VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
+                Text("Mobility & fitness")
+                    .font(.system(size: Tokens.FontSize.sm, weight: .semibold))
+                    .foregroundStyle(Tokens.Palette.textPrimary)
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: Tokens.Spacing.sm), count: 2),
+                          spacing: Tokens.Spacing.sm) {
+                    ForEach(metrics) { m in
+                        StatChip(value: m.value, unit: m.unit, label: m.label, accent: m.accent)
+                    }
+                }
             }
         }
     }
