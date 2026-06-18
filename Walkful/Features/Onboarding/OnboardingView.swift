@@ -8,7 +8,7 @@ struct OnboardingView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: Tokens.Spacing.xl) {
             Text("Step \(step + 1) of 4")
-                .font(.system(size: Tokens.FontSize.xs))
+                .font(Tokens.TextStyle.caption)
                 .foregroundStyle(Tokens.Palette.primary)
 
             content
@@ -19,7 +19,7 @@ struct OnboardingView: View {
 
             if step == 1 {
                 Button("Not now") { advance() }
-                    .font(.system(size: Tokens.FontSize.sm))
+                    .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textSecondary)
                     .frame(maxWidth: .infinity)
             }
@@ -49,7 +49,7 @@ struct OnboardingView: View {
                 )
                 Stepper(value: $settings.dailyGoal, in: 1_000...30_000, step: 500) {
                     Text("\(settings.dailyGoal.stepsFormatted) steps")
-                        .font(.system(size: Tokens.FontSize.xl, weight: .semibold))
+                        .font(Tokens.TextStyle.titleNumber)
                         .foregroundStyle(Tokens.Palette.textPrimary)
                 }
             }
@@ -61,7 +61,7 @@ struct OnboardingView: View {
                 )
                 Toggle("Move reminders", isOn: $settings.nudgesEnabled)
                     .tint(Tokens.Palette.primary)
-                    .font(.system(size: Tokens.FontSize.base))
+                    .font(Tokens.TextStyle.body)
                     .foregroundStyle(Tokens.Palette.textPrimary)
             }
         }
@@ -70,10 +70,10 @@ struct OnboardingView: View {
     private func textBlock(_ title: String, _ body: String) -> some View {
         VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
             Text(title)
-                .font(.system(size: Tokens.FontSize.xxl, weight: .semibold))
+                .font(Tokens.TextStyle.bigTitle)
                 .foregroundStyle(Tokens.Palette.textPrimary)
             Text(body)
-                .font(.system(size: Tokens.FontSize.base))
+                .font(Tokens.TextStyle.body)
                 .foregroundStyle(Tokens.Palette.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
         }

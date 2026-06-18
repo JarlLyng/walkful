@@ -50,10 +50,10 @@ struct InsightsView: View {
                     .font(.system(size: 28))
                     .foregroundStyle(Tokens.Palette.primary)
                 Text("Insights are part of Walkful Pro")
-                    .font(.system(size: Tokens.FontSize.lg, weight: .semibold))
+                    .font(Tokens.TextStyle.title)
                     .foregroundStyle(Tokens.Palette.textPrimary)
                 Text("Consistency heatmap, best time of day, brisk-minute trends and lifetime distance. A one-time unlock.")
-                    .font(.system(size: Tokens.FontSize.sm))
+                    .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textSecondary)
                 PrimaryButton(title: "Unlock Walkful Pro") { showingPaywall = true }
                     .padding(.top, Tokens.Spacing.xs)
@@ -65,10 +65,10 @@ struct InsightsView: View {
         Card {
             VStack(alignment: .leading, spacing: Tokens.Spacing.sm) {
                 Text("Connect Apple Health")
-                    .font(.system(size: Tokens.FontSize.lg, weight: .semibold))
+                    .font(Tokens.TextStyle.title)
                     .foregroundStyle(Tokens.Palette.textPrimary)
                 Text("Connect on the Today tab to unlock your insights.")
-                    .font(.system(size: Tokens.FontSize.sm))
+                    .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textSecondary)
             }
         }
@@ -98,7 +98,7 @@ struct InsightsView: View {
             }
             .pickerStyle(.segmented)
             Text(trendCaption)
-                .font(.system(size: Tokens.FontSize.xs))
+                .font(Tokens.TextStyle.caption)
                 .foregroundStyle(Tokens.Palette.textTertiary)
             TrendChartView(values: trendValues)
         }
@@ -112,11 +112,11 @@ struct InsightsView: View {
         return VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
             HStack {
                 Text("Consistency")
-                    .font(.system(size: Tokens.FontSize.sm, weight: .semibold))
+                    .font(Tokens.TextStyle.subheadlineSemibold)
                     .foregroundStyle(Tokens.Palette.textPrimary)
                 Spacer()
                 Text("\(atGoal) of \(max(days.count, 1)) days at goal")
-                    .font(.system(size: Tokens.FontSize.xs))
+                    .font(Tokens.TextStyle.caption)
                     .foregroundStyle(Tokens.Palette.textTertiary)
             }
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 3), count: 19), spacing: 3) {
@@ -126,6 +126,7 @@ struct InsightsView: View {
                         .aspectRatio(1, contentMode: .fit)
                 }
             }
+            .accessibilityHidden(true) // decorative; the count above is read by VoiceOver
         }
     }
 
@@ -180,7 +181,7 @@ struct InsightsView: View {
         if !metrics.isEmpty {
             VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
                 Text("Mobility & fitness")
-                    .font(.system(size: Tokens.FontSize.sm, weight: .semibold))
+                    .font(Tokens.TextStyle.subheadlineSemibold)
                     .foregroundStyle(Tokens.Palette.textPrimary)
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: Tokens.Spacing.sm), count: 2),
                           spacing: Tokens.Spacing.sm) {
@@ -197,11 +198,11 @@ struct InsightsView: View {
     private var activeMinutes: some View {
         VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
             Text("Brisk minutes · last 4 weeks")
-                .font(.system(size: Tokens.FontSize.sm, weight: .semibold))
+                .font(Tokens.TextStyle.subheadlineSemibold)
                 .foregroundStyle(Tokens.Palette.textPrimary)
             if health.activeMinutesByWeek.allSatisfy({ $0 == 0 }) {
                 Text("No active minutes recorded yet.")
-                    .font(.system(size: Tokens.FontSize.sm))
+                    .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textTertiary)
             } else {
                 WeekBars(values: health.activeMinutesByWeek,
@@ -216,7 +217,7 @@ struct InsightsView: View {
     private var records: some View {
         VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
             Text("Records")
-                .font(.system(size: Tokens.FontSize.sm, weight: .semibold))
+                .font(Tokens.TextStyle.subheadlineSemibold)
                 .foregroundStyle(Tokens.Palette.textPrimary)
             VStack(spacing: 0) {
                 recordRow("Best day", health.bestDaySteps.stepsFormatted)
@@ -231,11 +232,11 @@ struct InsightsView: View {
     private func recordRow(_ label: String, _ value: String) -> some View {
         HStack {
             Text(label)
-                .font(.system(size: Tokens.FontSize.sm))
+                .font(Tokens.TextStyle.subheadline)
                 .foregroundStyle(Tokens.Palette.textPrimary)
             Spacer()
             Text(value)
-                .font(.system(size: Tokens.FontSize.sm, weight: .semibold))
+                .font(Tokens.TextStyle.subheadlineSemibold)
                 .foregroundStyle(Tokens.Palette.accentText)
         }
         .padding(.vertical, Tokens.Spacing.sm)
@@ -251,13 +252,13 @@ struct InsightsView: View {
             Card {
                 VStack(alignment: .leading, spacing: Tokens.Spacing.xs) {
                     Text("This month")
-                        .font(.system(size: Tokens.FontSize.sm))
+                        .font(Tokens.TextStyle.subheadline)
                         .foregroundStyle(Tokens.Palette.textSecondary)
                     Text("\(health.thisMonthSteps.stepsFormatted) steps")
-                        .font(.system(size: Tokens.FontSize.xl, weight: .semibold))
+                        .font(Tokens.TextStyle.titleNumber)
                         .foregroundStyle(Tokens.Palette.accentText)
                     Text(recapDelta)
-                        .font(.system(size: Tokens.FontSize.sm))
+                        .font(Tokens.TextStyle.subheadline)
                         .foregroundStyle(Tokens.Palette.textPrimary)
                 }
             }
@@ -279,14 +280,14 @@ struct InsightsView: View {
         return Card {
             VStack(alignment: .leading, spacing: Tokens.Spacing.xs) {
                 Text("Lifetime distance")
-                    .font(.system(size: Tokens.FontSize.sm))
+                    .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textSecondary)
                 Text("\(Int(km).stepsFormatted) km")
-                    .font(.system(size: Tokens.FontSize.xl, weight: .semibold))
+                    .font(Tokens.TextStyle.titleNumber)
                     .foregroundStyle(Tokens.Palette.accentText)
                 if marathons >= 1 {
                     Text("That's \(marathons) marathon\(marathons == 1 ? "" : "s"). Keep wending.")
-                        .font(.system(size: Tokens.FontSize.sm))
+                        .font(Tokens.TextStyle.subheadline)
                         .foregroundStyle(Tokens.Palette.textPrimary)
                 }
             }
@@ -298,7 +299,7 @@ struct InsightsView: View {
     private var header: some View {
         HStack {
             Text("Insights")
-                .font(.system(size: Tokens.FontSize.lg, weight: .semibold))
+                .font(Tokens.TextStyle.title)
                 .foregroundStyle(Tokens.Palette.textPrimary)
             Spacer()
         }

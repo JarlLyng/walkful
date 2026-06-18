@@ -73,6 +73,21 @@ enum Tokens {
         .system(size: size, weight: weight, design: .rounded)
     }
 
+    /// Scalable text styles (Dynamic Type). Prefer these over fixed sizes so
+    /// text grows with the user's Larger Text setting.
+    enum TextStyle {
+        static let hero = Font.system(.largeTitle, design: .rounded).weight(.bold)
+        static let bigTitle = Font.system(.largeTitle).weight(.semibold)
+        static let titleNumber = Font.system(.title2, design: .rounded).weight(.semibold)
+        static let statNumber = Font.system(.title3, design: .rounded).weight(.semibold)
+        static let title = Font.system(.title3).weight(.semibold)
+        static let headline = Font.system(.headline)
+        static let body = Font.system(.body)
+        static let subheadlineSemibold = Font.system(.subheadline).weight(.semibold)
+        static let subheadline = Font.system(.subheadline)
+        static let caption = Font.system(.caption)
+    }
+
     // MARK: - Aurora — derived gradient/glow layer (built from the brand colors)
 
     enum Gradient {

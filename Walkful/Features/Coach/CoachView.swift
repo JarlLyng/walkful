@@ -30,28 +30,28 @@ struct CoachView: View {
                 .font(.system(size: 40))
                 .foregroundStyle(Tokens.Palette.primary)
             Text("Interval walk")
-                .font(.system(size: Tokens.FontSize.xxl, weight: .semibold))
+                .font(Tokens.TextStyle.bigTitle)
                 .foregroundStyle(Tokens.Palette.textPrimary)
             Text("Alternate easy and brisk walking. A few brisk intervals can meaningfully boost your fitness — no running, no lycra required.")
-                .font(.system(size: Tokens.FontSize.base))
+                .font(Tokens.TextStyle.body)
                 .foregroundStyle(Tokens.Palette.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
 
             Stepper(value: $coach.rounds, in: 2...8) {
                 Text("\(coach.rounds) rounds · 3 min easy / 3 min brisk")
-                    .font(.system(size: Tokens.FontSize.sm))
+                    .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textPrimary)
             }
             .tint(Tokens.Palette.primary)
 
             Text("About \(coach.briskMinutes) brisk minutes total.")
-                .font(.system(size: Tokens.FontSize.xs))
+                .font(Tokens.TextStyle.caption)
                 .foregroundStyle(Tokens.Palette.textTertiary)
 
             Spacer()
             PrimaryButton(title: "Start") { coach.start() }
             Button("Not now") { dismiss() }
-                .font(.system(size: Tokens.FontSize.sm))
+                .font(Tokens.TextStyle.subheadline)
                 .foregroundStyle(Tokens.Palette.textSecondary)
                 .frame(maxWidth: .infinity)
         }
@@ -63,11 +63,11 @@ struct CoachView: View {
     private var active: some View {
         VStack(spacing: Tokens.Spacing.xl) {
             Text("Round \(coach.currentRound) of \(coach.rounds)")
-                .font(.system(size: Tokens.FontSize.sm))
+                .font(Tokens.TextStyle.subheadline)
                 .foregroundStyle(Tokens.Palette.textTertiary)
 
             Text(coach.phase.title)
-                .font(.system(size: Tokens.FontSize.xxl, weight: .semibold))
+                .font(Tokens.TextStyle.bigTitle)
                 .foregroundStyle(coach.phase == .brisk ? Tokens.Palette.accentText : Tokens.Palette.textSecondary)
 
             ZStack {
@@ -97,10 +97,10 @@ struct CoachView: View {
                 .font(.system(size: 48))
                 .foregroundStyle(Tokens.Palette.primary)
             Text("Nice walk!")
-                .font(.system(size: Tokens.FontSize.xxl, weight: .semibold))
+                .font(Tokens.TextStyle.bigTitle)
                 .foregroundStyle(Tokens.Palette.textPrimary)
             Text("You completed \(coach.rounds) brisk intervals — about \(coach.briskMinutes) brisk minutes. Every step counts.")
-                .font(.system(size: Tokens.FontSize.base))
+                .font(Tokens.TextStyle.body)
                 .foregroundStyle(Tokens.Palette.textSecondary)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
@@ -114,7 +114,7 @@ struct CoachView: View {
     private func secondaryButton(_ title: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text(title)
-                .font(.system(size: Tokens.FontSize.base, weight: .semibold))
+                .font(Tokens.TextStyle.headline)
                 .foregroundStyle(Tokens.Palette.textPrimary)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, Tokens.Spacing.md)
