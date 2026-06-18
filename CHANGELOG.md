@@ -5,7 +5,8 @@ All notable changes to Walkful are documented here. Format based on
 
 ## [Unreleased]
 
-_Nothing yet._
+### Changed
+- **Onboarding polish** — Aurora backdrop, a gradient progress indicator, a per-step icon, and a smooth fade between steps (#7).
 
 ## [0.2.0] — 2026-06-18 — Pro v2, widgets, coach, nudges, Aurora & accessibility
 
