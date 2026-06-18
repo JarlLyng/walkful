@@ -180,6 +180,11 @@ final class HealthKitService {
         recentDays(n).filter { $0.steps >= goal }.count
     }
 
+    #if DEBUG
+    /// Test seam: inject a known daily history (used by unit tests and screenshots).
+    func setDailyHistoryForTesting(_ days: [DayStat]) { dailyHistory = days }
+    #endif
+
     var weekAveragePerDay: Int {
         guard !weekDays.isEmpty else { return 0 }
         return weekDays.map(\.steps).reduce(0, +) / weekDays.count
