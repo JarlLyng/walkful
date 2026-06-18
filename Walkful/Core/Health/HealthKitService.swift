@@ -24,6 +24,9 @@ final class HealthKitService {
     private let floorsType = HKQuantityType(.flightsClimbed)
     private let exerciseType = HKQuantityType(.appleExerciseTime)
     private let restingHRType = HKQuantityType(.restingHeartRate)
+    private let walkingSpeedType = HKQuantityType(.walkingSpeed)
+    private let steadinessType = HKQuantityType(.appleWalkingSteadiness)
+    private let vo2MaxType = HKQuantityType(.vo2Max)
 
     // I dag
     var authState: AuthState = .unknown
@@ -45,6 +48,11 @@ final class HealthKitService {
     var activeMinutesByWeek: [Int] = []
     var restingHeartRate: Int?
 
+    // Mobilitet & form (nil = ingen data, fx ingen Apple Watch → kort skjules)
+    var walkingSpeed: Double?      // m/s
+    var walkingSteadiness: Double? // 0...1
+    var vo2Max: Double?            // ml/(kg·min)
+
     private var observer: HKObserverQuery?
 
     var isAvailable: Bool { HKHealthStore.isHealthDataAvailable() }
@@ -54,7 +62,8 @@ final class HealthKitService {
     func requestAuthorization() async {
         guard isAvailable else { authState = .unavailable; return }
         let readTypes: Set<HKObjectType> = [
-            stepType, distanceType, floorsType, exerciseType, restingHRType
+            stepType, distanceType, floorsType, exerciseType, restingHRType,
+            walkingSpeedType, steadinessType, vo2MaxType
         ]
         do {
             try await store.requestAuthorization(toShare: [], read: readTypes)
@@ -190,10 +199,31 @@ final class HealthKitService {
         async let best = computeBestTimeOfDay()
         async let weekly = computeActiveMinutesByWeek()
         async let resting = computeRestingHeartRate()
+        async let speed = discreteAverage(walkingSpeedType, unit: .meter().unitDivided(by: .second()), days: 7)
+        async let steady = discreteAverage(steadinessType, unit: .percent(), days: 30)
+        async let vo2 = discreteAverage(vo2MaxType, unit: HKUnit(from: "ml/kg*min"), days: 90)
         lifetimeDistanceKm = await lifetime
         bestTimeOfDay = await best
         activeMinutesByWeek = await weekly
         restingHeartRate = await resting
+        walkingSpeed = await speed
+        walkingSteadiness = await steady
+        vo2Max = await vo2
+    }
+
+    private func discreteAverage(_ type: HKQuantityType, unit: HKUnit, days: Int) async -> Double? {
+        let start = Calendar.current.date(byAdding: .day, value: -days, to: .now) ?? .now
+        let predicate = HKQuery.predicateForSamples(withStart: start, end: .now)
+        return await withCheckedContinuation { continuation in
+            let query = HKStatisticsQuery(
+                quantityType: type,
+                quantitySamplePredicate: predicate,
+                options: .discreteAverage
+            ) { _, stats, _ in
+                continuation.resume(returning: stats?.averageQuantity()?.doubleValue(for: unit))
+            }
+            store.execute(query)
+        }
     }
 
     private func dailySteps(from start: Date, cal: Calendar) async -> [DayStat] {
