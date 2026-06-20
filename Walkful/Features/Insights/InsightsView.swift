@@ -22,6 +22,7 @@ struct InsightsView: View {
                 } else if !store.isPro {
                     locked
                 } else {
+                    actionCard
                     trends
                     yearHeatmap
                     chips
@@ -72,6 +73,80 @@ struct InsightsView: View {
                     .foregroundStyle(Tokens.Palette.textSecondary)
             }
         }
+    }
+
+    // MARK: - Actionable insight
+
+    private struct Insight {
+        let icon: String
+        let title: String
+        let message: String
+        var actionTitle: String?
+        var action: (() -> Void)?
+    }
+
+    private var actionableInsight: Insight? {
+        // 1) Not getting reminders → suggest turning them on, tied to the weakest weekday.
+        if !settings.nudgesEnabled, let day = health.weakestWeekday() {
+            return Insight(
+                icon: "bell.badge",
+                title: "Build a consistent habit",
+                message: "You tend to move least on \(day)s. Gentle reminders help you stay on track.",
+                actionTitle: "Turn on reminders",
+                action: enableNudges
+            )
+        }
+        // 2) On a streak → keep it alive.
+        let current = health.currentStreak(goal: settings.dailyGoal)
+        let longest = health.longestStreak(goal: settings.dailyGoal)
+        if current >= 3 {
+            let tail = current < longest ? " Your best is \(longest)." : " That's your best ever!"
+            return Insight(
+                icon: "flame",
+                title: "Keep your streak alive",
+                message: "You're on a \(current)-day streak.\(tail) A walk today keeps it going.")
+        }
+        // 3) Best time of day → plan around it.
+        if let time = health.bestTimeOfDay {
+            return Insight(
+                icon: "clock",
+                title: "Your best time",
+                message: "You move most in the \(time.lowercased()). Planning a walk then makes it easier to hit your goal.")
+        }
+        return nil
+    }
+
+    @ViewBuilder private var actionCard: some View {
+        if let insight = actionableInsight {
+            Card {
+                VStack(alignment: .leading, spacing: Tokens.Spacing.sm) {
+                    HStack(spacing: Tokens.Spacing.sm) {
+                        Image(systemName: insight.icon)
+                            .foregroundStyle(Tokens.Palette.primary)
+                        Text(insight.title)
+                            .font(Tokens.TextStyle.headline)
+                            .foregroundStyle(Tokens.Palette.textPrimary)
+                    }
+                    Text(insight.message)
+                        .font(Tokens.TextStyle.subheadline)
+                        .foregroundStyle(Tokens.Palette.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    if let actionTitle = insight.actionTitle {
+                        Button(actionTitle) { insight.action?() }
+                            .font(Tokens.TextStyle.subheadlineSemibold)
+                            .foregroundStyle(Tokens.Palette.primary)
+                            .padding(.top, Tokens.Spacing.xs)
+                    }
+                }
+            }
+        }
+    }
+
+    private func enableNudges() {
+        settings.nudgesEnabled = true
+        let start = settings.nudgeStartHour
+        let end = settings.nudgeEndHour
+        Task { await NudgeScheduler.reschedule(enabled: true, startHour: start, endHour: end) }
     }
 
     // MARK: - Trends (week / month / year)

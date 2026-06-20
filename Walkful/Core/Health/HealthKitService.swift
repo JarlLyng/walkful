@@ -180,6 +180,24 @@ final class HealthKitService {
         recentDays(n).filter { $0.steps >= goal }.count
     }
 
+    /// The weekday (English name) you move least on, by average steps. nil if no history.
+    func weakestWeekday() -> String? {
+        guard !dailyHistory.isEmpty else { return nil }
+        let cal = isoCalendar()
+        var totals: [Int: (sum: Int, count: Int)] = [:]
+        for day in dailyHistory {
+            let wd = cal.component(.weekday, from: day.date) // 1 = Sunday
+            let e = totals[wd] ?? (0, 0)
+            totals[wd] = (e.sum + day.steps, e.count + 1)
+        }
+        guard let weakest = totals.min(by: {
+            Double($0.value.sum) / Double($0.value.count) < Double($1.value.sum) / Double($1.value.count)
+        })?.key else { return nil }
+        let fmt = DateFormatter()
+        fmt.locale = Locale(identifier: "en_US")
+        return fmt.weekdaySymbols[weakest - 1] // weekdaySymbols[0] = Sunday
+    }
+
     #if DEBUG
     /// Test seam: inject a known daily history (used by unit tests and screenshots).
     func setDailyHistoryForTesting(_ days: [DayStat]) { dailyHistory = days }
