@@ -25,6 +25,7 @@ struct InsightsView: View {
                     actionCard
                     trends
                     yearHeatmap
+                    longevityZone
                     chips
                     mobility
                     activeMinutes
@@ -147,6 +148,62 @@ struct InsightsView: View {
         let start = settings.nudgeStartHour
         let end = settings.nudgeEndHour
         Task { await NudgeScheduler.reschedule(enabled: true, startHour: start, endHour: end) }
+    }
+
+    // MARK: - Longevity zone (Lancet dose-response curve)
+
+    @ViewBuilder private var longevityZone: some View {
+        let avg = health.recentAverage(days: 7)
+        if avg > 0 {
+            let zone = LongevityZone.forAverage(avg)
+            Card {
+                VStack(alignment: .leading, spacing: Tokens.Spacing.sm) {
+                    HStack(spacing: Tokens.Spacing.sm) {
+                        Image(systemName: "heart.text.square")
+                            .foregroundStyle(Tokens.Palette.primary)
+                        Text("Longevity zone")
+                            .font(Tokens.TextStyle.headline)
+                            .foregroundStyle(Tokens.Palette.textPrimary)
+                    }
+                    Text("\(avg.stepsFormatted) steps/day · \(zone.title)")
+                        .font(Tokens.TextStyle.subheadlineSemibold)
+                        .foregroundStyle(Tokens.Palette.accentText)
+
+                    curveBar(position: zone.position)
+                        .frame(height: 16)
+                        .accessibilityHidden(true)
+
+                    Text(zone.detail)
+                        .font(Tokens.TextStyle.subheadline)
+                        .foregroundStyle(Tokens.Palette.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text("Associations from observational research — not medical advice. The curve flattens past ~7,500–10,000 steps.")
+                        .font(Tokens.TextStyle.caption)
+                        .foregroundStyle(Tokens.Palette.textTertiary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .accessibilityElement(children: .combine)
+            }
+        }
+    }
+
+    private func curveBar(position: Double) -> some View {
+        GeometryReader { geo in
+            ZStack(alignment: .leading) {
+                Capsule()
+                    .fill(LinearGradient(
+                        colors: [Tokens.Palette.primary.opacity(0.18), Tokens.Palette.primary],
+                        startPoint: .leading, endPoint: .trailing))
+                    .frame(height: 8)
+                    .frame(maxHeight: .infinity, alignment: .center)
+                Circle()
+                    .fill(Tokens.Palette.primary)
+                    .frame(width: 14, height: 14)
+                    .overlay(Circle().stroke(Tokens.Palette.appBackground, lineWidth: 2))
+                    .offset(x: min(max(0, geo.size.width * position - 7), geo.size.width - 14))
+                    .frame(maxHeight: .infinity, alignment: .center)
+            }
+        }
     }
 
     // MARK: - Trends (week / month / year)

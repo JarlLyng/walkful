@@ -10,6 +10,7 @@ All notable changes to Walkful are documented here. Format based on
 - **Delightful moments** — the progress ring eases up to its value, a "Goal reached today" pill springs in when you hit your goal, and a gentle success haptic fires once a day on goal completion. All respect Reduce Motion (#10).
 - **"This week" widget** — a medium Home Screen widget with a 7-day bar chart (total + average per day, bars that hit your goal in full colour) and a rectangular Lock Screen variant. Reads the on-device App Group snapshot (#44).
 - **Data export (CSV) — Pro** — Settings → Your data → "Export steps (CSV)" writes your day-by-day step history to a CSV and shares it via the system share sheet. Generated entirely on-device — your data, your export (#41).
+- **Longevity zone card** — Insights maps your 7-day average onto the step/mortality dose-response curve (Lancet, 2022) with a position marker. Carefully hedged ("associations from observational research — not medical advice"), and honest that the curve flattens past ~7,500–10,000 steps (#42).
 
 ## [0.2.0] — 2026-06-20 — Pro v2, widgets, coach, nudges, Aurora & accessibility (build 7)
 
