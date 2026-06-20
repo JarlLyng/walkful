@@ -194,7 +194,8 @@ struct TodayView: View {
     }
 
     private func publishToWidget() {
-        SharedStore.save(steps: health.todaySteps, goal: goal)
+        SharedStore.save(steps: health.todaySteps, goal: goal,
+                         week: health.recentDays(7).map(\.steps))
         WidgetCenter.shared.reloadAllTimelines()
     }
 
