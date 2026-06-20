@@ -3,23 +3,14 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
-## [Unreleased]
+## [0.2.0] — 2026-06-20 — Pro v2, widgets, coach, nudges, Aurora & accessibility (build 7)
 
 ### Fixed
-- **Apple Health re-prompt on every launch.** `authState` is in-memory and read authorization can't be queried back, so a cold launch always showed the "Connect Apple Health" card again instead of the dashboard. The app now re-establishes authorization on launch (idempotent — no system prompt if access is already granted), so the dashboard and data appear immediately.
-
-### Added
-- **Insight → action** — Insights opens with a contextual card that turns a pattern into a next step: turn on reminders for your weakest weekday, keep an active streak alive, or plan around your best time of day (#6).
-
-### Changed
-- **Onboarding polish** — Aurora backdrop, a gradient progress indicator, a per-step icon, and a smooth fade between steps (#7).
-
-## [0.2.0] — 2026-06-18 — Pro v2, widgets, coach, nudges, Aurora & accessibility
-
-### Fixed
+- **Apple Health re-prompt on every launch.** `authState` is in-memory and read authorization can't be queried back, so a cold launch always showed the "Connect Apple Health" card again instead of the dashboard. The app now re-establishes authorization on launch (idempotent — no system prompt if access is already granted), so the dashboard and data appear immediately. Build 7.
 - **White screen on launch when upgrading from v0.1.** `AppSettings`' new properties lacked inline default values, so SwiftData's lightweight migration couldn't open an existing store. Added inline defaults to every property (a default in `init()` is not enough for migration). Build 3.
 
 ### Added
+- **Insight → action** — Insights opens with a contextual card that turns a pattern into a next step: turn on reminders for your weakest weekday, keep an active streak alive, or plan around your best time of day (#6).
 - **Accessibility** — full Dynamic Type (scalable text styles), VoiceOver support (decorative charts hidden, labelled ring, meaningful text equivalents), Reduced Motion, and verified contrast in light + dark (#9).
 - **Pro: Records & monthly recap** — Insights now has a records gallery (best day, best week, best month, longest streak, most floors) and a calm monthly recap (this month's steps + change vs last month) (#23).
 - **Pro: Mobility & fitness** — Insights now shows walking speed, walking steadiness, cardio fitness (VO₂max) and resting heart rate. Apple Watch-derived metrics hide gracefully when absent (#22).
@@ -34,6 +25,7 @@ All notable changes to Walkful are documented here. Format based on
 - Developer docs: `README.md`, `ARCHITECTURE.md`, `CONTRIBUTING.md`, this changelog.
 
 ### Changed
+- **Onboarding polish** — Aurora backdrop, a gradient progress indicator, a per-step icon, and a smooth fade between steps (#7).
 - **Aurora visual refresh** — a premium layer over the IAMJARL tokens: gradient progress ring with a soft glow, frosted glass cards, gradient-filled trend/week bars, rounded numerals, and a subtle aurora backdrop on Today/Insights. Light = purple→pink, dark = lime→teal→blue (#30).
 - Tabs are now **Today / Insights / Settings** (the standalone Week tab was folded into Today + Insights).
 - Design tokens now come from the real `IAMJARLDesignTokens` SPM package (was a local copy).
@@ -48,6 +40,5 @@ All notable changes to Walkful are documented here. Format based on
 - Local movement nudges (UserNotifications).
 - Layered app icon (light/dark/tinted); MetricKit diagnostics; privacy "Data Not Collected".
 
-[Unreleased]: https://github.com/JarlLyng/walkful/compare/v0.2.0...HEAD
 [0.2.0]: https://github.com/JarlLyng/walkful/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/JarlLyng/walkful/releases/tag/v0.1.0
