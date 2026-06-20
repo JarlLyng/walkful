@@ -180,6 +180,28 @@ final class HealthKitService {
         recentDays(n).filter { $0.steps >= goal }.count
     }
 
+    /// Average daily steps over the n full days before today (today's partial
+    /// count is excluded so a half-finished day can't drag the average down).
+    func recentAverage(days n: Int) -> Int {
+        let cal = isoCalendar()
+        let today = cal.startOfDay(for: .now)
+        let prior = dailyHistory
+            .filter { cal.startOfDay(for: $0.date) < today }
+            .sorted { $0.date < $1.date }
+            .suffix(n)
+        guard !prior.isEmpty else { return 0 }
+        return prior.map(\.steps).reduce(0, +) / prior.count
+    }
+
+    /// The next daily goal when the adaptive goal is on. Only ever increases,
+    /// in 500-step steps, and only when the recent average comfortably (≥110%)
+    /// beats the current goal. Capped so it stays realistic and never runs away.
+    static func adaptedGoal(current: Int, recentAverage: Int, cap: Int = 12_000) -> Int {
+        guard current < cap else { return current }
+        guard recentAverage >= Int(Double(current) * 1.1) else { return current }
+        return min(cap, current + 500)
+    }
+
     /// The weekday (English name) you move least on, by average steps. nil if no history.
     func weakestWeekday() -> String? {
         guard !dailyHistory.isEmpty else { return nil }

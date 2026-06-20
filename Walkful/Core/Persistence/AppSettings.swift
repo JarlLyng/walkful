@@ -17,15 +17,25 @@ final class AppSettings {
     var nudgeStartHour: Int = 9
     var nudgeEndHour: Int = 21
 
+    /// Vis afstand i miles i stedet for kilometer.
+    var useImperial: Bool = false
+
+    /// Lad det daglige mål stige gradvist når dit snit vokser (kun opad).
+    var adaptiveGoal: Bool = false
+
     init(dailyGoal: Int = 7_000,
          nudgesEnabled: Bool = true,
          hasOnboarded: Bool = false,
          nudgeStartHour: Int = 9,
-         nudgeEndHour: Int = 21) {
+         nudgeEndHour: Int = 21,
+         useImperial: Bool = false,
+         adaptiveGoal: Bool = false) {
         self.dailyGoal = dailyGoal
         self.nudgesEnabled = nudgesEnabled
         self.hasOnboarded = hasOnboarded
         self.nudgeStartHour = nudgeStartHour
         self.nudgeEndHour = nudgeEndHour
+        self.useImperial = useImperial
+        self.adaptiveGoal = adaptiveGoal
     }
 }

@@ -22,9 +22,19 @@ struct SettingsView: View {
                     Text("\(settings.dailyGoal.stepsFormatted) steps")
                         .foregroundStyle(Tokens.Palette.textPrimary)
                 }
-                Text("Every step counts. We suggest ~7,000 — not 10,000, which is a myth.")
+                Toggle("Adaptive goal", isOn: $settings.adaptiveGoal)
+                Text(settings.adaptiveGoal
+                     ? "Your goal rises in small steps as your recent average grows — never down. Adjust it any time."
+                     : "Every step counts. We suggest ~7,000 — not 10,000, which is a myth.")
                     .font(Tokens.TextStyle.caption)
                     .foregroundStyle(Tokens.Palette.textTertiary)
+            }
+
+            Section("Units") {
+                Picker("Distance", selection: $settings.useImperial) {
+                    Text("Kilometres").tag(false)
+                    Text("Miles").tag(true)
+                }
             }
 
             Section("Nudges") {
