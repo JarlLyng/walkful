@@ -38,6 +38,11 @@ struct TodayView: View {
             if health.authState == .authorized {
                 await health.refreshToday()
                 await health.loadHistory()
+                if settings.adaptiveGoal {
+                    settings.dailyGoal = HealthKitService.adaptedGoal(
+                        current: settings.dailyGoal,
+                        recentAverage: health.recentAverage(days: 14))
+                }
                 publishToWidget()
             }
         }
@@ -75,7 +80,7 @@ struct TodayView: View {
             LazyVGrid(columns: [GridItem(.flexible(), spacing: Tokens.Spacing.sm),
                                 GridItem(.flexible(), spacing: Tokens.Spacing.sm)],
                       spacing: Tokens.Spacing.sm) {
-                StatChip(value: String(format: "%.1f", health.todayDistanceKm), unit: "km", label: "distance")
+                StatChip(value: String(format: "%.1f", Units.distance(km: health.todayDistanceKm, imperial: settings.useImperial)), unit: Units.label(imperial: settings.useImperial), label: "distance")
                 StatChip(value: "\(health.todayActiveMinutes)", unit: "min", label: "active", accent: true)
                 StatChip(value: "\(health.todayFloors)", unit: nil, label: "floors")
                 StatChip(value: health.weekAveragePerDay.stepsFormatted, unit: nil, label: "week avg")

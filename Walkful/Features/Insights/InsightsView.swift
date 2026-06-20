@@ -357,7 +357,7 @@ struct InsightsView: View {
                 Text("Lifetime distance")
                     .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textSecondary)
-                Text("\(Int(km).stepsFormatted) km")
+                Text("\(Int(Units.distance(km: km, imperial: settings.useImperial)).stepsFormatted) \(Units.label(imperial: settings.useImperial))")
                     .font(Tokens.TextStyle.titleNumber)
                     .foregroundStyle(Tokens.Palette.accentText)
                 if marathons >= 1 {

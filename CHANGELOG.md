@@ -3,6 +3,11 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
+## [Unreleased]
+
+### Added
+- **Units & adaptive goal** — Settings now has a kilometres/miles toggle (distance shows in your unit across Today and Insights), and an opt-in adaptive daily goal that nudges your target up in small steps as your recent average grows — only ever upward (#43).
+
 ## [0.2.0] — 2026-06-20 — Pro v2, widgets, coach, nudges, Aurora & accessibility (build 7)
 
 ### Fixed
@@ -40,5 +45,6 @@ All notable changes to Walkful are documented here. Format based on
 - Local movement nudges (UserNotifications).
 - Layered app icon (light/dark/tinted); MetricKit diagnostics; privacy "Data Not Collected".
 
+[Unreleased]: https://github.com/JarlLyng/walkful/compare/v0.2.0...HEAD
 [0.2.0]: https://github.com/JarlLyng/walkful/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/JarlLyng/walkful/releases/tag/v0.1.0

@@ -65,6 +65,26 @@ final class HealthStatsTests: XCTestCase {
         XCTAssertEqual(s.weakestWeekday(), fmt.weekdaySymbols[target - 1])
     }
 
+    func testAdaptedGoalRaisesWhenAverageBeatsGoal() {
+        // 8,000 avg vs 7,000 goal → 8,000 ≥ 7,700, so bump by 500.
+        XCTAssertEqual(HealthKitService.adaptedGoal(current: 7_000, recentAverage: 8_000), 7_500)
+    }
+
+    func testAdaptedGoalHoldsWhenAverageOnlySlightlyAbove() {
+        // 7,200 avg vs 7,000 goal → below the 110% threshold (7,700), no change.
+        XCTAssertEqual(HealthKitService.adaptedGoal(current: 7_000, recentAverage: 7_200), 7_000)
+    }
+
+    func testAdaptedGoalRespectsCap() {
+        XCTAssertEqual(HealthKitService.adaptedGoal(current: 12_000, recentAverage: 20_000), 12_000)
+    }
+
+    func testRecentAverageExcludesToday() {
+        // Today is huge but partial-day should be ignored; avg of the two prior days = 6,000.
+        let s = service([day(-2, 5_000), day(-1, 7_000), day(0, 50_000)])
+        XCTAssertEqual(s.recentAverage(days: 14), 6_000)
+    }
+
     func testMonthlyTotalsSumsRecentSteps() {
         // Both entries fall within the last 12 months → their steps are summed.
         // (Asserting the grand total avoids flaking on a month boundary.)
