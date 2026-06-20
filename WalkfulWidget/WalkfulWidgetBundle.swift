@@ -5,5 +5,6 @@ import SwiftUI
 struct WalkfulWidgetBundle: WidgetBundle {
     var body: some Widget {
         StepWidget()
+        WeekWidget()
     }
 }
