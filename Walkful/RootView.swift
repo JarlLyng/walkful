@@ -57,7 +57,7 @@ struct RootView: View {
             InsightsView(settings: settings, health: health, store: store)
                 .tag(Tab.insights)
                 .tabItem { Label("Insights", systemImage: "chart.bar") }
-            SettingsView(settings: settings, store: store)
+            SettingsView(settings: settings, health: health, store: store)
                 .tag(Tab.settings)
                 .tabItem { Label("Settings", systemImage: "gearshape") }
         }

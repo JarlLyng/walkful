@@ -2,9 +2,12 @@ import SwiftUI
 
 struct SettingsView: View {
     @Bindable var settings: AppSettings
+    var health: HealthKitService
     var store: Store
 
     @State private var showingPaywall = false
+    @State private var exportURL: URL?
+    @State private var preparingExport = false
 
     private func resync() {
         let enabled = settings.nudgesEnabled
@@ -69,6 +72,39 @@ struct SettingsView: View {
                 }
             }
 
+            Section("Your data") {
+                if store.isPro {
+                    if let exportURL {
+                        ShareLink(item: exportURL) {
+                            Label("Export steps (CSV)", systemImage: "square.and.arrow.up")
+                                .foregroundStyle(Tokens.Palette.primary)
+                        }
+                    } else {
+                        HStack {
+                            Label("Export steps (CSV)", systemImage: "square.and.arrow.up")
+                                .foregroundStyle(Tokens.Palette.textTertiary)
+                            Spacer()
+                            if preparingExport { ProgressView() }
+                        }
+                    }
+                } else {
+                    Button {
+                        showingPaywall = true
+                    } label: {
+                        HStack {
+                            Label("Export steps (CSV)", systemImage: "square.and.arrow.up")
+                                .foregroundStyle(Tokens.Palette.textPrimary)
+                            Spacer()
+                            Image(systemName: "lock.fill")
+                                .foregroundStyle(Tokens.Palette.textTertiary)
+                        }
+                    }
+                }
+                Text("Your day-by-day step history as a CSV file — generated and shared on-device. Your data, your export.")
+                    .font(Tokens.TextStyle.caption)
+                    .foregroundStyle(Tokens.Palette.textTertiary)
+            }
+
             Section("Privacy") {
                 Label("All data stays on your device", systemImage: "lock.fill")
                     .font(Tokens.TextStyle.subheadline)
@@ -77,5 +113,16 @@ struct SettingsView: View {
         }
         .tint(Tokens.Palette.primary)
         .sheet(isPresented: $showingPaywall) { PaywallView(store: store) }
+        .task(id: store.isPro) { await prepareExport() }
+    }
+
+    /// Build the CSV file on-device so the ShareLink is ready instantly when tapped.
+    private func prepareExport() async {
+        guard store.isPro, exportURL == nil, !LaunchArgs.screenshots else { return }
+        preparingExport = true
+        defer { preparingExport = false }
+        if health.recentDays(1).isEmpty { await health.loadHistory() }
+        let csv = CSVExport.dailySteps(health.recentDays(400))
+        exportURL = CSVExport.writeTempFile(csv)
     }
 }
