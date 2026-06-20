@@ -8,11 +8,15 @@ struct TodayView: View {
 
     @State private var showingCoach = false
     @State private var showingPaywall = false
+    @State private var animatedProgress: Double = 0
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private var goal: Int { settings.dailyGoal }
     private var progress: Double {
         goal > 0 ? Double(health.todaySteps) / Double(goal) : 0
     }
+    private var goalReached: Bool { goal > 0 && health.todaySteps >= goal }
 
     var body: some View {
         ScrollView {
@@ -34,7 +38,7 @@ struct TodayView: View {
         .sheet(isPresented: $showingCoach) { CoachView() }
         .sheet(isPresented: $showingPaywall) { PaywallView(store: store) }
         .task {
-            if LaunchArgs.screenshots { return }
+            if LaunchArgs.screenshots { animatedProgress = progress; return }
             if health.authState == .authorized {
                 await health.refreshToday()
                 await health.loadHistory()
@@ -44,9 +48,32 @@ struct TodayView: View {
                         recentAverage: health.recentAverage(days: 14))
                 }
                 publishToWidget()
+                syncProgress()
+                maybeCelebrateGoal()
             }
         }
-        .onChange(of: health.todaySteps) { _, _ in publishToWidget() }
+        .onChange(of: health.todaySteps) { _, _ in
+            publishToWidget()
+            syncProgress()
+            maybeCelebrateGoal()
+        }
+    }
+
+    /// Fyld ringen op til den aktuelle progress (animeret, med mindre Reduce Motion).
+    private func syncProgress() {
+        if reduceMotion {
+            animatedProgress = progress
+        } else {
+            withAnimation(.easeInOut(duration: 0.6)) { animatedProgress = progress }
+        }
+    }
+
+    /// Fejr at dagens mål er nået — én gang om dagen, med en success-haptik.
+    private func maybeCelebrateGoal() {
+        guard !LaunchArgs.screenshots, goalReached else { return }
+        guard !Calendar.current.isDateInToday(settings.lastGoalCelebrationDay) else { return }
+        settings.lastGoalCelebrationDay = .now
+        Haptics.success()
     }
 
     // MARK: - Dashboard
@@ -54,7 +81,7 @@ struct TodayView: View {
     private var dashboard: some View {
         Group {
             ZStack {
-                ProgressRing(progress: progress)
+                ProgressRing(progress: animatedProgress)
                     .frame(width: 200, height: 200)
                 VStack(spacing: 2) {
                     Text(health.todaySteps.stepsFormatted)
@@ -70,6 +97,17 @@ struct TodayView: View {
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("\(health.todaySteps.stepsFormatted) of \(goal.stepsFormatted) steps today")
             .accessibilityValue("\(Int(progress * 100)) percent of your goal")
+
+            if goalReached {
+                Label("Goal reached today", systemImage: "checkmark.seal.fill")
+                    .font(Tokens.TextStyle.subheadlineSemibold)
+                    .foregroundStyle(Tokens.Palette.primary)
+                    .padding(.horizontal, Tokens.Spacing.md)
+                    .padding(.vertical, Tokens.Spacing.xs)
+                    .background(Tokens.Palette.primary.opacity(0.12), in: Capsule())
+                    .frame(maxWidth: .infinity)
+                    .transition(.scale(scale: 0.85).combined(with: .opacity))
+            }
 
             Text(meaning)
                 .font(Tokens.TextStyle.subheadline)
@@ -152,6 +190,7 @@ struct TodayView: View {
                 }
             }
         }
+        .animation(reduceMotion ? nil : .spring(response: 0.45, dampingFraction: 0.7), value: goalReached)
     }
 
     private func publishToWidget() {
