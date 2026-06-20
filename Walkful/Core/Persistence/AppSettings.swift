@@ -23,13 +23,18 @@ final class AppSettings {
     /// Lad det daglige mål stige gradvist når dit snit vokser (kun opad).
     var adaptiveGoal: Bool = false
 
+    /// Dagen vi sidst fejrede at målet blev nået — så haptikken kun udløses
+    /// én gang om dagen, ikke ved hvert app-start.
+    var lastGoalCelebrationDay: Date = Date.distantPast
+
     init(dailyGoal: Int = 7_000,
          nudgesEnabled: Bool = true,
          hasOnboarded: Bool = false,
          nudgeStartHour: Int = 9,
          nudgeEndHour: Int = 21,
          useImperial: Bool = false,
-         adaptiveGoal: Bool = false) {
+         adaptiveGoal: Bool = false,
+         lastGoalCelebrationDay: Date = .distantPast) {
         self.dailyGoal = dailyGoal
         self.nudgesEnabled = nudgesEnabled
         self.hasOnboarded = hasOnboarded
@@ -37,5 +42,6 @@ final class AppSettings {
         self.nudgeEndHour = nudgeEndHour
         self.useImperial = useImperial
         self.adaptiveGoal = adaptiveGoal
+        self.lastGoalCelebrationDay = lastGoalCelebrationDay
     }
 }

@@ -1,8 +1,5 @@
 import Foundation
 import Observation
-#if canImport(UIKit)
-import UIKit
-#endif
 
 /// Drives a guided interval walk: alternating "easy" and "brisk" phases for a
 /// number of rounds, with haptic cues on each phase change. Entirely on-device —
@@ -90,15 +87,6 @@ final class IntervalCoach {
 
     // MARK: - Haptics
 
-    private func impact() {
-        #if canImport(UIKit)
-        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-        #endif
-    }
-
-    private func success() {
-        #if canImport(UIKit)
-        UINotificationFeedbackGenerator().notificationOccurred(.success)
-        #endif
-    }
+    private func impact() { Haptics.impact() }
+    private func success() { Haptics.success() }
 }
