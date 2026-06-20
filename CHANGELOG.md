@@ -5,6 +5,9 @@ All notable changes to Walkful are documented here. Format based on
 
 ## [Unreleased]
 
+### Fixed
+- **Apple Health re-prompt on every launch.** `authState` is in-memory and read authorization can't be queried back, so a cold launch always showed the "Connect Apple Health" card again instead of the dashboard. The app now re-establishes authorization on launch (idempotent — no system prompt if access is already granted), so the dashboard and data appear immediately.
+
 ### Added
 - **Insight → action** — Insights opens with a contextual card that turns a pattern into a next step: turn on reminders for your weakest weekday, keep an active streak alive, or plan around your best time of day (#6).
 

@@ -72,6 +72,11 @@ struct RootView: View {
         }
         .task {
             if LaunchArgs.screenshots { return }
+            // Genetabler HealthKit-adgang ved cold launch. authState er ikke
+            // persisteret, og read-auth kan ikke aflæses — så et nyt kald er
+            // idempotent: iOS viser ikke systemarket igen hvis adgang allerede
+            // er givet, men authState bliver .authorized og dashboardet vises.
+            if health.authState == .unknown { await health.requestAuthorization() }
             // Hold planlagte nudges + sedentary-monitor i sync ved app-start.
             await NudgeScheduler.reschedule(enabled: settings.nudgesEnabled,
                                             startHour: settings.nudgeStartHour,
