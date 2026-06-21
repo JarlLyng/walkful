@@ -20,7 +20,7 @@ Orientation for anyone picking up Walkful. Pair this with [README](../README.md)
 
 1. **Get oriented & safe to change things** — `infra` issues first:
    - Add a unit-test target ([#45]) and CI on PRs ([#46]).
-   - Run the on-device verification checklist ([#47]) — confirms the things the simulator can't.
+   - Run the [on-device verification checklist](device-checklist.md) — confirms the things the simulator can't.
 2. **Product depth** (the paid value): in-app Danish localization ([#40]), data export ([#41]), mortality-risk context ([#42]), more widgets ([#44]), units/adaptive goal ([#43]).
 3. **Experience polish:** onboarding polish ([#7]), insight→action ([#6]), delight/animations ([#10]).
 4. **Platform:** Apple Watch app + complication ([#4]).
