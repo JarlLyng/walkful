@@ -26,15 +26,30 @@ jobs:
       - name: Generate project
         run: xcodegen generate
 
+      - name: Pick an iOS simulator
+        id: sim
+        run: |
+          # Don't hardcode a device name — runner images change which
+          # simulators exist. Pick any available iPhone; create one if none.
+          udid=$(xcrun simctl list devices available --json \
+            | python3 -c 'import json,sys; d=json.load(sys.stdin)["devices"]; print(next((x["udid"] for r in d.values() for x in r if x["name"].startswith("iPhone")), ""))')
+          if [ -z "$udid" ]; then
+            echo "No iPhone simulator available — creating one."
+            runtime=$(xcrun simctl list runtimes --json \
+              | python3 -c 'import json,sys; r=[x["identifier"] for x in json.load(sys.stdin)["runtimes"] if x.get("isAvailable") and "iOS" in x["name"]]; print(r[-1] if r else "")')
+            devtype=$(xcrun simctl list devicetypes --json \
+              | python3 -c 'import json,sys; d=[x["identifier"] for x in json.load(sys.stdin)["devicetypes"] if x.get("productFamily")=="iPhone"]; print(d[-1] if d else "")')
+            udid=$(xcrun simctl create "CI-iPhone" "$devtype" "$runtime")
+          fi
+          echo "Using simulator $udid"
+          echo "udid=$udid" >> "$GITHUB_OUTPUT"
+
       - name: Build & test
         run: |
           set -o pipefail
           xcodebuild test \
             -project Walkful.xcodeproj \
             -scheme Walkful \
-            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
             -clonedSourcePackagesDirPath .spm \
             CODE_SIGNING_ALLOWED=NO
-        # Runner image specifics (Xcode version, simulator name) may need
-        # tuning — adjust `xcode-version` / `-destination` to what the
-        # macOS runner provides if this step can't find them.
