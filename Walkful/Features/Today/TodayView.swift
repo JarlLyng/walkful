@@ -222,7 +222,7 @@ struct TodayView: View {
                 Text("Walkful reads your steps to show today's progress. Your data never leaves your device — we have no servers.")
                     .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textSecondary)
-                PrimaryButton(title: "Connect") {
+                PrimaryButton(title: "Continue") {
                     Task { await health.requestAuthorization() }
                 }
                 .padding(.top, Tokens.Spacing.xs)

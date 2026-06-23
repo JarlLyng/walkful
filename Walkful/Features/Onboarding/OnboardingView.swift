@@ -24,13 +24,6 @@ struct OnboardingView: View {
             Spacer()
 
             PrimaryButton(title: buttonTitle, action: primaryAction)
-
-            if step == 1 {
-                Button("Not now") { advance() }
-                    .font(Tokens.TextStyle.subheadline)
-                    .foregroundStyle(Tokens.Palette.textSecondary)
-                    .frame(maxWidth: .infinity)
-            }
         }
         .padding(Tokens.Spacing.xl)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -104,7 +97,7 @@ struct OnboardingView: View {
     private var buttonTitle: String {
         switch step {
         case 0: "Get started"
-        case 1: "Connect"
+        case 1: "Continue"
         case 2: "Continue"
         default: "Start walking"
         }
