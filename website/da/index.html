@@ -23,6 +23,8 @@
 <meta property="og:url" content="https://walkful.iamjarl.com/da/" />
 <meta property="og:image" content="https://walkful.iamjarl.com/og-image.png" />
 <meta property="og:image:alt" content="Walkful appen der viser dagens skridt fremskridtsring" />
+<meta property="og:locale" content="da_DK" />
+<meta property="og:locale:alternate" content="en_US" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
@@ -104,6 +106,20 @@
       "name": "Hvordan fungerer de smarte påmindelser mod stillesiddende tid?",
       "acceptedAnswer": { "@type": "Answer", "text": "I modsætning til almindelige fitnesstrackere, der vibrerer hver time uanset hvad, er Walkfuls påmindelser intelligente. De kører lokalt i baggrunden, tjekker din aktivitet via HealthKit, og sender kun en påmindelse, hvis du faktisk har siddet stille for længe i dine valgte aktive timer (f.eks. kl. 9 til 17)." }
     }
+  ]
+}
+</script>
+
+<!-- Structured data: the maker (entity clarity) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "IAMJARL",
+  "url": "https://iamjarl.com",
+  "sameAs": [
+    "https://walkful.iamjarl.com/",
+    "https://github.com/JarlLyng"
   ]
 }
 </script>
@@ -298,15 +314,25 @@
           <div class="phone-mockup">
             <div class="dynamic-island"></div>
             <div class="mockup-screen">
-              <img id="screen-today" class="screenshot-img active" src="../assets/today-dark.jpg" alt="Walkful appen der viser dagens dashboard med skridt og ring" />
-              <img id="screen-insights" class="screenshot-img" src="../assets/insights-dark.jpg" alt="Walkful appen der viser indsigter og varmekort over året" />
-              <img id="screen-coach" class="screenshot-img" src="../assets/coach-preview.jpg" alt="Walkful appen der viser skærmen for guidet intervaltræning" />
+              <img id="screen-today" class="screenshot-img active" src="../assets/today-dark.jpg" alt="Walkful appen der viser dagens dashboard med skridt og ring" width="320" height="694" loading="lazy" decoding="async" />
+              <img id="screen-insights" class="screenshot-img" src="../assets/insights-dark.jpg" alt="Walkful appen der viser indsigter og varmekort over året" width="320" height="694" loading="lazy" decoding="async" />
+              <img id="screen-coach" class="screenshot-img" src="../assets/coach-preview.jpg" alt="Walkful appen der viser skærmen for guidet intervaltræning" width="320" height="694" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>
       </section>
     </div>
   </div>
+
+  <!-- Mood / atmosphere band (image dropped into /assets) -->
+  <section class="mood-band" aria-label="Gang er hverdagens medicin">
+    <img class="mood-band__img" src="../assets/mood-walk.jpg" alt="En person der går udendørs på en sti i blødt gyldent eftermiddagslys" width="2400" height="1200" loading="lazy" decoding="async" />
+    <div class="mood-band__overlay" aria-hidden="true"></div>
+    <div class="mood-band__content">
+      <h2>Gang er hverdagens medicin</h2>
+      <p>Intet træningscenter, ingen lycra, intet pres — bare skridt der tæller. Walkful holder fokus på bevægelse, der passer ind i din hverdag.</p>
+    </div>
+  </section>
 
   <!-- Scientific Rationale Section -->
   <div class="wrap" id="science">
