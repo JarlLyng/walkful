@@ -44,6 +44,19 @@ final class IntervalCoach {
 
     func togglePause() { isRunning.toggle() }
 
+    #if DEBUG
+    /// Puts the coach in a representative mid-session state for screenshots.
+    func setScreenshotState() {
+        rounds = 4
+        currentRound = 2
+        phase = .brisk
+        remaining = 108
+        hasStarted = true
+        isFinished = false
+        isRunning = true
+    }
+    #endif
+
     func stop() {
         isRunning = false
         isFinished = false
