@@ -5,6 +5,9 @@ All notable changes to Walkful are documented here. Format based on
 
 ## [Unreleased]
 
+### Fixed
+- **HealthKit permission flow (App Review 5.1.1).** The pre-permission message no longer uses a "Connect" button (now neutral "Continue") and no longer offers a "Not now" escape — the user always proceeds to the system permission request after the explanation. Affects onboarding and the Today connect card. Build 8.
+
 ### Added
 - **Units & adaptive goal** — Settings now has a kilometres/miles toggle (distance shows in your unit across Today and Insights), and an opt-in adaptive daily goal that nudges your target up in small steps as your recent average grows — only ever upward (#43).
 - **Delightful moments** — the progress ring eases up to its value, a "Goal reached today" pill springs in when you hit your goal, and a gentle success haptic fires once a day on goal completion. All respect Reduce Motion (#10).
