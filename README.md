@@ -113,6 +113,7 @@ walking-app/
 - **[docs/trademark-check.md](docs/trademark-check.md)** — preliminary "Walkful" trademark clearance + next steps.
 - **[CHANGELOG.md](CHANGELOG.md)** — notable changes.
 - **[PRD.md](PRD.md)** · **[RESEARCH.md](RESEARCH.md)** · **[TECH_PLAN.md](TECH_PLAN.md)** — product spec, market/science research, technical plan (Danish).
+- **[TARGETAUDIENCE.md](TARGETAUDIENCE.md)** — who we build & sell for: ICP, personas, anti-personas, messaging, channels (English).
 - **[website/](website/)** — marketing site + privacy policy.
 
 ## Privacy
