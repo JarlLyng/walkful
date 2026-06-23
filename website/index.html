@@ -23,6 +23,8 @@
 <meta property="og:url" content="https://walkful.iamjarl.com/" />
 <meta property="og:image" content="https://walkful.iamjarl.com/og-image.png" />
 <meta property="og:image:alt" content="Walkful app showing today's step progress ring" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:locale:alternate" content="da_DK" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
@@ -114,6 +116,20 @@
       "name": "Can I compete with friends on Walkful?",
       "acceptedAnswer": { "@type": "Answer", "text": "Walkful deliberately has no social leaderboards. Instead you compete against your own records — beating your best week and keeping your streak. This keeps the app fully on-device and private, with no user accounts or databases." }
     }
+  ]
+}
+</script>
+
+<!-- Structured data: the maker (entity clarity) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "IAMJARL",
+  "url": "https://iamjarl.com",
+  "sameAs": [
+    "https://walkful.iamjarl.com/",
+    "https://github.com/JarlLyng"
   ]
 }
 </script>
@@ -308,15 +324,25 @@
           <div class="phone-mockup">
             <div class="dynamic-island"></div>
             <div class="mockup-screen">
-              <img id="screen-today" class="screenshot-img active" src="assets/today-dark.jpg" alt="Walkful app displaying Today dashboard steps and progress ring" />
-              <img id="screen-insights" class="screenshot-img" src="assets/insights-dark.jpg" alt="Walkful app displaying Insights and year heatmap trends" />
-              <img id="screen-coach" class="screenshot-img" src="assets/coach-preview.jpg" alt="Walkful app displaying guided Interval Walking coach session screen" />
+              <img id="screen-today" class="screenshot-img active" src="assets/today-dark.jpg" alt="Walkful app displaying Today dashboard steps and progress ring" width="320" height="694" loading="lazy" decoding="async" />
+              <img id="screen-insights" class="screenshot-img" src="assets/insights-dark.jpg" alt="Walkful app displaying Insights and year heatmap trends" width="320" height="694" loading="lazy" decoding="async" />
+              <img id="screen-coach" class="screenshot-img" src="assets/coach-preview.jpg" alt="Walkful app displaying guided Interval Walking coach session screen" width="320" height="694" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>
       </section>
     </div>
   </div>
+
+  <!-- Mood / atmosphere band (image dropped into /assets) -->
+  <section class="mood-band" aria-label="Walking is everyday medicine">
+    <img class="mood-band__img" src="assets/mood-walk.jpg" alt="A person walking outdoors along a path in soft golden-hour light" width="2400" height="1200" loading="lazy" decoding="async" />
+    <div class="mood-band__overlay" aria-hidden="true"></div>
+    <div class="mood-band__content">
+      <h2>Walking is everyday medicine</h2>
+      <p>No gym, no lycra, no pressure — just steps that add up. Walkful keeps the focus on movement that fits your life.</p>
+    </div>
+  </section>
 
   <!-- Scientific Rationale Section -->
   <div class="wrap" id="science">
