@@ -50,6 +50,14 @@ struct RootView: View {
     enum Tab: Hashable { case today, insights, settings }
 
     var body: some View {
+        if LaunchArgs.screenshots && LaunchArgs.screen == "coach" {
+            CoachView()
+        } else {
+            tabView
+        }
+    }
+
+    private var tabView: some View {
         TabView(selection: $tab) {
             TodayView(settings: settings, health: health, store: store)
                 .tag(Tab.today)

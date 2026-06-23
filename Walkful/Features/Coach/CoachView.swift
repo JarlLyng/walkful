@@ -19,6 +19,13 @@ struct CoachView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .background(Tokens.Palette.appBackground)
         .onReceive(timer) { _ in coach.tick() }
+        #if DEBUG
+        .onAppear {
+            if LaunchArgs.screenshots && LaunchArgs.screen == "coach" {
+                coach.setScreenshotState()
+            }
+        }
+        #endif
     }
 
     // MARK: - Intro
