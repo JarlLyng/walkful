@@ -3,7 +3,9 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
-## [Unreleased]
+## [1.0.0] — 2026-06-24 — 🎉 Released on the App Store (build 8)
+
+First public release — [App Store ID 6781303837](https://apps.apple.com/app/id6781303837).
 
 ### Fixed
 - **HealthKit permission flow (App Review 5.1.1).** The pre-permission message no longer uses a "Connect" button (now neutral "Continue") and no longer offers a "Not now" escape — the user always proceeds to the system permission request after the explanation. Affects onboarding and the Today connect card. Build 8.
@@ -52,6 +54,6 @@ All notable changes to Walkful are documented here. Format based on
 - Local movement nudges (UserNotifications).
 - Layered app icon (light/dark/tinted); MetricKit diagnostics; privacy "Data Not Collected".
 
-[Unreleased]: https://github.com/JarlLyng/walkful/compare/v0.2.0...HEAD
+[1.0.0]: https://github.com/JarlLyng/walkful/compare/v0.2.0...v1.0.0
 [0.2.0]: https://github.com/JarlLyng/walkful/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/JarlLyng/walkful/releases/tag/v0.1.0
