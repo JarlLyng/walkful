@@ -3,6 +3,11 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
+## [Unreleased]
+
+### Added
+- **App Store review prompt** — a single, well-timed request shown at a genuine high point (you just hit your goal *and* you're on a 3+ day streak), asked at most once ever and throttled by the system. No nagging, in keeping with the calm ethos.
+
 ## [1.0.0] — 2026-06-24 — 🎉 Released on the App Store (build 8)
 
 First public release — [App Store ID 6781303837](https://apps.apple.com/app/id6781303837).
@@ -54,6 +59,7 @@ First public release — [App Store ID 6781303837](https://apps.apple.com/app/id
 - Local movement nudges (UserNotifications).
 - Layered app icon (light/dark/tinted); MetricKit diagnostics; privacy "Data Not Collected".
 
+[Unreleased]: https://github.com/JarlLyng/walkful/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/JarlLyng/walkful/compare/v0.2.0...v1.0.0
 [0.2.0]: https://github.com/JarlLyng/walkful/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/JarlLyng/walkful/releases/tag/v0.1.0

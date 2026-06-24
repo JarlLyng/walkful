@@ -27,6 +27,9 @@ final class AppSettings {
     /// én gang om dagen, ikke ved hvert app-start.
     var lastGoalCelebrationDay: Date = Date.distantPast
 
+    /// Vi beder kun om en App Store-anmeldelse én gang (ved et positivt øjeblik).
+    var hasRequestedReview: Bool = false
+
     init(dailyGoal: Int = 7_000,
          nudgesEnabled: Bool = true,
          hasOnboarded: Bool = false,
@@ -34,7 +37,8 @@ final class AppSettings {
          nudgeEndHour: Int = 21,
          useImperial: Bool = false,
          adaptiveGoal: Bool = false,
-         lastGoalCelebrationDay: Date = .distantPast) {
+         lastGoalCelebrationDay: Date = .distantPast,
+         hasRequestedReview: Bool = false) {
         self.dailyGoal = dailyGoal
         self.nudgesEnabled = nudgesEnabled
         self.hasOnboarded = hasOnboarded
@@ -43,5 +47,6 @@ final class AppSettings {
         self.useImperial = useImperial
         self.adaptiveGoal = adaptiveGoal
         self.lastGoalCelebrationDay = lastGoalCelebrationDay
+        self.hasRequestedReview = hasRequestedReview
     }
 }
