@@ -8,6 +8,11 @@ All notable changes to Walkful are documented here. Format based on
 ### Added
 - **App Store review prompt** — a single, well-timed request shown at a genuine high point (you just hit your goal *and* you're on a 3+ day streak), asked at most once ever and throttled by the system. No nagging, in keeping with the calm ethos.
 - **Rate & Share in Settings** — a "Rate Walkful" link (opens the App Store review sheet) and a "Share Walkful" share button, for the people who want to spread the word.
+- **Insights loading skeleton** — a calm placeholder while your insights load, instead of an empty flash (build 10).
+
+### Changed
+- **More compact Consistency heatmap** — the year grid is tighter and less dominant (build 10).
+- **Refreshed app icon** (build 10).
 
 ## [1.0.0] — 2026-06-24 — 🎉 Released on the App Store (build 8)
 
