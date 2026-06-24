@@ -86,9 +86,33 @@ purchase + the 7,000-step science**, keep the tone **calm, honest, no hype**.
 - **Maker's first comment:**
 > Hi PH! 👋 I built Walkful because every step tracker I tried either sold my data, buried features behind a subscription, or shamed me over broken streaks. Walkful is the opposite: everything stays on your iPhone, it's a one-time purchase, and it's deliberately calm — you compete only with your own records. It's grounded in the recent Lancet research on ~7,000 steps. Would love your feedback, especially on the privacy-first approach.
 
+## 7. Indie Hackers (build-in-public post)
+
+A more personal, transparent tone fits IH. Title + body:
+
+- **Title:** `I shipped a private, one-time-purchase step tracker (no ads, no subscription)`
+- **Body:**
+> After trying every step tracker on the App Store, I was tired of three things: apps that sell your health data, apps that lock basic features behind a subscription, and apps that shame you over a broken streak. So I built the opposite.
+>
+> **Walkful** is a calm, private walking tracker for iPhone:
+> - **100% on-device** — no accounts, no servers, no analytics SDKs. The App Store privacy label is literally "Data Not Collected."
+> - **One-time purchase**, no subscription, no ads.
+> - **Evidence-based** — it's built around the 2025 Lancet finding that ~7,000 steps/day is linked to far lower mortality, instead of the 10,000-steps marketing myth.
+> - **Calm by design** — no leaderboards, no pace-shaming; you only compete with your own records.
+>
+> **The bet:** there's a real, paying audience that would rather *buy* a respectful tool once than be the product of a "free" one. The whole thing is the deliberate opposite of engagement-maxxing.
+>
+> **Tech:** SwiftUI + HealthKit (read-only), StoreKit 2 for the one-time unlock, WidgetKit, all on-device. No backend by design — which also means near-zero running costs.
+>
+> It's live now: https://apps.apple.com/app/id6781303837 · site: https://walkful.iamjarl.com
+>
+> I'd love feedback on the positioning — especially whether "private + one-time" is a strong enough wedge against the subscription incumbents. Happy to share what I learn about launch + ASO.
+
+> Tip: on IH, engage in the comments and share real numbers/learnings over time — the transparency *is* the content.
+
 ---
 
-## 7. Launch posts (Dansk)
+## 8. Launch posts (Dansk)
 
 ### LinkedIn
 > Walkful er nu på App Store. 🎉
@@ -105,10 +129,11 @@ purchase + the 7,000-step science**, keep the tone **calm, honest, no hype**.
 
 ---
 
-## 8. Outreach checklist
+## 9. Outreach checklist
 
 - [ ] Personal LinkedIn + X/Mastodon posts (links above).
 - [ ] Product Hunt launch (pick a Tue–Thu; line up a few people to check it out).
+- [ ] Indie Hackers build-in-public post (section 7) — engage in the comments; share real numbers over time.
 - [ ] 2–3 relevant subreddits / forums — **read each one's self-promotion rules first**; lead with the privacy story, not a sales pitch.
 - [ ] Privacy communities (PrivacyGuides forum, r/privacy) — emphasise on-device / Data Not Collected.
 - [ ] Ask friends & early users for honest App Store reviews (the first 5–10 ratings matter most). The app also asks at a positive moment in-app.

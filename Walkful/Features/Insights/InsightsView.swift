@@ -7,6 +7,9 @@ struct InsightsView: View {
 
     @State private var showingPaywall = false
     @State private var range: TrendRange = .month
+    @State private var insightsLoaded = false
+    @State private var shimmer = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     private let heatmapDays = 364
 
     enum TrendRange: String, CaseIterable, Identifiable {
@@ -21,7 +24,7 @@ struct InsightsView: View {
                     connectCard
                 } else if !store.isPro {
                     locked
-                } else {
+                } else if insightsLoaded {
                     actionCard
                     trends
                     yearHeatmap
@@ -32,6 +35,8 @@ struct InsightsView: View {
                     records
                     recap
                     lifetime
+                } else {
+                    insightsSkeleton
                 }
             }
             .padding(Tokens.Spacing.lg)
@@ -40,9 +45,36 @@ struct InsightsView: View {
         .safeAreaInset(edge: .top) { header }
         .sheet(isPresented: $showingPaywall) { PaywallView(store: store) }
         .task {
-            if LaunchArgs.screenshots { return }
-            if health.authState == .authorized, store.isPro { await health.loadInsights() }
+            if LaunchArgs.screenshots { insightsLoaded = true; return }
+            if health.authState == .authorized, store.isPro {
+                await health.loadInsights()
+                insightsLoaded = true
+            }
         }
+    }
+
+    // MARK: - Loading skeleton
+
+    private var insightsSkeleton: some View {
+        VStack(alignment: .leading, spacing: Tokens.Spacing.xl) {
+            skeletonBlock(height: 84)   // action card
+            skeletonBlock(height: 176)  // trends
+            skeletonBlock(height: 108)  // consistency
+            skeletonBlock(height: 64)   // chips
+        }
+        .onAppear {
+            guard !reduceMotion else { return }
+            withAnimation(.easeInOut(duration: 1.1).repeatForever(autoreverses: true)) { shimmer = true }
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Loading your insights")
+    }
+
+    private func skeletonBlock(height: CGFloat) -> some View {
+        RoundedRectangle(cornerRadius: Tokens.Radius.lg)
+            .fill(Tokens.Palette.mutedFill)
+            .frame(height: height)
+            .opacity(reduceMotion ? 0.6 : (shimmer ? 0.35 : 0.75))
     }
 
     private var locked: some View {
@@ -251,9 +283,9 @@ struct InsightsView: View {
                     .font(Tokens.TextStyle.caption)
                     .foregroundStyle(Tokens.Palette.textTertiary)
             }
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 3), count: 19), spacing: 3) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 2), count: 28), spacing: 2) {
                 ForEach(days) { day in
-                    RoundedRectangle(cornerRadius: 2)
+                    RoundedRectangle(cornerRadius: 1.5)
                         .fill(cellColor(day.steps))
                         .aspectRatio(1, contentMode: .fit)
                 }
