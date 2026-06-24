@@ -99,6 +99,10 @@ final class HealthKitService {
         let startDate = start ?? Calendar.current.startOfDay(for: .now)
         let predicate = HKQuery.predicateForSamples(withStart: startDate, end: .now)
         return await withCheckedContinuation { continuation in
+            // `.cumulativeSum` (without `.separateBySource`) uses HealthKit's
+            // built-in source merging, which matches the Health app — it drops
+            // iPhone steps that overlap Apple Watch steps. Do NOT add
+            // `.separateBySource` here or totals will double-count (see #53).
             let query = HKStatisticsQuery(
                 quantityType: type,
                 quantitySamplePredicate: predicate,

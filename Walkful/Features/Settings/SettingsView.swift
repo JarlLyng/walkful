@@ -105,6 +105,19 @@ struct SettingsView: View {
                     .foregroundStyle(Tokens.Palette.textTertiary)
             }
 
+            Section("Enjoying Walkful?") {
+                Link(destination: URL(string: "https://apps.apple.com/app/id6781303837?action=write-review")!) {
+                    Label("Rate Walkful", systemImage: "star")
+                        .foregroundStyle(Tokens.Palette.primary)
+                }
+                ShareLink(item: URL(string: "https://apps.apple.com/app/id6781303837")!,
+                          subject: Text("Walkful"),
+                          message: Text("A calm, private step tracker for iPhone — no ads, no subscription.")) {
+                    Label("Share Walkful", systemImage: "square.and.arrow.up")
+                        .foregroundStyle(Tokens.Palette.primary)
+                }
+            }
+
             Section("Privacy") {
                 Label("All data stays on your device", systemImage: "lock.fill")
                     .font(Tokens.TextStyle.subheadline)
