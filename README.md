@@ -111,6 +111,7 @@ walking-app/
 - **[docs/app-store-release.md](docs/app-store-release.md)** — App Store listing copy + submit checklist.
 - **[docs/device-checklist.md](docs/device-checklist.md)** — what to verify on a physical iPhone/Watch (the things the simulator can't).
 - **[docs/launch-kit.md](docs/launch-kit.md)** — taglines, pitch, press kit, and copy-paste launch posts (EN + DA).
+- **[docs/aso.md](docs/aso.md)** — App Store optimization: English + Danish metadata, screenshot captions, metrics.
 - **[docs/trademark-check.md](docs/trademark-check.md)** — preliminary "Walkful" trademark clearance + next steps.
 - **[CHANGELOG.md](CHANGELOG.md)** — notable changes.
 - **[PRD.md](PRD.md)** · **[RESEARCH.md](RESEARCH.md)** · **[TECH_PLAN.md](TECH_PLAN.md)** — product spec, market/science research, technical plan (Danish).
