@@ -250,7 +250,26 @@ final class HealthKitService {
     // MARK: - Insights
 
     func loadInsights() async {
+        await loadCoreInsights()
+        await loadDetailMetrics()
+    }
+
+    /// Fast pass: daily history + records/recap (in-memory reductions). The
+    /// Insights screen can render as soon as this returns — no slow HealthKit
+    /// aggregates here, so the loading skeleton clears quickly.
+    func loadCoreInsights() async {
         if dailyHistory.isEmpty { await loadHistory() }
+        bestDaySteps = dailyHistory.map(\.steps).max() ?? 0
+        let months = monthlyTotals(120)
+        bestMonthSteps = months.max() ?? 0
+        thisMonthSteps = months.last ?? 0
+        lastMonthSteps = months.count >= 2 ? months[months.count - 2] : 0
+    }
+
+    /// Slow pass: the heavier HealthKit aggregate queries (lifetime distance,
+    /// mobility, resting HR, active minutes, best time of day, max floors).
+    /// Their cards fill in / appear reactively as these resolve.
+    func loadDetailMetrics() async {
         async let lifetime = sum(distanceType, unit: .meterUnit(with: .kilo), from: Date.distantPast)
         async let best = computeBestTimeOfDay()
         async let weekly = computeActiveMinutesByWeek()
@@ -267,13 +286,6 @@ final class HealthKitService {
         walkingSteadiness = await steady
         vo2Max = await vo2
         mostFloorsInADay = await floors
-
-        // Records & recap (from the loaded daily history)
-        bestDaySteps = dailyHistory.map(\.steps).max() ?? 0
-        let months = monthlyTotals(120)
-        bestMonthSteps = months.max() ?? 0
-        thisMonthSteps = months.last ?? 0
-        lastMonthSteps = months.count >= 2 ? months[months.count - 2] : 0
     }
 
     private func maxDailyFloors() async -> Int {

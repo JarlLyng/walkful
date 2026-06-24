@@ -47,8 +47,9 @@ struct InsightsView: View {
         .task {
             if LaunchArgs.screenshots { insightsLoaded = true; return }
             if health.authState == .authorized, store.isPro {
-                await health.loadInsights()
+                await health.loadCoreInsights()   // fast → clear the skeleton
                 insightsLoaded = true
+                await health.loadDetailMetrics()  // heavier metrics fill in after
             }
         }
     }
