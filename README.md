@@ -5,7 +5,7 @@
 [![CI](https://github.com/JarlLyng/walkful/actions/workflows/ci.yml/badge.svg)](https://github.com/JarlLyng/walkful/actions/workflows/ci.yml)
 ![Platform](https://img.shields.io/badge/platform-iOS%2018%2B-000000?logo=apple)
 ![Swift](https://img.shields.io/badge/Swift-5-F05138?logo=swift&logoColor=white)
-![Status](https://img.shields.io/badge/status-App%20Store%20Review-3C3489)
+[![Download on the App Store](https://img.shields.io/badge/App_Store-Live-2E7D32?logo=apple&logoColor=white)](https://apps.apple.com/app/id6781303837)
 ![Privacy](https://img.shields.io/badge/privacy-Data%20Not%20Collected-2E7D32)
 ![License](https://img.shields.io/badge/license-Proprietary-5F5E5A)
 [![Co-created with AI](https://madebyhuman.iamjarl.com/badges/co-created-white.svg)](https://madebyhuman.iamjarl.com)
@@ -24,9 +24,9 @@ Made by **IAMJARL** · [walkful.iamjarl.com](https://walkful.iamjarl.com)
 
 ## Status
 
-- 🚀 **v0.2 (build 6) submitted to the App Store review.** Free app + a one-time **Walkful Pro** unlock.
-- Shipped: interval-walking coach, sedentary-aware nudges, Home/Lock Screen widgets, a deep Pro **Insights** tab (week/month/year trends, year heatmap, mobility & fitness, records, monthly recap), the **Aurora** visual design, and full **accessibility** (Dynamic Type, VoiceOver, Reduced Motion).
-- 🚧 Next: Apple Watch app/complication, onboarding polish, insight→action. See **[GitHub Issues](../../issues)** for the live backlog.
+- 🎉 **Live on the [App Store](https://apps.apple.com/app/id6781303837)** — v1.0. Free app + a one-time **Walkful Pro** unlock.
+- Shipped: interval-walking coach, sedentary-aware nudges, Home/Lock Screen widgets, a deep Pro **Insights** tab (week/month/year trends, year heatmap, mobility & fitness, longevity-zone card, records, monthly recap, CSV export), the **Aurora** visual design, and full **accessibility** (Dynamic Type, VoiceOver, Reduced Motion).
+- 🚧 Next: Apple Watch app/complication, in-app Danish localization, ASO. See **[GitHub Issues](../../issues)** for the live backlog.
 
 ## What makes it different
 
