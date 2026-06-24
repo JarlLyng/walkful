@@ -1,5 +1,6 @@
 import SwiftUI
 import WidgetKit
+import StoreKit
 
 struct TodayView: View {
     var settings: AppSettings
@@ -11,6 +12,7 @@ struct TodayView: View {
     @State private var animatedProgress: Double = 0
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.requestReview) private var requestReview
 
     private var goal: Int { settings.dailyGoal }
     private var progress: Double {
@@ -74,6 +76,20 @@ struct TodayView: View {
         guard !Calendar.current.isDateInToday(settings.lastGoalCelebrationDay) else { return }
         settings.lastGoalCelebrationDay = .now
         Haptics.success()
+        maybeAskForReview()
+    }
+
+    /// Ask for an App Store review at a genuine high point — the user just hit
+    /// their goal *and* is on a 3+ day streak — and only ever once. The system
+    /// further throttles how often the prompt actually appears.
+    private func maybeAskForReview() {
+        guard !settings.hasRequestedReview,
+              health.currentStreak(goal: goal) >= 3 else { return }
+        settings.hasRequestedReview = true
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(1.5))
+            requestReview()
+        }
     }
 
     // MARK: - Dashboard
