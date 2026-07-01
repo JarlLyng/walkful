@@ -141,3 +141,45 @@ A more personal, transparent tone fits IH. Title + body:
 - [ ] (Optional) Email a few Apple-focused or health/longevity newsletters with the one-paragraph pitch + screenshots.
 
 > Keep every message honest and hedged ("associated with", never medical claims) — it's part of the brand and keeps reviews trustworthy.
+
+---
+
+## 10. Distribution channels & drafts
+
+Reusable across IAMJARL apps. Lead with value or the story, never a bare link — communities punish self-promo.
+
+### Channel priority (privacy/health/Apple audience)
+1. **Hacker News "Show HN"** — best fit for the privacy / on-device / no-backend / indie story. High traffic potential, one shot, needs honest non-marketing framing.
+2. **AlternativeTo.net** — list as an alternative to the incumbents (durable discovery + backlink). Done for Walkful: listed as an alternative to **Pacer, Fitbit, Google Fit, StepsApp, Pedometer++** (optionally Stepz). License = Freemium; features = Privacy focused, No ads, No subscription, On-device, No account, Apple Health.
+3. **Reddit (value-first)** — r/QuantifiedSelf, r/walking, r/privacy + r/PrivacyGuides, r/apple. Read each sub's rules; participate first; reply to every comment.
+4. **Product Hunt** — see section 6 (pick Tue–Thu).
+5. **Maker-friendly:** r/SideProject, r/iosapps (showing your app is allowed here).
+
+### AlternativeTo entry (Walkful)
+- **Tagline:** A calm, private step & walking tracker for iPhone. On-device, no ads, one-time purchase.
+- **Alternative to:** Pacer, Fitbit, Google Fit, StepsApp, Pedometer++ (Stepz optional).
+- **Skip:** Strava / MapMyWalk (GPS/route), MyFitnessPal (diet), Apple Health (the source, not a rival).
+
+### Reddit draft — r/QuantifiedSelf (discussion + disclosure)
+> **Title:** I got uneasy about who owns my step data, so I built a tracker that keeps everything on the phone. How do you weigh that tradeoff?
+>
+> I've tracked my steps for years, and at some point it started bugging me that most of the apps doing it quietly send that data somewhere. Step history says a lot about you, like when you sleep and where you go, and plenty of free trackers fund themselves by sharing it.
+>
+> So I built one that does everything on the device. It reads from Apple Health, does all the trends and records locally, and has no account and no servers. I also went one-time purchase instead of a subscription so there's no incentive for me to hoard behaviour.
+>
+> The part I keep going back and forth on is the tradeoff. Staying fully on-device means no cross-device sync, no cloud backup, and I can't learn anything from aggregate data to improve it. For QS specifically, how do you weigh privacy against the features that only come from sending data to a server? Do you avoid cloud trackers, or is the convenience worth it for you?
+>
+> (Happy to share the app if anyone's curious, but I'm honestly more interested in how this crowd thinks about it.)
+
+### Reddit draft — r/walking (pure discussion; mention the app only if asked)
+> **Title:** The 10,000 steps target was a 1965 marketing slogan, not science. The research points closer to 7,000
+>
+> I went down a rabbit hole on this and it surprised me. The 10,000 number comes from the name of a Japanese pedometer from 1965 called the manpo-kei, which literally means "10,000 steps meter". It was a catchy product name, not a study.
+>
+> When researchers actually measured steps against health, the big benefits show up lower. A 2025 Lancet review found about 7,000 steps a day was linked to roughly 40 to 50 percent lower mortality compared to around 2,000, and the gains climb fastest between 5,000 and 7,000. After about 7,500 to 10,000 it mostly flattens out.
+>
+> What I like about it is that a good day suddenly feels reachable. 7,000 is a lot friendlier than 10,000, and a 6,000 day clearly still counts for plenty.
+>
+> What daily target do you aim for? And does hitting a round number actually motivate you, or just make the misses sting more?
+
+> The r/walking post deliberately doesn't link the app. If someone asks "which app?", mention Walkful in a reply. Linking it in the body will likely get it removed.
