@@ -30,6 +30,11 @@ final class AppSettings {
     /// Vi beder kun om en App Store-anmeldelse én gang (ved et positivt øjeblik).
     var hasRequestedReview: Bool = false
 
+    /// Dagen målet sidst blev ændret (manuelt eller adaptivt). Bruges til at
+    /// begrænse adaptive-justering til én gang om dagen og til at respektere
+    /// et manuelt sat mål samme dag.
+    var lastGoalAdjustmentDay: Date = Date.distantPast
+
     init(dailyGoal: Int = 7_000,
          nudgesEnabled: Bool = true,
          hasOnboarded: Bool = false,
@@ -38,7 +43,8 @@ final class AppSettings {
          useImperial: Bool = false,
          adaptiveGoal: Bool = false,
          lastGoalCelebrationDay: Date = .distantPast,
-         hasRequestedReview: Bool = false) {
+         hasRequestedReview: Bool = false,
+         lastGoalAdjustmentDay: Date = .distantPast) {
         self.dailyGoal = dailyGoal
         self.nudgesEnabled = nudgesEnabled
         self.hasOnboarded = hasOnboarded
@@ -48,5 +54,6 @@ final class AppSettings {
         self.adaptiveGoal = adaptiveGoal
         self.lastGoalCelebrationDay = lastGoalCelebrationDay
         self.hasRequestedReview = hasRequestedReview
+        self.lastGoalAdjustmentDay = lastGoalAdjustmentDay
     }
 }

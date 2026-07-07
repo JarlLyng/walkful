@@ -25,6 +25,11 @@ struct SettingsView: View {
                     Text("\(settings.dailyGoal.stepsFormatted) steps")
                         .foregroundStyle(Tokens.Palette.textPrimary)
                 }
+                .onChange(of: settings.dailyGoal) { _, _ in
+                    // A manual change claims today's slot so adaptive goal won't
+                    // override it the moment you return to Today.
+                    settings.lastGoalAdjustmentDay = .now
+                }
                 Toggle("Adaptive goal", isOn: $settings.adaptiveGoal)
                 Text(settings.adaptiveGoal
                      ? "Your goal rises in small steps as your recent average grows — never down. Adjust it any time."

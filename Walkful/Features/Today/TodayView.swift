@@ -44,10 +44,14 @@ struct TodayView: View {
             if health.authState == .authorized {
                 await health.refreshToday()
                 await health.loadHistory()
-                if settings.adaptiveGoal {
+                // Adaptive goal nudges at most once per day, and never overrides
+                // a goal you changed yourself today.
+                if settings.adaptiveGoal,
+                   !Calendar.current.isDateInToday(settings.lastGoalAdjustmentDay) {
                     settings.dailyGoal = HealthKitService.adaptedGoal(
                         current: settings.dailyGoal,
                         recentAverage: health.recentAverage(days: 14))
+                    settings.lastGoalAdjustmentDay = .now
                 }
                 publishToWidget()
                 syncProgress()
