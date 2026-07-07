@@ -5,6 +5,9 @@ All notable changes to Walkful are documented here. Format based on
 
 ## [Unreleased]
 
+### Fixed
+- **Adaptive goal no longer overrides your manual goal.** With Adaptive goal on, opening Today re-ran the adjustment on every visit, so a goal you'd just set (e.g. 7,500) jumped up (to 8,000) and could keep climbing. It now adjusts at most once per day and never overrides a goal you changed yourself the same day (build 10).
+
 ### Added
 - **App Store review prompt** — a single, well-timed request shown at a genuine high point (you just hit your goal *and* you're on a 3+ day streak), asked at most once ever and throttled by the system. No nagging, in keeping with the calm ethos.
 - **Rate & Share in Settings** — a "Rate Walkful" link (opens the App Store review sheet) and a "Share Walkful" share button, for the people who want to spread the word.
