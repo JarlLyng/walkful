@@ -52,6 +52,7 @@ marketing **site** source (`website/`), and normal OSS docs.
   `xcodebuild -project Walkful.xcodeproj -scheme Walkful -destination 'generic/platform=iOS Simulator' build`
 - Tests: the `WalkfulTests` target (run via the `Walkful` scheme).
 - **Versioning:** bump `MARKETING_VERSION` / `CURRENT_PROJECT_VERSION` in `project.yml`, then `xcodegen generate` — the managed Info.plist reads them via `$(...)`. Don't edit versions in Xcode's UI.
+- **CI/CD:** GitHub Actions (`.github/workflows/ci.yml`) builds + tests every PR to `main`. **Xcode Cloud** builds/archives from the **`release`** branch — push `main` → `release` to trigger a build. Because the `.xcodeproj` is generated, `ci_scripts/ci_post_clone.sh` runs `xcodegen generate` after Xcode Cloud clones.
 
 ## Conventions
 - Design tokens come from the `IAMJARLDesignTokens` SPM package (Aurora layer on top). No hardcoded colors/spacing/radius/type.
