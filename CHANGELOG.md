@@ -6,6 +6,8 @@ All notable changes to Walkful are documented here. Format based on
 ## [Unreleased]
 
 ### Fixed
+- **Interval coach keeps correct time with the phone locked.** The countdown is now anchored to the wall clock instead of per-tick counting, so a session in your pocket stays honest — elapsed phases are caught up the moment the screen comes back, without a burst of stale haptics (build 10, #83).
+- **Insights no longer sticks on the loading skeleton after unlocking Pro on that tab** (build 10, #84).
 - **Adaptive goal no longer overrides your manual goal.** With Adaptive goal on, opening Today re-ran the adjustment on every visit, so a goal you'd just set (e.g. 7,500) jumped up (to 8,000) and could keep climbing. It now adjusts at most once per day and never overrides a goal you changed yourself the same day (build 10).
 
 ### Added

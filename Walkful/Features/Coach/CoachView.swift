@@ -2,6 +2,7 @@ import SwiftUI
 
 struct CoachView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.scenePhase) private var scenePhase
     @State private var coach = IntervalCoach()
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -19,6 +20,11 @@ struct CoachView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .background(Tokens.Palette.appBackground)
         .onReceive(timer) { _ in coach.tick() }
+        .onChange(of: scenePhase) { _, newPhase in
+            // Ticks stop while backgrounded/locked; re-sync the wall-clock
+            // timing the moment the screen comes back (#83).
+            if newPhase == .active { coach.tick() }
+        }
         #if DEBUG
         .onAppear {
             if LaunchArgs.screenshots && LaunchArgs.screen == "coach" {
