@@ -1,0 +1,47 @@
+name: Feature request
+description: Propose a new capability or improvement that fits Walkful's principles.
+title: '[Feature] '
+labels: ['feature']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion. Keep it within Walkful's principles — on-device, calm, meaning over vanity metrics.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / user value
+      description: What user problem does this solve? How does it help people move more — or pay for the app?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What should it do? Keep it within Walkful's principles (on-device, calm, meaning over vanity metrics).
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      value: |
+        - HealthKit types / data needed:
+        - Design tokens / components affected:
+        - Privacy implications (must stay on-device):
+
+  - type: checkboxes
+    id: alignment
+    attributes:
+      label: Alignment checks
+      description: These keep requests inside the IAMJARL product DNA.
+      options:
+        - label: This keeps all data on-device — no account, cloud sync, or off-device processing
+          required: true
+        - label: This does not add a subscription or ads (a one-time Pro unlock is fine)
+          required: true
+        - label: I searched existing issues and didn't find a duplicate
+          required: true
