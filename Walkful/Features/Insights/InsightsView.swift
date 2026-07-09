@@ -44,9 +44,12 @@ struct InsightsView: View {
         .background(Tokens.Gradient.heroBackdrop.ignoresSafeArea())
         .safeAreaInset(edge: .top) { header }
         .sheet(isPresented: $showingPaywall) { PaywallView(store: store) }
-        .task {
+        .task(id: store.isPro) {
+            // id: store.isPro — re-runs when Pro is purchased from the paywall
+            // on this very tab; a plain .task runs once per view lifetime and
+            // would leave the skeleton up forever (#84).
             if LaunchArgs.screenshots { insightsLoaded = true; return }
-            if health.authState == .authorized, store.isPro {
+            if health.authState == .authorized, store.isPro, !insightsLoaded {
                 await health.loadCoreInsights()   // fast → clear the skeleton
                 insightsLoaded = true
                 await health.loadDetailMetrics()  // heavier metrics fill in after
