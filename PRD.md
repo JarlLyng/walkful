@@ -1,6 +1,6 @@
 # PRD — Walkful
 
-*Version 0.1 · 2026-06-17 · Bygger på [RESEARCH.md](RESEARCH.md)*
+*Version 0.1 · 2026-06-17 · Bygger på research i det private [iamjarl-strategy](https://github.com/JarlLyng/iamjarl-strategy)-hub*
 
 **Navn:** **Walkful** — engelsk, sammensat af "walk" + "-ful" (mindful-undertone). Internationalt publikum. Tagline-retning: *"Walkful — every step counts."*
 Historik: tidligere kandidat "Afoot" blev droppet — navnet var allerede i brug i App Store (App Record Creation Error ved upload). "Walkful" er et opfundet ord → mere ejerbart og varemærke-venligt. **Endeligt bekræftet ledigt i App Store Connect; varemærke-tjek (EUIPO/DKPTO) anbefales stadig før lancering.**
