@@ -7,7 +7,7 @@
 ![Swift](https://img.shields.io/badge/Swift-5-F05138?logo=swift&logoColor=white)
 [![Download on the App Store](https://img.shields.io/badge/App_Store-Live-2E7D32?logo=apple&logoColor=white)](https://apps.apple.com/app/id6781303837)
 ![Privacy](https://img.shields.io/badge/privacy-Data%20Not%20Collected-2E7D32)
-![License](https://img.shields.io/badge/license-Proprietary-5F5E5A)
+[![License](https://img.shields.io/badge/license-AGPL--3.0-2E7D32)](LICENSE)
 [![Co-created with AI](https://madebyhuman.iamjarl.com/badges/co-created-white.svg)](https://madebyhuman.iamjarl.com)
 
 A calm, private, evidence-based **step & walking tracker for iPhone and Apple Watch**. Walkful adds a meaningful motivation layer on top of Apple Health — and keeps **everything on your device**: no accounts, no servers, no ads, no data collection.
@@ -34,7 +34,7 @@ Made by **IAMJARL** · [walkful.iamjarl.com](https://walkful.iamjarl.com)
 - **Private by architecture** — all data is read from Apple Health and processed on-device. App Store privacy label: *Data Not Collected*.
 - **Calm, no manipulation** — no pace-shaming, no social leaderboards, no dark patterns. You compete against your own records.
 
-See **[RESEARCH.md](RESEARCH.md)** (market + science) and **[PRD.md](PRD.md)** (product spec) for the full rationale.
+See **[PRD.md](PRD.md)** (product spec) for the rationale. (Market/competitor research lives in the private [strategy hub](https://github.com/JarlLyng/iamjarl-strategy).)
 
 ---
 
@@ -97,7 +97,7 @@ walking-app/
 │  └─ Resources/            # Assets.xcassets (layered app icon)
 ├─ WalkfulWidget/           # WidgetKit extension (Home + Lock Screen)
 ├─ website/                 # Marketing site (static, SEO/GEO)
-├─ RESEARCH.md PRD.md TECH_PLAN.md   # Product & research docs (Danish)
+├─ PRD.md TECH_PLAN.md               # Product & technical docs (Danish)
 └─ ARCHITECTURE.md CONTRIBUTING.md CHANGELOG.md   # Developer docs (English)
 ```
 
@@ -110,13 +110,11 @@ walking-app/
 - **[docs/ROADMAP.md](docs/ROADMAP.md)** — project status, how work is tracked, and where to start (handoff).
 - **[docs/app-store-release.md](docs/app-store-release.md)** — App Store listing copy + submit checklist.
 - **[docs/device-checklist.md](docs/device-checklist.md)** — what to verify on a physical iPhone/Watch (the things the simulator can't).
-- **[docs/launch-kit.md](docs/launch-kit.md)** — taglines, pitch, press kit, and copy-paste launch posts (EN + DA).
-- **[docs/aso.md](docs/aso.md)** — App Store optimization: English + Danish metadata, screenshot captions, metrics.
-- **[docs/trademark-check.md](docs/trademark-check.md)** — preliminary "Walkful" trademark clearance + next steps.
 - **[CHANGELOG.md](CHANGELOG.md)** — notable changes.
-- **[PRD.md](PRD.md)** · **[RESEARCH.md](RESEARCH.md)** · **[TECH_PLAN.md](TECH_PLAN.md)** — product spec, market/science research, technical plan (Danish).
-- **[TARGETAUDIENCE.md](TARGETAUDIENCE.md)** — who we build & sell for: ICP, personas, anti-personas, messaging, channels (English).
+- **[CLAUDE.md](CLAUDE.md)** — quick-start context for developers and AI assistants.
+- **[PRD.md](PRD.md)** · **[TECH_PLAN.md](TECH_PLAN.md)** — product spec and technical plan (Danish).
 - **[website/](website/)** — marketing site + privacy policy.
+- **Strategy & audience** (target audience, positioning, pricing, SEO/ASO, marketing) lives in the private [iamjarl-strategy](https://github.com/JarlLyng/iamjarl-strategy) hub (folder `Walkful/`), not in this public repo.
 
 ## Privacy
 
@@ -124,4 +122,4 @@ Walkful collects nothing. Health data is read from Apple Health with explicit, g
 
 ## License
 
-Proprietary © 2026 IAMJARL. All rights reserved.
+[AGPL-3.0](LICENSE) © 2026 IAMJARL. Open source.

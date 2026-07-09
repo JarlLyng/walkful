@@ -14,6 +14,7 @@ All notable changes to Walkful are documented here. Format based on
 - **Insights loading skeleton** — a calm placeholder while your insights load, instead of an empty flash. Loads fast: the screen appears as soon as your history is ready, and the heavier metrics (mobility, lifetime distance, etc.) fill in after (build 10).
 
 ### Changed
+- **Open-sourced under AGPL-3.0.** Relicensed from proprietary ahead of making the repo public. Strategy/marketing docs (target audience, ASO, launch kit, competitor research) moved to a private hub; added a `CLAUDE.md`.
 - **More compact Consistency heatmap** — the year grid is tighter and less dominant (build 10).
 - **Refreshed app icon** (build 10).
 
