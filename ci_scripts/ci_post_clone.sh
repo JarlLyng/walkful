@@ -23,12 +23,18 @@ cd "$REPO"
 echo "ci_post_clone: generating the Xcode project from project.yml"
 xcodegen generate
 
-# Xcode Cloud's "Resolve package dependencies" step runs with automatic
-# resolution DISABLED and requires a committed Package.resolved — which we
-# can't commit because the .xcodeproj is generated/git-ignored. Resolve here
-# (auto-resolution IS allowed in this script) so the workspace has a
-# Package.resolved before that step runs.
-echo "ci_post_clone: pre-resolving Swift package dependencies"
-xcodebuild -resolvePackageDependencies -project Walkful.xcodeproj -scheme Walkful
+# Xcode Cloud disables automatic SwiftPM resolution environment-wide (even a
+# manual `xcodebuild -resolvePackageDependencies` is refused) and requires a
+# Package.resolved at
+# Walkful.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved.
+# We can't commit it there (the .xcodeproj is generated/git-ignored), so we keep
+# a checked-in copy at ci_scripts/Package.resolved and drop it into place after
+# generating the project. Xcode Cloud then fetches exactly the pinned versions.
+# NOTE: if you change SPM dependencies in project.yml, regenerate this file:
+#   xcodegen generate && xcodebuild -resolvePackageDependencies -project Walkful.xcodeproj -scheme Walkful
+#   cp Walkful.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved ci_scripts/Package.resolved
+SWIFTPM_DIR="Walkful.xcodeproj/project.xcworkspace/xcshareddata/swiftpm"
+mkdir -p "$SWIFTPM_DIR"
+cp "$(dirname "$0")/Package.resolved" "$SWIFTPM_DIR/Package.resolved"
 
-echo "ci_post_clone: done — generated $(ls -d *.xcodeproj); Package.resolved: $(ls Walkful.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved 2>/dev/null || echo MISSING)"
+echo "ci_post_clone: done — generated $(ls -d *.xcodeproj); Package.resolved in place: $(ls "$SWIFTPM_DIR/Package.resolved" 2>/dev/null || echo MISSING)"
