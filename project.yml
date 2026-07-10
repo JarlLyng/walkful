@@ -15,7 +15,7 @@ settings:
 packages:
   IAMJARLDesignTokens:
     url: https://github.com/JarlLyng/iamjarl-design
-    branch: main
+    from: 1.1.0
 targets:
   Walkful:
     type: application
