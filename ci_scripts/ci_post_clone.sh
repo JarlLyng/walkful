@@ -23,4 +23,12 @@ cd "$REPO"
 echo "ci_post_clone: generating the Xcode project from project.yml"
 xcodegen generate
 
-echo "ci_post_clone: done — generated $(ls -d *.xcodeproj)"
+# Xcode Cloud's "Resolve package dependencies" step runs with automatic
+# resolution DISABLED and requires a committed Package.resolved — which we
+# can't commit because the .xcodeproj is generated/git-ignored. Resolve here
+# (auto-resolution IS allowed in this script) so the workspace has a
+# Package.resolved before that step runs.
+echo "ci_post_clone: pre-resolving Swift package dependencies"
+xcodebuild -resolvePackageDependencies -project Walkful.xcodeproj -scheme Walkful
+
+echo "ci_post_clone: done — generated $(ls -d *.xcodeproj); Package.resolved: $(ls Walkful.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved 2>/dev/null || echo MISSING)"
