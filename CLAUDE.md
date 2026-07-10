@@ -14,7 +14,7 @@ no ads, no data collection. Its App Store privacy label is "Data Not Collected".
 - **Website:** [walkful.iamjarl.com](https://walkful.iamjarl.com)
 - **License:** [AGPL-3.0](LICENSE) — open source.
 - **Price:** Free download with a one-time **Walkful Pro** unlock (StoreKit 2 non-consumable). No subscription, no ads.
-- **Status:** Live on the App Store — id `6781303837`, v1.0.1.
+- **Status:** Live on the App Store — id `6781303837`, v1.0.2.
 - **Sister apps:** part of the [IAMJARL](https://iamjarl.com) portfolio.
 
 ## Strategy lives in the private hub
