@@ -1,0 +1,87 @@
+name: Bug report
+description: Something in the Walkful app or marketing site is broken or behaves unexpectedly.
+title: '[Bug] '
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. For metric/step bugs, whether an Apple Watch is paired matters.
+        For security vulnerabilities, **do not file a public issue** — see [SECURITY.md](https://github.com/JarlLyng/walkful/blob/main/SECURITY.md).
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: One line on what's wrong.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Where did this happen?
+      options:
+        - App
+        - Marketing website (walkful.iamjarl.com)
+        - Both
+        - Other / unsure
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+
+  - type: dropdown
+    id: watch
+    attributes:
+      label: Apple Watch paired?
+      description: Affects some metrics (steps, active energy).
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: Device / simulator
+
+  - type: input
+    id: ios_version
+    attributes:
+      label: iOS version
+
+  - type: input
+    id: app_version
+    attributes:
+      label: App version (MARKETING_VERSION)
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submit checks
+      options:
+        - label: I searched existing issues and didn't find a duplicate
+          required: true
+        - label: This is a public bug report (security issues go to SECURITY.md)
+          required: true
