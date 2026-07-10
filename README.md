@@ -24,7 +24,7 @@ Made by **IAMJARL** · [walkful.iamjarl.com](https://walkful.iamjarl.com)
 
 ## Status
 
-- 🎉 **Live on the [App Store](https://apps.apple.com/app/id6781303837)** — v1.0. Free app + a one-time **Walkful Pro** unlock.
+- 🎉 **Live on the [App Store](https://apps.apple.com/app/id6781303837)** — v1.0.2. Free app + a one-time **Walkful Pro** unlock.
 - Shipped: interval-walking coach, sedentary-aware nudges, Home/Lock Screen widgets, a deep Pro **Insights** tab (week/month/year trends, year heatmap, mobility & fitness, longevity-zone card, records, monthly recap, CSV export), the **Aurora** visual design, and full **accessibility** (Dynamic Type, VoiceOver, Reduced Motion).
 - 🚧 Next: Apple Watch app/complication, in-app Danish localization, ASO. See **[GitHub Issues](../../issues)** for the live backlog.
 

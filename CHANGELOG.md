@@ -3,7 +3,7 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
-## [Unreleased]
+## [1.0.2] — 2026-07-10 — refinements, fixes & open source
 
 ### Fixed
 - **Interval coach keeps correct time with the phone locked.** The countdown is now anchored to the wall clock instead of per-tick counting, so a session in your pocket stays honest — elapsed phases are caught up the moment the screen comes back, without a burst of stale haptics (build 10, #83).
@@ -71,7 +71,7 @@ First public release — [App Store ID 6781303837](https://apps.apple.com/app/id
 - Local movement nudges (UserNotifications).
 - Layered app icon (light/dark/tinted); MetricKit diagnostics; privacy "Data Not Collected".
 
-[Unreleased]: https://github.com/JarlLyng/walkful/compare/v1.0.0...HEAD
+[1.0.2]: https://github.com/JarlLyng/walkful/compare/v1.0.0...v1.0.2
 [1.0.0]: https://github.com/JarlLyng/walkful/compare/v0.2.0...v1.0.0
 [0.2.0]: https://github.com/JarlLyng/walkful/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/JarlLyng/walkful/releases/tag/v0.1.0
