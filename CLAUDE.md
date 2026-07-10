@@ -52,7 +52,8 @@ marketing **site** source (`website/`), and normal OSS docs.
   `xcodebuild -project Walkful.xcodeproj -scheme Walkful -destination 'generic/platform=iOS Simulator' build`
 - Tests: the `WalkfulTests` target (run via the `Walkful` scheme).
 - **Versioning:** bump `MARKETING_VERSION` / `CURRENT_PROJECT_VERSION` in `project.yml`, then `xcodegen generate` — the managed Info.plist reads them via `$(...)`. Don't edit versions in Xcode's UI.
-- **CI/CD:** GitHub Actions (`.github/workflows/ci.yml`) builds + tests every PR to `main`. **Xcode Cloud** builds/archives from the **`release`** branch — push `main` → `release` to trigger a build. Because the `.xcodeproj` is generated, `ci_scripts/ci_post_clone.sh` runs `xcodegen generate` after Xcode Cloud clones.
+- **CI/CD:** GitHub Actions (`.github/workflows/ci.yml`) builds + tests every PR to `main`. **Xcode Cloud** builds/archives from the **`release`** branch — push `main` → `release` to trigger a build. Because the `.xcodeproj` is generated, `ci_scripts/ci_post_clone.sh` runs `xcodegen generate` **and** drops the committed `ci_scripts/Package.resolved` into place (Xcode Cloud won't resolve SwiftPM itself).
+- **Xcode Cloud owns the build number.** On release builds it sets `CFBundleVersion` to its own incrementing counter — `CURRENT_PROJECT_VERSION` in `project.yml` is ignored there (it only affects local/manual archives). **So to release: bump `MARKETING_VERSION` per version** and let Xcode Cloud handle the build number. Don't reuse a `MARKETING_VERSION` whose build-number range is already taken on App Store Connect.
 
 ## Conventions
 - Design tokens come from the `IAMJARLDesignTokens` SPM package (Aurora layer on top). No hardcoded colors/spacing/radius/type.
