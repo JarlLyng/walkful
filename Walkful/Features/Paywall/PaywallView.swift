@@ -62,5 +62,11 @@ struct PaywallView: View {
         .padding(Tokens.Spacing.xl)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(Tokens.Palette.appBackground)
+        .alert("Purchase", isPresented: Binding(
+            get: { store.purchaseError != nil },
+            set: { if !$0 { store.clearPurchaseError() } }
+        ), presenting: store.purchaseError) { _ in
+            Button("OK", role: .cancel) { }
+        } message: { Text($0) }
     }
 }

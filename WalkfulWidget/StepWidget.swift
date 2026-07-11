@@ -28,14 +28,24 @@ struct StepProvider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<StepEntry>) -> Void) {
-        let entry = currentEntry()
-        let next = Calendar.current.date(byAdding: .minute, value: 30, to: .now) ?? .now
-        completion(Timeline(entries: [entry], policy: .after(next)))
+        let cal = Calendar.current
+        let now = Date()
+        var entries = [currentEntry()]
+        // Reset to 0 at midnight so the ring doesn't keep showing today's count
+        // as "today" once the day rolls over and the app hasn't run yet.
+        if let midnight = cal.nextDate(after: now, matching: DateComponents(hour: 0, minute: 0, second: 0), matchingPolicy: .nextTime) {
+            entries.append(StepEntry(date: midnight, steps: 0, goal: entries[0].goal))
+        }
+        let next = cal.date(byAdding: .minute, value: 30, to: now) ?? now
+        completion(Timeline(entries: entries, policy: .after(next)))
     }
 
     private func currentEntry() -> StepEntry {
+        // A snapshot from a previous day is stale — show 0 for today, not
+        // yesterday's count (#85). Keep the user's goal if we have one.
         if let snapshot = SharedStore.load() {
-            return StepEntry(date: snapshot.date, steps: snapshot.steps, goal: snapshot.goal)
+            let steps = snapshot.isFromToday() ? snapshot.steps : 0
+            return StepEntry(date: .now, steps: steps, goal: snapshot.goal)
         }
         return StepEntry(date: .now, steps: 0, goal: 7_000)
     }
