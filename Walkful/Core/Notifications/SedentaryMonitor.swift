@@ -73,14 +73,16 @@ enum SedentaryMonitor {
             return
         }
 
-        let steps = await stepsInLast(minutes: lookbackMinutes)
+        // nil = we couldn't read steps (e.g. Health access not granted/revoked).
+        // Don't nudge in that case — a read failure isn't evidence of sitting still.
+        guard let steps = await stepsInLast(minutes: lookbackMinutes) else { return }
         guard steps < stepThreshold else { return }
 
         await notifyMove()
         d.set(Date(), forKey: kLastNudge)
     }
 
-    private static func stepsInLast(minutes: Int) async -> Int {
+    private static func stepsInLast(minutes: Int) async -> Int? {
         let start = Date(timeIntervalSinceNow: -Double(minutes) * 60)
         let predicate = HKQuery.predicateForSamples(withStart: start, end: Date())
         return await withCheckedContinuation { continuation in
@@ -88,8 +90,14 @@ enum SedentaryMonitor {
                 quantityType: stepType,
                 quantitySamplePredicate: predicate,
                 options: .cumulativeSum
-            ) { _, stats, _ in
-                continuation.resume(returning: Int(stats?.sumQuantity()?.doubleValue(for: .count()) ?? 0))
+            ) { _, stats, error in
+                // Distinguish a real error (→ nil, skip the nudge) from a genuine
+                // zero-step window (stats present, no sum → 0, so the nudge fires).
+                if error != nil {
+                    continuation.resume(returning: nil)
+                } else {
+                    continuation.resume(returning: Int(stats?.sumQuantity()?.doubleValue(for: .count()) ?? 0))
+                }
             }
             store.execute(query)
         }

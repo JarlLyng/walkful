@@ -3,6 +3,14 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
+## [1.0.3] — robustness pass
+
+### Fixed
+- **Widget no longer shows yesterday's step count as "today".** If the app hadn't run since midnight, the Home/Lock Screen widget kept displaying the previous day's total. The widget now treats a snapshot from an earlier day as "no data yet" (shows 0) and resets at midnight on its own (#85).
+- **No false "time to move" nudge when Health access is unavailable.** A failed step read was being treated as a genuine zero-step window, which could fire a sedentary reminder even when Walkful simply couldn't read your activity. A read error now skips the nudge; a real quiet hour still triggers it (#86).
+- **Clear feedback when a purchase can't complete.** Failed, unverified, or pending (Ask to Buy) purchases now show a short explanation on the paywall instead of silently doing nothing. Cancelling stays silent (#87).
+- **Gentle hint when no steps show up.** If Walkful sees no activity at all — usually because Health read access was declined during onboarding (iOS hides read denials, so the app can't detect it directly) — Today now shows a calm card explaining how to enable it in Settings (#88).
+
 ## [1.0.2] — 2026-07-10 — refinements, fixes & open source
 
 ### Fixed

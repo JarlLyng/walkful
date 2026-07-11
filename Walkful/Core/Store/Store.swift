@@ -13,6 +13,10 @@ final class Store {
     private(set) var proProduct: Product?
     private(set) var isPro = false
     private(set) var isPurchasing = false
+    /// User-facing message when a purchase fails or is pending; nil when clear.
+    private(set) var purchaseError: String?
+
+    func clearPurchaseError() { purchaseError = nil }
 
     private var updatesListener: Task<Void, Never>?
 
@@ -36,16 +40,25 @@ final class Store {
     func purchase() async {
         guard let proProduct, !isPurchasing else { return }
         isPurchasing = true
+        purchaseError = nil
         defer { isPurchasing = false }
         do {
             let result = try await proProduct.purchase()
-            if case .success(let verification) = result,
-               case .verified(let transaction) = verification {
+            switch result {
+            case .success(.verified(let transaction)):
                 await transaction.finish()
                 await refreshEntitlement()
+            case .success(.unverified):
+                purchaseError = "We couldn't verify that purchase. If you were charged, tap Restore purchase."
+            case .pending:
+                purchaseError = "Your purchase is waiting for approval (e.g. Ask to Buy). Walkful Pro unlocks once it's approved."
+            case .userCancelled:
+                break // no message — the user chose to cancel
+            @unknown default:
+                break
             }
         } catch {
-            // Cancelled or failed — no state change.
+            purchaseError = "Something went wrong with the purchase. Please try again."
         }
     }
 

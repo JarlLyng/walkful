@@ -1,6 +1,7 @@
 import SwiftUI
 import WidgetKit
 import StoreKit
+import UIKit
 
 struct TodayView: View {
     var settings: AppSettings
@@ -13,10 +14,20 @@ struct TodayView: View {
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.requestReview) private var requestReview
+    @Environment(\.openURL) private var openURL
 
     private var goal: Int { settings.dailyGoal }
     private var progress: Double {
         goal > 0 ? Double(health.todaySteps) / Double(goal) : 0
+    }
+
+    /// No activity anywhere — most likely Health read access was declined
+    /// (HealthKit hides read denial, so `authState` still reads .authorized).
+    private var hasNoHealthData: Bool {
+        !LaunchArgs.screenshots
+            && health.todaySteps == 0
+            && health.thisWeekTotal == 0
+            && health.recentDays(30).allSatisfy { $0.steps == 0 }
     }
     private var goalReached: Bool { goal > 0 && health.todaySteps >= goal }
 
@@ -135,6 +146,8 @@ struct TodayView: View {
                 .frame(maxWidth: .infinity)
                 .multilineTextAlignment(.center)
 
+            if hasNoHealthData { noDataHint }
+
             LazyVGrid(columns: [GridItem(.flexible(), spacing: Tokens.Spacing.sm),
                                 GridItem(.flexible(), spacing: Tokens.Spacing.sm)],
                       spacing: Tokens.Spacing.sm) {
@@ -229,6 +242,25 @@ struct TodayView: View {
     }
 
     // MARK: - States
+
+    private var noDataHint: some View {
+        Card {
+            VStack(alignment: .leading, spacing: Tokens.Spacing.sm) {
+                Label("Not seeing your steps?", systemImage: "heart.text.square")
+                    .font(Tokens.TextStyle.subheadlineSemibold)
+                    .foregroundStyle(Tokens.Palette.textPrimary)
+                Text("Walkful needs permission to read your activity from Apple Health. Turn it on in Settings → Health → Data Access & Devices → Walkful, or add some steps in the Health app.")
+                    .font(Tokens.TextStyle.subheadline)
+                    .foregroundStyle(Tokens.Palette.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Button("Open Settings") {
+                    if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
+                }
+                .font(Tokens.TextStyle.subheadlineSemibold)
+                .foregroundStyle(Tokens.Palette.primary)
+            }
+        }
+    }
 
     private var connectCard: some View {
         Card {

@@ -11,6 +11,13 @@ struct DailySnapshot: Codable {
 
     var progress: Double { goal > 0 ? min(Double(steps) / Double(goal), 1) : 0 }
 
+    /// Whether the snapshot is from `now`'s calendar day. A widget should treat a
+    /// snapshot from a previous day as "no data yet today" (the app hasn't run
+    /// since midnight) rather than showing yesterday's count as today.
+    func isFromToday(_ now: Date = Date(), calendar: Calendar = .current) -> Bool {
+        calendar.isDate(date, inSameDayAs: now)
+    }
+
     init(steps: Int, goal: Int, date: Date, week: [Int] = []) {
         self.steps = steps
         self.goal = goal
