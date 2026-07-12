@@ -32,7 +32,16 @@ xcodebuild -project Walkful.xcodeproj -scheme Walkful \
 
 > The build resolves the `IAMJARLDesignTokens` Swift package from GitHub, so the first build needs network access.
 
-There is no automated test target yet — verify changes by running on a simulator/device. Some paths (HealthKit authorization, real step data, notification delivery, the layered app icon) can only be verified on a **physical iPhone**.
+### Tests
+
+The `WalkfulTests` target (sources in `Tests/`) runs via the `Walkful` scheme:
+
+```bash
+SIM=$(xcrun simctl list devices available | grep -oE "iPhone [0-9][^(]*\([0-9A-F-]+\)" | head -1 | grep -oE "[0-9A-F-]{36}")
+xcodebuild -project Walkful.xcodeproj -scheme Walkful -destination "id=$SIM" test
+```
+
+**CI runs build + tests on every PR to `main`** (`.github/workflows/ci.yml`), and merging requires a green run. Some paths (HealthKit authorization, real step data, notification delivery, the layered app icon) can still only be verified on a **physical iPhone** — see [docs/device-checklist.md](docs/device-checklist.md).
 
 ## Code conventions
 
@@ -83,9 +92,12 @@ If a stale notification prompt appears, `xcrun simctl erase "$DEV"` for a clean 
 
 ## Release / TestFlight
 
-1. Bump `MARKETING_VERSION` / `CURRENT_PROJECT_VERSION` in `project.yml`, then `xcodegen generate`.
-2. Xcode → Product → **Archive** (Any iOS Device, Release). Signing uses the IAMJARL team (`DEVELOPMENT_TEAM` in `project.yml`).
-3. **Distribute → TestFlight & App Store** → upload.
-4. The App Store Connect app record must exist first (bundle id `com.iamjarl.walkful`).
+Releases are built by **Xcode Cloud** from the `release` branch:
+
+1. Bump `MARKETING_VERSION` in `project.yml` on a branch, merge to `main` (Xcode Cloud owns the build number — `CURRENT_PROJECT_VERSION` only affects local archives).
+2. Fast-forward `release` to `main` and push — that push triggers the archive + upload to App Store Connect.
+3. `ci_scripts/ci_post_clone.sh` handles the XcodeGen generation and SwiftPM resolution on the Xcode Cloud runner (the committed `ci_scripts/Package.resolved` must stay in sync with `project.yml`'s dependency pin).
+
+Manual archives (Xcode → Product → **Archive**) still work for ad-hoc testing; signing uses the IAMJARL team (`DEVELOPMENT_TEAM` in `project.yml`).
 
 Known upload gotchas (already handled in `project.yml`): both HealthKit usage strings are required even though we only read; `ITSAppUsesNonExemptEncryption=NO` answers the export-compliance prompt.

@@ -23,6 +23,9 @@ Watch where noted) before each App Store submission.
       **not** re-show the "Connect Apple Health" card (regression guard for #54).
 - [ ] Insights (Pro) populates: trends, year heatmap, longevity-zone card,
       best time of day, records, recap, lifetime distance.
+- [ ] Insights shows the **loading skeleton** only briefly — the screen appears
+      as soon as history is ready; heavier metrics (mobility, lifetime distance)
+      fill in after without blocking (two-phase load).
 - [ ] Apple Watch-derived metrics (walking speed/steadiness, VO₂max, resting HR)
       appear if you wear a Watch; hide gracefully if not.
 
@@ -30,11 +33,20 @@ Watch where noted) before each App Store submission.
 - [ ] Settings → **Units** → Miles → distance switches to `mi` on Today + Insights.
 - [ ] Settings → **Adaptive goal** on → after a few high-average days the daily
       goal nudges up (never down).
+- [ ] With adaptive goal ON, **manually set a goal** (e.g. 7,500), leave Settings
+      and return to Today → the goal **stays** at your value that day; it adjusts
+      at most once per day (regression guard for #81).
 
 ## Delight (#10)
 - [ ] Crossing the daily goal fires a **success haptic** (once per day) and shows
       the "Goal reached today" pill.
 - [ ] With **Reduce Motion** on, ring/pill don't animate (haptic still fires).
+
+## Review prompt & Rate/Share
+- [ ] Settings → **Rate Walkful** opens the App Store review sheet; **Share
+      Walkful** opens the share sheet with the App Store link.
+- [ ] The automatic review prompt appears at most **once ever**, and only at a
+      high point (goal reached + 3-day streak). No nagging on later launches.
 
 ## Notifications & background nudges
 - [ ] Onboarding requests notification permission; granting enables nudges.
@@ -49,6 +61,8 @@ Watch where noted) before each App Store submission.
 - [ ] Lock Screen accessory widgets: Steps (circular/inline/rectangular) and
       This week (rectangular) render and update.
 - [ ] Widgets refresh after opening the app (snapshot via App Group).
+- [ ] After midnight **without opening the app**, widgets show 0 — not
+      yesterday's count (regression guard for #85).
 
 ## In-App Purchase (Sandbox)
 - [ ] Insights/coach show the paywall when **not** Pro.
