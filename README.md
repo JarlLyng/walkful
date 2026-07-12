@@ -124,6 +124,10 @@ walking-app/
 
 Walkful collects nothing. Health data is read from Apple Health with explicit, granular permission, used only on-device, and never transmitted. See [website/privacy.html](website/privacy.html).
 
+## Security
+
+Found a vulnerability? Please report it privately — see [SECURITY.md](SECURITY.md) — rather than opening a public issue.
+
 ## License
 
-[AGPL-3.0](LICENSE) © 2026 IAMJARL. Open source.
+[AGPL-3.0](LICENSE) © 2026 IAMJARL. Open source. Contributions welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).

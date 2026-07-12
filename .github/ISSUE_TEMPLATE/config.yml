@@ -1,8 +1,7 @@
-# Copy to <repo>/.github/ISSUE_TEMPLATE/config.yml and replace Walkful / JarlLyng/walkful / walkful.iamjarl.com.
 blank_issues_enabled: false
 contact_links:
   - name: 💬 Support / general help
-    url: https://walkful.iamjarl.com/support
+    url: https://walkful.iamjarl.com/support.html
     about: For general questions or anything that isn't a bug, feature, or marketing idea.
   - name: 🔒 Security vulnerability
     url: https://github.com/JarlLyng/walkful/security/policy

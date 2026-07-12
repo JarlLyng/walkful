@@ -2,6 +2,20 @@
 
 Thanks for working on Walkful! This guide covers setup, conventions, and workflow.
 
+## External contributions
+
+Walkful is open source (AGPL-3.0) and maintained by one person. Contributions are
+welcome, with two asks:
+
+- **Open an issue before a large PR** — the app is deliberately small and calm, and
+  not every good feature fits it (see the guardrails in [docs/ROADMAP.md](docs/ROADMAP.md)).
+  A quick issue saves you from building something that won't be merged.
+- By submitting a contribution you agree it's licensed under the project's
+  [AGPL-3.0](LICENSE) license.
+
+Please also read the [Code of Conduct](CODE_OF_CONDUCT.md). Security issues go
+through the [security policy](SECURITY.md), not public issues.
+
 ## Prerequisites
 
 - **Xcode 26+**
@@ -70,7 +84,7 @@ We track all work in **GitHub Issues**.
 - Types: `feature`, `bug`, `polish`, `docs`, `chore`
 - Priority: `p1`, `p2`, `p3`
 - Areas: `area:health`, `area:ui`, `area:notifications`, `area:storekit`, `area:watch`, `area:web`
-- Milestone **v1.0 — public launch** groups everything needed to charge for the app.
+- Milestones: **v1.0 — public launch** (shipped, closed) · **Post-launch / v1.x** (current work).
 
 Use the issue templates under `.github/ISSUE_TEMPLATE/`.
 
@@ -90,9 +104,9 @@ xcrun simctl io "$DEV" screenshot out.png         # 1320×2868 (6.9")
 To verify Dynamic Type: `xcrun simctl ui "$DEV" content_size accessibility-extra-large`.
 If a stale notification prompt appears, `xcrun simctl erase "$DEV"` for a clean slate. Output dir `screenshots/` is git-ignored.
 
-## Release / TestFlight
+## Release / TestFlight (maintainer only)
 
-Releases are built by **Xcode Cloud** from the `release` branch:
+Releases require App Store Connect access and are built by **Xcode Cloud** from the `release` branch:
 
 1. Bump `MARKETING_VERSION` in `project.yml` on a branch, merge to `main` (Xcode Cloud owns the build number — `CURRENT_PROJECT_VERSION` only affects local archives).
 2. Fast-forward `release` to `main` and push — that push triggers the archive + upload to App Store Connect.
