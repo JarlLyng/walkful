@@ -32,6 +32,15 @@
 <meta name="twitter:description" content="An evidence-based, 100% on-device walking app for iPhone. No accounts, no ads, no data collection." />
 <meta name="twitter:image" content="https://walkful.iamjarl.com/og-image.png" />
 
+<!-- Icons -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- Fonts (link instead of CSS @import — avoids the render-blocking chain) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" />
+
 <!-- Stylesheet linking (Aurora theme) -->
 <link rel="stylesheet" href="index.css" />
 
@@ -69,14 +78,17 @@
     "Evidence-based daily goal (~7,000 steps) instead of the 10,000 myth",
     "Compete against your own records — no social network required",
     "Gentle, optional reminders to break up sitting",
-    "Insights: consistency heatmap, best time of day, brisk-minute trends",
+    "Insights: consistency heatmap, best time of day, brisk-minute trends and a longevity-zone card",
+    "Guided interval-walking coach with haptics",
+    "Home Screen and Lock Screen widgets, including a This-week view",
+    "CSV export of your step history, kilometres or miles",
     "Private by design — nothing leaves your device"
   ],
   "publisher": { "@type": "Organization", "name": "IAMJARL", "url": "https://walkful.iamjarl.com/" }
 }
 </script>
 
-<!-- Structured data: FAQ (Generative Engine Optimization) -->
+<!-- Structured data: FAQ — mirrors the visible FAQ section 1:1 (Google requires marked-up Q&A to be visible on the page) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -84,23 +96,23 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Walkful?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Walkful is a calm, private walking and step tracker for iPhone and Apple Watch. It reads your activity from Apple Health and turns it into meaningful daily progress and insights. Everything is processed and stored on your device — there are no accounts, no servers, no ads and no data collection." }
+      "name": "What makes Walkful different from Apple Health or standard pedometers?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Standard apps show you raw numbers without context. Walkful places your steps into a medical perspective based on public health studies, showing you what your active minutes mean. Furthermore, Walkful provides guided interval walking, custom sedentary notifications, and deep local insights without collecting a single byte of your data." }
     },
     {
       "@type": "Question",
-      "name": "How many steps a day should I aim for?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Walkful suggests a default daily goal of around 7,000 steps. A 2025 Lancet Public Health meta-analysis found that walking about 7,000 steps per day was associated with roughly 47% lower all-cause mortality compared with 2,000 steps, with health benefits rising steeply between 5,000 and 7,000 steps. You can adjust the goal to any level — every step counts." }
+      "name": "Do I really need 10,000 steps per day?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. The 10,000 steps goal was a Japanese marketing gimmick from 1965, not a medical recommendation. Peer-reviewed research shows that the largest health benefit occurs between 5,000 and 7,500 steps. Walkful sets a default goal of 7,000 steps based on this evidence, which you can adjust to fit your life. Every step counts." }
     },
     {
       "@type": "Question",
-      "name": "Do I really need 10,000 steps a day?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No. The 10,000-steps target is not based on science — it originated from the name of a 1965 Japanese pedometer (\"manpo-kei\", meaning 10,000-step meter). Research shows meaningful health benefits well below 10,000, with the mortality-risk curve flattening around 7,000 steps. Walkful is built around this evidence rather than the myth." }
+      "name": "Does the app support Apple Watch?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Walkful reads your aggregated activity directly from Apple Health. Any steps or active minutes recorded by your Apple Watch flow seamlessly into Apple Health and are automatically reflected inside Walkful." }
     },
     {
       "@type": "Question",
-      "name": "Does Walkful work with Apple Watch?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. If you own an Apple Watch, your steps and activity flow automatically into Apple Health, and Walkful reads the combined, de-duplicated data. No separate setup is required." }
+      "name": "How is the app priced? Are there any subscriptions?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Walkful is a free download containing all core step tracking features. You can unlock Walkful Pro (adding deep Insights, consistency heatmaps, and the guided Interval Walking Coach) via a simple, one-time lifetime purchase. There are no subscriptions, recurring fees, or ads." }
     },
     {
       "@type": "Question",
@@ -109,13 +121,8 @@
     },
     {
       "@type": "Question",
-      "name": "Does Walkful have ads or a subscription?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Neither. Walkful is a single one-time purchase with no subscription and no advertising." }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I compete with friends on Walkful?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Walkful deliberately has no social leaderboards. Instead you compete against your own records — beating your best week and keeping your streak. This keeps the app fully on-device and private, with no user accounts or databases." }
+      "name": "How does the sedentary nudge monitor work?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Unlike standard activity trackers that buzz every hour regardless of what you are doing, Walkful's sedentary nudges are smart. Running locally in the background, they check your HealthKit status and only send a gentle local alert if you have actually been sitting still for too long during your custom-defined active-hours window (e.g. 9:00 to 17:00)." }
     }
   ]
 }
@@ -220,7 +227,7 @@
             <input type="range" class="steps-slider" min="2000" max="12000" step="500" value="4000" id="steps-range" aria-label="Adjust daily steps to see health impact" />
           </div>
           
-          <div class="benefit-display">
+          <div class="benefit-display" aria-live="polite">
             <div class="benefit-title" id="benefit-title">Active Start</div>
             <div class="benefit-desc" id="benefit-desc">Moving from 2,000 to 4,000 steps is associated with a steep decline in mortality risk (roughly 20-30% reduction). A solid foundation.</div>
           </div>
@@ -285,6 +292,22 @@
           <h3>Beautiful &amp; calm</h3>
           <p>A premium, native design that's a pleasure to open every day — smooth gradients, gentle motion, and full light &amp; dark support.</p>
         </div>
+
+        <div class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M16 1H8C6.34 1 5 2.34 5 4v16c0 1.66 1.34 3 3 3h8c1.66 0 3-1.34 3-3V4c0-1.66-1.34-3-3-3zm1 17H7V6h10v12z"/></svg>
+          </div>
+          <h3>Widgets at a glance</h3>
+          <p>Your progress ring on the Home Screen and Lock Screen — including a "This week" view — without opening the app.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          </div>
+          <h3>Your data, your export</h3>
+          <p>Export your full step history as CSV whenever you like, and switch between kilometres and miles. It's your data — take it with you.</p>
+        </div>
       </div>
     </section>
   </div>
@@ -293,25 +316,25 @@
   <div class="showcase-container">
     <div class="wrap">
       <section class="showcase-grid" aria-labelledby="showcase-title">
-        <div class="showcase-controls">
+        <div class="showcase-controls" role="tablist" aria-labelledby="showcase-title">
           <h2 id="showcase-title">Beautiful utility, designed for your day</h2>
-          
-          <button class="showcase-tab active" onclick="switchShowcase(0)" id="tab-0" aria-controls="screen-today">
+
+          <button class="showcase-tab active" onclick="switchShowcase(0)" id="tab-0" role="tab" aria-selected="true" aria-controls="screen-today">
             <div class="showcase-tab-title">
               <span>Today Dashboard</span>
             </div>
             <div class="showcase-tab-desc">Your daily status at a glance. Highly customizable target, step-level metrics, and immediate health context.</div>
           </button>
-          
-          <button class="showcase-tab" onclick="switchShowcase(1)" id="tab-1" aria-controls="screen-insights">
+
+          <button class="showcase-tab" onclick="switchShowcase(1)" id="tab-1" role="tab" aria-selected="false" aria-controls="screen-insights">
             <div class="showcase-tab-title">
               <span>Insights &amp; Heatmaps</span>
               <span class="badge-pro">Pro</span>
             </div>
             <div class="showcase-tab-desc">Uncover weekly, monthly and yearly walking consistencies. Includes mobility details and a personal records gallery.</div>
           </button>
-          
-          <button class="showcase-tab" onclick="switchShowcase(2)" id="tab-2" aria-controls="screen-coach">
+
+          <button class="showcase-tab" onclick="switchShowcase(2)" id="tab-2" role="tab" aria-selected="false" aria-controls="screen-coach">
             <div class="showcase-tab-title">
               <span>Interval Coach</span>
               <span class="badge-pro">Pro</span>
@@ -337,7 +360,7 @@
 
   <!-- Mood / atmosphere band (image dropped into /assets) -->
   <section class="mood-band" aria-label="Walking is everyday medicine">
-    <img class="mood-band__img" src="assets/mood-walk.jpg" alt="A person walking down a tree-lined country path in soft golden-hour light" width="1680" height="1120" loading="lazy" decoding="async" />
+    <img class="mood-band__img" src="assets/mood-walk.jpg" srcset="assets/mood-walk-840.jpg 840w, assets/mood-walk.jpg 1680w" sizes="100vw" alt="A person walking down a tree-lined country path in soft golden-hour light" width="1680" height="1120" loading="lazy" decoding="async" />
     <div class="mood-band__overlay" aria-hidden="true"></div>
     <div class="mood-band__content">
       <h2>Walking is everyday medicine</h2>
@@ -361,7 +384,7 @@
             
             <p>According to research published by Danish physician and professor <strong>Bente Klarlund Pedersen</strong>, every single step counts. Moving is medicine: it increases serotonin and dopamine levels, improves heart health, and lowers cardiovascular risks. Walkful translates these clinical insights directly into your daily tracking.</p>
             
-            <a class="citation-link" href="https://www.thelancet.com/journals/lanpub/home" target="_blank" rel="noopener">Read the Lancet Public Health Meta-Analysis →</a>
+            <a class="citation-link" href="https://doi.org/10.1016/S2468-2667(25)00164-1" target="_blank" rel="noopener">Read the Lancet Public Health Meta-Analysis →</a>
           </div>
           
           <div class="science-visual">
@@ -439,6 +462,13 @@
 
         <details name="faq-acc">
           <summary>
+            <span>Does Walkful collect or sell my data?</span>
+          </summary>
+          <p>No. Walkful is private by design. All your health data stays on your iPhone — there are no servers, no accounts and no third-party tracking. Its App Store privacy label is "Data Not Collected". This is a deliberate contrast to step-to-earn apps that monetise your data.</p>
+        </details>
+
+        <details name="faq-acc">
+          <summary>
             <span>How does the sedentary nudge monitor work?</span>
           </summary>
           <p>Unlike standard activity trackers that buzz every hour regardless of what you are doing, Walkful's sedentary nudges are smart. Running locally in the background, they check your HealthKit status and only send a gentle local alert if you have actually been sitting still for too long during your custom-defined active-hours window (e.g. 9:00 to 17:00).</p>
@@ -449,7 +479,7 @@
 
   <!-- Closing atmosphere band (image dropped into /assets) -->
   <section class="mood-band mood-band--closing" aria-label="Every step counts">
-    <img class="mood-band__img" src="assets/mood-summit.jpg" alt="A walker silhouetted against a pink and violet sunset sky above the clouds" width="1920" height="1209" loading="lazy" decoding="async" />
+    <img class="mood-band__img" src="assets/mood-summit.jpg" srcset="assets/mood-summit-840.jpg 840w, assets/mood-summit.jpg 1920w" sizes="100vw" alt="A walker silhouetted against a pink and violet sunset sky above the clouds" width="1920" height="1209" loading="lazy" decoding="async" />
     <div class="mood-band__overlay" aria-hidden="true"></div>
     <div class="mood-band__content">
       <h2>Every step counts</h2>
@@ -553,6 +583,7 @@
       const tab = document.getElementById(`tab-${i}`);
       if (tab) {
         tab.classList.toggle('active', i === index);
+        tab.setAttribute('aria-selected', i === index ? 'true' : 'false');
       }
     }
     screenshots.forEach((screen, i) => {
@@ -560,20 +591,44 @@
     });
   }
 
-  let showcaseInterval = setInterval(() => {
-    const activeTab = document.querySelector('.showcase-tab.active');
-    if (activeTab) {
-      const activeId = parseInt(activeTab.id.split('-')[1]);
-      const nextId = (activeId + 1) % 3;
-      switchShowcase(nextId);
-    }
-  }, 8000);
+  // Auto-rotate the showcase, but never against the user: skip entirely under
+  // prefers-reduced-motion, pause while hovered or focused, stop on interaction.
+  let showcaseInterval = null;
+  const showcaseSection = document.querySelector('.showcase-grid');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function startShowcaseRotation() {
+    if (reducedMotion.matches || showcaseInterval) return;
+    showcaseInterval = setInterval(() => {
+      const activeTab = document.querySelector('.showcase-tab.active');
+      if (activeTab) {
+        const activeId = parseInt(activeTab.id.split('-')[1]);
+        switchShowcase((activeId + 1) % 3);
+      }
+    }, 8000);
+  }
+
+  function pauseShowcaseRotation() {
+    clearInterval(showcaseInterval);
+    showcaseInterval = null;
+  }
+
+  if (showcaseSection) {
+    showcaseSection.addEventListener('mouseenter', pauseShowcaseRotation);
+    showcaseSection.addEventListener('mouseleave', startShowcaseRotation);
+    showcaseSection.addEventListener('focusin', pauseShowcaseRotation);
+    showcaseSection.addEventListener('focusout', startShowcaseRotation);
+  }
 
   document.querySelectorAll('.showcase-tab').forEach(tab => {
     tab.addEventListener('click', () => {
-      clearInterval(showcaseInterval);
+      pauseShowcaseRotation();
+      showcaseSection?.removeEventListener('mouseleave', startShowcaseRotation);
+      showcaseSection?.removeEventListener('focusout', startShowcaseRotation);
     });
   });
+
+  startShowcaseRotation();
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateSimulator);
 

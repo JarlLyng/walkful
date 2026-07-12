@@ -33,6 +33,15 @@
 <meta name="twitter:image" content="https://walkful.iamjarl.com/og-image.png" />
 
 <!-- Stylesheet linking (Aurora theme) -->
+<!-- Icons -->
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- Fonts (link instead of CSS @import — avoids the render-blocking chain) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" />
+
 <link rel="stylesheet" href="../index.css" />
 
 <!-- Privacy-friendly, cookieless analytics (self-hosted Umami) -->
@@ -69,7 +78,10 @@
     "Evidensbaseret dagligt mål (~7.000 skridt) i stedet for 10.000-myten",
     "Konkurrér mod dig selv — ingen sociale ranglister",
     "Venlige påmindelser mod stillesiddende tid",
-    "Indsigter: konsistens-heatmap, aktivitetstidspunkter og tempo-trends",
+    "Indsigter: konsistens-heatmap, aktivitetstidspunkter, tempo-trends og et langtidszone-kort",
+    "Guidet intervalgang-coach med haptik",
+    "Widgets til hjemmeskærmen og låseskærmen, inkl. en ugevisning",
+    "CSV-eksport af din skridthistorik, kilometer eller miles",
     "Privatliv ved arkitektur — intet forlader din iPhone"
   ],
   "publisher": { "@type": "Organization", "name": "IAMJARL", "url": "https://walkful.iamjarl.com/" }
@@ -101,6 +113,11 @@
       "@type": "Question",
       "name": "Hvad koster appen? Er der abonnement?",
       "acceptedAnswer": { "@type": "Answer", "text": "Walkful er gratis at hente og indeholder alle de grundlæggende skridttæller-funktioner. Du kan låse op for Walkful Pro (som tilføjer detaljerede indsigter, varmekort og intervaltrænings-coachen) via et enkelt engangskøb. Der er intet abonnement og ingen reklamer." }
+    },
+    {
+      "@type": "Question",
+      "name": "Indsamler eller sælger Walkful min data?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Nej. Walkful er privat i selve arkitekturen. Al din sundhedsdata bliver på din iPhone — der er ingen servere, ingen konti og ingen tredjeparts-sporing. Appens privatlivs-mærkat i App Store er \"Data Not Collected\". Det er en bevidst modsætning til apps, der tjener penge på din bevægelsesdata." }
     },
     {
       "@type": "Question",
@@ -210,7 +227,7 @@
             <input type="range" class="steps-slider" min="2000" max="12000" step="500" value="4000" id="steps-range" aria-label="Juster skridt for at se sundhedseffekt" />
           </div>
           
-          <div class="benefit-display">
+          <div class="benefit-display" aria-live="polite">
             <div class="benefit-title" id="benefit-title">Aktiv Start</div>
             <div class="benefit-desc" id="benefit-desc">At flytte sig fra 2.000 til 4.000 skridt er forbundet med et stejlt fald i dødelighedsrisiko (ca. 20-30% reduktion). Et stærkt fundament.</div>
           </div>
@@ -275,6 +292,22 @@
           <h3>Smukt &amp; roligt</h3>
           <p>Et eksklusivt, native design som er en fornøjelse at åbne hver dag — bløde overgange, blid bevægelse og fuld mørk/lys tilpasning.</p>
         </div>
+
+        <div class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M16 1H8C6.34 1 5 2.34 5 4v16c0 1.66 1.34 3 3 3h8c1.66 0 3-1.34 3-3V4c0-1.66-1.34-3-3-3zm1 17H7V6h10v12z"/></svg>
+          </div>
+          <h3>Widgets med overblik</h3>
+          <p>Din fremskridtsring på hjemmeskærmen og låseskærmen — inklusiv en "Denne uge"-visning — uden at åbne appen.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          </div>
+          <h3>Din data, din eksport</h3>
+          <p>Eksportér hele din skridthistorik som CSV når du vil, og skift mellem kilometer og miles. Det er din data — tag den med dig.</p>
+        </div>
       </div>
     </section>
   </div>
@@ -283,17 +316,17 @@
   <div class="showcase-container">
     <div class="wrap">
       <section class="showcase-grid" aria-labelledby="showcase-title">
-        <div class="showcase-controls">
+        <div class="showcase-controls" role="tablist" aria-labelledby="showcase-title">
           <h2 id="showcase-title">Smuk funktionalitet til din dag</h2>
-          
-          <button class="showcase-tab active" onclick="switchShowcase(0)" id="tab-0" aria-controls="screen-today">
+
+          <button class="showcase-tab active" onclick="switchShowcase(0)" id="tab-0" role="tab" aria-selected="true" aria-controls="screen-today">
             <div class="showcase-tab-title">
               <span>Dagens Dashboard</span>
             </div>
             <div class="showcase-tab-desc">Dagens status på et øjeblik. Justerbart mål, skridt-statistikker og øjeblikkelig sundhedskontekst.</div>
           </button>
           
-          <button class="showcase-tab" onclick="switchShowcase(1)" id="tab-1" aria-controls="screen-insights">
+          <button class="showcase-tab" onclick="switchShowcase(1)" id="tab-1" role="tab" aria-selected="false" aria-controls="screen-insights">
             <div class="showcase-tab-title">
               <span>Indsigter &amp; Varmekort</span>
               <span class="badge-pro">Pro</span>
@@ -301,7 +334,7 @@
             <div class="showcase-tab-desc">Se dine ugentlige, månedlige og årlige mønstre. Indeholder mobilitets-målinger og et galleri over dine rekorder.</div>
           </button>
           
-          <button class="showcase-tab" onclick="switchShowcase(2)" id="tab-2" aria-controls="screen-coach">
+          <button class="showcase-tab" onclick="switchShowcase(2)" id="tab-2" role="tab" aria-selected="false" aria-controls="screen-coach">
             <div class="showcase-tab-title">
               <span>Intervaltræning</span>
               <span class="badge-pro">Pro</span>
@@ -327,7 +360,7 @@
 
   <!-- Mood / atmosphere band (image dropped into /assets) -->
   <section class="mood-band" aria-label="Gang er hverdagens medicin">
-    <img class="mood-band__img" src="../assets/mood-walk.jpg" alt="En person der går ad en træomkranset sti i blødt gyldent eftermiddagslys" width="1680" height="1120" loading="lazy" decoding="async" />
+    <img class="mood-band__img" src="../assets/mood-walk.jpg" srcset="../assets/mood-walk-840.jpg 840w, ../assets/mood-walk.jpg 1680w" sizes="100vw" alt="En person der går ad en træomkranset sti i blødt gyldent eftermiddagslys" width="1680" height="1120" loading="lazy" decoding="async" />
     <div class="mood-band__overlay" aria-hidden="true"></div>
     <div class="mood-band__content">
       <h2>Gang er hverdagens medicin</h2>
@@ -351,7 +384,7 @@
             
             <p>Ifølge forskning formidlet af overlæge og professor <strong>Bente Klarlund Pedersen</strong> tæller hvert eneste skridt. Gang er medicin: det øger hjernens serotonin og dopamin, styrker hjertet og sænker risikoen for hjerte-kar-sygdomme. Walkful omsætter denne viden til praktisk motivation.</p>
             
-            <a class="citation-link" href="https://www.thelancet.com/journals/lanpub/home" target="_blank" rel="noopener">Læs Lancet Public Health metaanalysen her →</a>
+            <a class="citation-link" href="https://doi.org/10.1016/S2468-2667(25)00164-1" target="_blank" rel="noopener">Læs Lancet Public Health metaanalysen her →</a>
           </div>
           
           <div class="science-visual">
@@ -429,6 +462,13 @@
 
         <details name="faq-acc">
           <summary>
+            <span>Indsamler eller sælger Walkful min data?</span>
+          </summary>
+          <p>Nej. Walkful er privat i selve arkitekturen. Al din sundhedsdata bliver på din iPhone — der er ingen servere, ingen konti og ingen tredjeparts-sporing. Appens privatlivs-mærkat i App Store er "Data Not Collected". Det er en bevidst modsætning til apps, der tjener penge på din bevægelsesdata.</p>
+        </details>
+
+        <details name="faq-acc">
+          <summary>
             <span>Hvordan fungerer de smarte påmindelser mod stillesiddende tid?</span>
           </summary>
           <p>I modsætning til almindelige fitnesstrackere, der vibrerer hver time uanset hvad, er Walkfuls påmindelser intelligente. De kører lokalt i baggrunden, tjekker din aktivitet via HealthKit, og sender kun en påmindelse, hvis du faktisk har siddet stille for længe i dine valgte aktive timer (f.eks. kl. 9 til 17).</p>
@@ -439,7 +479,7 @@
 
   <!-- Closing atmosphere band (image dropped into /assets) -->
   <section class="mood-band mood-band--closing" aria-label="Hvert skridt tæller">
-    <img class="mood-band__img" src="../assets/mood-summit.jpg" alt="En vandrer i silhuet mod en lyserød og violet solnedgangshimmel over skyerne" width="1920" height="1209" loading="lazy" decoding="async" />
+    <img class="mood-band__img" src="../assets/mood-summit.jpg" srcset="../assets/mood-summit-840.jpg 840w, ../assets/mood-summit.jpg 1920w" sizes="100vw" alt="En vandrer i silhuet mod en lyserød og violet solnedgangshimmel over skyerne" width="1920" height="1209" loading="lazy" decoding="async" />
     <div class="mood-band__overlay" aria-hidden="true"></div>
     <div class="mood-band__content">
       <h2>Hvert skridt tæller</h2>
@@ -489,7 +529,7 @@
   const simulatorCard = document.getElementById('simulator');
 
   const benefits = {
-    2000: { title: "Stillesiddende Zone", desc: "At gå 2.000 skridt eller mindre er forbundet med øget dødelighed og hjer-kar-risici. Hvert skridt over denne zone gør en forskel.", color: "#E65C00" },
+    2000: { title: "Stillesiddende Zone", desc: "At gå 2.000 skridt eller mindre er forbundet med øget dødelighed og hjerte-kar-risici. Hvert skridt over denne zone gør en forskel.", color: "#E65C00" },
     4000: { title: "Aktiv Start", desc: "At flytte sig fra 2.000 til 4.000 skridt er forbundet med et stejlt fald i dødelighedsrisiko (ca. 20-30% reduktion). Et stærkt fundament.", color: "#FF9100" },
     6000: { title: "Høj Effekt Zone", desc: "Betydelig beskyttelse. Forbundet med ca. 40% lavere dødelighed. Forbedringer af hjerte-kar- og metaboliske funktioner er nu i fuld effekt.", color: "#A435D2" },
     7500: { title: "Optimalt Sundhedspunkt", desc: "Det videnskabeligt dokumenterede mål, hvor risikokurven flader ud (ca. 47% lavere dødelighed). Flere skridt tæller stadig, men dette er det mest effektive mål.", descColor: true },
@@ -543,6 +583,7 @@
       const tab = document.getElementById(`tab-${i}`);
       if (tab) {
         tab.classList.toggle('active', i === index);
+        tab.setAttribute('aria-selected', i === index ? 'true' : 'false');
       }
     }
     screenshots.forEach((screen, i) => {
@@ -550,18 +591,42 @@
     });
   }
 
-  let showcaseInterval = setInterval(() => {
-    const activeTab = document.querySelector('.showcase-tab.active');
-    if (activeTab) {
-      const activeId = parseInt(activeTab.id.split('-')[1]);
-      const nextId = (activeId + 1) % 3;
-      switchShowcase(nextId);
-    }
-  }, 8000);
+  // Auto-rotate the showcase, but never against the user: skip entirely under
+  // prefers-reduced-motion, pause while hovered or focused, stop on interaction.
+  let showcaseInterval = null;
+  const showcaseSection = document.querySelector('.showcase-grid');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function startShowcaseRotation() {
+    if (reducedMotion.matches || showcaseInterval) return;
+    showcaseInterval = setInterval(() => {
+      const activeTab = document.querySelector('.showcase-tab.active');
+      if (activeTab) {
+        const activeId = parseInt(activeTab.id.split('-')[1]);
+        switchShowcase((activeId + 1) % 3);
+      }
+    }, 8000);
+  }
+
+  function pauseShowcaseRotation() {
+    clearInterval(showcaseInterval);
+    showcaseInterval = null;
+  }
+
+  if (showcaseSection) {
+    showcaseSection.addEventListener('mouseenter', pauseShowcaseRotation);
+    showcaseSection.addEventListener('mouseleave', startShowcaseRotation);
+    showcaseSection.addEventListener('focusin', pauseShowcaseRotation);
+    showcaseSection.addEventListener('focusout', startShowcaseRotation);
+  }
+
+  startShowcaseRotation();
 
   document.querySelectorAll('.showcase-tab').forEach(tab => {
     tab.addEventListener('click', () => {
-      clearInterval(showcaseInterval);
+      pauseShowcaseRotation();
+      showcaseSection?.removeEventListener('mouseleave', startShowcaseRotation);
+      showcaseSection?.removeEventListener('focusout', startShowcaseRotation);
     });
   });
 
