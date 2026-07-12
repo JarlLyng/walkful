@@ -1,19 +1,21 @@
-# App Store release guide — Walkful
+# App Store listing reference — Walkful
 
-Everything needed to take Walkful from TestFlight to a public App Store release.
-Copy-paste blocks are ready to use; adjust wording to taste. (#8)
+The living reference for Walkful's App Store presence: listing copy, privacy-label
+answers, review notes, and the submit checklist. Originally the launch guide (#8);
+the app has been **live since June 2026** (id [6781303837](https://apps.apple.com/app/id6781303837)).
+Keep this in sync when the listing changes in App Store Connect.
+(The **Danish** localized listing lives in the private strategy hub — `iamjarl-strategy/Walkful/aso.md`.)
 
 App: **Walkful** · Bundle ID `com.iamjarl.walkful` · Team: IAMJARL (`KDWZ3WNLDK`)
 Category: **Health & Fitness** · Age rating: **4+** · Sign-in required: **No**
 
 ---
 
-## 0. Prerequisites
+## 0. Prerequisites (done at launch — kept for reference)
 
 - [x] Paid Applications Agreement active (App Store Connect → Business).
-- [x] IAP `com.iamjarl.walkful.pro` created, **Ready to Submit** (Non-Consumable).
-- [ ] Latest build uploaded (currently 0.2, build 4 — Pro v2). Bump build for each upload.
-- [ ] App record exists (it does — created with the IAP).
+- [x] IAP `com.iamjarl.walkful.pro` created (Non-Consumable) — approved with 1.0.
+- [x] App record exists. Builds now arrive via **Xcode Cloud** from the `release` branch (Xcode Cloud owns the build number — see CONTRIBUTING.md).
 
 > ⚠️ **First IAP ships with the app version.** On the version page, under *In-App Purchases*, **select "Walkful Pro"** so it's reviewed together with the build. Otherwise the IAP stays unreviewed.
 
@@ -67,10 +69,11 @@ FREE
 • Home Screen and Lock Screen widgets.
 
 WALKFUL PRO (one-time purchase — no subscription)
-• Insights: week / month / year trends and a full-year consistency heatmap.
+• Insights: week / month / year trends, a full-year consistency heatmap and a longevity-zone card.
 • Mobility & fitness: walking speed, steadiness, cardio fitness (VO₂max) and resting heart rate.
 • Records: best day, week and month, longest streak, most floors.
 • A calm monthly recap.
+• CSV export — your data, yours to take with you.
 • The interval-walking coach — guided easy/brisk sessions to boost your fitness.
 
 Walkful collects nothing. Your health data is read from Apple Health, used only on your device, and never shared or sold.
@@ -78,14 +81,7 @@ Walkful collects nothing. Your health data is read from Apple Health, used only 
 Made by IAMJARL.
 ```
 
-**What's New** (release notes for the first public version):
-```
-The first public release of Walkful — a calm, private, evidence-based walking tracker.
-• Today dashboard with progress, trends and streaks
-• Home Screen & Lock Screen widgets
-• Gentle, sedentary-aware reminders
-• Walkful Pro: deep insights, mobility & fitness metrics, records, and an interval-walking coach
-```
+**What's New**: written per release — use the relevant [CHANGELOG](../CHANGELOG.md) section as the source, phrased for users. (The 1.0 launch notes are preserved in the git history of this file.)
 
 **Other fields:**
 - **Copyright:** `© 2026 IAMJARL`
@@ -151,8 +147,8 @@ no analytics. App privacy label: Data Not Collected.
 3. Fill in everything above + screenshots + age rating (4+) + pricing (app is free; Pro is the IAP).
 4. **Add for Review → Submit**.
 
-## 7. After approval
+## 7. After each approval
 
-- Tag the release: `git tag v1.0.0 && git push --tags` (and add release notes).
-- Announce the site (already live at walkful.iamjarl.com).
+- Cut the CHANGELOG `[Unreleased]` section to a version heading with the date.
+- Tag the release (`git tag vX.Y.Z && git push --tags`) and update the status line in README/CLAUDE.md.
 - Watch MetricKit crash reports in Xcode Organizer.

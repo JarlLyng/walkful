@@ -96,8 +96,12 @@ walking-app/
 │  ├─ Features/             # Onboarding / Today / Insights / Coach / Paywall / Settings
 │  └─ Resources/            # Assets.xcassets (layered app icon)
 ├─ WalkfulWidget/           # WidgetKit extension (Home + Lock Screen)
+├─ Tests/                   # WalkfulTests unit tests (run via the Walkful scheme)
 ├─ website/                 # Marketing site (static, SEO/GEO)
-├─ PRD.md TECH_PLAN.md               # Product & technical docs (Danish)
+├─ docs/                    # Process docs (roadmap, release guide, device checklist)
+├─ ci_scripts/              # Xcode Cloud post-clone (xcodegen + SwiftPM resolve)
+├─ .github/                 # CI workflow, Pages deploy, issue/PR templates
+├─ PRD.md TECH_PLAN.md               # Product & technical specs (Danish, historical)
 └─ ARCHITECTURE.md CONTRIBUTING.md CHANGELOG.md   # Developer docs (English)
 ```
 

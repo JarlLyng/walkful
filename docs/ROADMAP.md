@@ -3,29 +3,29 @@
 Orientation for anyone picking up Walkful. Pair this with [README](../README.md),
 [ARCHITECTURE](../ARCHITECTURE.md) and [CONTRIBUTING](../CONTRIBUTING.md).
 
-## Where the project stands (June 2026)
+## Where the project stands (July 2026)
 
-- **App:** v0.2 (build 6) **submitted to App Store review.** Free app + one-time **Walkful Pro** IAP.
-- **Shipped:** HealthKit dashboard, Today/Insights/Settings, interval-walking coach, sedentary-aware nudges, Home/Lock Screen widgets, Pro insights (trends, year heatmap, mobility & fitness, records, recap), the **Aurora** visual design, full **accessibility** (Dynamic Type, VoiceOver, Reduced Motion).
-- **Marketing site:** live at **walkful.iamjarl.com** (+ Danish `/da/`), auto-deployed from `website/` via GitHub Pages.
+- **App:** **Live on the App Store** (id [6781303837](https://apps.apple.com/app/id6781303837)) — currently v1.0.2, with 1.0.3 in review. Free app + one-time **Walkful Pro** IAP. Open source under AGPL-3.0.
+- **Shipped:** HealthKit dashboard (Today/Insights/Settings), interval-walking coach, sedentary-aware nudges, Home/Lock Screen widgets (incl. the systemMedium "This week"), Pro insights (trends, year heatmap, mobility & fitness, longevity-zone card, records, recap), CSV export, km/mi units, adaptive goal, App Store review prompt + Rate/Share, the **Aurora** visual design, full **accessibility** (Dynamic Type, VoiceOver, Reduced Motion).
+- **Infra:** unit tests (`Tests/`, 30+ cases) run by **GitHub Actions CI on every PR**; releases build via **Xcode Cloud** from the `release` branch; `main` is branch-protected.
+- **Marketing site:** live at **walkful.iamjarl.com** (+ Danish `/da/`, `/learn/` content hub, `/support.html`), auto-deployed from `website/` via GitHub Pages.
 - **Privacy:** 100% on-device. App Store label **Data Not Collected**.
 
 ## How work is tracked
 
-- **GitHub Issues** are the backlog. Every change goes through a branch + PR that closes an issue.
+- **GitHub Issues** are the backlog. Every change goes through a branch + PR that closes an issue; CI must pass before merge.
 - **Milestones:** `v1.0 — public launch` (what shipped) · `Post-launch / v1.x` (everything next).
 - **Labels:** type (`feature`/`bug`/`polish`/`chore`/`docs`), priority (`p1`–`p3`), area (`area:health/ui/notifications/storekit/watch/web`), plus `marketing` and `infra`.
 
-## Suggested order for a new developer
+## What's next
 
-1. **Get oriented & safe to change things** — `infra` issues first:
-   - Add a unit-test target ([#45]) and CI on PRs ([#46]).
-   - Run the [on-device verification checklist](device-checklist.md) — confirms the things the simulator can't.
-2. **Product depth** (the paid value): in-app Danish localization ([#40]), data export ([#41]), mortality-risk context ([#42]), more widgets ([#44]), units/adaptive goal ([#43]).
-3. **Experience polish:** onboarding polish ([#7]), insight→action ([#6]), delight/animations ([#10]).
-4. **Platform:** Apple Watch app + complication ([#4]).
-5. **Growth:** App Store badge URL post-approval ([#36]), ASO + Danish listing ([#37]), launch/press ([#38]), site content ([#39]).
-6. **Phase 2:** mood/mental check-in ([#13]); trademark check ([#11]).
+The remaining meaningful work, roughly in order of impact:
+
+1. **Apple Watch app + complication** ([#4]) — the largest missing platform piece; Watch data already flows in via Health, but there is no Watch target.
+2. **In-app Danish localization + i18n infrastructure** ([#40]) — the App Store listing is already localized to Danish; the app UI is English-only.
+3. **Step de-dup investigation** ([#53]) — totals can run high vs Health/Fitness with iPhone+Watch; needs a device pair to reproduce.
+4. **Mood / mental check-in** ([#13]) — phase-2 concept.
+5. Smaller cleanups: [#89] (minor correctness), [#90] (contributor build experience), [#93] (code of conduct).
 
 (Issue numbers are a snapshot — see the live [issues list](../../issues) and milestones.)
 
@@ -38,4 +38,4 @@ Orientation for anyone picking up Walkful. Pair this with [README](../README.md)
 
 ## Release notes / process
 
-See [app-store-release.md](app-store-release.md) for the listing copy, privacy-label answers, review notes, and the submit checklist (incl. the first-IAP-with-version requirement and the `xcodegen generate` step).
+See [app-store-release.md](app-store-release.md) for the listing reference (copy, privacy label, review notes) and [CONTRIBUTING.md](../CONTRIBUTING.md) for the release flow (bump `MARKETING_VERSION` → merge to `main` → fast-forward `release` → Xcode Cloud builds and uploads).

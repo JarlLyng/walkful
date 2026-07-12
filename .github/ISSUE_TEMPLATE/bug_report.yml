@@ -74,7 +74,7 @@ body:
   - type: input
     id: app_version
     attributes:
-      label: App version (MARKETING_VERSION)
+      label: App version (bottom of the app's Settings tab, or the App Store page)
 
   - type: checkboxes
     id: checks

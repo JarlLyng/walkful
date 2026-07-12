@@ -1,6 +1,6 @@
 # CLAUDE.md — Walkful
 
-Quick-start context for developers and AI assistants. Detailed specs in `docs/`.
+Quick-start context for developers and AI assistants. Product/tech specs live at the repo root (`PRD.md`, `TECH_PLAN.md` — historical, June 2026); process docs in `docs/`.
 
 ## What is Walkful?
 
@@ -33,7 +33,7 @@ marketing **site** source (`website/`), and normal OSS docs.
 - **Interval-walking coach (Pro):** guided easy/brisk sessions with haptics.
 - **Widgets:** Home Screen (`systemSmall`, `systemMedium` "This week") + Lock Screen accessory families.
 - **Gentle nudges:** sedentary-aware local reminders within a user-set active-hours window.
-- **CSV export (Pro), Rate/Share, and a once-per-day App Store review prompt.**
+- **CSV export (Pro), Rate/Share, and an App Store review prompt asked at most once ever** (at a goal + 3-day-streak high point, throttled by the system).
 
 ### Features that do NOT exist (common hallucination targets)
 - No accounts, login, servers, backend, or cloud sync — all on-device.

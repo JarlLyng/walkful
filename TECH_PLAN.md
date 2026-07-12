@@ -2,6 +2,8 @@
 
 *Version 0.1 · 2026-06-17 · Bygger på [PRD.md](PRD.md)*
 
+> **Historisk spec (juni 2026).** Bevaret for kontekst — dele af planen (fx datamodellerne) blev aldrig implementeret som beskrevet. Se [ARCHITECTURE.md](ARCHITECTURE.md) for hvordan appen faktisk er bygget.
+
 Princip: **100% on-device, ingen backend.** Alt der ikke skal forlade telefonen, gør det ikke. Privacy er en arkitektonisk egenskab, ikke en indstilling.
 
 ---
