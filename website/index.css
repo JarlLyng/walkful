@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap');
+/* Fonts are loaded via <link> in each page's <head> (faster than a
+   render-blocking @import chain) — see index.html / da/index.html. */
 
 :root {
   /* Aurora Theme - Light Mode Colors */
@@ -99,6 +100,8 @@ header {
   display: flex;
   align-items: center;
   gap: 10px;
+  /* the default anchor underline can't be cancelled by descendants */
+  text-decoration: none;
 }
 
 .logo-icon {
@@ -961,6 +964,19 @@ summary {
   color: var(--text);
   user-select: none;
   outline: none;
+}
+
+/* Keyboard focus — visible replacement for the outlines removed above.
+   :focus-visible only fires on keyboard/switch navigation, not mouse clicks. */
+summary:focus-visible,
+.steps-slider:focus-visible,
+.showcase-tab:focus-visible,
+.lang-btn:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 /* Hide standard marker */
