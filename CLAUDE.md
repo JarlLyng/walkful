@@ -30,7 +30,8 @@ Voice: all public copy (App Store text, site copy, community posts, replies) fol
 hub's `VOICE.md`, base voice plus Walkful's overlay. The overlay in short: calm and
 anti-streak-guilt, no pressure language ("crush your goals" is banned), say "curious what
 you think" and never "would love feedback". Hard rules: no em-dashes, no bullet lists in
-public copy, minimal emojis, avoid AI-sounding phrasing. A voice audit of existing copy is
+public copy (App Store descriptions and release notes keep their short feature lists, per the
+hub carve-out), minimal emojis, avoid AI-sounding phrasing. A voice audit of existing copy is
 tracked in the hub's Walkful backlog; fold it into the next touch.
 
 ## App features (be precise — do not invent features that don't exist)
