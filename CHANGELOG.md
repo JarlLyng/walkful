@@ -3,7 +3,10 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
-## [1.0.3] — robustness pass
+## [1.0.3] — 2026-07-13 — robustness pass & Danish App Store listing
+
+### Added
+- **Danish App Store listing** — localized name ("Walkful: Skridttæller"), subtitle, keywords, description and release notes on the Danish storefront. The app UI itself is still English (#40 tracks in-app localization).
 
 ### Fixed
 - **Widget no longer shows yesterday's step count as "today".** If the app hadn't run since midnight, the Home/Lock Screen widget kept displaying the previous day's total. The widget now treats a snapshot from an earlier day as "no data yet" (shows 0) and resets at midnight on its own (#85).
@@ -79,6 +82,7 @@ First public release — [App Store ID 6781303837](https://apps.apple.com/app/id
 - Local movement nudges (UserNotifications).
 - Layered app icon (light/dark/tinted); MetricKit diagnostics; privacy "Data Not Collected".
 
+[1.0.3]: https://github.com/JarlLyng/walkful/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/JarlLyng/walkful/compare/v1.0.0...v1.0.2
 [1.0.0]: https://github.com/JarlLyng/walkful/compare/v0.2.0...v1.0.0
 [0.2.0]: https://github.com/JarlLyng/walkful/compare/v0.1.0...v0.2.0
