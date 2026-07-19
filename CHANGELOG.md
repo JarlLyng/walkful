@@ -3,6 +3,11 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
+## [Unreleased]
+
+### Fixed
+- **No more clock-based "Time to move" reminders.** Three fixed-time daily reminders (11/15/19) fired blindly regardless of activity — you could get "Time to move" after a 13,000-step day. They're removed; every nudge now comes from the sedentary monitor, which only fires when you've genuinely been still. Updating also clears the old scheduled reminders (#113).
+
 ## [1.0.3] — 2026-07-13 — robustness pass & Danish App Store listing
 
 ### Added
