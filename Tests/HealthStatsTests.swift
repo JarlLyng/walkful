@@ -91,4 +91,21 @@ final class HealthStatsTests: XCTestCase {
         let s = service([day(-1, 5_000), day(0, 6_000)])
         XCTAssertEqual(s.monthlyTotals(12).reduce(0, +), 11_000)
     }
+
+    func testMonthlyTotalsAlwaysReturnsRequestedCount() {
+        let s = service([day(0, 6_000)])
+        XCTAssertEqual(s.monthlyTotals(12).count, 12)
+    }
+
+    func testMonthlyTotalsKeepsEmptyMonthsAsZero() {
+        // Steps two months ago and this month, nothing in between — the gap
+        // month must appear as 0, not vanish and shift the bars (#89).
+        let current = Calendar.current
+        let thisMonth = current.date(from: current.dateComponents([.year, .month], from: Date()))!
+        let twoMonthsAgo = current.date(byAdding: .month, value: -2, to: thisMonth)!
+        let s = service([.init(date: twoMonthsAgo, steps: 100_000),
+                         .init(date: thisMonth, steps: 50_000)])
+        let totals = s.monthlyTotals(3)
+        XCTAssertEqual(totals, [100_000, 0, 50_000])
+    }
 }

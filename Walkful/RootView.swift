@@ -20,6 +20,10 @@ struct RootContainer: View {
                 Tokens.Palette.appBackground
                     .ignoresSafeArea()
                     .onAppear {
+                        // Guard against a second insert if this branch re-appears
+                        // before @Query has published the first row (#89).
+                        let count = (try? context.fetchCount(FetchDescriptor<AppSettings>())) ?? 0
+                        guard count == 0 else { return }
                         let s = AppSettings()
                         if LaunchArgs.screenshots { s.hasOnboarded = true }
                         context.insert(s)

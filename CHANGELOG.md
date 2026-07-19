@@ -6,6 +6,8 @@ All notable changes to Walkful are documented here. Format based on
 ## [Unreleased]
 
 ### Fixed
+- **Year chart no longer skips empty months.** A month with no step data used to vanish from the Insights year trend, shifting the remaining bars out of alignment; it now shows as 0 in its right place (#89).
+- **Settings can no longer be duplicated** by a rare race on first launch (#89).
 - **No more clock-based "Time to move" reminders.** Three fixed-time daily reminders (11/15/19) fired blindly regardless of activity — you could get "Time to move" after a 13,000-step day. They're removed; every nudge now comes from the sedentary monitor, which only fires when you've genuinely been still. Updating also clears the old scheduled reminders (#113).
 
 ## [1.0.3] — 2026-07-13 — robustness pass & Danish App Store listing
