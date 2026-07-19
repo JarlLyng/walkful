@@ -235,7 +235,10 @@ final class HealthKitService {
     }
 
     /// Monthly step totals (oldest→newest) for the year trend.
-    func monthlyTotals(_ months: Int = 12) -> [Int] {
+    /// Enumerates the last `months` calendar months explicitly so a month with
+    /// no samples contributes 0 instead of disappearing (which shifted the
+    /// "Year" bars out of alignment, #89).
+    func monthlyTotals(_ months: Int = 12, now: Date = Date()) -> [Int] {
         let cal = Calendar.current
         var byMonth: [Date: Int] = [:]
         for day in dailyHistory {
@@ -244,7 +247,10 @@ final class HealthKitService {
                 byMonth[monthStart, default: 0] += day.steps
             }
         }
-        return byMonth.keys.sorted().suffix(months).map { byMonth[$0] ?? 0 }
+        guard let thisMonth = cal.date(from: cal.dateComponents([.year, .month], from: now)) else { return [] }
+        return (0..<months).reversed().compactMap { offset in
+            cal.date(byAdding: .month, value: -offset, to: thisMonth).map { byMonth[$0] ?? 0 }
+        }
     }
 
     // MARK: - Insights
