@@ -442,7 +442,15 @@ final class HealthKitService {
 
     #if DEBUG
     /// Fills the service with realistic sample data for App Store screenshots.
-    func loadSampleData() {
+    func loadSampleData() { fillWithSampleData() }
+    #endif
+
+    /// Fills the service with realistic synthetic data. Used by the DEBUG
+    /// screenshot mode and by the Pro paywall preview, which renders a blurred
+    /// example of the Insights screen on a throwaway service instance. Never
+    /// called on the live service outside screenshot mode, and the paywall
+    /// labels it as example data.
+    func fillWithSampleData() {
         let cal = isoCalendar()
         let today = cal.startOfDay(for: .now)
         var hist: [DayStat] = []
@@ -484,7 +492,6 @@ final class HealthKitService {
         vo2Max = 43
         lifetimeDistanceKm = 2_140
     }
-    #endif
 
     // MARK: - Live opdatering
 

@@ -9,6 +9,10 @@ struct InsightsView: View {
     @State private var range: TrendRange = .month
     @State private var insightsLoaded = false
     @State private var shimmer = false
+    /// Throwaway service holding sample data for the locked-state preview (#119).
+    /// Never touches HealthKit — it is only ever filled by `fillWithSampleData`.
+    @State private var previewHealth = HealthKitService()
+    @State private var previewFilled = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     private let heatmapDays = 364
 
@@ -81,21 +85,68 @@ struct InsightsView: View {
             .opacity(reduceMotion ? 0.6 : (shimmer ? 0.35 : 0.75))
     }
 
+    /// Shows what Insights actually looks like, behind a soft blur, instead of
+    /// only describing it in prose (#119). The preview runs on its own
+    /// sample-data service and is labelled as an example.
     private var locked: some View {
-        Card {
-            VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
-                Image(systemName: "chart.bar.fill")
-                    .font(.system(size: 28))
-                    .foregroundStyle(Tokens.Palette.primary)
-                Text("Insights are part of Walkful Pro")
-                    .font(Tokens.TextStyle.title)
-                    .foregroundStyle(Tokens.Palette.textPrimary)
-                Text("Consistency heatmap, best time of day, brisk-minute trends and lifetime distance. A one-time unlock.")
-                    .font(Tokens.TextStyle.subheadline)
-                    .foregroundStyle(Tokens.Palette.textSecondary)
-                PrimaryButton(title: "Unlock Walkful Pro") { showingPaywall = true }
-                    .padding(.top, Tokens.Spacing.xs)
+        VStack(spacing: Tokens.Spacing.lg) {
+            ZStack {
+                previewShowcase
+                    // Light touch on purpose: enough to read as "not your data",
+                    // little enough that the heatmap pattern stays recognisable.
+                    // That pattern is the actual pitch.
+                    .blur(radius: 2.5)
+                    // Capped so it stays a teaser and the CTA below stays
+                    // reachable at accessibility text sizes.
+                    .frame(maxHeight: 340)
+                    .clipped()
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(true) // decorative; the card below carries the message
+
+                Text("Example")
+                    .font(Tokens.TextStyle.caption)
+                    .foregroundStyle(Tokens.Palette.textTertiary)
+                    .padding(.horizontal, Tokens.Spacing.sm)
+                    .padding(.vertical, 2)
+                    .background(Tokens.Palette.mutedFill, in: Capsule())
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                    .accessibilityHidden(true)
             }
+
+            Card {
+                VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
+                    Image(systemName: "chart.bar.fill")
+                        .font(.system(size: 28))
+                        .foregroundStyle(Tokens.Palette.primary)
+                    Text("This is your year, once you unlock Pro")
+                        .font(Tokens.TextStyle.title)
+                        .foregroundStyle(Tokens.Palette.textPrimary)
+                    Text("A consistency heatmap of every day, week and month trends, your records, mobility and fitness, and the longevity zone. Built from the history already in Apple Health, so it fills in from day one. A one-time unlock, no subscription.")
+                        .font(Tokens.TextStyle.subheadline)
+                        .foregroundStyle(Tokens.Palette.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    PrimaryButton(title: "Unlock Walkful Pro") { showingPaywall = true }
+                        .padding(.top, Tokens.Spacing.xs)
+                }
+            }
+        }
+        .onAppear {
+            guard !previewFilled else { return }
+            previewHealth.fillWithSampleData()
+            previewFilled = true
+        }
+    }
+
+    /// The real trend chart + heatmap, rendered from sample data.
+    private var previewShowcase: some View {
+        VStack(alignment: .leading, spacing: Tokens.Spacing.lg) {
+            VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
+                Text("Steps · by month")
+                    .font(Tokens.TextStyle.caption)
+                    .foregroundStyle(Tokens.Palette.textTertiary)
+                TrendChartView(values: previewHealth.monthlyTotals(12))
+            }
+            heatmapSection(previewHealth)
         }
     }
 
@@ -274,7 +325,11 @@ struct InsightsView: View {
 
     // MARK: - Consistency (year heatmap)
 
-    private var yearHeatmap: some View {
+    private var yearHeatmap: some View { heatmapSection(health) }
+
+    /// Takes the service explicitly so the paywall preview can render the same
+    /// grid from a throwaway sample-data service (#119).
+    private func heatmapSection(_ health: HealthKitService) -> some View {
         let days = health.recentDays(heatmapDays)
         let atGoal = health.daysAtGoal(lastDays: heatmapDays, goal: settings.dailyGoal)
         return VStack(alignment: .leading, spacing: Tokens.Spacing.md) {

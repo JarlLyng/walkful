@@ -35,7 +35,9 @@ struct RootContainer: View {
             #if DEBUG
             if LaunchArgs.screenshots {
                 health.loadSampleData()
-                store.forcePro()
+                // `-screen paywall` deliberately stays non-Pro so the locked
+                // Insights state (and its blurred preview) can be captured.
+                if !LaunchArgs.lockedPreview { store.forcePro() }
                 return
             }
             #endif
@@ -76,7 +78,7 @@ struct RootView: View {
         .onAppear {
             if LaunchArgs.screenshots {
                 switch LaunchArgs.screen {
-                case "insights": tab = .insights
+                case "insights", "paywall": tab = .insights
                 case "settings": tab = .settings
                 default: tab = .today
                 }
