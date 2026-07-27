@@ -5,6 +5,10 @@ All notable changes to Walkful are documented here. Format based on
 
 ## [Unreleased]
 
+### Added
+- **Share your progress as an image.** The streak card on Today has a share button that renders a picture of your day — steps, this week, your streak — on your device and hands it to the share sheet. Pro cards also include the year grid. Free for everyone, never offered unprompted (#117).
+- **Widgets are findable now.** Settings has a short "Add a widget" note explaining where to find them on the Home Screen. They shipped in 1.0 but the app never mentioned them (#116).
+
 ### Changed
 - **The Pro screen now shows Insights instead of describing it.** Tapping Insights without Pro used to give you a short text card. It now renders the real year trend and consistency heatmap from example data behind a light blur, so you can see what you'd be unlocking, with a note that the history comes from Apple Health and fills in from day one (#119).
 

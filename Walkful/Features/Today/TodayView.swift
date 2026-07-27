@@ -11,6 +11,8 @@ struct TodayView: View {
     @State private var showingCoach = false
     @State private var showingPaywall = false
     @State private var animatedProgress: Double = 0
+    /// Set when a progress card has been rendered; presents the share sheet (#117).
+    @State private var shareItem: ShareItem?
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.requestReview) private var requestReview
@@ -50,6 +52,9 @@ struct TodayView: View {
         .safeAreaInset(edge: .top) { header }
         .sheet(isPresented: $showingCoach) { CoachView() }
         .sheet(isPresented: $showingPaywall) { PaywallView(store: store) }
+        .sheet(item: $shareItem) { item in
+            ShareSheet(url: item.url)
+        }
         .task {
             if LaunchArgs.screenshots { animatedProgress = progress; return }
             if health.authState == .authorized {
@@ -219,11 +224,42 @@ struct TodayView: View {
                                 .font(Tokens.TextStyle.subheadline)
                                 .foregroundStyle(Tokens.Palette.textSecondary)
                         }
+                        Spacer()
+                        shareProgressButton(streak: streak)
                     }
                 }
             }
         }
         .animation(reduceMotion ? nil : .spring(response: 0.45, dampingFraction: 0.7), value: goalReached)
+    }
+
+    /// Share your own progress as an image (#117). Free for everyone on
+    /// purpose: if only Pro users could share, the word never travels.
+    /// User-initiated only — nothing is ever offered unprompted.
+    @ViewBuilder
+    private func shareProgressButton(streak: Int) -> some View {
+        Button {
+            shareItem = shareCard(streak: streak).renderedItem()
+        } label: {
+            Image(systemName: "square.and.arrow.up")
+                .font(.system(size: 17, weight: .medium))
+                .foregroundStyle(Tokens.Palette.primary)
+                .padding(Tokens.Spacing.xs)
+        }
+        .accessibilityLabel("Share your progress as an image")
+    }
+
+    private func shareCard(streak: Int) -> ShareCardView {
+        ShareCardView(
+            steps: health.todaySteps,
+            goal: goal,
+            week: health.weekDays.map(\.steps),
+            streak: streak,
+            // The year grid is the most striking part, so Pro gets a richer
+            // card. Free users still get a shareable one — the growth loop
+            // has to stay open to everyone.
+            year: store.isPro ? health.recentDays(364).map(\.steps) : []
+        )
     }
 
     private func publishToWidget() {
