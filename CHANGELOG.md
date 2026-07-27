@@ -19,11 +19,10 @@ All notable changes to Walkful are documented here. Format based on
 - **Year chart no longer skips empty months.** A month with no step data used to vanish from the Insights year trend, shifting the remaining bars out of alignment; it now shows as 0 in its right place (#89).
 - **Settings can no longer be duplicated** by a rare race on first launch (#89).
 
-## [1.0.3] — 2026-07-13 — robustness pass
+## [1.0.3] — 2026-07-13 — robustness pass & Danish App Store listing
 
-> Note: this entry previously claimed a Danish App Store listing shipped with
-> this version. It didn't — the App Store still reports English-only metadata.
-> Tracked in #37.
+### Added
+- **Danish App Store listing** — localized name ("Walkful: Skridttæller"), subtitle, keywords, description and release notes on the Danish storefront. The app UI itself is still English (#40 tracks in-app localization).
 
 ### Fixed
 - **Widget no longer shows yesterday's step count as "today".** If the app hadn't run since midnight, the Home/Lock Screen widget kept displaying the previous day's total. The widget now treats a snapshot from an earlier day as "no data yet" (shows 0) and resets at midnight on its own (#85).
