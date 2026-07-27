@@ -5,6 +5,9 @@ All notable changes to Walkful are documented here. Format based on
 
 ## [Unreleased]
 
+### Changed
+- **The Pro screen now shows Insights instead of describing it.** Tapping Insights without Pro used to give you a short text card. It now renders the real year trend and consistency heatmap from example data behind a light blur, so you can see what you'd be unlocking, with a note that the history comes from Apple Health and fills in from day one (#119).
+
 ### Fixed
 - **Year chart no longer skips empty months.** A month with no step data used to vanish from the Insights year trend, shifting the remaining bars out of alignment; it now shows as 0 in its right place (#89).
 - **Settings can no longer be duplicated** by a rare race on first launch (#89).
