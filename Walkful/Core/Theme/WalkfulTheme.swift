@@ -108,6 +108,19 @@ enum Tokens {
             ],
             startPoint: .top, endPoint: .bottom
         )
+        /// Fixed (non-adaptive) brand gradient for exported images. An
+        /// `ImageRenderer` has no reliable light/dark trait, so a shared card
+        /// must not depend on one — same brand hexes as `bars`, dark variant.
+        static let exportBars = LinearGradient(
+            colors: [Color(rgb: 0xD0FF00), Color(rgb: 0x37B6E9)],
+            startPoint: .top, endPoint: .bottom
+        )
+        /// Backdrop for exported images. Fixed for the same reason.
+        static let exportBackdrop = LinearGradient(
+            colors: [Color(rgb: 0x15101F), Color(rgb: 0x000000)],
+            startPoint: .topLeading, endPoint: .bottomTrailing
+        )
+
         /// Subtle aurora screen backdrop.
         static let heroBackdrop = LinearGradient(
             colors: [
@@ -129,6 +142,9 @@ private func adaptive(_ light: Color, _ dark: Color) -> Color {
 }
 
 extension Color {
+    /// Fast opaque farve fra 0xRRGGBB (uden light/dark-variation).
+    init(rgb: UInt) { self.init(UIColor(rgb: rgb)) }
+
     /// Opaque farve fra 0xRRGGBB, forskellig i light og dark.
     init(light: UInt, dark: UInt) {
         self.init(UIColor { trait in

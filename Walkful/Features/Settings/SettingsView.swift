@@ -110,6 +110,22 @@ struct SettingsView: View {
                     .foregroundStyle(Tokens.Palette.textTertiary)
             }
 
+            Section("Home Screen") {
+                Label {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Add a widget")
+                            .foregroundStyle(Tokens.Palette.textPrimary)
+                        Text("Touch and hold your Home Screen, tap Edit, then Add Widget and search for Walkful. There's a ring, a \"This week\" view, and Lock Screen widgets.")
+                            .font(Tokens.TextStyle.caption)
+                            .foregroundStyle(Tokens.Palette.textTertiary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                } icon: {
+                    Image(systemName: "square.grid.2x2")
+                        .foregroundStyle(Tokens.Palette.primary)
+                }
+            }
+
             Section("Enjoying Walkful?") {
                 Link(destination: URL(string: "https://apps.apple.com/app/id6781303837?action=write-review")!) {
                     Label("Rate Walkful", systemImage: "star")
