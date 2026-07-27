@@ -12,15 +12,18 @@ All notable changes to Walkful are documented here. Format based on
 ### Changed
 - **The Pro screen now shows Insights instead of describing it.** Tapping Insights without Pro used to give you a short text card. It now renders the real year trend and consistency heatmap from example data behind a light blur, so you can see what you'd be unlocking, with a note that the history comes from Apple Health and fills in from day one (#119).
 
+## [1.0.4] — 2026-07-19 — honest reminders
+
 ### Fixed
+- **No more clock-based "Time to move" reminders.** Three fixed-time daily reminders (11/15/19) fired blindly regardless of activity — you could get "Time to move" after a 13,000-step day. They're removed; every nudge now comes from the sedentary monitor, which only fires when you've genuinely been still. Updating also clears the old scheduled reminders (#113).
 - **Year chart no longer skips empty months.** A month with no step data used to vanish from the Insights year trend, shifting the remaining bars out of alignment; it now shows as 0 in its right place (#89).
 - **Settings can no longer be duplicated** by a rare race on first launch (#89).
-- **No more clock-based "Time to move" reminders.** Three fixed-time daily reminders (11/15/19) fired blindly regardless of activity — you could get "Time to move" after a 13,000-step day. They're removed; every nudge now comes from the sedentary monitor, which only fires when you've genuinely been still. Updating also clears the old scheduled reminders (#113).
 
-## [1.0.3] — 2026-07-13 — robustness pass & Danish App Store listing
+## [1.0.3] — 2026-07-13 — robustness pass
 
-### Added
-- **Danish App Store listing** — localized name ("Walkful: Skridttæller"), subtitle, keywords, description and release notes on the Danish storefront. The app UI itself is still English (#40 tracks in-app localization).
+> Note: this entry previously claimed a Danish App Store listing shipped with
+> this version. It didn't — the App Store still reports English-only metadata.
+> Tracked in #37.
 
 ### Fixed
 - **Widget no longer shows yesterday's step count as "today".** If the app hadn't run since midnight, the Home/Lock Screen widget kept displaying the previous day's total. The widget now treats a snapshot from an earlier day as "no data yet" (shows 0) and resets at midnight on its own (#85).
@@ -96,6 +99,7 @@ First public release — [App Store ID 6781303837](https://apps.apple.com/app/id
 - Local movement nudges (UserNotifications).
 - Layered app icon (light/dark/tinted); MetricKit diagnostics; privacy "Data Not Collected".
 
+[1.0.4]: https://github.com/JarlLyng/walkful/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/JarlLyng/walkful/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/JarlLyng/walkful/compare/v1.0.0...v1.0.2
 [1.0.0]: https://github.com/JarlLyng/walkful/compare/v0.2.0...v1.0.0
