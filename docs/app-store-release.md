@@ -83,6 +83,13 @@ Made by IAMJARL.
 
 **What's New**: written per release — use the relevant [CHANGELOG](../CHANGELOG.md) section as the source, phrased for users. (The 1.0 launch notes are preserved in the git history of this file.)
 
+> **Verifying localized metadata.** The iTunes lookup API serves metadata in the
+> language you ask for, not the storefront's: use
+> `curl -s "https://itunes.apple.com/lookup?id=6781303837&country=dk&lang=da_dk"`.
+> Without `lang`, it returns the English metadata even for `country=dk`. Also note
+> `languageCodesISO2A` describes the **app binary's** localizations (still EN only),
+> never the store listing's — it is not a check for whether a localized listing is live.
+
 **Other fields:**
 - **Copyright:** `© 2026 IAMJARL`
 - **Primary category:** Health & Fitness
