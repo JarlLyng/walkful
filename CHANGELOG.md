@@ -3,7 +3,7 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
-## [Unreleased]
+## [1.0.5] — 2026-07-28 — share your progress
 
 ### Added
 - **Share your progress as an image.** The streak card on Today has a share button that renders a picture of your day — steps, this week, your streak — on your device and hands it to the share sheet. Pro cards also include the year grid. Free for everyone, never offered unprompted (#117).
@@ -98,6 +98,7 @@ First public release — [App Store ID 6781303837](https://apps.apple.com/app/id
 - Local movement nudges (UserNotifications).
 - Layered app icon (light/dark/tinted); MetricKit diagnostics; privacy "Data Not Collected".
 
+[1.0.5]: https://github.com/JarlLyng/walkful/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/JarlLyng/walkful/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/JarlLyng/walkful/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/JarlLyng/walkful/compare/v1.0.0...v1.0.2
