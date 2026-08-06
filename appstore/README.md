@@ -8,7 +8,7 @@ Capture happens here, composition happens there, so every IAMJARL app shares one
 
 - `raw/` — unretouched simulator captures, `<locale>-<screen>.png`
 - `manifest.json` — what gets composed: shot order, captions per locale, slot sizes
-- `1.1.0/` — the composed posters, English at the root and Danish in `da/`
+- `1.1.0/` — the composed posters, one folder per locale (`en/`, `da/`)
 
 Superseded release folders are deleted rather than kept. Git history has them.
 
@@ -54,7 +54,12 @@ Re-capturing the raws needs the app's screenshot mode. Two things to know:
 
 ## Uploading
 
-App Store Connect validates per slot. `iphone-6.9-*.png` (1290×2796) goes in the 6.9" slot and
+App Store Connect validates per slot: `iphone-6.9-*.png` (1290×2796) belongs in the 6.9" slot,
 `iphone-6.5-*.png` (1242×2688) in the 6.5" one. Uploading the wrong size to a slot is what the
-"dimensions of one or more screenshots are wrong" error means. Danish posters go under the `da`
+"dimensions of one or more screenshots are wrong" error means. `da/` goes under the Danish
 localization on the version page.
+
+**You only need one iPhone set.** Apple scales whichever you supply to the other sizes, so both
+slots exist here only because the listing's legacy slot was 6.5". 6.9" is the better single
+choice (Apple downscales it cleanly, and it is the size new listings are asked for), so when the
+6.5" set in App Store Connect is retired, drop the 6.5" entries from the manifest too.
