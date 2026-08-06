@@ -55,10 +55,15 @@ struct WeekBarsView: View {
         HStack(alignment: .bottom, spacing: 6) {
             ForEach(Array(week.enumerated()), id: \.offset) { index, steps in
                 VStack(spacing: 3) {
+                    // Rounded rectangles, not capsules: a capsule's ends are
+                    // half its width, so a bar that isn't much taller than it is
+                    // wide renders as a circle and the week stops reading as a
+                    // chart. Matches WeekBars in the app.
                     ZStack(alignment: .bottom) {
-                        Capsule().fill(WidgetBrand.tint.opacity(0.15))
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(WidgetBrand.tint.opacity(0.15))
                             .frame(height: barHeight)
-                        Capsule()
+                        RoundedRectangle(cornerRadius: 4)
                             .fill(steps >= goal ? WidgetBrand.tint : WidgetBrand.tint.opacity(0.5))
                             .frame(height: max(3, barHeight * CGFloat(min(steps, scaleMax)) / CGFloat(scaleMax)))
                     }

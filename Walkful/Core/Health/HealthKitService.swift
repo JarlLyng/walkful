@@ -463,16 +463,20 @@ final class HealthKitService {
         let today = cal.startOfDay(for: .now)
         var hist: [DayStat] = []
         // A repeating weekly shape on top of the slow trend, so any 7-day window
-        // reads as a real week (busy days, a quiet one, a rest day) instead of
-        // seven near-identical bars. Marketing screenshots show this data, and a
-        // flat week made the "This week" widget look like decoration.
-        let weekShape = [1.18, 0.82, 1.28, 0.94, 1.06, 0.42, 1.12]
+        // reads as a real week instead of seven near-identical bars (a flat week
+        // made the "This week" widget look like decoration). The multipliers are
+        // all chosen to stay above the 7,000 default goal, because a day below it
+        // breaks the streak — and a 2-day streak undersells the app in a
+        // marketing capture. Dips live in the older history instead, where they
+        // give the consistency heatmap texture without touching the streak.
+        let weekShape = [1.32, 1.09, 1.58, 1.16, 1.40, 1.09, 1.24]
         for i in stride(from: 364, through: 0, by: -1) {
             let date = cal.date(byAdding: .day, value: -i, to: today) ?? today
             let x = Double(364 - i)
-            let base = 7000 + 1400 * sin(x / 40.0) + 600 * sin(x / 11.0)
-            let shape = weekShape[Int(x.truncatingRemainder(dividingBy: 7))]
-            hist.append(DayStat(date: date, steps: max(800, Int(base * shape))))
+            let base = 7600 + 700 * sin(x / 40.0) + 300 * sin(x / 11.0)
+            var steps = base * weekShape[Int(x.truncatingRemainder(dividingBy: 7))]
+            if i > 45, Int(x.truncatingRemainder(dividingBy: 8)) == 3 { steps *= 0.5 }
+            hist.append(DayStat(date: date, steps: max(800, Int(steps))))
         }
         dailyHistory = hist
         authState = .authorized
