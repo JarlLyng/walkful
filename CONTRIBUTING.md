@@ -63,12 +63,36 @@ xcodebuild -project Walkful.xcodeproj -scheme Walkful -destination "id=$SIM" tes
 - **Design tokens only.** Use `Tokens.Palette/Spacing/Radius` and the **Aurora** layer (`Tokens.Gradient.*`, `.glassCard()`) — never hardcode colors or sizes. Everything must work in light **and** dark mode.
 - **Text uses `Tokens.TextStyle.*`** (scalable), never fixed `.system(size:)` — so Dynamic Type works.
 - **Accessibility:** label meaningful views; hide decorative charts (`accessibilityHidden`) when their values exist as text; respect Reduce Motion.
-- **UI strings in English.** Code comments may be Danish.
+- **UI strings are localizable.** English is the source language; see Localization below. Anything user-facing that isn't a SwiftUI literal must be `LocalizedStringResource`, never `String`. Code comments may be Danish.
 - **Reuse components** in `Core/Theme/Components.swift` before adding new ones.
 - **Privacy is non-negotiable.** No networking, no analytics SDKs, no data leaving the device.
 - Round any displayed number; respect locale via `Int.stepsFormatted`.
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for module layout and the "add a new metric" recipe.
+
+## Localization
+
+The app is English + Danish. When you add user-facing text:
+
+1. Write the English literal in SwiftUI as usual (`Text("…")`). If the text lives in a
+   model, a struct field or a function parameter, type it **`LocalizedStringResource`**,
+   not `String` — a `String` is invisible to string extraction and will stay English.
+   Outside SwiftUI use `String(localized: "…")`.
+2. Build once. Xcode adds the new key to `Localizable.xcstrings` (app) or
+   `WalkfulWidget/Localizable.xcstrings` (widget).
+3. Open the catalog in Xcode and fill in the Danish value. Use plural *variations* for
+   counted text; never append an "s" in code.
+4. Run the tests. `LocalizationTests` fails if a Danish string is still identical to its
+   English source, which is how a forgotten translation gets caught.
+
+Check it visually in either language without changing your Mac's settings:
+
+```bash
+xcrun simctl launch <device> com.iamjarl.walkful -AppleLanguages "(da)" -AppleLocale "da_DK"
+```
+
+Adding a language means adding it to `knownRegions` in `project.yml` and translating both
+catalogs.
 
 ## Git workflow
 

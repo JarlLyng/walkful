@@ -105,8 +105,10 @@ enum SedentaryMonitor {
 
     private static func notifyMove() async {
         let content = UNMutableNotificationContent()
-        content.title = "Time to move"
-        content.body = "You've been still for a while — a short walk or the stairs?"
+        // Notification text is built outside SwiftUI, so it needs an explicit
+        // localized lookup rather than a bare literal.
+        content.title = String(localized: "Time to move")
+        content.body = String(localized: "You've been still for a while — a short walk or the stairs?")
         content.sound = .default
         let request = UNNotificationRequest(
             identifier: "walkful.sedentary." + UUID().uuidString,

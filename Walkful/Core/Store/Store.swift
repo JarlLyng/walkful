@@ -49,16 +49,16 @@ final class Store {
                 await transaction.finish()
                 await refreshEntitlement()
             case .success(.unverified):
-                purchaseError = "We couldn't verify that purchase. If you were charged, tap Restore purchase."
+                purchaseError = String(localized: "We couldn't verify that purchase. If you were charged, tap Restore purchase.")
             case .pending:
-                purchaseError = "Your purchase is waiting for approval (e.g. Ask to Buy). Walkful Pro unlocks once it's approved."
+                purchaseError = String(localized: "Your purchase is waiting for approval (e.g. Ask to Buy). Walkful Pro unlocks once it's approved.")
             case .userCancelled:
                 break // no message — the user chose to cancel
             @unknown default:
                 break
             }
         } catch {
-            purchaseError = "Something went wrong with the purchase. Please try again."
+            purchaseError = String(localized: "Something went wrong with the purchase. Please try again.")
         }
     }
 

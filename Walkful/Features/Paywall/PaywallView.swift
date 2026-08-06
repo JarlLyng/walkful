@@ -4,7 +4,7 @@ struct PaywallView: View {
     @Environment(\.dismiss) private var dismiss
     var store: Store
 
-    private let benefits: [(icon: String, title: String, body: String)] = [
+    private let benefits: [(icon: String, title: LocalizedStringResource, body: LocalizedStringResource)] = [
         ("chart.bar.fill", "Insights", "Consistency heatmap, best time of day, brisk-minute trends and your lifetime distance."),
         ("figure.walk.motion", "Interval-walking coach", "Guided easy/brisk sessions with haptics — the evidence-based way to boost fitness."),
         ("lock.shield.fill", "Still 100% private", "One payment. No subscription, no ads, nothing leaves your device.")
@@ -21,7 +21,7 @@ struct PaywallView: View {
                 .foregroundStyle(Tokens.Palette.textSecondary)
 
             VStack(alignment: .leading, spacing: Tokens.Spacing.lg) {
-                ForEach(benefits, id: \.title) { b in
+                ForEach(benefits, id: \.icon) { b in
                     HStack(alignment: .top, spacing: Tokens.Spacing.md) {
                         Image(systemName: b.icon)
                             .font(.system(size: 22))

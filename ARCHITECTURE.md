@@ -7,7 +7,7 @@ Walkful is a small, single-target SwiftUI app with **no backend**. Privacy is an
 1. **On-device only** — health data is read from HealthKit and used in memory / on-device; nothing is transmitted.
 2. **Tokens, not hardcoded values** — all colors/spacing/radius/typography come from `Tokens` (backed by the IAMJARL design system). Views never hardcode a hex or a pixel value, and everything supports light + dark.
 3. **Meaning over vanity metrics** — features must help the user move more, not maximize screen time.
-4. **English UI strings**, Danish allowed in code comments/product docs.
+4. **Localizable UI strings** — English is the source language, Danish ships alongside it (see Localization). Code comments may be Danish.
 
 ## App flow
 
@@ -37,8 +37,9 @@ WalkfulApp (@main)
 | `Core/Diagnostics/MetricsSubscriber.swift` | MetricKit subscriber — crash/performance payloads delivered by the OS (no third-party SDK, no servers). |
 | `Core/Theme/WalkfulTheme.swift` | `Tokens` facade over `IAMJARLDesignTokens`; light/dark-adaptive `Color`s, the **Aurora** layer (`Tokens.Gradient.ring/bars/heroBackdrop`), and scalable `Tokens.TextStyle.*` (Dynamic Type). |
 | `Core/Theme/Components.swift` | Reusable views: `Card`/`.glassCard()`, `PrimaryButton`, `ProgressRing` (gradient + glow, respects Reduce Motion), `StatChip`, `WeekBars`, `TrendChartView`. |
-| `Core/Screenshots/ScreenshotSupport.swift` | `LaunchArgs` — `-screenshots`/`-screen` flags for DEBUG sample-data captures. |
-| `Core/Formatters.swift` | `Int.stepsFormatted` (en_US grouping). Also compiled into the widget. |
+| `Core/Screenshots/ScreenshotSupport.swift` | `LaunchArgs` — `-screenshots`/`-screen` flags for DEBUG sample-data captures (`-screen paywall` shows the locked Insights state). |
+| `Core/Localization/DisplayStrings.swift` | Localized display forms for modelled cases (`TimeOfDay`), kept out of the service so it stays free of presentation concerns. |
+| `Core/Formatters.swift` | `Int.stepsFormatted` (grouping follows the reader's locale) + `Units` for km/mi. Also compiled into the widget. |
 | `Features/Onboarding` | 4-step onboarding; writes goal/nudges to `AppSettings`. |
 | `Features/Today` | Dashboard: ring + meaning line, stat chips, this-week bars, streak, interval-coach CTA. Publishes the widget snapshot. Coach is **Pro-gated** (→ paywall). |
 | `Features/Insights` | **Pro-gated.** Week/month/year trends + year heatmap, best time / longest streak, mobility & fitness (walking speed/steadiness/VO₂max/resting HR), longevity-zone card, brisk-minute trend, records gallery, monthly recap, lifetime milestone. Two-phase load behind a skeleton: the screen appears as soon as history is ready; heavier metrics fill in after. |
@@ -90,6 +91,33 @@ A premium layer **derived from** the IAMJARL tokens, not hardcoded one-offs:
 - `Tokens.Gradient.ring` / `.bars` / `.heroBackdrop` — adaptive gradients (light purple→pink, dark lime→teal→blue) built from the brand colors.
 - `ProgressRing` strokes with the gradient + a soft glow; `Card`/`StatChip` use `.glassCard()` (`.ultraThinMaterial`); charts fill with the gradient; Today/Insights sit on the aurora backdrop.
 - Keep new UI on these — don't reintroduce flat solid fills or hardcoded hex.
+
+## Localization
+
+The UI ships in **English and Danish**. Translations live in **String Catalogs**
+(`Walkful/Resources/Localizable.xcstrings` for the app, `WalkfulWidget/Localizable.xcstrings`
+for the widget — an extension has its own bundle and cannot read the app's catalog).
+`SWIFT_EMIT_LOC_STRINGS` makes the compiler extract literals, and `knownRegions` in
+`project.yml` is what gets a `da.lproj` compiled into the bundle.
+
+The rule that matters: **only text SwiftUI sees as a localizable literal gets extracted.**
+A `String`-typed property or function parameter is invisible to extraction and silently
+stays English, so anything user-facing is typed `LocalizedStringResource` — including
+`StatChip.label`, `PrimaryButton.title`, `Insight`, `LongevityZone`, `IntervalCoach.Phase.title`
+and `TrendRange.label`. Outside SwiftUI (notification bodies, `Store.purchaseError`) use
+`String(localized:)`.
+
+Two related traps this codebase already hit:
+- **Don't inject a translated noun into a fixed sentence.** `TimeOfDay` therefore carries a
+  whole localized sentence per case (`DisplayStrings.swift`) rather than a word dropped into
+  "You move most in the …", which no Danish grammar survives.
+- **Don't build plurals in code.** Appending an English `"s"` can't produce "maratoner";
+  plural variations belong in the catalog.
+
+Numbers, dates and weekday names follow `Locale.current` (`Int.stepsFormatted`,
+`weakestWeekday()`), so a Danish screen reads 8.682 and "onsdag". `LocalizationTests`
+guards all of this: Danish is bundled, the plural table exists, and no Danish value is
+still identical to its English source unless deliberately so.
 
 ## Accessibility
 

@@ -56,7 +56,13 @@ struct TodayView: View {
             ShareSheet(url: item.url)
         }
         .task {
-            if LaunchArgs.screenshots { animatedProgress = progress; return }
+            if LaunchArgs.screenshots {
+                animatedProgress = progress
+                // Publish the sample snapshot too, so Home Screen widgets are
+                // presentable in App Store captures rather than showing 0.
+                publishToWidget()
+                return
+            }
             if health.authState == .authorized {
                 await health.refreshToday()
                 await health.loadHistory()
@@ -268,7 +274,7 @@ struct TodayView: View {
         WidgetCenter.shared.reloadAllTimelines()
     }
 
-    private var meaning: String {
+    private var meaning: LocalizedStringResource {
         switch health.todaySteps {
         case 7_000...: "In the zone linked to ~47% lower mortality."
         case 5_000..<7_000: "Past 5,000 — the real benefits kick in here."
@@ -318,7 +324,8 @@ struct TodayView: View {
         }
     }
 
-    private func infoCard(icon: String, title: String, message: String) -> some View {
+    private func infoCard(icon: String, title: LocalizedStringResource,
+                          message: LocalizedStringResource) -> some View {
         Card {
             VStack(alignment: .leading, spacing: Tokens.Spacing.sm) {
                 Image(systemName: icon)

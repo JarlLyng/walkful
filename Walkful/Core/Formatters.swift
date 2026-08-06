@@ -1,12 +1,12 @@
 import Foundation
 
-// Walkful er en engelsk/international app. Vi grupperer tal med komma
-// (en_US) indtil vi evt. tilbyder fuld locale-tilpasning senere.
-private let enUS = Locale(identifier: "en_US")
-
 extension Int {
+    /// Step counts grouped for the reader's locale (1,234 in English,
+    /// 1.234 in Danish). This was pinned to en_US while the UI was
+    /// English-only; now that the app is localized it has to follow the
+    /// language, or a Danish screen would show English grouping.
     var stepsFormatted: String {
-        self.formatted(.number.grouping(.automatic).locale(enUS))
+        self.formatted(.number.grouping(.automatic))
     }
 }
 
@@ -19,6 +19,7 @@ enum Units {
         imperial ? km / kmPerMile : km
     }
 
+    /// The unit symbols are identical in both languages, so these stay literal.
     static func label(imperial: Bool) -> String {
         imperial ? "mi" : "km"
     }

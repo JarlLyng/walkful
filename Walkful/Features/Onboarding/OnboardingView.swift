@@ -82,7 +82,7 @@ struct OnboardingView: View {
         }
     }
 
-    private func textBlock(_ title: String, _ body: String) -> some View {
+    private func textBlock(_ title: LocalizedStringResource, _ body: LocalizedStringResource) -> some View {
         VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
             Text(title)
                 .font(Tokens.TextStyle.bigTitle)
@@ -94,7 +94,7 @@ struct OnboardingView: View {
         }
     }
 
-    private var buttonTitle: String {
+    private var buttonTitle: LocalizedStringResource {
         switch step {
         case 0: "Get started"
         case 1: "Continue"

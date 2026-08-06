@@ -14,7 +14,7 @@ no ads, no data collection. Its App Store privacy label is "Data Not Collected".
 - **Website:** [walkful.iamjarl.com](https://walkful.iamjarl.com)
 - **License:** [AGPL-3.0](LICENSE) — open source.
 - **Price:** Free download with a one-time **Walkful Pro** unlock (StoreKit 2 non-consumable). No subscription, no ads.
-- **Status:** Live on the App Store — id `6781303837`, v1.0.5 (English + Danish store listings; app UI is English).
+- **Status:** Live on the App Store — id `6781303837`, v1.0.5 live (English + Danish store listings; app UI localized to both).
 - **Sister apps:** part of the [IAMJARL](https://iamjarl.com) portfolio.
 
 ## Strategy lives in the private hub
@@ -42,6 +42,7 @@ tracked in the hub's Walkful backlog; fold it into the next touch.
 - **Widgets:** Home Screen (`systemSmall`, `systemMedium` "This week") + Lock Screen accessory families.
 - **Gentle nudges:** sedentary-aware local reminders within a user-set active-hours window.
 - **CSV export (Pro), Rate/Share, and an App Store review prompt asked at most once ever** (at a goal + 3-day-streak high point, throttled by the system).
+- **Danish app UI:** the interface is localized to English + Danish via String Catalogs (`Localizable.xcstrings` in the app and widget targets). Numbers, dates and weekday names follow the reader's locale.
 - **Shareable progress card:** a share button on Today's streak card renders a PNG of your day/week/streak on-device (free for everyone; Pro cards add the year grid).
 
 ### Features that do NOT exist (common hallucination targets)
@@ -50,7 +51,7 @@ tracked in the hub's Walkful backlog; fold it into the next touch.
 - No social features, leaderboards, friends or challenges (you compete with your own records).
 - **No standalone Apple Watch app or complication yet** — Watch data flows in via Apple Health, but there is no Watch target.
 - No Android, no GPS route/map tracking, no calorie/diet tracking.
-- No in-app Danish localization yet (the app UI is English; the marketing site has a `/da/` page).
+- No languages beyond English and Danish (the app UI ships both; the marketing site has a `/da/` page).
 
 ## Requirements
 - iOS 18+. Xcode 26+, [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`).

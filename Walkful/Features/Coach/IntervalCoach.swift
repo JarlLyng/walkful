@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 import Observation
 
 /// Drives a guided interval walk: alternating "easy" and "brisk" phases for a
@@ -17,7 +18,8 @@ final class IntervalCoach {
 
     enum Phase {
         case easy, brisk
-        var title: String { self == .brisk ? "Brisk" : "Easy" }
+        /// Localizable: shown as the big phase label during a session.
+        var title: LocalizedStringResource { self == .brisk ? "Brisk" : "Easy" }
     }
 
     // Plan (seconds)

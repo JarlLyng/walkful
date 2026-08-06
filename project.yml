@@ -4,10 +4,16 @@ options:
   deploymentTarget:
     iOS: "18.0"
   createIntermediateGroups: true
+  developmentLanguage: en
+  # String Catalogs (Localizable.xcstrings) hold the translations; the project
+  # still has to know which regions exist so Xcode compiles a da.lproj into the
+  # bundle (which is also what makes the App Store list Danish).
+  knownRegions: [en, da, Base]
 settings:
   base:
     SWIFT_VERSION: "5.0"
-    MARKETING_VERSION: "1.0.5"
+    SWIFT_EMIT_LOC_STRINGS: YES
+    MARKETING_VERSION: "1.1.0"
     CURRENT_PROJECT_VERSION: "12"
     GENERATE_INFOPLIST_FILE: YES
     DEVELOPMENT_TEAM: KDWZ3WNLDK

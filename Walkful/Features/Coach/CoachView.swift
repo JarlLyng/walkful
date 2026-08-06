@@ -92,10 +92,12 @@ struct CoachView: View {
                     .foregroundStyle(Tokens.Palette.textPrimary)
             }
             .accessibilityElement(children: .ignore)
-            .accessibilityLabel("\(coach.phase.title) phase, \(coach.remaining) seconds left, round \(coach.currentRound) of \(coach.rounds)")
+            .accessibilityLabel("\(String(localized: coach.phase.title)) phase, \(coach.remaining) seconds left, round \(coach.currentRound) of \(coach.rounds)")
 
             HStack(spacing: Tokens.Spacing.md) {
-                secondaryButton(coach.isRunning ? "Pause" : "Resume") { coach.togglePause() }
+                // Spelled out so both words reach the catalog.
+                let pauseTitle: LocalizedStringResource = coach.isRunning ? "Pause" : "Resume"
+                secondaryButton(pauseTitle) { coach.togglePause() }
                 secondaryButton("End") { coach.stop(); dismiss() }
             }
         }
@@ -124,7 +126,7 @@ struct CoachView: View {
 
     // MARK: - Helpers
 
-    private func secondaryButton(_ title: String, action: @escaping () -> Void) -> some View {
+    private func secondaryButton(_ title: LocalizedStringResource, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text(title)
                 .font(Tokens.TextStyle.headline)
