@@ -462,11 +462,17 @@ final class HealthKitService {
         let cal = isoCalendar()
         let today = cal.startOfDay(for: .now)
         var hist: [DayStat] = []
+        // A repeating weekly shape on top of the slow trend, so any 7-day window
+        // reads as a real week (busy days, a quiet one, a rest day) instead of
+        // seven near-identical bars. Marketing screenshots show this data, and a
+        // flat week made the "This week" widget look like decoration.
+        let weekShape = [1.18, 0.82, 1.28, 0.94, 1.06, 0.42, 1.12]
         for i in stride(from: 364, through: 0, by: -1) {
             let date = cal.date(byAdding: .day, value: -i, to: today) ?? today
             let x = Double(364 - i)
-            let steps = Int(7200 + 2600 * sin(x / 9.0) + 1500 * sin(x / 40.0))
-            hist.append(DayStat(date: date, steps: max(800, steps)))
+            let base = 7000 + 1400 * sin(x / 40.0) + 600 * sin(x / 11.0)
+            let shape = weekShape[Int(x.truncatingRemainder(dividingBy: 7))]
+            hist.append(DayStat(date: date, steps: max(800, Int(base * shape))))
         }
         dailyHistory = hist
         authState = .authorized

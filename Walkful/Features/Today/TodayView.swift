@@ -56,7 +56,13 @@ struct TodayView: View {
             ShareSheet(url: item.url)
         }
         .task {
-            if LaunchArgs.screenshots { animatedProgress = progress; return }
+            if LaunchArgs.screenshots {
+                animatedProgress = progress
+                // Publish the sample snapshot too, so Home Screen widgets are
+                // presentable in App Store captures rather than showing 0.
+                publishToWidget()
+                return
+            }
             if health.authState == .authorized {
                 await health.refreshToday()
                 await health.loadHistory()
