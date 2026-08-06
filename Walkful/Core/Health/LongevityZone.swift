@@ -5,8 +5,8 @@ import Foundation
 /// **associations** from observational research, not medical advice, and the
 /// curve **flattens** past ~7,500–10,000 steps — more is not linearly better.
 struct LongevityZone: Equatable {
-    let title: String
-    let detail: String
+    let title: LocalizedStringResource
+    let detail: LocalizedStringResource
     /// 0…1 position along the curve, for the marker in the card.
     let position: Double
 

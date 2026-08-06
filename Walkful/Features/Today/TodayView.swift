@@ -268,7 +268,7 @@ struct TodayView: View {
         WidgetCenter.shared.reloadAllTimelines()
     }
 
-    private var meaning: String {
+    private var meaning: LocalizedStringResource {
         switch health.todaySteps {
         case 7_000...: "In the zone linked to ~47% lower mortality."
         case 5_000..<7_000: "Past 5,000 — the real benefits kick in here."
@@ -318,7 +318,8 @@ struct TodayView: View {
         }
     }
 
-    private func infoCard(icon: String, title: String, message: String) -> some View {
+    private func infoCard(icon: String, title: LocalizedStringResource,
+                          message: LocalizedStringResource) -> some View {
         Card {
             VStack(alignment: .leading, spacing: Tokens.Spacing.sm) {
                 Image(systemName: icon)

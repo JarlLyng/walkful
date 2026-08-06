@@ -18,6 +18,13 @@ final class HealthKitService {
         let steps: Int
     }
 
+    /// Which part of the day the user moves most in. Kept as a case rather than
+    /// a display string so each language can phrase it its own way (an English
+    /// noun dropped into a Danish sentence does not survive the grammar).
+    enum TimeOfDay: Int, CaseIterable, Sendable {
+        case night, morning, afternoon, evening
+    }
+
     private let store = HKHealthStore()
     private let stepType = HKQuantityType(.stepCount)
     private let distanceType = HKQuantityType(.distanceWalkingRunning)
@@ -44,7 +51,7 @@ final class HealthKitService {
 
     // Insights
     var lifetimeDistanceKm = 0.0
-    var bestTimeOfDay: String?
+    var bestTimeOfDay: TimeOfDay?
     var activeMinutesByWeek: [Int] = []
     var restingHeartRate: Int?
 
@@ -219,8 +226,10 @@ final class HealthKitService {
         guard let weakest = totals.min(by: {
             Double($0.value.sum) / Double($0.value.count) < Double($1.value.sum) / Double($1.value.count)
         })?.key else { return nil }
+        // Locale-aware: a Danish UI must not name an English weekday. Callers
+        // phrase the surrounding sentence so this can stand alone as a noun.
         let fmt = DateFormatter()
-        fmt.locale = Locale(identifier: "en_US")
+        fmt.locale = .current
         return fmt.weekdaySymbols[weakest - 1] // weekdaySymbols[0] = Sunday
     }
 
@@ -358,7 +367,7 @@ final class HealthKitService {
     }
 
     /// Hvornår på dagen går du mest?
-    private func computeBestTimeOfDay() async -> String? {
+    private func computeBestTimeOfDay() async -> TimeOfDay? {
         let cal = isoCalendar()
         guard let start = cal.date(byAdding: .day, value: -14, to: cal.startOfDay(for: .now)) else { return nil }
         var interval = DateComponents(); interval.hour = 1
@@ -382,12 +391,11 @@ final class HealthKitService {
                     default: buckets[0] += steps
                     }
                 }
-                let labels = ["Late night", "Mornings", "Afternoons", "Evenings"]
                 guard let maxIdx = buckets.indices.max(by: { buckets[$0] < buckets[$1] }),
                       buckets[maxIdx] > 0 else {
                     continuation.resume(returning: nil); return
                 }
-                continuation.resume(returning: labels[maxIdx])
+                continuation.resume(returning: TimeOfDay(rawValue: maxIdx))
             }
             store.execute(query)
         }
@@ -484,7 +492,7 @@ final class HealthKitService {
         lastMonthSteps = months.count >= 2 ? months[months.count - 2] : 0
         mostFloorsInADay = 28
 
-        bestTimeOfDay = "Mornings"
+        bestTimeOfDay = .morning
         activeMinutesByWeek = [120, 150, 165, 190]
         restingHeartRate = 58
         walkingSpeed = 1.4

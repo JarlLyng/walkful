@@ -3,6 +3,11 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
+## [Unreleased]
+
+### Added
+- **The app speaks Danish.** The whole interface is translated, not just the App Store listing: Today, Insights, the interval coach, Settings, onboarding, notifications and the widgets. Numbers, dates and weekday names follow your language too, so a Danish phone reads 8.682 and "onsdag" (#40).
+
 ## [1.0.5] — 2026-07-28 — share your progress
 
 ### Added

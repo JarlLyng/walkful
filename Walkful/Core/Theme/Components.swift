@@ -60,7 +60,7 @@ struct TrendChartView: View {
 // MARK: - PrimaryButton
 
 struct PrimaryButton: View {
-    var title: String
+    var title: LocalizedStringResource
     var action: () -> Void
 
     var body: some View {
@@ -106,7 +106,9 @@ struct ProgressRing: View {
 struct StatChip: View {
     var value: String
     var unit: String?
-    var label: String
+    /// Localizable: the caption under the number ("distance", "week avg"…).
+    /// `value` and `unit` stay plain strings — they are numbers and symbols.
+    var label: LocalizedStringResource
     var accent: Bool = false
 
     private var fg: Color { accent ? Tokens.Palette.accentText : Tokens.Palette.textPrimary }

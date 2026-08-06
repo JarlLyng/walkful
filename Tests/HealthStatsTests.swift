@@ -60,8 +60,11 @@ final class HealthStatsTests: XCTestCase {
             days.append(.init(date: date, steps: wd == target ? 1_000 : 9_000))
         }
         let s = service(days)
+        // Compare against the current locale's own weekday name: the app is
+        // localized now, so the assertion has to be about *which* weekday was
+        // picked, not about it being spelled in English.
         let fmt = DateFormatter()
-        fmt.locale = Locale(identifier: "en_US")
+        fmt.locale = .current
         XCTAssertEqual(s.weakestWeekday(), fmt.weekdaySymbols[target - 1])
     }
 

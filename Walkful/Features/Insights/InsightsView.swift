@@ -17,8 +17,17 @@ struct InsightsView: View {
     private let heatmapDays = 364
 
     enum TrendRange: String, CaseIterable, Identifiable {
-        case week = "Week", month = "Month", year = "Year"
+        case week, month, year
         var id: String { rawValue }
+        /// Separate from `rawValue`: a raw value used as display text is invisible
+        /// to string extraction and would stay English.
+        var label: LocalizedStringResource {
+            switch self {
+            case .week: "Week"
+            case .month: "Month"
+            case .year: "Year"
+            }
+        }
     }
 
     var body: some View {
@@ -167,9 +176,9 @@ struct InsightsView: View {
 
     private struct Insight {
         let icon: String
-        let title: String
-        let message: String
-        var actionTitle: String?
+        let title: LocalizedStringResource
+        let message: LocalizedStringResource
+        var actionTitle: LocalizedStringResource?
         var action: (() -> Void)?
     }
 
@@ -179,7 +188,9 @@ struct InsightsView: View {
             return Insight(
                 icon: "bell.badge",
                 title: "Build a consistent habit",
-                message: "You tend to move least on \(day)s. Gentle reminders help you stay on track.",
+                // Phrased so the weekday stands alone as a noun — "on Mondays"
+                // with an English plural -s doesn't survive translation.
+                message: "Your quietest day is usually \(day). Gentle reminders help you stay on track.",
                 actionTitle: "Turn on reminders",
                 action: enableNudges
             )
@@ -188,18 +199,18 @@ struct InsightsView: View {
         let current = health.currentStreak(goal: settings.dailyGoal)
         let longest = health.longestStreak(goal: settings.dailyGoal)
         if current >= 3 {
-            let tail = current < longest ? " Your best is \(longest)." : " That's your best ever!"
+            // Two whole messages rather than a stitched-on tail: a fragment
+            // appended mid-sentence can't be translated reliably.
             return Insight(
                 icon: "flame",
                 title: "Keep your streak alive",
-                message: "You're on a \(current)-day streak.\(tail) A walk today keeps it going.")
+                message: current < longest
+                    ? "You're on a \(current)-day streak. Your best is \(longest). A walk today keeps it going."
+                    : "You're on a \(current)-day streak, your best ever. A walk today keeps it going.")
         }
         // 3) Best time of day → plan around it.
         if let time = health.bestTimeOfDay {
-            return Insight(
-                icon: "clock",
-                title: "Your best time",
-                message: "You move most in the \(time.lowercased()). Planning a walk then makes it easier to hit your goal.")
+            return Insight(icon: "clock", title: "Your best time", message: time.insightMessage)
         }
         return nil
     }
@@ -303,17 +314,21 @@ struct InsightsView: View {
         }
     }
 
-    private var trendCaption: String {
+    private var trendCaption: LocalizedStringResource {
         let vals = trendValues
         guard !vals.isEmpty else { return "No data yet" }
         let avg = vals.reduce(0, +) / vals.count
-        return "Steps · avg \(avg.stepsFormatted)/\(range == .year ? "month" : "day")"
+        // One whole string per unit rather than injecting "day"/"month", which
+        // would leave the unit untranslated.
+        return range == .year
+            ? "Steps · avg \(avg.stepsFormatted)/month"
+            : "Steps · avg \(avg.stepsFormatted)/day"
     }
 
     private var trends: some View {
         VStack(alignment: .leading, spacing: Tokens.Spacing.md) {
             Picker("Range", selection: $range) {
-                ForEach(TrendRange.allCases) { Text($0.rawValue).tag($0) }
+                ForEach(TrendRange.allCases) { Text($0.label).tag($0) }
             }
             .pickerStyle(.segmented)
             Text(trendCaption)
@@ -364,7 +379,7 @@ struct InsightsView: View {
 
     private var chips: some View {
         HStack(spacing: Tokens.Spacing.sm) {
-            StatChip(value: health.bestTimeOfDay ?? "—", unit: nil, label: "best time")
+            StatChip(value: health.bestTimeOfDay.map { String(localized: $0.label) } ?? "—", unit: nil, label: "best time")
             StatChip(value: "\(health.longestStreak(goal: settings.dailyGoal))",
                      unit: "days", label: "longest streak")
         }
@@ -376,7 +391,7 @@ struct InsightsView: View {
         let id = UUID()
         let value: String
         let unit: String?
-        let label: String
+        let label: LocalizedStringResource
         var accent = false
     }
 
@@ -387,7 +402,10 @@ struct InsightsView: View {
         }
         if let steady = health.walkingSteadiness {
             let pct = Int((steady * 100).rounded())
-            metrics.append(Metric(value: pct >= 50 ? "OK" : "Low", unit: nil,
+            // Both branches spelled out: a ternary inside String(localized:)
+            // only gets one of them extracted into the catalog.
+            let steadyLabel: LocalizedStringResource = pct >= 50 ? "OK" : "Low"
+            metrics.append(Metric(value: String(localized: steadyLabel), unit: nil,
                                   label: "steadiness", accent: pct >= 50))
         }
         if let vo2 = health.vo2Max {
@@ -509,7 +527,10 @@ struct InsightsView: View {
                     .font(Tokens.TextStyle.titleNumber)
                     .foregroundStyle(Tokens.Palette.accentText)
                 if marathons >= 1 {
-                    Text("That's \(marathons) marathon\(marathons == 1 ? "" : "s"). Keep wending.")
+                    // Plural handled by explicit variations in the String
+                    // Catalog. Automatic inflection (^[…](inflect:)) doesn't
+                    // cover Danish, and appending an English "s" never did.
+                    Text("That's \(marathons) marathons. Keep wending.")
                         .font(Tokens.TextStyle.subheadline)
                         .foregroundStyle(Tokens.Palette.textPrimary)
                 }

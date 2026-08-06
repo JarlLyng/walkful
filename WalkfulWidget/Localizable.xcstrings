@@ -1,0 +1,120 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%@ steps": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ skridt"
+          }
+        }
+      }
+    },
+    "%lld": {
+      "extractionState": "manual",
+      "shouldTranslate": false
+    },
+    "Open Walkful": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Åbn Walkful"
+          }
+        }
+      }
+    },
+    "Open Walkful to sync your week.": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Åbn Walkful for at opdatere din uge."
+          }
+        }
+      }
+    },
+    "Steps": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skridt"
+          }
+        }
+      }
+    },
+    "THIS WEEK": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DENNE UGE"
+          }
+        }
+      }
+    },
+    "This week": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denne uge"
+          }
+        }
+      }
+    },
+    "WALKFUL": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WALKFUL"
+          }
+        }
+      }
+    },
+    "Your last 7 days at a glance.": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dine seneste 7 dage på et øjeblik."
+          }
+        }
+      }
+    },
+    "Your step progress today.": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dit skridt-fremskridt i dag."
+          }
+        }
+      }
+    },
+    "avg/day": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gns./dag"
+          }
+        }
+      }
+    },
+    "of %@": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "af %@"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
