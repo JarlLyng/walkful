@@ -82,6 +82,8 @@
     "Guidet intervalgang-coach med haptik",
     "Widgets til hjemmeskærmen og låseskærmen, inkl. en ugevisning",
     "CSV-eksport af din skridthistorik, kilometer eller miles",
+    "Del dit fremskridt som et billede, tegnet på enheden",
+    "Dansk brugerflade",
     "Privatliv ved arkitektur — intet forlader din iPhone"
   ],
   "publisher": { "@type": "Organization", "name": "IAMJARL", "url": "https://walkful.iamjarl.com/" }
@@ -103,6 +105,11 @@
       "@type": "Question",
       "name": "Skal jeg absolut gå 10.000 skridt om dagen?",
       "acceptedAnswer": { "@type": "Answer", "text": "Nej. De 10.000 skridt var et japansk markedsføringsstunt fra 1965, ikke en lægefaglig anbefaling. Forskning viser, at den største sundhedsmæssige gevinst sker mellem 5.000 og 7.500 skridt. Walkful foreslår derfor et mål på 7.000 skridt, som du frit kan tilpasse. Hvert skridt tæller." }
+    },
+    {
+      "@type": "Question",
+      "name": "Er appen på dansk?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ja. Hele brugerfladen er på dansk, ikke kun siden i App Store. Tal, datoer og ugedage følger også dit sprog, så der står 8.682 og \"onsdag\". Er din iPhone sat til dansk, skifter Walkful helt af sig selv." }
     },
     {
       "@type": "Question",
@@ -201,6 +208,10 @@
             <div class="trust-item">
               <svg viewBox="0 0 20 20"><path d="M9 12l-4.47-4.47L3.1 8.94 9 14.83l8-8-1.41-1.42L9 12z"/></svg>
               <span>100% Privat (On-device)</span>
+            </div>
+            <div class="trust-item">
+              <svg viewBox="0 0 20 20"><path d="M9 12l-4.47-4.47L3.1 8.94 9 14.83l8-8-1.41-1.42L9 12z"/></svg>
+              <span>Appen er på dansk</span>
             </div>
           </div>
         </div>
@@ -303,6 +314,14 @@
 
         <div class="card">
           <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+          </div>
+          <h3>Del dit fremskridt</h3>
+          <p>Tryk på deleknappen, og Walkful tegner et billede af din dag, din uge og din stime. Det bliver lavet på telefonen, så intet uploades.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
           </div>
           <h3>Din data, din eksport</h3>
@@ -348,9 +367,9 @@
           <div class="phone-mockup">
             <div class="dynamic-island"></div>
             <div class="mockup-screen">
-              <img id="screen-today" class="screenshot-img active" src="../assets/today-dark.jpg" alt="Walkful appen der viser dagens dashboard med skridt og ring" width="320" height="694" loading="lazy" decoding="async" />
-              <img id="screen-insights" class="screenshot-img" src="../assets/insights-dark.jpg" alt="Walkful appen der viser indsigter og varmekort over året" width="320" height="694" loading="lazy" decoding="async" />
-              <img id="screen-coach" class="screenshot-img" src="../assets/coach-dark.jpg" alt="Walkful appen der viser skærmen for guidet intervaltræning" width="320" height="694" loading="lazy" decoding="async" />
+              <img id="screen-today" class="screenshot-img active" src="../assets/today-dark-da.jpg" alt="Walkful appen der viser dagens dashboard med skridt og ring" width="320" height="694" loading="lazy" decoding="async" />
+              <img id="screen-insights" class="screenshot-img" src="../assets/insights-dark-da.jpg" alt="Walkful appen der viser indsigter og varmekort over året" width="320" height="694" loading="lazy" decoding="async" />
+              <img id="screen-coach" class="screenshot-img" src="../assets/coach-dark-da.jpg" alt="Walkful appen der viser skærmen for guidet intervaltræning" width="320" height="694" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>
@@ -444,6 +463,13 @@
             <span>Skal jeg absolut gå 10.000 skridt om dagen?</span>
           </summary>
           <p>Nej. De 10.000 skridt var et japansk markedsføringsstunt fra 1965, ikke en lægefaglig anbefaling. Forskning viser, at den største sundhedsmæssige gevinst sker mellem 5.000 og 7.500 skridt. Walkful foreslår derfor et mål på 7.000 skridt, som du frit kan tilpasse. Hvert skridt tæller.</p>
+        </details>
+
+        <details name="faq-acc">
+          <summary>
+            <span>Er appen på dansk?</span>
+          </summary>
+          <p>Ja. Hele brugerfladen er på dansk, ikke kun siden i App Store. Tal, datoer og ugedage følger også dit sprog, så der står 8.682 og "onsdag". Er din iPhone sat til dansk, skifter Walkful helt af sig selv.</p>
         </details>
 
         <details name="faq-acc">
