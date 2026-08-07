@@ -3,7 +3,7 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
-## [Unreleased]
+## [1.1.0] — 2026-08-07 — the app speaks Danish
 
 ### Added
 - **The app speaks Danish.** The whole interface is translated, not just the App Store listing: Today, Insights, the interval coach, Settings, onboarding, notifications and the widgets. Numbers, dates and weekday names follow your language too, so a Danish phone reads 8.682 and "onsdag" (#40).
@@ -103,6 +103,7 @@ First public release — [App Store ID 6781303837](https://apps.apple.com/app/id
 - Local movement nudges (UserNotifications).
 - Layered app icon (light/dark/tinted); MetricKit diagnostics; privacy "Data Not Collected".
 
+[1.1.0]: https://github.com/JarlLyng/walkful/compare/v1.0.5...v1.1.0
 [1.0.5]: https://github.com/JarlLyng/walkful/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/JarlLyng/walkful/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/JarlLyng/walkful/compare/v1.0.2...v1.0.3

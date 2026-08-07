@@ -90,6 +90,23 @@ Made by IAMJARL.
 > `languageCodesISO2A` describes the **app binary's** localizations (still EN only),
 > never the store listing's — it is not a check for whether a localized listing is live.
 
+> **Age ratings: the social-media questions (deadline 2026-09-07).** They live inside the
+> **Age Ratings questionnaire** (App Information → App Age Ratings → Edit), not as a field on
+> the App Information page, which is why they look missing. Two questions, and for Walkful both
+> answers are **No**:
+>
+> - *Social Media* — "redistribution, amplification, or interaction with user-generated content
+>   through a social feed…". Walkful has no accounts, no servers, no feed and no UGC.
+> - *Social Media Disabled for Users Under 13* — asserts the app calls the Declared Age Range
+>   API and delivers only age-appropriate UGC. Walkful does neither, so Yes would be a false
+>   declaration. It only carries weight when the first answer is Yes.
+>
+> The shareable progress card is **not** a social-media capability: it hands an image of the
+> user's own data to the system share sheet. Answering Yes would force a minimum **13+** rating
+> and put a Social Media descriptor on the product page, which would be wrong and would hurt in
+> the audience this app is aimed at. Answer only between submissions — editing this section
+> while a version is in review can require re-submitting.
+
 **Other fields:**
 - **Copyright:** `© 2026 IAMJARL`
 - **Primary category:** Health & Fitness
