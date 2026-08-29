@@ -3,6 +3,14 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
+## [1.1.1] — unreleased — the buy button answers
+
+### Fixed
+- **The Pro button could do nothing at all.** If the App Store product failed to load, and being offline at launch was enough, the paywall still showed a normal buy button. Tapping it did nothing: no error, no retry, no explanation. Reconnecting did not help either, because the product was only ever fetched once per launch. The paywall now fetches it again when you open it, a tap that cannot start a purchase says why, and the screen offers a retry (#134).
+
+### Changed
+- **Design tokens updated** from iamjarl-design 1.1.0 to 1.6.0. Additive, so nothing in the app changes visually (#131).
+
 ## [1.1.0] — 2026-08-07 — the app speaks Danish
 
 ### Added
