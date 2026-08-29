@@ -47,6 +47,11 @@
 <!-- Privacy-friendly, cookieless analytics (self-hosted Umami) -->
 <script defer src="https://umami-iamjarl.vercel.app/script.js" data-website-id="2b384f21-31d1-4b7b-a6bf-82328062883e"></script>
 
+<!-- Shared portfolio footer. Cross-links come from a registry in the design
+     system, so a new app is added there once, never here. Pin the tag. -->
+<script type="module"
+  src="https://cdn.jsdelivr.net/gh/jarllyng/iamjarl-design@v1.6.0/dist/components/ij-footer.js"></script>
+
 <!-- Structured data: the app -->
 <script type="application/ld+json">
 {
@@ -156,13 +161,13 @@
       </div>
       <span class="logo">Walkful</span>
     </a>
-    <div class="nav-actions">
+    <nav class="nav-actions" aria-label="Main">
       <div class="lang-switcher" role="group" aria-label="Language selection">
         <button class="lang-btn active" id="lang-btn-en" onclick="switchLanguage('en')">EN</button>
         <button class="lang-btn" id="lang-btn-da" onclick="switchLanguage('da')">DA</button>
       </div>
       <a class="btn btn-ghost" href="#features">Explore</a>
-    </div>
+    </nav>
   </header>
 </div>
 
@@ -498,36 +503,21 @@
   </section>
 </main>
 
-<footer>
+<div class="site-footer">
   <div class="wrap">
-    <div class="footer-content">
-      <div>
-        <a href="/" class="footer-logo">Walkful</a>
-        <p style="margin-top: 8px;">Every step counts. Made with care by IAMJARL.</p>
-      </div>
-      <div class="footer-links-column">
-        <div class="footer-links">
-          <a href="/learn/">Learn</a>
-          <a href="/privacy.html">Privacy Policy</a>
-          <a href="/support.html">Support</a>
-        </div>
-        <div style="font-size: 11px; font-weight: 600; opacity: 0.6; margin-top: 8px; letter-spacing: 0.05em;">MORE FROM IAMJARL</div>
-        <div class="footer-links" style="font-size: 13px; flex-wrap: wrap; justify-content: flex-end; gap: 16px;">
-          <a href="https://wodrounds.iamjarl.com" target="_blank" rel="noopener">WODrounds</a>
-          <a href="https://anvilworkout.iamjarl.com" target="_blank" rel="noopener">Anvil Workout</a>
-          <a href="https://weannicotine.iamjarl.com" target="_blank" rel="noopener">Wean Nicotine</a>
-          <a href="https://gettothemovie.iamjarl.com" target="_blank" rel="noopener">Get to the Movie!</a>
-          <a href="https://trimrpix.iamjarl.com" target="_blank" rel="noopener">TrimrPix</a>
-          <a href="https://madebyhuman.iamjarl.com" target="_blank" rel="noopener">Made by Human</a>
-          <a href="https://iamjarl.com" target="_blank" rel="noopener">All Projects →</a>
-        </div>
-      </div>
-    </div>
-    <div style="margin-top: 24px; text-align: center; font-size: 12px; opacity: 0.6;">
-      &copy; 2026 IAMJARL. All rights reserved.
-    </div>
+    <ij-footer app="walkful" tagline="Every step counts. Made with care by IAMJARL.">
+      <a slot="links" href="/learn/">Learn</a>
+      <a slot="links" href="/privacy.html">Privacy Policy</a>
+      <a slot="links" href="/support.html">Support</a>
+
+      <p slot="fineprint">&copy; 2026 IAMJARL. All rights reserved.</p>
+
+      <!-- No slot attribute on purpose: this is the pre-upgrade fallback, shown
+           only if the component script never loads. Do not leave it out. -->
+      <p>&copy; 2026 IAMJARL &middot; <a href="/learn/">Learn</a> &middot; <a href="/privacy.html">Privacy Policy</a> &middot; <a href="/support.html">Support</a></p>
+    </ij-footer>
   </div>
-</footer>
+</div>
 
 <script>
   // Interactive Slider Setup

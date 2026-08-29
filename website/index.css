@@ -1007,62 +1007,15 @@ details p {
   line-height: 1.6;
 }
 
-/* Footer styling */
-footer {
+/* Footer band. The footer itself is <ij-footer> from the design system, which
+   brings its own layout and colours (including dark mode); this is only the
+   strip of page it sits in. */
+.site-footer {
   padding: 56px 0;
   border-top: 1px solid var(--surface-border);
   color: var(--text-tertiary);
   font-size: 14px;
   background: var(--bg);
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.footer-links-column {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 12px;
-}
-
-@media (max-width: 900px) {
-  .footer-links-column {
-    align-items: center;
-    width: 100%;
-    margin-top: 16px;
-  }
-  .footer-links-column .footer-links {
-    justify-content: center;
-  }
-}
-
-.footer-logo {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 18px;
-  color: var(--text);
-  text-decoration: none;
-}
-
-.footer-links {
-  display: flex;
-  gap: 24px;
-}
-
-.footer-links a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-.footer-links a:hover {
-  color: var(--primary);
 }
 
 /* Responsive Overrides */
@@ -1120,11 +1073,6 @@ footer {
     width: 100%;
     text-align: center;
     justify-content: center;
-  }
-  
-  .footer-content {
-    flex-direction: column;
-    text-align: center;
   }
 }
 

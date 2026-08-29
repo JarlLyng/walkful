@@ -47,6 +47,11 @@
 <!-- Privacy-friendly, cookieless analytics (self-hosted Umami) -->
 <script defer src="https://umami-iamjarl.vercel.app/script.js" data-website-id="2b384f21-31d1-4b7b-a6bf-82328062883e"></script>
 
+<!-- Shared portfolio footer. Cross-links come from a registry in the design
+     system, so a new app is added there once, never here. Pin the tag. -->
+<script type="module"
+  src="https://cdn.jsdelivr.net/gh/jarllyng/iamjarl-design@v1.6.0/dist/components/ij-footer.js"></script>
+
 <!-- Structured data: the app (Danish) -->
 <script type="application/ld+json">
 {
@@ -161,13 +166,13 @@
       </div>
       <span class="logo">Walkful</span>
     </a>
-    <div class="nav-actions">
+    <nav class="nav-actions" aria-label="Primær">
       <div class="lang-switcher" role="group" aria-label="Sprogvalg">
         <button class="lang-btn" id="lang-btn-en" onclick="switchLanguage('en')">EN</button>
         <button class="lang-btn active" id="lang-btn-da" onclick="switchLanguage('da')">DA</button>
       </div>
       <a class="btn btn-ghost" href="#features">Udforsk</a>
-    </div>
+    </nav>
   </header>
 </div>
 
@@ -514,36 +519,21 @@
   </section>
 </main>
 
-<footer>
+<div class="site-footer">
   <div class="wrap">
-    <div class="footer-content">
-      <div>
-        <a href="/da/" class="footer-logo">Walkful</a>
-        <p style="margin-top: 8px;">Hvert skridt tæller. Lavet med omhu af IAMJARL.</p>
-      </div>
-      <div class="footer-links-column">
-        <div class="footer-links">
-          <a href="/learn/">Læs (EN)</a>
-          <a href="/privacy.html">Privatlivspolitik</a>
-          <a href="/support.html">Support</a>
-        </div>
-        <div style="font-size: 11px; font-weight: 600; opacity: 0.6; margin-top: 8px; letter-spacing: 0.05em;">FLERE PROJEKTER FRA IAMJARL</div>
-        <div class="footer-links" style="font-size: 13px; flex-wrap: wrap; justify-content: flex-end; gap: 16px;">
-          <a href="https://wodrounds.iamjarl.com" target="_blank" rel="noopener">WODrounds</a>
-          <a href="https://anvilworkout.iamjarl.com" target="_blank" rel="noopener">Anvil Workout</a>
-          <a href="https://weannicotine.iamjarl.com" target="_blank" rel="noopener">Wean Nicotine</a>
-          <a href="https://gettothemovie.iamjarl.com" target="_blank" rel="noopener">Get to the Movie!</a>
-          <a href="https://trimrpix.iamjarl.com" target="_blank" rel="noopener">TrimrPix</a>
-          <a href="https://madebyhuman.iamjarl.com" target="_blank" rel="noopener">Made by Human</a>
-          <a href="https://iamjarl.com" target="_blank" rel="noopener">Alle projekter →</a>
-        </div>
-      </div>
-    </div>
-    <div style="margin-top: 24px; text-align: center; font-size: 12px; opacity: 0.6;">
-      &copy; 2026 IAMJARL. Alle rettigheder forbeholdes.
-    </div>
+    <ij-footer app="walkful" tagline="Hvert skridt tæller. Lavet med omhu af IAMJARL.">
+      <a slot="links" href="/learn/">Læs (EN)</a>
+      <a slot="links" href="/privacy.html">Privatlivspolitik</a>
+      <a slot="links" href="/support.html">Support</a>
+
+      <p slot="fineprint">&copy; 2026 IAMJARL. Alle rettigheder forbeholdes.</p>
+
+      <!-- Uden slot med vilje: reserven, der kun vises hvis komponentens
+           script aldrig loader. Lad den blive. -->
+      <p>&copy; 2026 IAMJARL &middot; <a href="/privacy.html">Privatlivspolitik</a> &middot; <a href="/support.html">Support</a></p>
+    </ij-footer>
   </div>
-</footer>
+</div>
 
 <script>
   // Interactive Slider Setup
