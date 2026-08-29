@@ -35,32 +35,43 @@ Result: the label reads **Data Not Collected** — a genuine differentiator.
 
 ## 2. App information (copy-paste)
 
-**Subtitle** (≤30 chars):
+**App name** (≤30 chars) — the highest-weighted indexed field, so it carries a search
+term rather than the wordmark alone. Danish already does this (`Walkful: Skridttæller`),
+and `Pedometer` is the exact English parallel:
+```
+Walkful: Pedometer
+```
+
+**Subtitle** (≤30 chars) — unchanged, it carries the positioning:
 ```
 Calm, private step tracker
 ```
 
 **Promotional text** (≤170 chars, editable anytime without review):
 ```
-Every step counts. A calm, private walking tracker that turns your steps into meaning — no ads, no accounts, and nothing ever leaves your phone.
+Every step counts. A calm, private walking tracker that turns your steps into meaning. No ads, no accounts, and nothing ever leaves your phone.
 ```
 
-**Keywords** (≤100 chars, comma-separated, no spaces — this is 97):
+**Keywords** (≤100 chars, comma-separated, no spaces — this is 98):
 ```
-steps,walking,pedometer,walk,health,fitness,activity,private,interval,goal,streak,counter,tracker
+walking,walk,health,fitness,activity,interval,goal,streak,counter,distance,daily,exercise,mobility
 ```
+Nothing here repeats the name or the subtitle, because each term indexes once and a repeat
+spends characters twice for nothing. `pedometer` moved up into the name; `private` and
+`tracker` were already in the subtitle; `steps` is covered by `step` there. The 31 characters
+that freed went to `distance`, `daily`, `exercise` and `mobility`, which nothing else covered.
 
 **Description**:
 ```
-Walkful turns your daily walks into something meaningful — calmly, and entirely on your phone.
+Walkful turns your daily walks into something meaningful, calmly and entirely on your phone.
 
 Apple Health gives you the numbers. Walkful gives them meaning: progress paired with what it actually does for your health, built on the science of walking rather than the 10,000-steps myth.
 
 WHY WALKFUL
-• Meaning over numbers — see what your activity means, not just a count.
-• Private by design — everything stays on your device. No accounts, no servers, no ads, no data collection.
-• Calm, never pushy — no pace-shaming, no leaderboards, no dark patterns. You compete only against your own records.
-• Evidence-based — a suggested ~7,000-step goal, grounded in recent research.
+• Meaning over numbers. See what your activity means, not just a count.
+• Private by design. Everything stays on your device. No accounts, no servers, no ads, no data collection.
+• Calm, never pushy. No pace-shaming, no leaderboards, no dark patterns. You compete only against your own records.
+• Evidence-based. A suggested ~7,000-step goal, grounded in recent research.
 
 FREE
 • Today dashboard: progress ring, distance, active minutes, floors, this-week trend and your streak.
@@ -68,13 +79,13 @@ FREE
 • Gentle, optional reminders to break up long sitting.
 • Home Screen and Lock Screen widgets.
 
-WALKFUL PRO (one-time purchase — no subscription)
+WALKFUL PRO (one-time purchase, no subscription)
 • Insights: week / month / year trends, a full-year consistency heatmap and a longevity-zone card.
 • Mobility & fitness: walking speed, steadiness, cardio fitness (VO₂max) and resting heart rate.
 • Records: best day, week and month, longest streak, most floors.
 • A calm monthly recap.
-• CSV export — your data, yours to take with you.
-• The interval-walking coach — guided easy/brisk sessions to boost your fitness.
+• CSV export. Your data, yours to take with you.
+• The interval-walking coach. Guided easy/brisk sessions to boost your fitness.
 
 Walkful collects nothing. Your health data is read from Apple Health, used only on your device, and never shared or sold.
 
