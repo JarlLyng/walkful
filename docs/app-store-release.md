@@ -118,6 +118,73 @@ Made by IAMJARL.
 > the audience this app is aimed at. Answer only between submissions — editing this section
 > while a version is in review can require re-submitting.
 
+## 2b. Danish listing (copy-paste)
+
+The Danish localization has its own name, subtitle, keywords, promotional text and
+description. They used to live in `docs/aso.md`, which left this repo when the strategy
+moved to the private hub, so every release they had to be reconstructed from memory. They
+belong here: this is the copy itself, not the reasoning behind it.
+
+Name, subtitle and description below are what is **live**, read back with the lookup command
+in the note further down, not what an old plan proposed. The em-dashes are removed, so
+submitting these updates the listing to match the house voice.
+
+**Name** (≤30, this is 21):
+```
+Walkful: Skridttæller
+```
+
+**Subtitle** (≤30, this is 29):
+```
+Privat gå-app, ingen reklamer
+```
+
+**Promotional text** (≤170, this is 147):
+```
+Hvert skridt tæller. En rolig, privat gå-app der gør dine skridt til mening. Ingen reklamer, ingen konti, og intet forlader nogensinde din telefon.
+```
+
+**Keywords** (≤100, this is 88). Unverified: the lookup API does not return the keyword
+field, so this is the 1.0.3 plan rather than a reading of what is live. Check it against
+App Store Connect before trusting it:
+```
+skridt,gåtur,motion,sundhed,pedometer,træning,aktivitet,mål,stime,interval,distance,7000
+```
+
+**Description**:
+```
+Walkful gør dine daglige gåture til noget meningsfuldt, roligt og helt privat på din telefon.
+
+Apple Health giver dig tallene. Walkful giver dem mening: fremskridt koblet med hvad det faktisk betyder for din sundhed, bygget på videnskaben om gang frem for myten om de 10.000 skridt.
+
+HVORFOR WALKFUL
+• Mening frem for tal. Se hvad din aktivitet betyder, ikke bare en optælling.
+• Privat i selve arkitekturen. Alt bliver på din enhed. Ingen konti, ingen servere, ingen reklamer, ingen dataindsamling.
+• Rolig, aldrig anmassende. Ingen fart-skam, ingen ranglister, ingen manipulation. Du konkurrerer kun mod dine egne rekorder.
+• Evidensbaseret. Et foreslået mål på ca. 7.000 skridt, baseret på nyere forskning.
+
+GRATIS
+• Today-oversigt: fremskridtsring, distance, aktive minutter, etager, ugens tendens og din stime.
+• Virker med iPhone og Apple Watch via Apple Health.
+• Blide, valgfrie påmindelser der bryder lange perioder med stillesiddende tid.
+• Widgets til hjemmeskærmen og låseskærmen.
+
+WALKFUL PRO (engangskøb, intet abonnement)
+• Insights: tendenser for uge, måned og år samt et konsistens-heatmap for hele året.
+• Mobilitet & fitness: ganghastighed, gangstabilitet, kondital (VO₂max) og hvilepuls.
+• Rekorder: bedste dag, uge og måned, længste stime, flest etager.
+• En rolig månedsopsamling.
+• CSV-eksport. Dine data, dine at tage med.
+• Interval-gang-coachen. Guidede sessioner med roligt og raskt tempo, der styrker din kondition.
+
+Walkful indsamler ingenting. Dine sundhedsdata læses fra Apple Health, bruges kun på din enhed og bliver aldrig delt eller solgt.
+```
+
+The CSV-export bullet is **new**. The live Danish description omits it while the English one
+lists it, so a Danish reader could not see that Pro includes it.
+
+---
+
 **Other fields:**
 - **Copyright:** `© 2026 IAMJARL`
 - **Primary category:** Health & Fitness
