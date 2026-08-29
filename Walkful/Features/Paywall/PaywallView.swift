@@ -48,8 +48,21 @@ struct PaywallView: View {
                     if store.isPro { dismiss() }
                 }
             }
-            .opacity(store.isPurchasing ? 0.6 : 1)
-            .disabled(store.isPurchasing)
+            // Dimmed but still tappable when the product is missing: disabling it
+            // would bring back the silence this fixes, and the tap explains itself.
+            .opacity(store.isPurchasing || store.isLoadingProduct || !store.isProductAvailable ? 0.6 : 1)
+            .disabled(store.isPurchasing || store.isLoadingProduct)
+
+            if !store.isProductAvailable, !store.isLoadingProduct {
+                VStack(alignment: .leading, spacing: Tokens.Spacing.xs) {
+                    Text("We couldn't reach the App Store, so Pro can't be unlocked right now.")
+                        .fixedSize(horizontal: false, vertical: true)
+                    Button("Try again") { Task { await store.loadProduct() } }
+                        .foregroundStyle(Tokens.Palette.primary)
+                }
+                .font(Tokens.TextStyle.subheadline)
+                .foregroundStyle(Tokens.Palette.textSecondary)
+            }
 
             HStack {
                 Button("Restore purchase") { Task { await store.restore(); if store.isPro { dismiss() } } }
@@ -62,6 +75,9 @@ struct PaywallView: View {
         .padding(Tokens.Spacing.xl)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(Tokens.Palette.appBackground)
+        // Launch-time load may have failed while the user was offline. They are
+        // looking at the paywall now, so this is the moment to try again.
+        .task { if !store.isProductAvailable { await store.loadProduct() } }
         .alert("Purchase", isPresented: Binding(
             get: { store.purchaseError != nil },
             set: { if !$0 { store.clearPurchaseError() } }

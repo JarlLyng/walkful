@@ -13,6 +13,7 @@ final class Store {
     private(set) var proProduct: Product?
     private(set) var isPro = false
     private(set) var isPurchasing = false
+    private(set) var isLoadingProduct = false
     /// User-facing message when a purchase fails or is pending; nil when clear.
     private(set) var purchaseError: String?
 
@@ -27,21 +28,46 @@ final class Store {
     /// Load the product and refresh the current entitlement.
     func load() async {
         await refreshEntitlement()
-        do {
-            let products = try await Product.products(for: [Self.proID])
-            proProduct = products.first
-        } catch {
-            // Offline / not configured — stay in free tier silently.
-        }
+        await loadProduct()
     }
+
+    /// Fetch the Pro product. Safe to call again, which is the point: a load that
+    /// failed at launch (offline, or the product not yet approved for sale) used
+    /// to stay failed for the whole session.
+    @discardableResult
+    func loadProduct() async -> Bool {
+        guard !isLoadingProduct else { return proProduct != nil }
+        isLoadingProduct = true
+        defer { isLoadingProduct = false }
+        do {
+            proProduct = try await Product.products(for: [Self.proID]).first
+        } catch {
+            proProduct = nil
+        }
+        return proProduct != nil
+    }
+
+    /// False when the App Store never handed us the product, in which case the
+    /// paywall must not present a buy button it cannot honour.
+    var isProductAvailable: Bool { proProduct != nil }
 
     var displayPrice: String { proProduct?.displayPrice ?? "" }
 
     func purchase() async {
-        guard let proProduct, !isPurchasing else { return }
+        guard !isPurchasing else { return }
         isPurchasing = true
         purchaseError = nil
         defer { isPurchasing = false }
+
+        // The product can still be missing here if the launch-time load failed.
+        // Retry once, then say so out loud. Returning silently is what made a
+        // broken paywall look exactly like an unpopular one (#134).
+        if proProduct == nil { await loadProduct() }
+        guard let proProduct else {
+            purchaseError = String(localized: "Walkful Pro isn't available from the App Store right now. Please check your connection and try again.")
+            return
+        }
+
         do {
             let result = try await proProduct.purchase()
             switch result {

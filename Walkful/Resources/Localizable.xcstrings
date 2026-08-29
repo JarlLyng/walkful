@@ -1215,6 +1215,16 @@
         }
       }
     },
+    "Try again": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prøv igen"
+          }
+        }
+      }
+    },
     "Turn on reminders": {
       "localizations": {
         "da": {
@@ -1295,6 +1305,16 @@
         }
       }
     },
+    "Walkful Pro isn't available from the App Store right now. Please check your connection and try again.": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Walkful Pro er ikke tilgængelig fra App Store lige nu. Tjek din forbindelse, og prøv igen."
+          }
+        }
+      }
+    },
     "Walkful can remind you to break up long sitting with a short walk or the stairs — a couple of times a day at most. Fully optional.": {
       "localizations": {
         "da": {
@@ -1341,6 +1361,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Walkful læser dine skridt, distance og etager for at vise dit fremskridt. Dine data forlader aldrig din enhed, for vi har ingen servere."
+          }
+        }
+      }
+    },
+    "We couldn't reach the App Store, so Pro can't be unlocked right now.": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vi kunne ikke få fat i App Store, så Pro kan ikke låses op lige nu."
           }
         }
       }
