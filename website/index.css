@@ -1,5 +1,5 @@
 /* Fonts are loaded via <link> in each page's <head> (faster than a
-   render-blocking @import chain) — see index.html / da/index.html. */
+   render-blocking @import chain). See index.html / da/index.html. */
 
 :root {
   /* Aurora Theme - Light Mode Colors */
@@ -966,7 +966,7 @@ summary {
   outline: none;
 }
 
-/* Keyboard focus — visible replacement for the outlines removed above.
+/* Keyboard focus. A visible replacement for the outlines removed above.
    :focus-visible only fires on keyboard/switch navigation, not mouse clicks. */
 summary:focus-visible,
 .steps-slider:focus-visible,
