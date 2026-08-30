@@ -14,7 +14,7 @@ no ads, no data collection. Its App Store privacy label is "Data Not Collected".
 - **Website:** [walkful.iamjarl.com](https://walkful.iamjarl.com)
 - **License:** [AGPL-3.0](LICENSE) — open source.
 - **Price:** Free download with a one-time **Walkful Pro** unlock (StoreKit 2 non-consumable). No subscription, no ads.
-- **Status:** Live on the App Store — id `6781303837`, v1.1.0 live (English + Danish store listings; app UI localized to both).
+- **Status:** Live on the App Store — id `6781303837`, v1.1.1 live (English + Danish store listings; app UI localized to both). The en-US listing is named `Walkful: Pedometer` (#135); Danish is `Walkful: Skridttæller`.
 - **Sister apps:** part of the [IAMJARL](https://iamjarl.com) portfolio.
 
 ## Strategy lives in the private hub
