@@ -200,11 +200,13 @@
             </a>
             <a class="btn btn-ghost" href="#science">Hvorfor gang virker</a>
           </div>
+
+          <p class="hero-note">Gratis at hente. <a href="#pricing">Walkful Pro</a> låser de dybere funktioner op med ét køb, aldrig et abonnement. Til iPhone med iOS 18 eller nyere.</p>
           
           <div class="trust-badge-row">
             <div class="trust-item">
               <svg viewBox="0 0 20 20"><path d="M9 12l-4.47-4.47L3.1 8.94 9 14.83l8-8-1.41-1.42L9 12z"/></svg>
-              <span>Engangskøb</span>
+              <span>Gratis at hente</span>
             </div>
             <div class="trust-item">
               <svg viewBox="0 0 20 20"><path d="M9 12l-4.47-4.47L3.1 8.94 9 14.83l8-8-1.41-1.42L9 12z"/></svg>
@@ -253,6 +255,86 @@
   </div>
 
   <!-- Features Grid Section -->
+  <!-- Showcase / App Screen Gallery Section -->
+  <div class="showcase-container">
+    <div class="wrap">
+      <section class="showcase-grid" aria-labelledby="showcase-title">
+        <div class="showcase-controls" role="tablist" aria-labelledby="showcase-title">
+          <h2 id="showcase-title">Smuk funktionalitet til din dag</h2>
+
+          <button class="showcase-tab active" onclick="switchShowcase(0)" id="tab-0" role="tab" aria-selected="true" aria-controls="screen-today">
+            <div class="showcase-tab-title">
+              <span>Dagens Dashboard</span>
+            </div>
+            <div class="showcase-tab-desc">Dagens status på et øjeblik. Justerbart mål, skridt-statistikker og øjeblikkelig sundhedskontekst.</div>
+          </button>
+          
+          <button class="showcase-tab" onclick="switchShowcase(1)" id="tab-1" role="tab" aria-selected="false" aria-controls="screen-insights">
+            <div class="showcase-tab-title">
+              <span>Indsigter &amp; Varmekort</span>
+              <span class="badge-pro">Pro</span>
+            </div>
+            <div class="showcase-tab-desc">Se dine ugentlige, månedlige og årlige mønstre. Indeholder mobilitets-målinger og et galleri over dine rekorder.</div>
+          </button>
+          
+          <button class="showcase-tab" onclick="switchShowcase(2)" id="tab-2" role="tab" aria-selected="false" aria-controls="screen-coach">
+            <div class="showcase-tab-title">
+              <span>Intervaltræning</span>
+              <span class="badge-pro">Pro</span>
+            </div>
+            <div class="showcase-tab-desc">Hæv konditionen med guidede 3-minutters raske og langsomme intervaller. Din iPhone giver dig et lille bank, når du skal skifte tempo.</div>
+          </button>
+        </div>
+        
+        <!-- CSS Phone Mockup -->
+        <div class="mockup-container">
+          <div class="phone-mockup">
+            <div class="dynamic-island"></div>
+            <div class="mockup-screen">
+              <img id="screen-today" class="screenshot-img active" src="../assets/today-dark-da.jpg" alt="Walkful appen der viser dagens dashboard med skridt og ring" width="320" height="694" loading="eager" fetchpriority="high" decoding="async" />
+              <img id="screen-insights" class="screenshot-img" src="../assets/insights-dark-da.jpg" alt="Walkful appen der viser indsigter og varmekort over året" width="320" height="694" loading="lazy" decoding="async" />
+              <img id="screen-coach" class="screenshot-img" src="../assets/coach-dark-da.jpg" alt="Walkful appen der viser skærmen for guidet intervaltræning" width="320" height="694" loading="lazy" decoding="async" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Hvad den gratis app giver, og hvad Pro lægger til -->
+  <div class="wrap" id="pricing">
+    <section class="pricing-section" aria-labelledby="pricing-title">
+      <div class="section-title-area">
+        <h2 id="pricing-title">Gratis at hente. Pro hvis du vil have mere.</h2>
+        <p>Alt det du skal bruge for at følge dine gåture er med i den gratis app. Walkful Pro lægger de dybere dele til, for én betaling, aldrig et abonnement.</p>
+      </div>
+
+      <div class="plan-grid">
+        <div class="card plan-card">
+          <h3>I den gratis app</h3>
+          <p>Dagens skridt sammen med hvad de betyder for dit helbred, plus distance, aktive minutter, etager, ugen på ét blik og din stime. Widgets til hjemmeskærmen og låseskærmen. Blide påmindelser når du har siddet stille et stykke tid. Og et fremskridtskort du kan dele.</p>
+        </div>
+        <div class="card plan-card plan-card--pro">
+          <h3>Walkful Pro</h3>
+          <p>Tendenser for uge, måned og år, et konsistens-heatmap for hele året og dine rekorder. Ganghastighed, gangstabilitet, kondital og hvilepuls. Den guidede intervalgang-coach. Og CSV-eksport af hele din historik, når du har lyst.</p>
+        </div>
+      </div>
+
+      <div class="pricing-actions">
+        <a class="app-store-badge" href="https://apps.apple.com/app/id6781303837" aria-label="Hent Walkful i App Store">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.1,16.67C20.08,16.74 19.67,18.11 18.71,19.5M15.97,4.17C16.63,3.37 17.07,2.28 16.95,1C16,1.04 14.9,1.6 14.24,2.38C13.68,3.04 13.19,4.14 13.34,5.39C14.39,5.47 15.4,4.88 15.97,4.17Z"/>
+              </svg>
+              <div class="badge-text">
+                <span class="badge-sub">Hent i</span>
+                <span class="badge-main">App Store</span>
+              </div>
+            </a>
+        <p class="pricing-note">Ét køb, ikke et abonnement. Til iPhone med iOS 18 eller nyere.</p>
+      </div>
+    </section>
+  </div>
+
   <div class="wrap" id="features">
     <section aria-labelledby="features-title">
       <div class="section-title-area">
@@ -334,52 +416,6 @@
         </div>
       </div>
     </section>
-  </div>
-
-  <!-- Showcase / App Screen Gallery Section -->
-  <div class="showcase-container">
-    <div class="wrap">
-      <section class="showcase-grid" aria-labelledby="showcase-title">
-        <div class="showcase-controls" role="tablist" aria-labelledby="showcase-title">
-          <h2 id="showcase-title">Smuk funktionalitet til din dag</h2>
-
-          <button class="showcase-tab active" onclick="switchShowcase(0)" id="tab-0" role="tab" aria-selected="true" aria-controls="screen-today">
-            <div class="showcase-tab-title">
-              <span>Dagens Dashboard</span>
-            </div>
-            <div class="showcase-tab-desc">Dagens status på et øjeblik. Justerbart mål, skridt-statistikker og øjeblikkelig sundhedskontekst.</div>
-          </button>
-          
-          <button class="showcase-tab" onclick="switchShowcase(1)" id="tab-1" role="tab" aria-selected="false" aria-controls="screen-insights">
-            <div class="showcase-tab-title">
-              <span>Indsigter &amp; Varmekort</span>
-              <span class="badge-pro">Pro</span>
-            </div>
-            <div class="showcase-tab-desc">Se dine ugentlige, månedlige og årlige mønstre. Indeholder mobilitets-målinger og et galleri over dine rekorder.</div>
-          </button>
-          
-          <button class="showcase-tab" onclick="switchShowcase(2)" id="tab-2" role="tab" aria-selected="false" aria-controls="screen-coach">
-            <div class="showcase-tab-title">
-              <span>Intervaltræning</span>
-              <span class="badge-pro">Pro</span>
-            </div>
-            <div class="showcase-tab-desc">Hæv konditionen med guidede 3-minutters raske og langsomme intervaller. Din iPhone giver dig et lille bank, når du skal skifte tempo.</div>
-          </button>
-        </div>
-        
-        <!-- CSS Phone Mockup -->
-        <div class="mockup-container">
-          <div class="phone-mockup">
-            <div class="dynamic-island"></div>
-            <div class="mockup-screen">
-              <img id="screen-today" class="screenshot-img active" src="../assets/today-dark-da.jpg" alt="Walkful appen der viser dagens dashboard med skridt og ring" width="320" height="694" loading="lazy" decoding="async" />
-              <img id="screen-insights" class="screenshot-img" src="../assets/insights-dark-da.jpg" alt="Walkful appen der viser indsigter og varmekort over året" width="320" height="694" loading="lazy" decoding="async" />
-              <img id="screen-coach" class="screenshot-img" src="../assets/coach-dark-da.jpg" alt="Walkful appen der viser skærmen for guidet intervaltræning" width="320" height="694" loading="lazy" decoding="async" />
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
   </div>
 
   <!-- Mood / atmosphere band (image dropped into /assets) -->
@@ -515,6 +551,17 @@
     <div class="mood-band__content">
       <h2>Hvert skridt tæller</h2>
       <p>Ikke myten om de 10.000 skridt. Ingen rangliste. Bare dit eget rolige fremskridt, privat på din telefon.</p>
+      <div class="mood-band__actions">
+      <a class="app-store-badge" href="https://apps.apple.com/app/id6781303837" aria-label="Hent Walkful i App Store">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.1,16.67C20.08,16.74 19.67,18.11 18.71,19.5M15.97,4.17C16.63,3.37 17.07,2.28 16.95,1C16,1.04 14.9,1.6 14.24,2.38C13.68,3.04 13.19,4.14 13.34,5.39C14.39,5.47 15.4,4.88 15.97,4.17Z"/>
+        </svg>
+        <div class="badge-text">
+          <span class="badge-sub">Hent i</span>
+          <span class="badge-main">App Store</span>
+        </div>
+      </a>
+      </div>
     </div>
   </section>
 </main>

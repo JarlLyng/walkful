@@ -195,11 +195,13 @@
             </a>
             <a class="btn btn-ghost" href="#science">Why walking matters</a>
           </div>
+
+          <p class="hero-note">Free to download. <a href="#pricing">Walkful Pro</a> unlocks the deeper features with a single purchase, never a subscription. For iPhone on iOS 18 or later.</p>
           
           <div class="trust-badge-row">
             <div class="trust-item">
               <svg viewBox="0 0 20 20"><path d="M9 12l-4.47-4.47L3.1 8.94 9 14.83l8-8-1.41-1.42L9 12z"/></svg>
-              <span>One-time purchase</span>
+              <span>Free to download</span>
             </div>
             <div class="trust-item">
               <svg viewBox="0 0 20 20"><path d="M9 12l-4.47-4.47L3.1 8.94 9 14.83l8-8-1.41-1.42L9 12z"/></svg>
@@ -244,6 +246,86 @@
   </div>
 
   <!-- Features Grid Section -->
+  <!-- Showcase / App Screen Gallery Section -->
+  <div class="showcase-container">
+    <div class="wrap">
+      <section class="showcase-grid" aria-labelledby="showcase-title">
+        <div class="showcase-controls" role="tablist" aria-labelledby="showcase-title">
+          <h2 id="showcase-title">Beautiful utility, designed for your day</h2>
+
+          <button class="showcase-tab active" onclick="switchShowcase(0)" id="tab-0" role="tab" aria-selected="true" aria-controls="screen-today">
+            <div class="showcase-tab-title">
+              <span>Today Dashboard</span>
+            </div>
+            <div class="showcase-tab-desc">Your daily status at a glance. Highly customizable target, step-level metrics, and immediate health context.</div>
+          </button>
+
+          <button class="showcase-tab" onclick="switchShowcase(1)" id="tab-1" role="tab" aria-selected="false" aria-controls="screen-insights">
+            <div class="showcase-tab-title">
+              <span>Insights &amp; Heatmaps</span>
+              <span class="badge-pro">Pro</span>
+            </div>
+            <div class="showcase-tab-desc">Uncover weekly, monthly and yearly walking consistencies. Includes mobility details and a personal records gallery.</div>
+          </button>
+
+          <button class="showcase-tab" onclick="switchShowcase(2)" id="tab-2" role="tab" aria-selected="false" aria-controls="screen-coach">
+            <div class="showcase-tab-title">
+              <span>Interval Coach</span>
+              <span class="badge-pro">Pro</span>
+            </div>
+            <div class="showcase-tab-desc">Boost your fitness with guided 3-minute brisk &amp; slow intervals. Your iPhone taps you when it is time to switch pace.</div>
+          </button>
+        </div>
+        
+        <!-- CSS Phone Mockup -->
+        <div class="mockup-container">
+          <div class="phone-mockup">
+            <div class="dynamic-island"></div>
+            <div class="mockup-screen">
+              <img id="screen-today" class="screenshot-img active" src="assets/today-dark.jpg" alt="Walkful app displaying Today dashboard steps and progress ring" width="320" height="694" loading="eager" fetchpriority="high" decoding="async" />
+              <img id="screen-insights" class="screenshot-img" src="assets/insights-dark.jpg" alt="Walkful app displaying Insights and year heatmap trends" width="320" height="694" loading="lazy" decoding="async" />
+              <img id="screen-coach" class="screenshot-img" src="assets/coach-dark.jpg" alt="Walkful app displaying guided Interval Walking coach session screen" width="320" height="694" loading="lazy" decoding="async" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- What the free app gives you, and what Pro adds -->
+  <div class="wrap" id="pricing">
+    <section class="pricing-section" aria-labelledby="pricing-title">
+      <div class="section-title-area">
+        <h2 id="pricing-title">Free to download. Pro if you want more.</h2>
+        <p>Everything you need to follow your walking is in the free app. Walkful Pro adds the deeper parts, for one payment, never a subscription.</p>
+      </div>
+
+      <div class="plan-grid">
+        <div class="card plan-card">
+          <h3>In the free app</h3>
+          <p>Today's steps paired with what they mean for your health, plus distance, active minutes, floors, this week at a glance and your streak. Widgets for the Home Screen and Lock Screen. Gentle reminders when you have been sitting a while. And a progress card you can share.</p>
+        </div>
+        <div class="card plan-card plan-card--pro">
+          <h3>Walkful Pro</h3>
+          <p>Trends by week, month and year, a full-year consistency heatmap and your records. Walking speed, steadiness, cardio fitness and resting heart rate. The guided interval-walking coach. And CSV export of your whole history, whenever you want it.</p>
+        </div>
+      </div>
+
+      <div class="pricing-actions">
+        <a class="app-store-badge" href="https://apps.apple.com/app/id6781303837" aria-label="Download Walkful on the App Store">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.1,16.67C20.08,16.74 19.67,18.11 18.71,19.5M15.97,4.17C16.63,3.37 17.07,2.28 16.95,1C16,1.04 14.9,1.6 14.24,2.38C13.68,3.04 13.19,4.14 13.34,5.39C14.39,5.47 15.4,4.88 15.97,4.17Z"/>
+              </svg>
+              <div class="badge-text">
+                <span class="badge-sub">Download on the</span>
+                <span class="badge-main">App Store</span>
+              </div>
+            </a>
+        <p class="pricing-note">One purchase, not a subscription. For iPhone on iOS 18 or later.</p>
+      </div>
+    </section>
+  </div>
+
   <div class="wrap" id="features">
     <section aria-labelledby="features-title">
       <div class="section-title-area">
@@ -325,52 +407,6 @@
         </div>
       </div>
     </section>
-  </div>
-
-  <!-- Showcase / App Screen Gallery Section -->
-  <div class="showcase-container">
-    <div class="wrap">
-      <section class="showcase-grid" aria-labelledby="showcase-title">
-        <div class="showcase-controls" role="tablist" aria-labelledby="showcase-title">
-          <h2 id="showcase-title">Beautiful utility, designed for your day</h2>
-
-          <button class="showcase-tab active" onclick="switchShowcase(0)" id="tab-0" role="tab" aria-selected="true" aria-controls="screen-today">
-            <div class="showcase-tab-title">
-              <span>Today Dashboard</span>
-            </div>
-            <div class="showcase-tab-desc">Your daily status at a glance. Highly customizable target, step-level metrics, and immediate health context.</div>
-          </button>
-
-          <button class="showcase-tab" onclick="switchShowcase(1)" id="tab-1" role="tab" aria-selected="false" aria-controls="screen-insights">
-            <div class="showcase-tab-title">
-              <span>Insights &amp; Heatmaps</span>
-              <span class="badge-pro">Pro</span>
-            </div>
-            <div class="showcase-tab-desc">Uncover weekly, monthly and yearly walking consistencies. Includes mobility details and a personal records gallery.</div>
-          </button>
-
-          <button class="showcase-tab" onclick="switchShowcase(2)" id="tab-2" role="tab" aria-selected="false" aria-controls="screen-coach">
-            <div class="showcase-tab-title">
-              <span>Interval Coach</span>
-              <span class="badge-pro">Pro</span>
-            </div>
-            <div class="showcase-tab-desc">Boost your fitness with guided 3-minute brisk &amp; slow intervals. Your iPhone taps you when it is time to switch pace.</div>
-          </button>
-        </div>
-        
-        <!-- CSS Phone Mockup -->
-        <div class="mockup-container">
-          <div class="phone-mockup">
-            <div class="dynamic-island"></div>
-            <div class="mockup-screen">
-              <img id="screen-today" class="screenshot-img active" src="assets/today-dark.jpg" alt="Walkful app displaying Today dashboard steps and progress ring" width="320" height="694" loading="lazy" decoding="async" />
-              <img id="screen-insights" class="screenshot-img" src="assets/insights-dark.jpg" alt="Walkful app displaying Insights and year heatmap trends" width="320" height="694" loading="lazy" decoding="async" />
-              <img id="screen-coach" class="screenshot-img" src="assets/coach-dark.jpg" alt="Walkful app displaying guided Interval Walking coach session screen" width="320" height="694" loading="lazy" decoding="async" />
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
   </div>
 
   <!-- Mood / atmosphere band (image dropped into /assets) -->
@@ -499,6 +535,17 @@
     <div class="mood-band__content">
       <h2>Every step counts</h2>
       <p>Not the 10,000-step myth. Not a leaderboard. Just your own quiet progress, kept private on your phone.</p>
+      <div class="mood-band__actions">
+      <a class="app-store-badge" href="https://apps.apple.com/app/id6781303837" aria-label="Download Walkful on the App Store">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.1,16.67C20.08,16.74 19.67,18.11 18.71,19.5M15.97,4.17C16.63,3.37 17.07,2.28 16.95,1C16,1.04 14.9,1.6 14.24,2.38C13.68,3.04 13.19,4.14 13.34,5.39C14.39,5.47 15.4,4.88 15.97,4.17Z"/>
+        </svg>
+        <div class="badge-text">
+          <span class="badge-sub">Download on the</span>
+          <span class="badge-main">App Store</span>
+        </div>
+      </a>
+      </div>
     </div>
   </section>
 </main>
