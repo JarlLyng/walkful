@@ -1136,6 +1136,83 @@ details p {
   .mood-band { margin: 64px 0; min-height: 300px; }
 }
 
+/* ── Pricing: what is free, what Pro adds ─────────────────────────────── */
+.hero-note {
+  margin: 16px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 46ch;
+}
+
+/* The stylesheet has no global anchor rule, so an unstyled link here would
+   render in the browser's default blue. */
+.hero-note a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.hero-note a:hover {
+  text-decoration: none;
+}
+
+.pricing-section {
+  padding: 96px 0 0;
+}
+
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.plan-card h3 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.plan-card p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.plan-card--pro {
+  border-color: rgba(var(--primary-rgb), 0.35);
+}
+
+
+.pricing-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.pricing-note {
+  margin: 0;
+  font-size: 14px;
+  /* Not --text-tertiary: that is the 3.63:1 colour tracked in #148, and this
+     line carries the price and the device requirement. */
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* The closing mood band used to end the page with no way forward. */
+.mood-band__actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
 /* ── Narrow screens ───────────────────────────────────────────────────── */
 /* Below roughly 380px the logo and the nav together need more room than the
    viewport has, and body has overflow-x: hidden, so the last control was
