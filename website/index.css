@@ -1135,3 +1135,35 @@ details p {
 @media (max-width: 768px) {
   .mood-band { margin: 64px 0; min-height: 300px; }
 }
+
+/* ── Narrow screens ───────────────────────────────────────────────────── */
+/* Below roughly 380px the logo and the nav together need more room than the
+   viewport has, and body has overflow-x: hidden, so the last control was
+   clipped with no way to scroll to it. Let the header wrap instead. */
+@media (max-width: 420px) {
+  header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .nav-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* ── Reduced motion ───────────────────────────────────────────────────── */
+/* The screenshot rotator already respects this in JS; the CSS did not, so
+   smooth scrolling and every transition ran regardless of the setting. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

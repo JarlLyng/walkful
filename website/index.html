@@ -84,14 +84,14 @@
     "Compete against your own records, no social network required",
     "Gentle, optional reminders to break up sitting",
     "Insights: consistency heatmap, best time of day, brisk-minute trends and a longevity-zone card",
-    "Guided interval-walking coach with haptics",
+    "Guided interval-walking coach with haptic cues on iPhone",
     "Home Screen and Lock Screen widgets, including a This-week view",
     "CSV export of your step history, kilometres or miles",
     "Share your progress as an image, rendered on device",
     "English and Danish interface",
     "Private by design, so nothing leaves your device"
   ],
-  "publisher": { "@type": "Organization", "name": "IAMJARL", "url": "https://walkful.iamjarl.com/" }
+  "publisher": { "@type": "Organization", "name": "IAMJARL", "url": "https://iamjarl.com" }
 }
 </script>
 
@@ -114,7 +114,7 @@
     {
       "@type": "Question",
       "name": "Does the app support Apple Watch?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Walkful reads your aggregated activity directly from Apple Health. Any steps or active minutes recorded by your Apple Watch flow seamlessly into Apple Health and are automatically reflected inside Walkful." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, as a data source. Any steps or active minutes your Apple Watch records flow into Apple Health, and Walkful reads them from there. There is no separate Walkful app for the watch yet, so the interval coach runs on your iPhone." }
     },
     {
       "@type": "Question",
@@ -354,7 +354,7 @@
               <span>Interval Coach</span>
               <span class="badge-pro">Pro</span>
             </div>
-            <div class="showcase-tab-desc">Boost your fitness with guided 3-minute brisk &amp; slow intervals. Uses native Apple Watch haptics to keep you on track.</div>
+            <div class="showcase-tab-desc">Boost your fitness with guided 3-minute brisk &amp; slow intervals. Your iPhone taps you when it is time to switch pace.</div>
           </button>
         </div>
         
@@ -433,7 +433,7 @@
           <span>Data Not Collected</span>
         </div>
         <h2 id="privacy-sec-title">Your privacy is built into the architecture</h2>
-        <p>Most popular health and step tracking apps monetize your movement data. Walkful is different: we have no database, no accounts, and no backend servers. All calculations and historical insight trends are compiled locally using Apple HealthKit. Your data never leaves your iPhone.</p>
+        <p>Walkful has no database, no accounts, and no backend servers. All calculations and historical insight trends are compiled locally using Apple HealthKit. Your data never leaves your iPhone.</p>
         <a class="btn btn-ghost" href="/privacy.html">Read our Privacy Policy</a>
       </div>
     </section>
@@ -465,7 +465,7 @@
           <summary>
             <span>Does the app support Apple Watch?</span>
           </summary>
-          <p>Yes. Walkful reads your aggregated activity directly from Apple Health. Any steps or active minutes recorded by your Apple Watch flow seamlessly into Apple Health and are automatically reflected inside Walkful.</p>
+          <p>Yes, as a data source. Any steps or active minutes your Apple Watch records flow into Apple Health, and Walkful reads them from there. There is no separate Walkful app for the watch yet, so the interval coach runs on your iPhone.</p>
         </details>
 
         <details name="faq-acc">
@@ -534,7 +534,7 @@
     6000: { title: "High Benefit Zone", desc: "Significant protection. Associated with ~40% lower all-cause mortality. Cardiovascular and metabolic health improvements are now in full effect.", color: "#A435D2" },
     7500: { title: "Optimal Health Sweet Spot", desc: "The science-backed target where the risk curve flattens (~47% lower mortality). Additional steps still count, but this is the ultimate efficiency goal.", descColor: true },
     10000: { title: "Milestone Zone", desc: "Excellent activity level. While the health benefits continue, they level off after 7,000-8,000 steps. Compete with yourself, not a marketing myth.", descColor: true },
-    12000: { title: "Super Active", desc: "Outstanding physical activity. Highly beneficial for endurance, weight maintenance, and mental clarity. You are crushing it!", descColor: true }
+    12000: { title: "Super Active", desc: "A high level of activity, and good for endurance, weight maintenance and mental clarity. Worth knowing: the benefit curve has already flattened well below this.", descColor: true }
   };
 
   function updateSimulator() {
