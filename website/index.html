@@ -157,6 +157,7 @@
 </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <div class="wrap">
   <header>
@@ -178,7 +179,7 @@
   </header>
 </div>
 
-<main>
+<main id="main">
   <!-- Hero Section -->
   <div class="hero-container">
     <div class="wrap">
@@ -258,17 +259,17 @@
   <div class="showcase-container">
     <div class="wrap">
       <section class="showcase-grid" aria-labelledby="showcase-title">
-        <div class="showcase-controls" role="tablist" aria-labelledby="showcase-title">
+        <div class="showcase-controls">
           <h2 id="showcase-title">Beautiful utility, designed for your day</h2>
 
-          <button class="showcase-tab active" onclick="switchShowcase(0)" id="tab-0" role="tab" aria-selected="true" aria-controls="screen-today">
+          <button class="showcase-tab active" onclick="switchShowcase(0)" id="tab-0" aria-pressed="true">
             <div class="showcase-tab-title">
               <span>Today Dashboard</span>
             </div>
             <div class="showcase-tab-desc">Your daily status at a glance. Highly customizable target, step-level metrics, and immediate health context.</div>
           </button>
 
-          <button class="showcase-tab" onclick="switchShowcase(1)" id="tab-1" role="tab" aria-selected="false" aria-controls="screen-insights">
+          <button class="showcase-tab" onclick="switchShowcase(1)" id="tab-1" aria-pressed="false">
             <div class="showcase-tab-title">
               <span>Insights &amp; Heatmaps</span>
               <span class="badge-pro">Pro</span>
@@ -276,7 +277,7 @@
             <div class="showcase-tab-desc">Uncover weekly, monthly and yearly walking consistencies. Includes mobility details and a personal records gallery.</div>
           </button>
 
-          <button class="showcase-tab" onclick="switchShowcase(2)" id="tab-2" role="tab" aria-selected="false" aria-controls="screen-coach">
+          <button class="showcase-tab" onclick="switchShowcase(2)" id="tab-2" aria-pressed="false">
             <div class="showcase-tab-title">
               <span>Interval Coach</span>
               <span class="badge-pro">Pro</span>
@@ -291,8 +292,8 @@
             <div class="dynamic-island"></div>
             <div class="mockup-screen">
               <img id="screen-today" class="screenshot-img active" src="assets/today-dark.jpg" alt="Walkful app displaying Today dashboard steps and progress ring" width="320" height="694" loading="eager" fetchpriority="high" decoding="async" />
-              <img id="screen-insights" class="screenshot-img" src="assets/insights-dark.jpg" alt="Walkful app displaying Insights and year heatmap trends" width="320" height="694" loading="lazy" decoding="async" />
-              <img id="screen-coach" class="screenshot-img" src="assets/coach-dark.jpg" alt="Walkful app displaying guided Interval Walking coach session screen" width="320" height="694" loading="lazy" decoding="async" />
+              <img id="screen-insights" class="screenshot-img" aria-hidden="true" src="assets/insights-dark.jpg" alt="Walkful app displaying Insights and year heatmap trends" width="320" height="694" loading="lazy" decoding="async" />
+              <img id="screen-coach" class="screenshot-img" aria-hidden="true" src="assets/coach-dark.jpg" alt="Walkful app displaying guided Interval Walking coach session screen" width="320" height="694" loading="lazy" decoding="async" />
             </div>
           </div>
         </div>
@@ -639,11 +640,15 @@
       const tab = document.getElementById(`tab-${i}`);
       if (tab) {
         tab.classList.toggle('active', i === index);
-        tab.setAttribute('aria-selected', i === index ? 'true' : 'false');
+        tab.setAttribute('aria-pressed', i === index ? 'true' : 'false');
       }
     }
     screenshots.forEach((screen, i) => {
       screen.classList.toggle('active', i === index);
+      // Inactive screenshots stay in the DOM for the crossfade, so they have to
+      // be hidden from assistive tech explicitly. Opacity alone left all three
+      // in the accessibility tree.
+      screen.setAttribute('aria-hidden', i === index ? 'false' : 'true');
     });
   }
 
@@ -678,6 +683,16 @@
 
   document.querySelectorAll('.showcase-tab').forEach(tab => {
     tab.addEventListener('click', () => {
+      // On mobile the phone sits above the controls, so the image a tap changes
+      // can be off screen. 'nearest' moves nothing when it is already visible,
+      // so this is a no-op on desktop.
+      const mockup = document.querySelector('.mockup-container');
+      if (mockup) {
+        mockup.scrollIntoView({
+          block: 'nearest',
+          behavior: reducedMotion.matches ? 'auto' : 'smooth'
+        });
+      }
       pauseShowcaseRotation();
       showcaseSection?.removeEventListener('mouseleave', startShowcaseRotation);
       showcaseSection?.removeEventListener('focusout', startShowcaseRotation);
