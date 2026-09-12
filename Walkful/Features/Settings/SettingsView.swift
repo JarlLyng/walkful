@@ -32,8 +32,8 @@ struct SettingsView: View {
                 }
                 Toggle("Adaptive goal", isOn: $settings.adaptiveGoal)
                 Text(settings.adaptiveGoal
-                     ? "Your goal rises in small steps as your recent average grows — never down. Adjust it any time."
-                     : "Every step counts. We suggest ~7,000 — not 10,000, which is a myth.")
+                     ? "Your goal rises in small steps as your recent average grows, and never falls. Adjust it any time."
+                     : "Every step counts. We suggest ~7,000 rather than 10,000, which is a myth.")
                     .font(Tokens.TextStyle.caption)
                     .foregroundStyle(Tokens.Palette.textTertiary)
             }
@@ -58,7 +58,7 @@ struct SettingsView: View {
                         ForEach(15..<24) { Text(hourLabel($0)).tag($0) }
                     }
                     .onChange(of: settings.nudgeEndHour) { _, _ in resync() }
-                    Text("Walkful only reminds you when you've actually been sitting a while, within these hours — at most a couple of times a day.")
+                    Text("Walkful only reminds you when you've actually been sitting a while, within these hours, and at most a couple of times a day.")
                         .font(Tokens.TextStyle.caption)
                         .foregroundStyle(Tokens.Palette.textTertiary)
                 }
@@ -66,7 +66,7 @@ struct SettingsView: View {
 
             Section("Walkful Pro") {
                 if store.isPro {
-                    Label("Pro unlocked — thank you!", systemImage: "checkmark.seal.fill")
+                    Label("Pro unlocked. Thank you!", systemImage: "checkmark.seal.fill")
                         .font(Tokens.TextStyle.subheadline)
                         .foregroundStyle(Tokens.Palette.textSecondary)
                 } else {
@@ -105,7 +105,7 @@ struct SettingsView: View {
                         }
                     }
                 }
-                Text("Your day-by-day step history as a CSV file — generated and shared on-device. Your data, your export.")
+                Text("Your day-by-day step history as a CSV file, generated and shared on-device. Your data, your export.")
                     .font(Tokens.TextStyle.caption)
                     .foregroundStyle(Tokens.Palette.textTertiary)
             }
@@ -133,7 +133,7 @@ struct SettingsView: View {
                 }
                 ShareLink(item: URL(string: "https://apps.apple.com/app/id6781303837")!,
                           subject: Text("Walkful"),
-                          message: Text("A calm, private step tracker for iPhone — no ads, no subscription.")) {
+                          message: Text("A calm, private step tracker for iPhone. No ads, no subscription.")) {
                     Label("Share Walkful", systemImage: "square.and.arrow.up")
                         .foregroundStyle(Tokens.Palette.primary)
                 }

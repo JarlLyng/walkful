@@ -49,18 +49,18 @@ struct OnboardingView: View {
         case 0:
             textBlock(
                 "Welcome to Walkful",
-                "Every step counts. Walkful turns your walks into something meaningful — calmly, and entirely on your phone."
+                "Every step counts. Walkful turns your walks into something meaningful, calmly and entirely on your phone."
             )
         case 1:
             textBlock(
                 "Connect Apple Health",
-                "Walkful reads your steps, distance and stairs to show your progress. Your data never leaves your device — we have no servers."
+                "Walkful reads your steps, distance and stairs to show your progress. Your data never leaves your device, because we have no servers."
             )
         case 2:
             VStack(alignment: .leading, spacing: Tokens.Spacing.xl) {
                 textBlock(
                     "Set your daily goal",
-                    "We suggest 7,000 — research links it to far lower mortality than 2,000. Not 10,000, which is a myth."
+                    "We suggest 7,000, which research links to far lower mortality than 2,000. Not 10,000, which is a myth."
                 )
                 Stepper(value: $settings.dailyGoal, in: 1_000...30_000, step: 500) {
                     Text("\(settings.dailyGoal.stepsFormatted) steps")
@@ -72,7 +72,7 @@ struct OnboardingView: View {
             VStack(alignment: .leading, spacing: Tokens.Spacing.xl) {
                 textBlock(
                     "Gentle nudges",
-                    "Walkful can remind you to break up long sitting with a short walk or the stairs — a couple of times a day at most. Fully optional."
+                    "Walkful can remind you to break up long sitting with a short walk or the stairs, a couple of times a day at most. Fully optional."
                 )
                 Toggle("Move reminders", isOn: $settings.nudgesEnabled)
                     .tint(Tokens.Palette.primary)
