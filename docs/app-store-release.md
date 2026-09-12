@@ -87,6 +87,8 @@ WALKFUL PRO (one-time purchase, no subscription)
 • CSV export. Your data, yours to take with you.
 • The interval-walking coach. Guided easy/brisk sessions to boost your fitness.
 
+Walkful Pro supports Family Sharing, so one purchase covers everyone in your Family Sharing group.
+
 Walkful collects nothing. Your health data is read from Apple Health, used only on your device, and never shared or sold.
 
 Made by IAMJARL.
@@ -180,6 +182,8 @@ WALKFUL PRO (engangskøb, intet abonnement)
 • En rolig månedsopsamling.
 • CSV-eksport. Dine data, dine at tage med.
 • Interval-gang-coachen. Guidede sessioner med roligt og raskt tempo, der styrker din kondition.
+
+Walkful Pro understøtter Family Sharing, så ét køb dækker alle i din familiedeling.
 
 Walkful indsamler ingenting. Dine sundhedsdata læses fra Apple Health, bruges kun på din enhed og bliver aldrig delt eller solgt.
 ```
