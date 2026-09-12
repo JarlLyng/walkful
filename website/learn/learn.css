@@ -80,6 +80,16 @@ blockquote {
 .cta-text { color: var(--text-2); font-size: 15px; }
 .cta-go { color: var(--accent-text); font-weight: 600; font-size: 15px; margin-top: 8px; display: inline-block; }
 
+.disclosure {
+  margin-top: 32px;
+  font-size: 14px;
+  color: var(--text-2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
 .related { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 20px; }
 .related a { display: block; margin: 8px 0; font-weight: 600; }
 
