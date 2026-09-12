@@ -171,8 +171,8 @@
     </a>
     <nav class="nav-actions" aria-label="Main">
       <div class="lang-switcher" role="group" aria-label="Language selection">
-        <button class="lang-btn active" id="lang-btn-en" onclick="switchLanguage('en')">EN</button>
-        <button class="lang-btn" id="lang-btn-da" onclick="switchLanguage('da')">DA</button>
+        <a class="lang-btn active" id="lang-btn-en" href="/" hreflang="en" lang="en" aria-current="page">EN</a>
+        <a class="lang-btn" id="lang-btn-da" href="/da/" hreflang="da" lang="da">DA</a>
       </div>
       <a class="btn btn-ghost" href="#features">Explore</a>
     </nav>
@@ -703,14 +703,6 @@
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateSimulator);
 
-  function switchLanguage(lang) {
-    const isLocal = location.protocol === 'file:';
-    if (lang === 'en') {
-      location.href = isLocal ? (location.pathname.includes('/da/') ? '../index.html' : 'index.html') : '/';
-    } else if (lang === 'da') {
-      location.href = isLocal ? (location.pathname.includes('/da/') ? 'index.html' : 'da/index.html') : '/da/';
-    }
-  }
 
   // Initialize
   updateSimulator();
