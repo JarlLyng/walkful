@@ -1136,6 +1136,22 @@ details p {
   .mood-band { margin: 64px 0; min-height: 300px; }
 }
 
+/* Source line under the step simulator. The figures it shows are group-level
+   associations, and #145 asked for that to be visible next to the number. */
+.simulator-note {
+  margin: 16px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.simulator-note a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* ── Pricing: what is free, what Pro adds ─────────────────────────────── */
 .hero-note {
   margin: 16px 0 0;

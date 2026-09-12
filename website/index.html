@@ -244,9 +244,10 @@
           </div>
           
           <div class="benefit-display" aria-live="polite">
-            <div class="benefit-title" id="benefit-title">Active Start</div>
-            <div class="benefit-desc" id="benefit-desc">Moving from 2,000 to 4,000 steps is associated with a steep decline in mortality risk (roughly 20-30% reduction). A solid foundation.</div>
+            <div class="benefit-title" id="benefit-title">Benefits are kicking in</div>
+            <div class="benefit-desc" id="benefit-desc">Around 5,000+ steps a day is associated with meaningfully lower all-cause mortality in large studies.</div>
           </div>
+          <p class="simulator-note">This is the reading Walkful shows you. The figures describe associations across large groups, not a prediction about you. <a href="https://pubmed.ncbi.nlm.nih.gov/40713949/" rel="noopener">Lancet Public Health, 2025</a>.</p>
         </div>
       </section>
     </div>
@@ -597,47 +598,33 @@
   const benefitDesc = document.getElementById('benefit-desc');
   const simulatorCard = document.getElementById('simulator');
 
-  const benefits = {
-    2000: { title: "Sedentary Zone", desc: "Walking 2,000 steps or less is associated with higher all-cause mortality and cardiovascular risks. Every step above this zone makes a difference.", color: "#E65C00" },
-    4000: { title: "Active Start", desc: "Moving from 2,000 to 4,000 steps is associated with a steep decline in mortality risk (roughly 20-30% reduction). A solid foundation.", color: "#FF9100" },
-    6000: { title: "High Benefit Zone", desc: "Significant protection. Associated with ~40% lower all-cause mortality. Cardiovascular and metabolic health improvements are now in full effect.", color: "#A435D2" },
-    7500: { title: "Optimal Health Sweet Spot", desc: "The science-backed target where the risk curve flattens (~47% lower mortality). Additional steps still count, but this is the ultimate efficiency goal.", descColor: true },
-    10000: { title: "Milestone Zone", desc: "Excellent activity level. While the health benefits continue, they level off after 7,000-8,000 steps. Compete with yourself, not a marketing myth.", descColor: true },
-    12000: { title: "Super Active", desc: "A high level of activity, and good for endurance, weight maintenance and mental clarity. Worth knowing: the benefit curve has already flattened well below this.", descColor: true }
-  };
+  // The zones below mirror LongevityZone.swift exactly, so this shows what the
+  // app actually says rather than a second set of health claims maintained here.
+  // Ranges, not nearest-key: the old lookup showed the 4,000 text at 5,000 steps.
+  const zones = [
+    { max: 4000,  title: "Building a base",
+      desc: "Every step above sedentary is associated with lower risk. Small, steady increases add up." },
+    { max: 7000,  title: "Benefits are kicking in",
+      desc: "Around 5,000+ steps a day is associated with meaningfully lower all-cause mortality in large studies." },
+    { max: 10000, title: "Strong-benefit zone",
+      desc: "About 7,000 steps a day is associated with roughly 40\u201350% lower mortality risk versus very low activity, in large observational studies." },
+    { max: Infinity, title: "Near the plateau",
+      desc: "Past about 7,500 to 10,000 steps the curve flattens. Extra steps add little further mortality benefit, though they are perfectly fine." }
+  ];
 
   function updateSimulator() {
     const steps = parseInt(slider.value);
     ringValue.textContent = steps.toLocaleString('en-US');
-    
+
     const target = 7000;
     const percentage = Math.min(steps / target, 1.25);
-    const strokeDashoffset = Math.max(0, 314.16 * (1 - percentage));
-    progressCircle.style.strokeDashoffset = strokeDashoffset;
-    
-    const keys = [2000, 4000, 6000, 7500, 10000, 12000];
-    const closestKey = keys.reduce((prev, curr) => Math.abs(curr - steps) < Math.abs(prev - steps) ? curr : prev);
-    
-    const data = benefits[closestKey];
-    benefitTitle.textContent = data.title;
-    benefitDesc.textContent = data.desc;
-    
-    let dynamicColor = data.color;
-    if (data.descColor) {
-      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      dynamicColor = isDark ? '#D0FF00' : '#A435D2';
-    }
-    
-    simulatorCard.style.setProperty('--primary', dynamicColor);
-    simulatorCard.style.setProperty('--primary-rgb', hexToRgb(dynamicColor));
+    progressCircle.style.strokeDashoffset = Math.max(0, 314.16 * (1 - percentage));
+
+    const zone = zones.find(z => steps < z.max);
+    benefitTitle.textContent = zone.title;
+    benefitDesc.textContent = zone.desc;
   }
-  
-  function hexToRgb(hex) {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    if (!result) return '164, 53, 210';
-    return `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`;
-  }
-  
+
   slider.addEventListener('input', updateSimulator);
 
   // Showcase Tab Switcher Setup
