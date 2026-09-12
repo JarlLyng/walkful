@@ -253,9 +253,10 @@
           </div>
           
           <div class="benefit-display" aria-live="polite">
-            <div class="benefit-title" id="benefit-title">Aktiv Start</div>
-            <div class="benefit-desc" id="benefit-desc">At flytte sig fra 2.000 til 4.000 skridt er forbundet med et stejlt fald i dødelighedsrisiko (ca. 20-30% reduktion). Et stærkt fundament.</div>
+            <div class="benefit-title" id="benefit-title">Gevinsten sætter ind</div>
+            <div class="benefit-desc" id="benefit-desc">Omkring 5.000 skridt om dagen eller mere er i store studier forbundet med markant lavere dødelighed.</div>
           </div>
+          <p class="simulator-note">Sådan ser aflæsningen ud i Walkful. Tallene beskriver sammenhænge på tværs af store grupper, ikke en forudsigelse om dig. <a href="https://pubmed.ncbi.nlm.nih.gov/40713949/" rel="noopener">Lancet Public Health, 2025</a>.</p>
         </div>
       </section>
     </div>
@@ -613,47 +614,33 @@
   const benefitDesc = document.getElementById('benefit-desc');
   const simulatorCard = document.getElementById('simulator');
 
-  const benefits = {
-    2000: { title: "Stillesiddende Zone", desc: "At gå 2.000 skridt eller mindre er forbundet med øget dødelighed og hjerte-kar-risici. Hvert skridt over denne zone gør en forskel.", color: "#E65C00" },
-    4000: { title: "Aktiv Start", desc: "At flytte sig fra 2.000 til 4.000 skridt er forbundet med et stejlt fald i dødelighedsrisiko (ca. 20-30% reduktion). Et stærkt fundament.", color: "#FF9100" },
-    6000: { title: "Høj Effekt Zone", desc: "Betydelig beskyttelse. Forbundet med ca. 40% lavere dødelighed. Forbedringer af hjerte-kar- og metaboliske funktioner er nu i fuld effekt.", color: "#A435D2" },
-    7500: { title: "Optimalt Sundhedspunkt", desc: "Det videnskabeligt dokumenterede mål, hvor risikokurven flader ud (ca. 47% lavere dødelighed). Flere skridt tæller stadig, men dette er det mest effektive mål.", descColor: true },
-    10000: { title: "Milestone Zone", desc: "Fremragende aktivitetsniveau. Selvom de helbredsmæssige fordele fortsætter, flader de ud efter 7.000-8.000 skridt. Konkurrér med dig selv, ikke en myte.", descColor: true },
-    12000: { title: "Super Aktiv", desc: "Enestående fysisk aktivitet. Yderst gavnligt for udholdenhed, vægtvedligeholdelse og mentalt overskud. Du gør det fantastisk!", descColor: true }
-  };
+  // Zonerne herunder er ordret fra LongevityZone.swift, så siden viser det appen
+  // faktisk siger i stedet for et andet sæt sundhedspåstande vedligeholdt her.
+  // Intervaller, ikke nærmeste nøgle: den gamle opslagsmetode viste 4.000-teksten ved 5.000 skridt.
+  const zones = [
+    { max: 4000,  title: "Du bygger et fundament",
+      desc: "Hvert skridt ud over stillesiddende er forbundet med lavere risiko. Sm\u00e5, stabile forbedringer l\u00e6gger sig sammen." },
+    { max: 7000,  title: "Gevinsten s\u00e6tter ind",
+      desc: "Omkring 5.000 skridt om dagen eller mere er i store studier forbundet med markant lavere d\u00f8delighed." },
+    { max: 10000, title: "Zone med stor gevinst",
+      desc: "Cirka 7.000 skridt om dagen er i store observationsstudier forbundet med omkring 40 til 50 % lavere d\u00f8delighedsrisiko sammenlignet med meget lav aktivitet." },
+    { max: Infinity, title: "T\u00e6t p\u00e5 plateauet",
+      desc: "Efter cirka 7.500 til 10.000 skridt flader kurven ud. Flere skridt giver kun lidt yderligere gevinst, men de er helt fine." }
+  ];
 
   function updateSimulator() {
     const steps = parseInt(slider.value);
     ringValue.textContent = steps.toLocaleString('da-DK');
-    
+
     const target = 7000;
     const percentage = Math.min(steps / target, 1.25);
-    const strokeDashoffset = Math.max(0, 314.16 * (1 - percentage));
-    progressCircle.style.strokeDashoffset = strokeDashoffset;
-    
-    const keys = [2000, 4000, 6000, 7500, 10000, 12000];
-    const closestKey = keys.reduce((prev, curr) => Math.abs(curr - steps) < Math.abs(prev - steps) ? curr : prev);
-    
-    const data = benefits[closestKey];
-    benefitTitle.textContent = data.title;
-    benefitDesc.textContent = data.desc;
-    
-    let dynamicColor = data.color;
-    if (data.descColor) {
-      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      dynamicColor = isDark ? '#D0FF00' : '#A435D2';
-    }
-    
-    simulatorCard.style.setProperty('--primary', dynamicColor);
-    simulatorCard.style.setProperty('--primary-rgb', hexToRgb(dynamicColor));
+    progressCircle.style.strokeDashoffset = Math.max(0, 314.16 * (1 - percentage));
+
+    const zone = zones.find(z => steps < z.max);
+    benefitTitle.textContent = zone.title;
+    benefitDesc.textContent = zone.desc;
   }
-  
-  function hexToRgb(hex) {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    if (!result) return '164, 53, 210';
-    return `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`;
-  }
-  
+
   slider.addEventListener('input', updateSimulator);
 
   // Showcase Tab Switcher Setup
