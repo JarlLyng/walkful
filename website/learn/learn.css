@@ -83,8 +83,13 @@ blockquote {
 .related { margin-top: 40px; border-top: 1px solid var(--border); padding-top: 20px; }
 .related a { display: block; margin: 8px 0; font-weight: 600; }
 
-footer.site { margin-top: 48px; border-top: 1px solid var(--border); padding-top: 20px; font-size: 13px; color: var(--text-3); }
-footer.site a { color: var(--text-3); }
+/* The footer itself is <ij-footer> from the design system, which brings its own
+   layout and colours. This is only the band it sits in. */
+.site-footer { margin-top: 48px; border-top: 1px solid var(--border); padding-top: 20px; }
+/* Slotted footer links inherit this page's anchor colour, not the component's,
+   so give them the muted treatment the front pages get. */
+.site-footer a { color: var(--text-2); text-decoration: none; }
+.site-footer a:hover { color: var(--primary); }
 
 .card-list { list-style: none; padding: 0; margin: 24px 0 0; }
 .card-list li { margin: 0 0 14px; }

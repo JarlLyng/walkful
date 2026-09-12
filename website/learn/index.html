@@ -19,6 +19,12 @@
 <meta property="og:image" content="https://walkful.iamjarl.com/og-image.png" />
 <link rel="stylesheet" href="learn.css" />
 <script defer src="https://umami-iamjarl.vercel.app/script.js" data-website-id="2b384f21-31d1-4b7b-a6bf-82328062883e"></script>
+<!-- Shared portfolio footer. The cross-links below are a build-time snapshot of
+     the registry in the design system, inlined so they reach crawlers that do
+     not run JS. Regenerate from dist/footers/walkful.html rather than editing
+     them by hand, and keep the tag pinned. -->
+<script type="module"
+  src="https://cdn.jsdelivr.net/gh/jarllyng/iamjarl-design@v1.8.1/dist/components/ij-footer.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -59,9 +65,27 @@
     <span class="cta-go">Get Walkful on the App Store →</span>
   </a>
 
-  <footer class="site">
-    © 2026 IAMJARL · <a href="/">walkful.iamjarl.com</a> · <a href="/privacy.html">Privacy</a>
-  </footer>
+  <div class="site-footer">
+    <ij-footer app="walkful" tagline="Every step counts. Made with care by IAMJARL.">
+      <a slot="links" href="/learn/">Learn</a>
+      <a slot="links" href="/privacy.html">Privacy Policy</a>
+      <a slot="links" href="/support.html">Support</a>
+
+      <!-- IAMJARL cross-links for Walkful — generated, do not edit -->
+      <!-- design system v1.8.1, registry updated 2026-09-12 -->
+      <a slot="cross-links" href="https://anvilworkout.iamjarl.com">Anvil Workout</a>
+      <a slot="cross-links" href="https://wodrounds.iamjarl.com">WODrounds</a>
+      <a slot="cross-links" href="https://weannicotine.iamjarl.com">Wean Nicotine</a>
+      <a slot="cross-links" href="https://madebyhuman.iamjarl.com">Made by Human</a>
+      <a slot="cross-links" href="https://iamjarl.com">All projects</a>
+
+      <p slot="fineprint">&copy; 2026 IAMJARL</p>
+
+      <!-- No slot attribute on purpose: the pre-upgrade fallback, shown only if
+           the component script never loads. Do not leave it out. -->
+      <p>&copy; 2026 IAMJARL &middot; <a href="/">walkful.iamjarl.com</a> &middot; <a href="/privacy.html">Privacy</a></p>
+    </ij-footer>
+  </div>
 </div>
 </body>
 </html>
