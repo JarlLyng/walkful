@@ -101,7 +101,8 @@ Made by IAMJARL.
 > `languageCodesISO2A` describes the **app binary's** localizations (still EN only),
 > never the store listing's — it is not a check for whether a localized listing is live.
 
-> **Age ratings: the social-media questions (deadline 2026-09-07).** They live inside the
+> **Age ratings: the social-media questions (answered 2026-09-08, both No).** Settled, kept
+> here so the reasoning is not rediscovered. They live inside the
 > **Age Ratings questionnaire** (App Information → App Age Ratings → Edit), not as a field on
 > the App Information page, which is why they look missing. Two questions, and for Walkful both
 > answers are **No**:
@@ -117,6 +118,9 @@ Made by IAMJARL.
 > and put a Social Media descriptor on the product page, which would be wrong and would hurt in
 > the audience this app is aimed at. Answer only between submissions — editing this section
 > while a version is in review can require re-submitting.
+>
+> If Apple asks again after a future questionnaire change, the answers stay No unless the app
+> actually gains a feed or user-generated content, which the roadmap does not contain.
 
 ## 2b. Danish listing (copy-paste)
 
