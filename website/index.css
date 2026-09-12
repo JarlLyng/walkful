@@ -185,6 +185,8 @@ header {
   display: inline-flex;
   align-items: center;
   padding: 5px 14px;
+  /* They are links now, not buttons, so the underline has to go (#149). */
+  text-decoration: none;
   border-radius: 6px;
   cursor: pointer;
   transition: var(--transition);
