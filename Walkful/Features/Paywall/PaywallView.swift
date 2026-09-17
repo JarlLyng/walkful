@@ -6,7 +6,7 @@ struct PaywallView: View {
 
     private let benefits: [(icon: String, title: LocalizedStringResource, body: LocalizedStringResource)] = [
         ("chart.bar.fill", "Insights", "Consistency heatmap, best time of day, brisk-minute trends and your lifetime distance."),
-        ("figure.walk.motion", "Interval-walking coach", "Guided easy/brisk sessions with haptics — the evidence-based way to boost fitness."),
+        ("figure.walk.motion", "Interval-walking coach", "Guided easy/brisk sessions with haptics. The evidence-based way to boost fitness."),
         ("lock.shield.fill", "Still 100% private", "One payment. No subscription, no ads, nothing leaves your device.")
     ]
 
@@ -16,7 +16,7 @@ struct PaywallView: View {
             Text("Walkful Pro")
                 .font(Tokens.TextStyle.bigTitle)
                 .foregroundStyle(Tokens.Palette.textPrimary)
-            Text("Unlock the parts that help you move more — once, forever.")
+            Text("Unlock the parts that help you move more. Once, forever.")
                 .font(Tokens.TextStyle.body)
                 .foregroundStyle(Tokens.Palette.textSecondary)
 

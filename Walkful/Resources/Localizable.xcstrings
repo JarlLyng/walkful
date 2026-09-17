@@ -125,7 +125,7 @@
         }
       }
     },
-    "3 min easy / 3 min brisk — boost your fitness": {
+    "3 min easy / 3 min brisk. Boost your fitness": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -135,7 +135,7 @@
         }
       }
     },
-    "A calm, private step tracker for iPhone — no ads, no subscription.": {
+    "A calm, private step tracker for iPhone. No ads, no subscription.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -215,7 +215,7 @@
         }
       }
     },
-    "Alternate easy and brisk walking. A few brisk intervals can meaningfully boost your fitness — no running, no lycra required.": {
+    "Alternate easy and brisk walking. A few brisk intervals can meaningfully boost your fitness. No running, no lycra required.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -235,7 +235,7 @@
         }
       }
     },
-    "Associations from observational research — not medical advice. The curve flattens past ~7,500–10,000 steps.": {
+    "Associations from observational research, not medical advice. The curve flattens past ~7,500–10,000 steps.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -425,16 +425,6 @@
         }
       }
     },
-    "Every step counts — you're on your way.": {
-      "localizations": {
-        "da": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hvert skridt tæller. Du er godt på vej."
-          }
-        }
-      }
-    },
     "Every step counts. Let's begin.": {
       "localizations": {
         "da": {
@@ -445,7 +435,7 @@
         }
       }
     },
-    "Every step counts. Walkful turns your walks into something meaningful — calmly, and entirely on your phone.": {
+    "Every step counts. Walkful turns your walks into something meaningful, calmly and entirely on your phone.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -455,12 +445,22 @@
         }
       }
     },
-    "Every step counts. We suggest ~7,000 — not 10,000, which is a myth.": {
+    "Every step counts. We suggest ~7,000 rather than 10,000, which is a myth.": {
       "localizations": {
         "da": {
           "stringUnit": {
             "state": "translated",
             "value": "Hvert skridt tæller. Vi foreslår ca. 7.000, ikke 10.000, som er en myte."
+          }
+        }
+      }
+    },
+    "Every step counts. You're on your way.": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hvert skridt tæller. Du er godt på vej."
           }
         }
       }
@@ -535,7 +535,7 @@
         }
       }
     },
-    "Guided easy/brisk sessions with haptics — the evidence-based way to boost fitness.": {
+    "Guided easy/brisk sessions with haptics. The evidence-based way to boost fitness.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -835,7 +835,7 @@
         }
       }
     },
-    "Past 5,000 — the real benefits kick in here.": {
+    "Past 5,000, where the real benefits kick in.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -845,7 +845,7 @@
         }
       }
     },
-    "Past ~7,500–10,000 steps the curve flattens — extra steps add little further mortality benefit, though they're perfectly fine.": {
+    "Past ~7,500–10,000 steps the curve flattens. Extra steps add little further mortality benefit, though they're perfectly fine.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -875,7 +875,7 @@
         }
       }
     },
-    "Pro unlocked — thank you!": {
+    "Pro unlocked. Thank you!": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -1265,7 +1265,7 @@
         }
       }
     },
-    "Unlock the parts that help you move more — once, forever.": {
+    "Unlock the parts that help you move more. Once, forever.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -1315,7 +1315,7 @@
         }
       }
     },
-    "Walkful can remind you to break up long sitting with a short walk or the stairs — a couple of times a day at most. Fully optional.": {
+    "Walkful can remind you to break up long sitting with a short walk or the stairs, a couple of times a day at most. Fully optional.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -1335,7 +1335,7 @@
         }
       }
     },
-    "Walkful only reminds you when you've actually been sitting a while, within these hours — at most a couple of times a day.": {
+    "Walkful only reminds you when you've actually been sitting a while, within these hours, and at most a couple of times a day.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -1345,7 +1345,7 @@
         }
       }
     },
-    "Walkful reads your steps to show today's progress. Your data never leaves your device — we have no servers.": {
+    "Walkful reads your steps to show today's progress. Your data never leaves your device, because we have no servers.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -1355,7 +1355,7 @@
         }
       }
     },
-    "Walkful reads your steps, distance and stairs to show your progress. Your data never leaves your device — we have no servers.": {
+    "Walkful reads your steps, distance and stairs to show your progress. Your data never leaves your device, because we have no servers.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -1385,7 +1385,7 @@
         }
       }
     },
-    "We suggest 7,000 — research links it to far lower mortality than 2,000. Not 10,000, which is a myth.": {
+    "We suggest 7,000, which research links to far lower mortality than 2,000. Not 10,000, which is a myth.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -1425,7 +1425,7 @@
         }
       }
     },
-    "You completed %lld brisk intervals — about %lld brisk minutes. Every step counts.": {
+    "You completed %lld brisk intervals, about %lld brisk minutes. Every step counts.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -1495,7 +1495,7 @@
         }
       }
     },
-    "You've been still for a while — a short walk or the stairs?": {
+    "You've been still for a while. A short walk or the stairs?": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -1535,7 +1535,7 @@
         }
       }
     },
-    "Your day-by-day step history as a CSV file — generated and shared on-device. Your data, your export.": {
+    "Your day-by-day step history as a CSV file, generated and shared on-device. Your data, your export.": {
       "localizations": {
         "da": {
           "stringUnit": {
@@ -1545,7 +1545,7 @@
         }
       }
     },
-    "Your goal rises in small steps as your recent average grows — never down. Adjust it any time.": {
+    "Your goal rises in small steps as your recent average grows, and never falls. Adjust it any time.": {
       "localizations": {
         "da": {
           "stringUnit": {

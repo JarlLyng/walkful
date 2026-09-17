@@ -31,7 +31,7 @@ struct LongevityZone: Equatable {
         default:
             return LongevityZone(
                 title: "Near the plateau",
-                detail: "Past ~7,500–10,000 steps the curve flattens — extra steps add little further mortality benefit, though they're perfectly fine.",
+                detail: "Past ~7,500–10,000 steps the curve flattens. Extra steps add little further mortality benefit, though they're perfectly fine.",
                 position: position)
         }
     }

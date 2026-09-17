@@ -179,7 +179,7 @@ struct TodayView: View {
                         Text("Start an interval walk")
                             .font(Tokens.TextStyle.headline)
                             .foregroundStyle(Tokens.Palette.textPrimary)
-                        Text("3 min easy / 3 min brisk — boost your fitness")
+                        Text("3 min easy / 3 min brisk. Boost your fitness")
                             .font(Tokens.TextStyle.subheadline)
                             .foregroundStyle(Tokens.Palette.textSecondary)
                     }
@@ -277,8 +277,8 @@ struct TodayView: View {
     private var meaning: LocalizedStringResource {
         switch health.todaySteps {
         case 7_000...: "In the zone linked to ~47% lower mortality."
-        case 5_000..<7_000: "Past 5,000 — the real benefits kick in here."
-        case 1..<5_000: "Every step counts — you're on your way."
+        case 5_000..<7_000: "Past 5,000, where the real benefits kick in."
+        case 1..<5_000: "Every step counts. You're on your way."
         default: "Every step counts. Let's begin."
         }
     }
@@ -313,7 +313,7 @@ struct TodayView: View {
                 Text("Connect Apple Health")
                     .font(Tokens.TextStyle.title)
                     .foregroundStyle(Tokens.Palette.textPrimary)
-                Text("Walkful reads your steps to show today's progress. Your data never leaves your device — we have no servers.")
+                Text("Walkful reads your steps to show today's progress. Your data never leaves your device, because we have no servers.")
                     .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textSecondary)
                 PrimaryButton(title: "Continue") {

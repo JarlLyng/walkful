@@ -275,7 +275,7 @@ struct InsightsView: View {
                         .font(Tokens.TextStyle.subheadline)
                         .foregroundStyle(Tokens.Palette.textSecondary)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("Associations from observational research — not medical advice. The curve flattens past ~7,500–10,000 steps.")
+                    Text("Associations from observational research, not medical advice. The curve flattens past ~7,500–10,000 steps.")
                         .font(Tokens.TextStyle.caption)
                         .foregroundStyle(Tokens.Palette.textTertiary)
                         .fixedSize(horizontal: false, vertical: true)
