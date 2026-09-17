@@ -47,10 +47,21 @@ Walkful: Pedometer
 Calm, private step tracker
 ```
 
-**Promotional text** (≤170 chars, editable anytime without review):
+**Promotional text** (≤170 chars). The only listing field that can be changed
+without a submission, including while a version is in review, so it is where a
+new message can go out first. Current, 143 chars:
 ```
 Every step counts. A calm, private walking tracker that turns your steps into meaning. No ads, no accounts, and nothing ever leaves your phone.
 ```
+Alternative that leads with Family Sharing, 160 chars. Family Sharing is on for
+the Pro unlock and appears nowhere else in the listing until a description
+update ships:
+```
+Every step counts. A calm, private walking tracker that turns your steps into meaning. One purchase covers the whole family, and nothing ever leaves your phone.
+```
+The trade is "no ads, no accounts" for the family line. Not much is lost: the
+subtitle and the description both still carry the no-subscription point, and
+privacy stays in the closing clause. The family line is carried nowhere else.
 
 **Keywords** (≤100 chars, comma-separated, no spaces — this is 98):
 ```
@@ -145,9 +156,15 @@ Walkful: Skridttæller
 Privat gå-app, ingen reklamer
 ```
 
-**Promotional text** (≤170, this is 147):
+**Promotional text** (≤170). Current, 147 chars:
 ```
 Hvert skridt tæller. En rolig, privat gå-app der gør dine skridt til mening. Ingen reklamer, ingen konti, og intet forlader nogensinde din telefon.
+```
+Alternative that leads with Family Sharing, also 147 chars. Use it in step with
+the English one rather than on its own, so the two storefronts say the same
+thing:
+```
+Hvert skridt tæller. En rolig, privat gå-app der gør dine skridt til mening. Ét køb dækker hele familien, og intet forlader nogensinde din telefon.
 ```
 
 **Keywords** (≤100, this is 88). Unverified: the lookup API does not return the keyword
