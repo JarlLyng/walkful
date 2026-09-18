@@ -3,7 +3,7 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
-## [1.1.2] — unreleased — wording
+## [1.1.2] — 2026-09-18 — wording
 
 ### Changed
 - **Small wording changes throughout the app.** Twenty-one lines read a little more plainly: the Today meaning line, the interval coach, the paywall, onboarding, Settings and the sedentary nudge. Nothing behaves differently, and the Danish text is unchanged (#159).
