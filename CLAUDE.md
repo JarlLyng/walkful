@@ -1,6 +1,6 @@
 # CLAUDE.md — Walkful
 
-Quick-start context for developers and AI assistants. Product/tech specs live at the repo root (`PRD.md`, `TECH_PLAN.md` — historical, June 2026); process docs in `docs/`.
+Quick-start context for developers and AI assistants. How the app is actually built: `ARCHITECTURE.md`. Process docs in `docs/`. The pre-launch specs in `docs/history/` describe what was planned in June 2026, not what shipped, so do not read them as the spec.
 
 ## What is Walkful?
 
@@ -10,7 +10,7 @@ insights, grounded in walking science (~7,000 steps, not the 10,000 myth).
 Everything is processed and stored **on the device** — no accounts, no servers,
 no ads, no data collection. Its App Store privacy label is "Data Not Collected".
 
-- **Developer:** Jarl Lyng / [IAMJARL](https://iamjarl.com)
+- **Developer:** Jarl / [IAMJARL](https://iamjarl.com)
 - **Website:** [walkful.iamjarl.com](https://walkful.iamjarl.com)
 - **License:** [AGPL-3.0](LICENSE) — open source.
 - **Price:** Free download with a one-time **Walkful Pro** unlock (StoreKit 2 non-consumable). No subscription, no ads.

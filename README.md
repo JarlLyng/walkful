@@ -34,7 +34,7 @@ Made by **IAMJARL** · [walkful.iamjarl.com](https://walkful.iamjarl.com)
 - **Private by architecture** — all data is read from Apple Health and processed on-device. App Store privacy label: *Data Not Collected*.
 - **Calm, no manipulation** — no pace-shaming, no social leaderboards, no dark patterns. You compete against your own records.
 
-See **[PRD.md](PRD.md)** (product spec) for the rationale. (Market/competitor research lives in the private [strategy hub](https://github.com/JarlLyng/iamjarl-strategy).)
+The reasoning behind these lives in the private [strategy hub](https://github.com/JarlLyng/iamjarl-strategy), along with audience and market research. For how the app is actually built, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ---
 
@@ -99,9 +99,9 @@ walking-app/
 ├─ Tests/                   # WalkfulTests unit tests (run via the Walkful scheme)
 ├─ website/                 # Marketing site (static, SEO/GEO)
 ├─ docs/                    # Process docs (roadmap, release guide, device checklist)
+├─ docs/history/            # Superseded pre-launch specs (Danish, June 2026)
 ├─ ci_scripts/              # Xcode Cloud post-clone (xcodegen + SwiftPM resolve)
 ├─ .github/                 # CI workflow, Pages deploy, issue/PR templates
-├─ PRD.md TECH_PLAN.md               # Product & technical specs (Danish, historical)
 └─ ARCHITECTURE.md CONTRIBUTING.md CHANGELOG.md   # Developer docs (English)
 ```
 
@@ -116,7 +116,7 @@ walking-app/
 - **[docs/device-checklist.md](docs/device-checklist.md)** — what to verify on a physical iPhone/Watch (the things the simulator can't).
 - **[CHANGELOG.md](CHANGELOG.md)** — notable changes.
 - **[CLAUDE.md](CLAUDE.md)** — quick-start context for developers and AI assistants.
-- **[PRD.md](PRD.md)** · **[TECH_PLAN.md](TECH_PLAN.md)** — product spec and technical plan (Danish).
+- **[docs/history/](docs/history/)** — the pre-launch product and technical specs (Danish, June 2026). Kept for context; they describe what was planned, not what shipped.
 - **[website/](website/)** — marketing site + privacy policy.
 - **Strategy & audience** (target audience, positioning, pricing, SEO/ASO, marketing) lives in the private [iamjarl-strategy](https://github.com/JarlLyng/iamjarl-strategy) hub (folder `Walkful/`), not in this public repo.
 
