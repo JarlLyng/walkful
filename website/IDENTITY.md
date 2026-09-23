@@ -34,3 +34,22 @@ itself keeps both modes**; this is about the site only.
   dark-mode visitor gets white footer text on a white page.
 
 If a future change reintroduces a dark rule, the pin is the thing to check first.
+
+## The social card
+
+`og-image.png` is the image a stranger sees first, when a link is shared anywhere, before any
+word of the page. Per the hub's `DESIGN.md` it does two jobs: the site's `og:image` on every page,
+and the repo's GitHub social preview.
+
+It carries the name, one line of outcome, and the real Today screen, on the pinned light ground
+with the purple accent. It replaced an enlarged app icon on a flat ground, which the hub measured
+on 2026-09-22 as saying nothing about what the app does.
+
+Generated, not drawn by hand: `appstore/social/make_card.py` builds it from
+`appstore/social/today-en.png` with the App Store poster tool's own helpers, so it shares the
+posters' look. **Recapture that screenshot whenever the Today screen's copy changes.** The card is
+public imagery, and an old capture advertises old copy; the first draft of this card showed an
+em-dash the app had already dropped, because it used an August capture.
+
+**The GitHub half is a manual upload.** Repo Settings, then Social preview. There is no API for it.
+
