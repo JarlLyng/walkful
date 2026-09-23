@@ -15,3 +15,20 @@ WalkfulWidget/Info.plist
 
 # Python venv for the hub's screenshot tool
 .venv/
+
+# Agent and editor tooling stays local. The repos are indifferent to which AI is
+# used; AGENTS.md is the one agent-context file. List from the hub's
+# _template/.gitignore (2026-09-19).
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.cursor/
+.cursorrules
+.windsurfrules
+.clinerules
+.aider*
+.continue/
+.codex/
+.mcp.json
+GEMINI.md
+.github/copilot-instructions.md

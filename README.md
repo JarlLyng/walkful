@@ -115,7 +115,7 @@ walking-app/
 - **[docs/app-store-release.md](docs/app-store-release.md)** — App Store listing copy + submit checklist.
 - **[docs/device-checklist.md](docs/device-checklist.md)** — what to verify on a physical iPhone/Watch (the things the simulator can't).
 - **[CHANGELOG.md](CHANGELOG.md)** — notable changes.
-- **[CLAUDE.md](CLAUDE.md)** — quick-start context for developers and AI assistants.
+- **[AGENTS.md](AGENTS.md)** — quick-start context for developers and coding agents, whichever you use.
 - **[docs/history/](docs/history/)** — the pre-launch product and technical specs (Danish, June 2026). Kept for context; they describe what was planned, not what shipped.
 - **[website/](website/)** — marketing site + privacy policy.
 - **Strategy & audience** (target audience, positioning, pricing, SEO/ASO, marketing) lives in the private [iamjarl-strategy](https://github.com/JarlLyng/iamjarl-strategy) hub (folder `Walkful/`), not in this public repo.
