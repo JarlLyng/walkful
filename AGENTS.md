@@ -1,4 +1,4 @@
-# CLAUDE.md — Walkful
+# AGENTS.md — Walkful
 
 Quick-start context for developers and AI assistants. How the app is actually built: `ARCHITECTURE.md`. Process docs in `docs/`. The pre-launch specs in `docs/history/` describe what was planned in June 2026, not what shipped, so do not read them as the spec.
 

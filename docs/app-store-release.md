@@ -277,5 +277,5 @@ no analytics. App privacy label: Data Not Collected.
 ## 7. After each approval
 
 - Cut the CHANGELOG `[Unreleased]` section to a version heading with the date.
-- Tag the release (`git tag vX.Y.Z && git push --tags`) and update the status line in README/CLAUDE.md.
+- Tag the release (`git tag vX.Y.Z && git push --tags`) and update the status line in README/AGENTS.md.
 - Watch MetricKit crash reports in Xcode Organizer.
