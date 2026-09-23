@@ -1,4 +1,6 @@
 :root {
+  /* Pinned light (#171). */
+  color-scheme: light;
   --primary: #A435D2;
   --accent-text: #7A2499;
   --bg: #fff;
@@ -9,20 +11,6 @@
   --text-3: rgba(18, 10, 33, 0.55);
   --border: rgba(0, 0, 0, 0.12);
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary: #D0FF00;
-    --accent-text: #D0FF00;
-    --bg: #000;
-    --surface: rgba(255, 255, 255, 0.05);
-    --surface-border: rgba(208, 255, 0, 0.16);
-    --text: #fff;
-    --text-2: rgba(255, 255, 255, 0.76);
-    --text-3: rgba(255, 255, 255, 0.55);
-    --border: rgba(255, 255, 255, 0.16);
-  }
-}
-
 * { box-sizing: border-box; }
 body {
   margin: 0;
@@ -112,3 +100,14 @@ blockquote {
 .card-list .d { color: var(--text-2); font-size: 15px; }
 
 .disclaimer { font-size: 13px; color: var(--text-3); margin-top: 28px; }
+
+/* The footer component follows the OS colour scheme unless the host sets its
+   tokens, in which case it takes them in both modes. Without this, a visitor in
+   dark mode would get the component's white text on this pinned light page.
+   These are the component's own light fallbacks, so light mode is unchanged. */
+ij-footer {
+  --ij-color-text-primary: rgba(0, 0, 0, 1);
+  --ij-color-text-secondary: rgba(0, 0, 0, 0.70);
+  --ij-color-primary: #A435D2;
+  --ij-color-border-subtle: rgba(0, 0, 0, 0.10);
+}
