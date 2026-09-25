@@ -91,6 +91,11 @@ struct RootView: View {
             // idempotent: iOS viser ikke systemarket igen hvis adgang allerede
             // er givet, men authState bliver .authorized og dashboardet vises.
             if health.authState == .unknown { await health.requestAuthorization() }
+            // A cold launch has no walk in progress, so any coach cues left by
+            // an earlier process are orphans the user could not stop. The old
+            // remove-everything in reschedule cleared these by accident; clear
+            // them on purpose, here only, and not when nudge settings change.
+            await SystemCueScheduler().removeAll()
             // Hold planlagte nudges + sedentary-monitor i sync ved app-start.
             await NudgeScheduler.reschedule(enabled: settings.nudgesEnabled,
                                             startHour: settings.nudgeStartHour,

@@ -7,7 +7,7 @@ final class IntervalCoachTests: XCTestCase {
     /// Zero-length phases let a single tick exercise the whole catch-up loop —
     /// the same path that runs after the phone was locked mid-session (#83).
     func testElapsedPhasesAreCaughtUpAndSessionFinishes() {
-        let coach = IntervalCoach()
+        let coach = IntervalCoach(cues: RecordingCues())
         coach.rounds = 2
         coach.easySeconds = 0
         coach.briskSeconds = 0
@@ -19,7 +19,7 @@ final class IntervalCoachTests: XCTestCase {
     }
 
     func testCatchUpLandsInTheCorrectMidSessionPhase() {
-        let coach = IntervalCoach()
+        let coach = IntervalCoach(cues: RecordingCues())
         coach.rounds = 2
         coach.easySeconds = 0      // already elapsed at start
         coach.briskSeconds = 3_600 // far in the future
@@ -32,7 +32,7 @@ final class IntervalCoachTests: XCTestCase {
     }
 
     func testPauseFreezesRemainingAndTicksDoNothing() {
-        let coach = IntervalCoach()
+        let coach = IntervalCoach(cues: RecordingCues())
         coach.start()
         coach.togglePause()
         XCTAssertFalse(coach.isRunning)
@@ -44,7 +44,7 @@ final class IntervalCoachTests: XCTestCase {
     }
 
     func testStopResetsSession() {
-        let coach = IntervalCoach()
+        let coach = IntervalCoach(cues: RecordingCues())
         coach.start()
         coach.stop()
         XCTAssertFalse(coach.hasStarted)

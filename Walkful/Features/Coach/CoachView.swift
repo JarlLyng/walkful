@@ -94,6 +94,14 @@ struct CoachView: View {
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("\(String(localized: coach.phase.title)) phase, \(coach.remaining) seconds left, round \(coach.currentRound) of \(coach.rounds)")
 
+            if coach.cuesUnavailable {
+                Text("Turn on notifications in Settings to feel the cues with your phone locked.")
+                    .font(Tokens.TextStyle.caption)
+                    .foregroundStyle(Tokens.Palette.textTertiary)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
             HStack(spacing: Tokens.Spacing.md) {
                 // Spelled out so both words reach the catalog.
                 let pauseTitle: LocalizedStringResource = coach.isRunning ? "Pause" : "Resume"
