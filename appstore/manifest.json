@@ -2,7 +2,7 @@
   "app": "Walkful",
   "mode": "light",
   "accent": "#A435D2",
-  "out_dir": "1.1.0",
+  "out_dir": "1.1.3",
   "shots": [
     {"raw": "raw/en-today.png", "slot": "iphone-6.9", "out": "en/iphone-6.9-1.png",
      "caption": "Steps with meaning,\nnot just a count."},
