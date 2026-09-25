@@ -8,7 +8,7 @@ Capture happens here, composition happens there, so every IAMJARL app shares one
 
 - `raw/` — unretouched simulator captures, `<locale>-<screen>.png`
 - `manifest.json` — what gets composed: shot order, captions per locale, slot sizes
-- `1.1.0/` — the composed posters, one folder per locale (`en/`, `da/`)
+- `1.1.3/` — the composed posters, one folder per locale (`en/`, `da/`)
 
 Superseded release folders are deleted rather than kept. Git history has them.
 
@@ -54,8 +54,9 @@ Re-capturing the raws needs the app's screenshot mode. Two things to know:
 
 ## Uploading
 
-App Store Connect validates per slot: `iphone-6.9-*.png` (1290×2796) belongs in the 6.9" slot,
-`iphone-6.5-*.png` (1242×2688) in the 6.5" one. Uploading the wrong size to a slot is what the
+App Store Connect validates per slot: `iphone-6.9-*.png` (1320×2868) belongs in the 6.9" slot,
+`iphone-6.5-*.png` (1284×2778) in the 6.5" one. Both sizes are on Apple's accepted list, alongside
+the smaller 1290×2796 and 1242×2688 the 1.1.0 set used; the hub's tool moved to the larger ones. Uploading the wrong size to a slot is what the
 "dimensions of one or more screenshots are wrong" error means. `da/` goes under the Danish
 localization on the version page.
 
@@ -63,3 +64,14 @@ localization on the version page.
 slots exist here only because the listing's legacy slot was 6.5". 6.9" is the better single
 choice (Apple downscales it cleanly, and it is the size new listings are asked for), so when the
 6.5" set in App Store Connect is retired, drop the 6.5" entries from the manifest too.
+
+## Recapture when the app's copy changes
+
+The raws are screenshots of real screens, so they carry the app's copy at the moment they were
+taken. #159 rewrote 21 English strings in 1.1.2 and the raws were not retaken, so the 1.1.0
+English Today and Insights posters went on advertising copy the app no longer had, em-dashes
+included (#178). The English Today, Insights and Coach raws were retaken for 1.1.3.
+
+Any release that changes a string visible on a poster screen should retake that raw. The Danish
+raws and the English paywall and widget raws were checked and carried nothing that changed.
+
