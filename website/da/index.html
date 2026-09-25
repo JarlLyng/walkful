@@ -11,8 +11,7 @@
 <link rel="alternate" hreflang="en" href="https://walkful.iamjarl.com/" />
 <link rel="alternate" hreflang="da" href="https://walkful.iamjarl.com/da/" />
 <link rel="alternate" hreflang="x-default" href="https://walkful.iamjarl.com/" />
-<meta name="theme-color" content="#A435D2" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#A435D2" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
 
 <!-- Open Graph -->
@@ -22,15 +21,17 @@
 <meta property="og:description" content="En evidensbaseret gå-app, der gemmer alt på din enhed. Ingen konti, ingen reklamer, intet abonnement. Bygget på videnskaben om hverdagsbevægelse." />
 <meta property="og:url" content="https://walkful.iamjarl.com/da/" />
 <meta property="og:image" content="https://walkful.iamjarl.com/og-image.png" />
-<meta property="og:image:alt" content="Walkful appen der viser dagens skridt fremskridtsring" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Walkful med teksten Steps with meaning, not just a count, og appens Today-skærm med dagens skridtring." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://walkful.iamjarl.com/og-image.png" />
 <meta property="og:locale" content="da_DK" />
 <meta property="og:locale:alternate" content="en_US" />
 
 <!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Walkful: en rolig, privat skridttæller til iPhone" />
 <meta name="twitter:description" content="En evidensbaseret skridttæller app til iPhone. Ingen konti, ingen reklamer, ingen datadeling." />
-<meta name="twitter:image" content="https://walkful.iamjarl.com/og-image.png" />
 
 <!-- Stylesheet linking (Aurora theme) -->
 <!-- Icons -->
@@ -717,7 +718,6 @@
     });
   });
 
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateSimulator);
 
 
   // Initialize
