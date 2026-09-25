@@ -33,7 +33,7 @@ final class LocalizationTests: XCTestCase {
         // strings; if it fails after an edit that added none, a translation
         // was orphaned, most likely by rewriting an English string, which
         // renames its key.
-        XCTAssertGreaterThanOrEqual(da.count, 161,
+        XCTAssertGreaterThanOrEqual(da.count, 162,
                                     "Danish strings went missing: a rewritten English string renames its key, and the translation has to move with it")
 
         // The key IS the English source string, because the catalog's

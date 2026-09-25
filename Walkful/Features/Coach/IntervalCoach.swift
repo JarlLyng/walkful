@@ -38,6 +38,20 @@ final class IntervalCoach {
     /// `remaining` then holds the frozen value.
     private var phaseEnd: Date?
 
+    /// True when notifications are off, so the phase cues cannot reach a
+    /// locked phone (#174). The coach still keeps time; the screen says why
+    /// the pocket stays quiet.
+    private(set) var cuesUnavailable = false
+
+    @ObservationIgnored private let cues: CueScheduling
+    /// Serialises cue work. Each change waits for the one before it, so a quick
+    /// pause right after start can never leave stray notifications behind.
+    @ObservationIgnored private(set) var cueTask: Task<Void, Never>?
+
+    init(cues: CueScheduling = SystemCueScheduler()) {
+        self.cues = cues
+    }
+
     var phaseTotal: Int { phase == .brisk ? briskSeconds : easySeconds }
     var phaseProgress: Double {
         phaseTotal > 0 ? Double(phaseTotal - remaining) / Double(phaseTotal) : 0
@@ -53,6 +67,7 @@ final class IntervalCoach {
         isFinished = false
         isRunning = true
         impact()
+        scheduleCues()
     }
 
     func togglePause() {
@@ -60,9 +75,11 @@ final class IntervalCoach {
             remaining = currentRemaining()   // freeze
             phaseEnd = nil
             isRunning = false
+            clearCues()
         } else {
             phaseEnd = Date.now.addingTimeInterval(TimeInterval(remaining))
             isRunning = true
+            scheduleCues()                  // the rest, from the new phase end
         }
     }
 
@@ -85,6 +102,7 @@ final class IntervalCoach {
         isFinished = false
         hasStarted = false
         phaseEnd = nil
+        clearCues()
     }
 
     /// Called once per second by the view's timer, and when the scene becomes
@@ -135,6 +153,32 @@ final class IntervalCoach {
         remaining = 0
         phaseEnd = nil
         success()
+        clearCues()
+    }
+
+    // MARK: - Pocket cues (#174)
+
+    private func scheduleCues() {
+        guard let end = phaseEnd, isRunning, !isFinished, !LaunchArgs.screenshots else { return }
+        let plan = CoachCues.plan(phase: phase, currentRound: currentRound, rounds: rounds,
+                                  phaseEnd: end, easySeconds: easySeconds, briskSeconds: briskSeconds)
+        let total = rounds, minutes = briskMinutes
+        enqueue { [cues] in
+            let allowed = await cues.replace(with: plan, totalRounds: total, briskMinutes: minutes)
+            self.cuesUnavailable = !allowed
+        }
+    }
+
+    private func clearCues() {
+        enqueue { [cues] in await cues.removeAll() }
+    }
+
+    private func enqueue(_ work: @escaping @MainActor () async -> Void) {
+        let previous = cueTask
+        cueTask = Task { @MainActor in
+            await previous?.value
+            await work()
+        }
     }
 
     // MARK: - Haptics

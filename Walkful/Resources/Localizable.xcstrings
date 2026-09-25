@@ -1225,6 +1225,16 @@
         }
       }
     },
+    "Turn on notifications in Settings to feel the cues with your phone locked.": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slå notifikationer til i Indstillinger for at mærke signalerne, når telefonen er låst."
+          }
+        }
+      }
+    },
     "Turn on reminders": {
       "localizations": {
         "da": {

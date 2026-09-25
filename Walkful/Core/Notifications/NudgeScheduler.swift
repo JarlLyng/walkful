@@ -24,11 +24,19 @@ enum NudgeScheduler {
     /// Also clears any pending scheduled nudges left behind by pre-1.0.4
     /// versions (the removed clock-based baseline used repeating triggers,
     /// which survive app updates until explicitly removed).
+    ///
+    /// Clears everything except an interval walk's cues. It used to remove
+    /// every pending request, which would have silenced a walk in progress
+    /// whenever nudge settings changed (#174). Filtering by the coach's prefix
+    /// rather than listing nudge identifiers keeps the legacy cleanup intact,
+    /// whatever identifiers those old requests used.
     static func reschedule(enabled: Bool, startHour: Int, endHour: Int) async {
         if LaunchArgs.screenshots { return } // no permission prompts during screenshots
         SedentaryMonitor.updateSettings(enabled: enabled, startHour: startHour, endHour: endHour)
 
-        center.removeAllPendingNotificationRequests()
+        let pending = await center.pendingNotificationRequests().map(\.identifier)
+        center.removePendingNotificationRequests(
+            withIdentifiers: CoachCues.identifiersNotOwnedByCoach(pending))
         guard enabled else { return }
         guard await requestAuthorization() else { return }
 
