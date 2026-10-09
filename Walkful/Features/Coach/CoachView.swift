@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 struct CoachView: View {
     @Environment(\.dismiss) private var dismiss
