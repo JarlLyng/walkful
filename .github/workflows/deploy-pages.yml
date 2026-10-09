@@ -25,6 +25,42 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history: the sitemap step dates each page by its last commit.
+          fetch-depth: 0
+      - name: Date the sitemap from git
+        # Each page's <lastmod> is the date of the last commit that touched its
+        # source (#187). Never hand-written, and never the build date, since
+        # Google stops trusting a date that is always the same or always today.
+        shell: python
+        run: |
+          import pathlib, re, subprocess
+
+          def git(*args):
+              return subprocess.run(["git", *args], capture_output=True, text=True, check=True).stdout.strip()
+
+          # A shallow clone would date every page by the one commit it has.
+          if git("rev-parse", "--is-shallow-repository") == "true":
+              raise SystemExit("Shallow clone: every page would get the same date.")
+
+          site = pathlib.Path("website")
+          sitemap = site / "sitemap.xml"
+
+          def lastmod(loc):
+              path = re.sub(r"^https://walkful\.iamjarl\.com/", "", loc)
+              if path == "" or path.endswith("/"):
+                  path += "index.html"
+              source = site / path
+              if not source.is_file():
+                  raise SystemExit(f"The sitemap lists {loc}, but {source} does not exist.")
+              return git("log", "-1", "--format=%cs", "--", str(source))
+
+          xml = re.sub(r"\s*<lastmod>[^<]*</lastmod>", "", sitemap.read_text())
+          xml = re.sub(r"(\s*)<loc>([^<]+)</loc>",
+                       lambda m: f"{m[1]}<loc>{m[2]}</loc>{m[1]}<lastmod>{lastmod(m[2])}</lastmod>",
+                       xml)
+          sitemap.write_text(xml)
+          print(xml)
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
