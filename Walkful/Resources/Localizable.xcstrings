@@ -835,6 +835,16 @@
         }
       }
     },
+    "Opens an email to support@iamjarl.com with the app and iOS version filled in. Nothing is sent until you send it.": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Åbner en mail til support@iamjarl.com med app- og iOS-version udfyldt. Intet bliver sendt, før du selv sender den."
+          }
+        }
+      }
+    },
     "Past 5,000, where the real benefits kick in.": {
       "localizations": {
         "da": {
@@ -951,6 +961,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Runde %lld af %lld"
+          }
+        }
+      }
+    },
+    "Send feedback": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giv feedback"
           }
         }
       }
