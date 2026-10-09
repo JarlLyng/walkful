@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="da">
+<html lang="da" class="light">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -40,9 +40,12 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
 <!-- Fonts (link instead of CSS @import, which avoids the render-blocking chain) -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" />
+<!-- Display face and identity from one design-system release, so they can't drift
+     apart (#185). Same CDN as the footer, so no new third party; Google Fonts is gone. -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jarllyng/iamjarl-design@v1.17.0/dist/fonts/instrument-sans.css"
+  integrity="sha384-VOEtgni8jpPomLQ2v9GNBhDgZfF6zaCwrIMrCju8lVQtG149ciO2ck4PNxBxcmUZ" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jarllyng/iamjarl-design@v1.17.0/dist/identity/walkful.css"
+  integrity="sha384-t4j70NxmFN6dJixWUyGuvrn9jHJ7l0m/bc39/BigALnaJ7u56PV7T8NY/dHbm436" crossorigin="anonymous" />
 
 <link rel="stylesheet" href="../index.css" />
 
