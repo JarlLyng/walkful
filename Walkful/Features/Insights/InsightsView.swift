@@ -398,7 +398,7 @@ struct InsightsView: View {
     private var mobilityMetrics: [Metric] {
         var metrics: [Metric] = []
         if let speed = health.walkingSpeed {
-            metrics.append(Metric(value: String(format: "%.1f", speed), unit: "m/s", label: "walking speed"))
+            metrics.append(Metric(value: speed.oneDecimal(), unit: "m/s", label: "walking speed"))
         }
         if let steady = health.walkingSteadiness {
             let pct = Int((steady * 100).rounded())
