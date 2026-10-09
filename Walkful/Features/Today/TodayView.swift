@@ -162,7 +162,7 @@ struct TodayView: View {
             LazyVGrid(columns: [GridItem(.flexible(), spacing: Tokens.Spacing.sm),
                                 GridItem(.flexible(), spacing: Tokens.Spacing.sm)],
                       spacing: Tokens.Spacing.sm) {
-                StatChip(value: String(format: "%.1f", Units.distance(km: health.todayDistanceKm, imperial: settings.useImperial)), unit: Units.label(imperial: settings.useImperial), label: "distance")
+                StatChip(value: Units.distance(km: health.todayDistanceKm, imperial: settings.useImperial).oneDecimal(), unit: Units.label(imperial: settings.useImperial), label: "distance")
                 StatChip(value: "\(health.todayActiveMinutes)", unit: "min", label: "active", accent: true)
                 StatChip(value: "\(health.todayFloors)", unit: nil, label: "floors")
                 StatChip(value: health.weekAveragePerDay.stepsFormatted, unit: nil, label: "week avg")

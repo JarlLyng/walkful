@@ -10,6 +10,15 @@ extension Int {
     }
 }
 
+extension Double {
+    /// One decimal for the reader's locale: 5.8 in English, 5,8 in Danish
+    /// (#195). `String(format: "%.1f")` always writes a full stop whatever
+    /// the language, so it must not format anything a reader sees.
+    func oneDecimal(locale: Locale = .current) -> String {
+        self.formatted(.number.precision(.fractionLength(1)).locale(locale))
+    }
+}
+
 /// Afstandsvisning — HealthKit giver os kilometer; vi konverterer til
 /// brugerens valgte enhed (metrisk/imperial).
 enum Units {

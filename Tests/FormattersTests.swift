@@ -13,4 +13,15 @@ final class FormattersTests: XCTestCase {
         XCTAssertEqual(7_000.stepsFormatted, "7\(sep)000")
         XCTAssertEqual(1_234_567.stepsFormatted, "1\(sep)234\(sep)567")
     }
+
+    /// #195: the distance chip read "5.8 km" on a Danish phone. Pinned to
+    /// explicit locales, since the simulator's own locale says nothing.
+    func testOneDecimalUsesTheLocalesDecimalSeparator() {
+        let da = Locale(identifier: "da_DK"), en = Locale(identifier: "en_US")
+        XCTAssertEqual(5.8.oneDecimal(locale: da), "5,8")
+        XCTAssertEqual(5.8.oneDecimal(locale: en), "5.8")
+        XCTAssertEqual(5.99.oneDecimal(locale: da), "6,0")
+        XCTAssertEqual(0.0.oneDecimal(locale: da), "0,0")
+        XCTAssertEqual(1.36.oneDecimal(locale: en), "1.4")
+    }
 }
