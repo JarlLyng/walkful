@@ -35,6 +35,8 @@ header.site { display: flex; align-items: center; justify-content: space-between
 .crumbs { font-size: 13px; color: var(--text-3); margin: 16px 0 0; }
 .crumbs a { color: var(--text-3); }
 
+/* Instrument Sans, from the identity sheet (#185). */
+h1, h2, h3, .logo { font-family: var(--ij-font-display, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif); }
 h1 { font-size: clamp(28px, 6vw, 38px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin: 12px 0 8px; }
 h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin: 36px 0 8px; }
 h3 { font-size: 18px; font-weight: 600; margin: 26px 0 6px; }

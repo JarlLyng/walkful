@@ -7,7 +7,7 @@ inherited. The strategy hub holds the same table for every site in the portfolio
 |---|---|
 | **Ground** | Light, pinned. Calm and daytime. |
 | **Accent** | Purple, `#A435D2`, as the App Store posters and listing use. |
-| **Type voice** | Outfit for display, Inter for copy. |
+| **Type voice** | Instrument Sans for display (headings and the wordmark), the system UI face for copy. |
 | **Imagery mode** | The product screen first, then the step slider. |
 | **Motion** | The step slider is the one element that responds to the visitor. Copy is never hidden behind motion. |
 | **Signature** | The step slider. Keep it as it is. |
@@ -28,6 +28,9 @@ itself keeps both modes**; this is about the site only.
 - `color-scheme: light` on the root of every page, so form controls, scrollbars and
   system colours stay light too.
 - One `theme-color`, `#A435D2`.
+- `class="light"` on every `<html>`. The design system's identity sheet (`identity/walkful.css`,
+  loaded for the display face) carries a dark-mode rule of its own, guarded by
+  `:root:not(.light)`. The class keeps it on the light values.
 - **The footer component has to be pinned separately.** `<ij-footer>` follows the OS
   colour scheme unless the host sets its `--ij-*` tokens. Each stylesheet sets four of
   them on `ij-footer`, to the component's own light values. Remove that rule and a
