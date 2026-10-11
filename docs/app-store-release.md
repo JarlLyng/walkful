@@ -49,7 +49,12 @@ Calm, private step tracker
 
 **Promotional text** (≤170 chars). The only listing field that can be changed
 without a submission, including while a version is in review, so it is where a
-new message can go out first. Current, 143 chars:
+new message can go out first. Current, live since 1.1.3 (read back from the store on
+2026-10-09), 164 chars:
+```
+Every step counts. A calm, private walking tracker that turns your steps into meaning. The interval coach now guides you even with your phone locked in your pocket.
+```
+The evergreen version to go back to once the coach news is old, 143 chars:
 ```
 Every step counts. A calm, private walking tracker that turns your steps into meaning. No ads, no accounts, and nothing ever leaves your phone.
 ```
@@ -156,7 +161,11 @@ Walkful: Skridttæller
 Privat gå-app, ingen reklamer
 ```
 
-**Promotional text** (≤170). Current, 147 chars:
+**Promotional text** (≤170). Current, live since 1.1.3 (read back 2026-10-09), 146 chars:
+```
+Hvert skridt tæller. En rolig, privat gå-app der gør dine skridt til mening. Intervalgang-coachen guider dig nu, også med telefonen låst i lommen.
+```
+The evergreen version, 147 chars:
 ```
 Hvert skridt tæller. En rolig, privat gå-app der gør dine skridt til mening. Ingen reklamer, ingen konti, og intet forlader nogensinde din telefon.
 ```

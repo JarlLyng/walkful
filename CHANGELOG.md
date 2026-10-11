@@ -3,7 +3,7 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
-## [1.1.3] — unreleased — the coach reaches your pocket
+## [1.1.3] — 2026-09-26 — the coach reaches your pocket
 
 ### Fixed
 - **The interval coach now guides you with your phone locked in a pocket.** It kept the right time, but it only buzzed while the screen was on, so with the phone in a pocket, which is how most people walk, it never told you when to switch between easy and brisk. Every change of pace is now a notification that vibrates and sounds with the phone locked. Pausing, resuming or ending the walk keeps them in step, and nothing fires after you end it. With the app open on screen, the phone taps you exactly as before (#174).
