@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="da" class="light">
+<html lang="da">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,13 +12,15 @@
 <link rel="alternate" hreflang="x-default" href="https://walkful.iamjarl.com/support.html" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<!-- Display face and identity from one design-system release, so they can't drift
-     apart (#185). Same CDN as the footer, so no new third party; Google Fonts is gone. -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jarllyng/iamjarl-design@v1.17.0/dist/fonts/instrument-sans.css"
-  integrity="sha384-VOEtgni8jpPomLQ2v9GNBhDgZfF6zaCwrIMrCju8lVQtG149ciO2ck4PNxBxcmUZ" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jarllyng/iamjarl-design@v1.17.0/dist/identity/walkful.css"
-  integrity="sha384-t4j70NxmFN6dJixWUyGuvrn9jHJ7l0m/bc39/BigALnaJ7u56PV7T8NY/dHbm436" crossorigin="anonymous" />
-<meta name="theme-color" content="#A435D2" />
+<!-- Walkful's identity from the design system, one release (#200): sand, charcoal,
+     magenta, and Fraunces for headings. Light only, whatever the visitor's setting. -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jarllyng/iamjarl-design@v1.22.0/dist/css/tokens.css"
+  integrity="sha384-8is+xEJWb1BMGykI/0iVM+8wsERx5OFBsEse0wyYlHXI4SpsvbvnA+GzCAB0bmPN" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jarllyng/iamjarl-design@v1.22.0/dist/identity/walkful.css"
+  integrity="sha384-cvJcaGhwrQll/8y8AtD8vyP1CLHCFtgiUBIuYApLk7K6PGrX5J1GL8mimiDXkKJI" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jarllyng/iamjarl-design@v1.22.0/dist/fonts/fraunces.css"
+  integrity="sha384-g2jn6Eb2ibuITmPrsbZlJUK8B5oHmTzc6l74BFuzHyR90rrYdl3FotWrWaKCA8Wj" crossorigin="anonymous" />
+<meta name="theme-color" content="#F5EFE6" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Support · Walkful" />
 <meta property="og:description" content="Få hjælp til Walkful. Kontakt support og løs almindelige problemer." />
@@ -26,7 +28,7 @@
 <meta property="og:image" content="https://walkful.iamjarl.com/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Walkful med teksten Steps with meaning, not just a count, og appens Today-skærm med dagens skridtring." />
+<meta property="og:image:alt" content="Walkful med teksten Every step counts ved siden af appens I dag-skærm med dagens skridtring." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://walkful.iamjarl.com/og-image.png" />
 <script defer src="https://umami-iamjarl.vercel.app/script.js" data-website-id="2b384f21-31d1-4b7b-a6bf-82328062883e" data-domains="walkful.iamjarl.com"></script>
@@ -34,22 +36,21 @@
      the registry in the design system, inlined so they reach crawlers that do
      not run JS. Regenerate from dist/footers/walkful.html rather than editing
      them by hand, and keep the tag pinned. -->
-<script type="module"
-  src="https://cdn.jsdelivr.net/gh/jarllyng/iamjarl-design@v1.8.1/dist/components/ij-footer.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/jarllyng/iamjarl-design@v1.22.0/dist/components/ij-footer.js"
+  integrity="sha384-bUtSLlSYOBCW6gfXvlnaXfzmIt3VSYTXunF4GDlaL0x1WR9LjRfl/5im/s6z9qtu" crossorigin="anonymous"></script>
 <style>
-  :root{color-scheme:light;--primary:#A435D2;--accent-text:#7A2499;--bg:#fff;--surface:rgba(0,0,0,0.04);--text:#000;--text-2:rgba(0,0,0,0.70);--text-3:rgba(0,0,0,0.55);--border:rgba(0,0,0,0.12)}
+  :root{--primary:var(--ij-color-accent-text);--accent-text:var(--ij-color-accent-text);--bg:var(--ij-color-bg-app);--surface:var(--ij-color-bg-card);--text:var(--ij-color-text-primary);--text-2:var(--ij-color-text-secondary);--text-3:var(--ij-color-text-tertiary);--border:var(--ij-color-border-subtle)}
   *{box-sizing:border-box}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  body{margin:0;font-family:var(--ij-font-ui,system-ui),-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:18px;background:var(--bg);color:var(--text);line-height:1.7}
   a{color:var(--accent-text)}
   .wrap{max-width:720px;margin:0 auto;padding:24px 20px 64px}
-  h1,h2,.logo{font-family:var(--ij-font-display,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif)}
+  h1,h2,.logo{font-family:var(--ij-font-display,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif);font-variation-settings:var(--ij-font-display-axes,normal)}
   h1{font-size:34px;font-weight:600;letter-spacing:-0.02em;margin:24px 0 8px}
   h2{font-size:20px;font-weight:600;margin:32px 0 8px}
   p,li{color:var(--text-2);margin:0 0 12px}
   ol,ul{padding-left:22px}
   .logo{font-weight:600;font-size:20px;color:var(--text);text-decoration:none}
   .muted{color:var(--text-3);font-size:14px}
-  ij-footer{--ij-color-text-primary:rgba(0,0,0,1);--ij-color-text-secondary:rgba(0,0,0,0.70);--ij-color-primary:#A435D2;--ij-color-border-subtle:rgba(0,0,0,0.10)}
   .site-footer{margin-top:40px;border-top:1px solid var(--border);padding-top:20px}
   .site-footer a{color:var(--text-2);text-decoration:none}
   .site-footer a:hover{color:var(--primary)}
@@ -104,11 +105,11 @@
       <a slot="links" href="/privacy.html" hreflang="en">Privatlivspolitik (EN)</a>
       <a slot="links" href="/da/support.html">Support</a>
 
-      <!-- IAMJARL cross-links for Walkful — generated, do not edit -->
-      <!-- design system v1.8.1, registry updated 2026-09-12 -->
+      <!-- IAMJARL cross-links for Walkful: generated, do not edit -->
+      <!-- design system v1.22.0, registry updated 2026-10-11 -->
       <a slot="cross-links" href="https://anvilworkout.iamjarl.com">Anvil Workout</a>
-      <a slot="cross-links" href="https://wodrounds.iamjarl.com">WODrounds</a>
       <a slot="cross-links" href="https://weannicotine.iamjarl.com">Wean Nicotine</a>
+      <a slot="cross-links" href="https://wodrounds.iamjarl.com">WODrounds</a>
       <a slot="cross-links" href="https://madebyhuman.iamjarl.com">Made by Human</a>
       <a slot="cross-links" href="https://iamjarl.com">All projects</a>
 
