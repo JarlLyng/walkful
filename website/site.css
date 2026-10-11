@@ -34,6 +34,10 @@
 .faq summary::marker { color: var(--ij-color-accent); }
 .faq details p { margin: var(--ij-spacing-md) 0 0; color: var(--ij-color-text-secondary); }
 
-/* The Made by Human "Co-created with AI" badge, beside the illustration credit. */
-.mbh-badge { display: inline-block; vertical-align: middle; margin-left: var(--ij-spacing-xs, 4px); }
-.mbh-badge img { display: block; height: 28px; width: auto; }
+
+/* <ij-footer> is a plain block: the page gives it the content width and room,
+   as the other pages do with their own wrapper. Its slotted links are light DOM,
+   so the kit's accent link colour would reach them; keep them quiet instead. */
+.site-footer { padding-block: var(--ij-mkt-space-block) var(--ij-mkt-space-section); }
+.site-footer a { color: var(--ij-color-text-secondary); text-decoration: none; }
+.site-footer a:hover { color: var(--ij-color-accent-text); }

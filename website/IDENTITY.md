@@ -45,9 +45,13 @@ the path as the one magenta line. They were drawn with AI, as SVG code, in iamja
 The owner chose them on 2026-10-11 over his own Figma drafts, which did not come out as
 vectors.
 
-The footer says so: "Illustrations drawn with AI", with the Made by Human "Co-created with
-AI" badge beside it. They are never presented as hand-drawn. If drawings the owner finishes
-by hand replace them, the credit becomes "drawn with AI and finished by Jarl".
+The footer says so: "Illustrations drawn with AI". They are never presented as hand-drawn. If
+drawings the owner finishes by hand replace them, the credit becomes "drawn with AI and finished
+by Jarl".
+
+**No Made by Human badge on the site.** The hub's `PROJECT_STANDARDS.md` keeps the "Co-created
+with AI" badge to the repo's README, never a marketing site. It shipped in the footer for a day
+and came out again (2026-10-11).
 
 ## The loop and the screens
 
