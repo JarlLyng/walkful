@@ -33,3 +33,7 @@
 }
 .faq summary::marker { color: var(--ij-color-accent); }
 .faq details p { margin: var(--ij-spacing-md) 0 0; color: var(--ij-color-text-secondary); }
+
+/* The Made by Human "Co-created with AI" badge, beside the illustration credit. */
+.mbh-badge { display: inline-block; vertical-align: middle; margin-left: var(--ij-spacing-xs, 4px); }
+.mbh-badge img { display: block; height: 28px; width: auto; }

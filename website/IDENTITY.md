@@ -40,12 +40,14 @@ The step slider, the old signature, is gone with the redesign. The page the owne
 
 ## The drawings
 
-Generated with AI and finished by the owner in Figma, then exported as SVG. Until they land,
-the statements carry the kit's placeholder drawings.
+The statements carry the line drawings from the design system's kit: trees and a path, with
+the path as the one magenta line. They were drawn with AI, as SVG code, in iamjarl-design.
+The owner chose them on 2026-10-11 over his own Figma drafts, which did not come out as
+vectors.
 
-When the real ones go in, the footer gets the credit line "Illustrations drawn with AI and
-finished by Jarl" and the Made by Human "Co-created with AI" badge. They are never presented
-as hand-drawn.
+The footer says so: "Illustrations drawn with AI", with the Made by Human "Co-created with
+AI" badge beside it. They are never presented as hand-drawn. If drawings the owner finishes
+by hand replace them, the credit becomes "drawn with AI and finished by Jarl".
 
 ## The loop and the screens
 
@@ -59,13 +61,13 @@ those screens change.**
 word of the page. Per the hub's `DESIGN.md` it does two jobs: the site's `og:image` on every page,
 and the repo's GitHub social preview.
 
-**It still has the old identity:** white with the purple accent, from September. It should be
-remade on sand with the new face before the redesign ships, from the same `-site` capture, and
-uploaded to GitHub again.
+It carries the name and "Every step counts." in Fraunces soft, the hero's magenta line, one
+line of outcome, and the real Today screen in a generic phone, on sand. It moved to this
+identity with the redesign.
 
 Generated, not drawn by hand: `appstore/social/make_card.py` builds it from
-`appstore/social/today-en.png` with the App Store poster tool's own helpers, so it shares the
-posters' look. **Recapture that screenshot whenever the Today screen's copy changes.** The card is
+`appstore/social/today-en.png`, the site-mode capture, with the App Store poster tool's bezel and
+shadow, and Fraunces from iamjarl-design. **Recapture that screenshot whenever the Today screen's copy changes.** The card is
 public imagery, and an old capture advertises old copy; the first draft of this card showed an
 em-dash the app had already dropped, because it used an August capture.
 
