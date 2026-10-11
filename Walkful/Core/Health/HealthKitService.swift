@@ -450,7 +450,7 @@ final class HealthKitService {
 
     #if DEBUG
     /// Fills the service with realistic sample data for App Store screenshots.
-    func loadSampleData() { fillWithSampleData() }
+    func loadSampleData() { fillWithSampleData(calmDay: LaunchArgs.site) }
     #endif
 
     /// Fills the service with realistic synthetic data. Used by the DEBUG
@@ -458,7 +458,7 @@ final class HealthKitService {
     /// example of the Insights screen on a throwaway service instance. Never
     /// called on the live service outside screenshot mode, and the paywall
     /// labels it as example data.
-    func fillWithSampleData() {
+    func fillWithSampleData(calmDay: Bool = false) {
         let cal = isoCalendar()
         let today = cal.startOfDay(for: .now)
         var hist: [DayStat] = []
@@ -478,13 +478,18 @@ final class HealthKitService {
             if i > 45, Int(x.truncatingRemainder(dividingBy: 8)) == 3 { steps *= 0.5 }
             hist.append(DayStat(date: date, steps: max(800, Int(steps))))
         }
+        if calmDay, hist.count >= 2 {
+            // Today and yesterday under the 7,000 goal: an ordinary day, no streak.
+            hist[hist.count - 1] = DayStat(date: hist[hist.count - 1].date, steps: 5_840)
+            hist[hist.count - 2] = DayStat(date: hist[hist.count - 2].date, steps: 6_310)
+        }
         dailyHistory = hist
         authState = .authorized
 
         todaySteps = hist.last?.steps ?? 8_240
         todayDistanceKm = Double(todaySteps) * 0.00072
-        todayFloors = 11
-        todayActiveMinutes = 38
+        todayFloors = calmDay ? 6 : 11
+        todayActiveMinutes = calmDay ? 31 : 38
 
         let tws = Self.weekStart(today, cal)
         var weekly: [Date: Int] = [:]

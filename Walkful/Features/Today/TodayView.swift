@@ -62,7 +62,25 @@ struct TodayView: View {
         // average, the streak and the week widget stayed empty.
         .task(id: health.authState) {
             if LaunchArgs.screenshots {
-                animatedProgress = progress
+                if LaunchArgs.site {
+                    // The site's hero loop: the ring fills once, then holds. Wait
+                    // for the sample data to show the dashboard, or the fill
+                    // plays behind the connect card where no recording sees it.
+                    for _ in 0..<60 where health.authState != .authorized {
+                        try? await Task.sleep(for: .milliseconds(50))
+                    }
+                    try? await Task.sleep(for: .seconds(3.0))
+                    // Stepped rather than one withAnimation: the ring's own 0.5 s
+                    // animation would override a longer one. 2.4 s, eased.
+                    let target = progress
+                    for i in 1...72 {
+                        let t = Double(i) / 72
+                        animatedProgress = target * (t < 0.5 ? 2 * t * t : 1 - pow(-2 * t + 2, 2) / 2)
+                        try? await Task.sleep(for: .milliseconds(33))
+                    }
+                } else {
+                    animatedProgress = progress
+                }
                 // Publish the sample snapshot too, so Home Screen widgets are
                 // presentable in App Store captures rather than showing 0.
                 publishToWidget()
@@ -103,6 +121,8 @@ struct TodayView: View {
 
     /// Fyld ringen op til den aktuelle progress (animeret, med mindre Reduce Motion).
     private func syncProgress() {
+        // The site's loop drives the ring itself (see the screenshot branch).
+        if LaunchArgs.site { return }
         if reduceMotion {
             animatedProgress = progress
         } else {

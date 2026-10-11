@@ -1,0 +1,35 @@
+/* Walkful's own additions to the design system's marketing kit (#200).
+   The kit and Walkful's identity sheet set the page: sand, charcoal, magenta,
+   Fraunces for headlines. This file adds only what the kit has no section for,
+   and takes every value from the tokens. */
+
+/* The /learn/ articles as cards: the whole card is the link. */
+.ij-card--link {
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: border-color var(--ij-duration-fast, 150ms) var(--ij-easing-standard, ease);
+}
+.ij-card--link .ij-title { color: var(--ij-color-text-primary); }
+.ij-card--link:hover { border-color: var(--ij-color-accent); }
+.ij-card--link:hover .ij-title { text-decoration: underline; text-decoration-color: var(--ij-color-accent); text-underline-offset: 0.2em; }
+
+/* The FAQ: plain disclosures, readable with or without script. */
+.faq { display: grid; gap: var(--ij-spacing-sm); }
+.faq details {
+  background: var(--ij-color-bg-app);
+  border: 1px solid var(--ij-color-border-subtle);
+  border-radius: var(--ij-radius-md);
+  padding: var(--ij-spacing-lg);
+}
+.faq summary {
+  cursor: pointer;
+  font-family: var(--ij-font-display, var(--ij-font-ui));
+  font-variation-settings: var(--ij-font-display-axes, normal);
+  font-size: var(--ij-mkt-title-size);
+  line-height: var(--ij-mkt-title-leading);
+  color: var(--ij-color-text-primary);
+  list-style-position: outside;
+}
+.faq summary::marker { color: var(--ij-color-accent); }
+.faq details p { margin: var(--ij-spacing-md) 0 0; color: var(--ij-color-text-secondary); }

@@ -16,6 +16,13 @@ enum LaunchArgs {
         screenshots && screen == "paywall"
     }
 
+    /// `-site` with `-screenshots`: captures for the marketing site (walkful#200).
+    /// The site's rule is no streaks, so the sample day sits under the goal with
+    /// no streak behind it, and Today's ring fills once, for the hero's loop.
+    static var site: Bool {
+        screenshots && ProcessInfo.processInfo.arguments.contains("-site")
+    }
+
     static var screen: String {
         let args = ProcessInfo.processInfo.arguments
         if let i = args.firstIndex(of: "-screen"), i + 1 < args.count {
