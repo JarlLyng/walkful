@@ -3,6 +3,16 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
+## [1.1.4] — unreleased — the week shows up, and a way to write
+
+### Fixed
+- **This week, the week average and the streak now load when you open the app.** After the app had been closed, Today could show your day correctly but "No steps yet this week", a week average of 0 and no streak card, and the "This week" widget emptied too, until you switched tabs. The app now loads them as soon as it has Health access, and again whenever you come back to it, so a new day or week isn't shown with yesterday's numbers (#194).
+- **Decimals follow your language.** Distance and walking speed read 5,8 in Danish instead of 5.8 (#195).
+
+### Added
+- **Send feedback, in Settings.** It opens an email to support@iamjarl.com with the app and iOS version filled in, so there is a private way to say what's wrong next to the review link. Nothing is sent until you send it (#182).
+- **The app version at the bottom of Settings**, where the support page has always said it is.
+
 ## [1.1.3] — 2026-09-26 — the coach reaches your pocket
 
 ### Fixed

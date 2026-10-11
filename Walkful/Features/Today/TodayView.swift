@@ -15,6 +15,7 @@ struct TodayView: View {
     @State private var shareItem: ShareItem?
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.scenePhase) private var scenePhase
     @Environment(\.requestReview) private var requestReview
     @Environment(\.openURL) private var openURL
 
@@ -55,7 +56,11 @@ struct TodayView: View {
         .sheet(item: $shareItem) { item in
             ShareSheet(url: item.url)
         }
-        .task {
+        // Keyed on authState (#194). On a cold launch this runs while RootView is
+        // still re-establishing HealthKit access and authState is .unknown, so a
+        // plain .task skipped the load and never ran again: the week, the week
+        // average, the streak and the week widget stayed empty.
+        .task(id: health.authState) {
             if LaunchArgs.screenshots {
                 animatedProgress = progress
                 // Publish the sample snapshot too, so Home Screen widgets are
@@ -63,28 +68,37 @@ struct TodayView: View {
                 publishToWidget()
                 return
             }
-            if health.authState == .authorized {
-                await health.refreshToday()
-                await health.loadHistory()
-                // Adaptive goal nudges at most once per day, and never overrides
-                // a goal you changed yourself today.
-                if settings.adaptiveGoal,
-                   !Calendar.current.isDateInToday(settings.lastGoalAdjustmentDay) {
-                    settings.dailyGoal = HealthKitService.adaptedGoal(
-                        current: settings.dailyGoal,
-                        recentAverage: health.recentAverage(days: 14))
-                    settings.lastGoalAdjustmentDay = .now
-                }
-                publishToWidget()
-                syncProgress()
-                maybeCelebrateGoal()
-            }
+            await load()
+        }
+        // Coming back to the app reloads too, so a new day or week isn't shown
+        // with yesterday's history. The step observer only refreshes today.
+        .onChange(of: scenePhase) { _, phase in
+            guard phase == .active, !LaunchArgs.screenshots else { return }
+            Task { await load() }
         }
         .onChange(of: health.todaySteps) { _, _ in
             publishToWidget()
             syncProgress()
             maybeCelebrateGoal()
         }
+    }
+
+    private func load() async {
+        guard health.authState == .authorized else { return }
+        await health.refreshToday()
+        await health.loadHistory()
+        // Adaptive goal nudges at most once per day, and never overrides
+        // a goal you changed yourself today.
+        if settings.adaptiveGoal,
+           !Calendar.current.isDateInToday(settings.lastGoalAdjustmentDay) {
+            settings.dailyGoal = HealthKitService.adaptedGoal(
+                current: settings.dailyGoal,
+                recentAverage: health.recentAverage(days: 14))
+            settings.lastGoalAdjustmentDay = .now
+        }
+        publishToWidget()
+        syncProgress()
+        maybeCelebrateGoal()
     }
 
     /// Fyld ringen op til den aktuelle progress (animeret, med mindre Reduce Motion).

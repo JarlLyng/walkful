@@ -137,12 +137,25 @@ struct SettingsView: View {
                     Label("Share Walkful", systemImage: "square.and.arrow.up")
                         .foregroundStyle(Tokens.Palette.primary)
                 }
+                // A private way to say what's wrong, next to the public review (#182).
+                Link(destination: Feedback.mailURL()) {
+                    Label("Send feedback", systemImage: "envelope")
+                        .foregroundStyle(Tokens.Palette.primary)
+                }
+                Text("Opens an email to support@iamjarl.com with the app and iOS version filled in. Nothing is sent until you send it.")
+                    .font(Tokens.TextStyle.caption)
+                    .foregroundStyle(Tokens.Palette.textTertiary)
             }
 
-            Section("Privacy") {
+            Section {
                 Label("All data stays on your device", systemImage: "lock.fill")
                     .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textSecondary)
+            } header: {
+                Text("Privacy")
+            } footer: {
+                // The support pages tell people to read the version here.
+                Text(verbatim: "Walkful \(Feedback.appVersion)")
             }
         }
         .tint(Tokens.Palette.primary)
