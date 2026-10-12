@@ -35,32 +35,6 @@
 .faq summary::marker { color: var(--ij-color-accent); }
 .faq details p { margin: var(--ij-spacing-md) 0 0; color: var(--ij-color-text-secondary); }
 
-
-/* <ij-footer> is a plain block: the page gives it the content width and room,
-   as the other pages do with their own wrapper. Its slotted links are light DOM,
-   so the kit's accent link colour would reach them; keep them quiet instead. */
-.site-footer { padding-block: var(--ij-mkt-space-block) var(--ij-mkt-space-section); }
-.site-footer a { color: var(--ij-color-text-secondary); text-decoration: none; }
-.site-footer a:hover { color: var(--ij-color-accent-text); }
-
-/* The same reach in the nav: kit.css colours every link on the page with the
-   accent text, and as light DOM that beats <ij-nav>'s own ::slotted colours.
-   On the Download button that put deep magenta text on the magenta fill. Give
-   each slot back the colour the nav itself sets for it. */
-ij-nav a[slot="brand"], ij-nav a[slot="secondary"] { color: var(--ij-color-text-primary); }
-ij-nav a[slot="links"] { color: var(--ij-color-text-secondary); }
-ij-nav a[slot="links"]:hover { color: var(--ij-color-text-primary); }
-ij-nav a[slot="cta"] { color: var(--ij-color-on-accent); }
-
 /* The source card's own `margin: 0` comes after the kit's stack rule and wins,
    so "Evidence, not myths." sat flush on the card (#203). Give it the stack's gap. */
 .ij-stack > * + .ij-source { margin-top: var(--ij-mkt-space-stack); }
-
-/* The tour's resting row is a centred flex row that scrolls. When it is wider
-   than its scroller, as three phones are on a phone, centring pushes the first
-   screen past the start edge, where it cannot be scrolled to (#203). Auto margins
-   centre the row when it fits and start it at the edge when it doesn't. Wean's
-   workaround; drop it with the version bump once iamjarl-design#80 ships. */
-.ij-tour:not(.is-live) .ij-tour__screens { justify-content: flex-start; }
-.ij-tour:not(.is-live) .ij-tour__screens > :first-child { margin-left: auto; }
-.ij-tour:not(.is-live) .ij-tour__screens > :last-child { margin-right: auto; }
