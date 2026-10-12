@@ -34,7 +34,3 @@
 }
 .faq summary::marker { color: var(--ij-color-accent); }
 .faq details p { margin: var(--ij-spacing-md) 0 0; color: var(--ij-color-text-secondary); }
-
-/* The source card's own `margin: 0` comes after the kit's stack rule and wins,
-   so "Evidence, not myths." sat flush on the card (#203). Give it the stack's gap. */
-.ij-stack > * + .ij-source { margin-top: var(--ij-mkt-space-stack); }

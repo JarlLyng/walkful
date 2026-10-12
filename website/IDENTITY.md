@@ -21,7 +21,7 @@ The step slider, the old signature, is gone with the redesign. The page the owne
 
 ## How it is enforced
 
-- **Everything comes from one design-system release,** `@v1.29.0`, with SRI: the tokens,
+- **Everything comes from one design-system release,** `@v1.29.1`, with SRI: the tokens,
   Walkful's identity sheet, the Fraunces face, the kit, `<ij-nav>` and `<ij-footer>`. Bump
   them together, never one by one.
 - **The identity sheet holds the page light** whatever the visitor's setting, so there is no
