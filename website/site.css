@@ -29,7 +29,8 @@
   font-size: var(--ij-mkt-title-size);
   line-height: var(--ij-mkt-title-leading);
   color: var(--ij-color-text-primary);
-  list-style-position: outside;
+  /* Inside, or the marker sits on the card's left border (#203). */
+  list-style-position: inside;
 }
 .faq summary::marker { color: var(--ij-color-accent); }
 .faq details p { margin: var(--ij-spacing-md) 0 0; color: var(--ij-color-text-secondary); }
@@ -50,3 +51,16 @@ ij-nav a[slot="brand"], ij-nav a[slot="secondary"] { color: var(--ij-color-text-
 ij-nav a[slot="links"] { color: var(--ij-color-text-secondary); }
 ij-nav a[slot="links"]:hover { color: var(--ij-color-text-primary); }
 ij-nav a[slot="cta"] { color: var(--ij-color-on-accent); }
+
+/* The source card's own `margin: 0` comes after the kit's stack rule and wins,
+   so "Evidence, not myths." sat flush on the card (#203). Give it the stack's gap. */
+.ij-stack > * + .ij-source { margin-top: var(--ij-mkt-space-stack); }
+
+/* The tour's resting row is a centred flex row that scrolls. When it is wider
+   than its scroller, as three phones are on a phone, centring pushes the first
+   screen past the start edge, where it cannot be scrolled to (#203). Auto margins
+   centre the row when it fits and start it at the edge when it doesn't. Wean's
+   workaround; drop it with the version bump once iamjarl-design#80 ships. */
+.ij-tour:not(.is-live) .ij-tour__screens { justify-content: flex-start; }
+.ij-tour:not(.is-live) .ij-tour__screens > :first-child { margin-left: auto; }
+.ij-tour:not(.is-live) .ij-tour__screens > :last-child { margin-right: auto; }
