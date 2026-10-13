@@ -3,7 +3,7 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
-## [1.1.4] — unreleased — the week shows up, and a way to write
+## [1.1.4] — 2026-10-12 — the week shows up, and a way to write
 
 ### Fixed
 - **This week, the week average and the streak now load when you open the app.** After the app had been closed, Today could show your day correctly but "No steps yet this week", a week average of 0 and no streak card, and the "This week" widget emptied too, until you switched tabs. The app now loads them as soon as it has Health access, and again whenever you come back to it, so a new day or week isn't shown with yesterday's numbers (#194).
