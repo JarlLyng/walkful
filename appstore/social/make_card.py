@@ -1,7 +1,7 @@
 # Social card for Walkful: og:image and GitHub social preview, per the hub's
 # DESIGN.md "Social cards". On the site's identity since the redesign (#200):
-# warm sand, charcoal, the icon's magenta, Fraunces soft for the words that
-# carry the voice. Reuses the App Store poster tool's bezel and shadow, so the
+# warm sand, charcoal, Fraunces soft for the words that carry the voice. No
+# underline: on the site the walked path is the one magenta line (#207). Reuses the App Store poster tool's bezel and shadow, so the
 # phone matches the posters; the bezel is generic, with no island.
 #
 # Usage, from the repo root with the hub and iamjarl-design cloned alongside:
@@ -23,7 +23,6 @@ FRAUNCES = os.path.join(HERE, "..", "..", "..", "iamjarl-design", "fonts", "frau
 SAND = P.hex_to_rgb("#F5EFE6")
 CHARCOAL = P.hex_to_rgb("#2B2825")
 SECONDARY = P.hex_to_rgb("#53504C")
-MAGENTA = P.hex_to_rgb("#F140FE")       # strokes only, never small text
 LINK = P.hex_to_rgb("#A80FB3")          # the text-safe accent
 
 def fraunces(size, weight=400):
@@ -54,13 +53,8 @@ d.text((M, 104), "Walkful", font=fraunces(84), fill=CHARCOAL)
 head_f = fraunces(56)
 d.text((M, 222), "Every step counts.", font=head_f, fill=CHARCOAL)
 
-# The hero's loose magenta line under the headline, as on the page.
-line_y = 304
-pts = [(M + 2 + i * 6, line_y + 5 * __import__("math").sin(i / 7.0)) for i in range(0, 74)]
-d.line(pts, fill=MAGENTA, width=5, joint="curve")
-
 facts_f = P.font(26, "Regular")
-y = 346
+y = 330
 for line in P.wrap(d, "A calm, private step tracker for iPhone. It all stays on your phone, and nothing scolds you for a quiet day.", facts_f, col_w):
     d.text((M, y), line, font=facts_f, fill=SECONDARY)
     y += 38
