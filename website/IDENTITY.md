@@ -21,9 +21,13 @@ The step slider, the old signature, is gone with the redesign. The page the owne
 
 ## How it is enforced
 
-- **Everything comes from one design-system release,** `@v1.32.1`, with SRI: the tokens,
+- **Everything comes from one design-system release,** `@v1.31.0`, with SRI: the tokens,
   Walkful's identity sheet, the Fraunces face, the kit, `<ij-nav>` and `<ij-footer>`. Bump
   them together, never one by one.
+  **One exception for now (#210):** `ij-footer.js` and `kit.css` are at `@v1.32.1`, for the
+  footer's quiet text at AA. jsDelivr answered 503 for uncached v1.32.1 files on 2026-10-15,
+  Fraunces' sheet among them, so the rest stays on v1.31.0, which is unchanged for Walkful and
+  cached. Move the rest to v1.32.1 once every file there serves 200.
 - **The identity sheet holds the page light** whatever the visitor's setting, so there is no
   `prefers-color-scheme` rule in `website/` and no `class="light"` to keep. With the system
   in dark mode, the page is still sand.
