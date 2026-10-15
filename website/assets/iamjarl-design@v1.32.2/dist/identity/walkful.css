@@ -1,0 +1,101 @@
+/* IAMJARL identity for Walkful: generated, do not edit */
+/* design system v1.32.2. Light only: this sheet holds the site in that mode whatever the visitor's setting. */
+/* Display face: Fraunces (OFL-1.1). Self-host it; see design.md. */
+
+:root {
+  color-scheme: light;
+  --ij-color-bg-app: #F5EFE6;
+  --ij-color-bg-card: #FFFCF7;
+  --ij-color-surface-default: #FFFCF7;
+  --ij-color-text-primary: #2B2825;
+  --ij-color-text-secondary: #53504C;
+  --ij-color-text-tertiary: #68645F;
+  --ij-color-accent: #F140FE;
+  --ij-color-accent-rgb: 241, 64, 254;
+  --ij-color-on-accent: #000000;
+  --ij-color-accent-text: #A80FB3;
+  --ij-color-accent-family: #A80FB3;
+  --ij-color-accent-family-rgb: 168, 15, 179;
+  --ij-font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --ij-font-display-axes: 'SOFT' 100;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ij-color-primary-rgb: 164, 53, 210; /* deprecated, use color-mix() */
+    --ij-gradient-primary: linear-gradient(135deg, #A435D2, #E0529C); /* decorative only, no text colour clears AA */
+    --ij-gradient-brand: linear-gradient(135deg, #D0FF00, #A435D2); /* decorative only, no text colour clears AA */
+    --ij-color-primary: #A435D2;
+    --ij-color-on-primary: #FFFFFF;
+    --ij-color-primary-hover: #8E2BB8;
+    --ij-color-primary-pressed: #7A2499;
+    --ij-color-primary-subtle: rgba(164, 53, 210, 0.12);
+    --ij-color-text-primary: #000000;
+    --ij-color-text-secondary: rgba(0, 0, 0, 0.70);
+    --ij-color-text-tertiary: rgba(0, 0, 0, 0.55);
+    --ij-color-text-disabled: rgba(0, 0, 0, 0.35);
+    --ij-color-text-inverse: #FFFFFF;
+    --ij-color-bg-app: #FFFFFF;
+    --ij-color-bg-muted: rgba(0, 0, 0, 0.04);
+    --ij-color-bg-card: rgba(0, 0, 0, 0.04);
+    --ij-color-bg-disabled: rgba(0, 0, 0, 0.06);
+    --ij-color-surface-default: #FFFFFF;
+    --ij-color-surface-raised: rgba(0, 0, 0, 0.02);
+    --ij-color-border-subtle: rgba(0, 0, 0, 0.10);
+    --ij-color-border-default: rgba(0, 0, 0, 0.16);
+    --ij-color-state-success: #2E7D32;
+    --ij-color-state-warning: #C2410C;
+    --ij-color-state-error: #D70015;
+    --ij-color-bg-app: #F5EFE6;
+    --ij-color-bg-card: #FFFCF7;
+    --ij-color-surface-default: #FFFCF7;
+    --ij-color-text-primary: #2B2825;
+    --ij-color-text-secondary: #53504C;
+    --ij-color-text-tertiary: #68645F;
+    --ij-color-accent: #F140FE;
+    --ij-color-accent-rgb: 241, 64, 254;
+    --ij-color-on-accent: #000000;
+    --ij-color-accent-text: #A80FB3;
+    --ij-color-accent-family: #A80FB3;
+    --ij-color-accent-family-rgb: 168, 15, 179;
+  }
+}
+
+.dark {
+  --ij-color-primary-rgb: 164, 53, 210; /* deprecated, use color-mix() */
+  --ij-gradient-primary: linear-gradient(135deg, #A435D2, #E0529C); /* decorative only, no text colour clears AA */
+  --ij-gradient-brand: linear-gradient(135deg, #D0FF00, #A435D2); /* decorative only, no text colour clears AA */
+  --ij-color-primary: #A435D2;
+  --ij-color-on-primary: #FFFFFF;
+  --ij-color-primary-hover: #8E2BB8;
+  --ij-color-primary-pressed: #7A2499;
+  --ij-color-primary-subtle: rgba(164, 53, 210, 0.12);
+  --ij-color-text-primary: #000000;
+  --ij-color-text-secondary: rgba(0, 0, 0, 0.70);
+  --ij-color-text-tertiary: rgba(0, 0, 0, 0.55);
+  --ij-color-text-disabled: rgba(0, 0, 0, 0.35);
+  --ij-color-text-inverse: #FFFFFF;
+  --ij-color-bg-app: #FFFFFF;
+  --ij-color-bg-muted: rgba(0, 0, 0, 0.04);
+  --ij-color-bg-card: rgba(0, 0, 0, 0.04);
+  --ij-color-bg-disabled: rgba(0, 0, 0, 0.06);
+  --ij-color-surface-default: #FFFFFF;
+  --ij-color-surface-raised: rgba(0, 0, 0, 0.02);
+  --ij-color-border-subtle: rgba(0, 0, 0, 0.10);
+  --ij-color-border-default: rgba(0, 0, 0, 0.16);
+  --ij-color-state-success: #2E7D32;
+  --ij-color-state-warning: #C2410C;
+  --ij-color-state-error: #D70015;
+  --ij-color-bg-app: #F5EFE6;
+  --ij-color-bg-card: #FFFCF7;
+  --ij-color-surface-default: #FFFCF7;
+  --ij-color-text-primary: #2B2825;
+  --ij-color-text-secondary: #53504C;
+  --ij-color-text-tertiary: #68645F;
+  --ij-color-accent: #F140FE;
+  --ij-color-accent-rgb: 241, 64, 254;
+  --ij-color-on-accent: #000000;
+  --ij-color-accent-text: #A80FB3;
+  --ij-color-accent-family: #A80FB3;
+  --ij-color-accent-family-rgb: 168, 15, 179;
+}

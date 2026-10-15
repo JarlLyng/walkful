@@ -21,13 +21,16 @@ The step slider, the old signature, is gone with the redesign. The page the owne
 
 ## How it is enforced
 
-- **Everything comes from one design-system release,** `@v1.31.0`, with SRI: the tokens,
-  Walkful's identity sheet, the Fraunces face, the kit, `<ij-nav>` and `<ij-footer>`. Bump
-  them together, never one by one.
-  **One exception for now (#210):** `ij-footer.js` and `kit.css` are at `@v1.32.1`, for the
-  footer's quiet text at AA. jsDelivr answered 503 for uncached v1.32.1 files on 2026-10-15,
-  Fraunces' sheet among them, so the rest stays on v1.31.0, which is unchanged for Walkful and
-  cached. Move the rest to v1.32.1 once every file there serves 200.
+- **Everything comes from one design-system release, served from this site** (#212):
+  `assets/iamjarl-design@v1.32.2/`, with SRI. That covers the tokens, Walkful's identity sheet,
+  the Fraunces sheet and its woff2, the kit, `<ij-nav>`, `<ij-footer>` and the two store badges.
+  Nothing loads from jsDelivr: its `/gh/` path answered 503 for minutes on a new tag in October
+  2026, and three of these sheets block the first paint.
+  - **The files are copied from the tag**, never edited, and each is checked against the tag's
+    `dist/sri.json` (the recipe is in iamjarl-design's README, *A copy served from the site
+    itself*). The `integrity` values stay on the tags.
+  - **A bump is a new folder plus changed links**, never a file changed in place, and it moves
+    every file together.
 - **The identity sheet holds the page light** whatever the visitor's setting, so there is no
   `prefers-color-scheme` rule in `website/` and no `class="light"` to keep. With the system
   in dark mode, the page is still sand.
