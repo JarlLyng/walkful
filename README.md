@@ -1,67 +1,59 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="app-icon-dark.png">
+  <img src="app-icon-light.png" alt="" width="80" height="80">
+</picture>
+
 # Walkful
 
-> Every step counts.
+Calm, private step tracker
 
-[![CI](https://github.com/JarlLyng/walkful/actions/workflows/ci.yml/badge.svg)](https://github.com/JarlLyng/walkful/actions/workflows/ci.yml)
-![Platform](https://img.shields.io/badge/platform-iOS%2018%2B-000000?logo=apple)
-![Swift](https://img.shields.io/badge/Swift-5-F05138?logo=swift&logoColor=white)
-[![Download on the App Store](https://img.shields.io/badge/App_Store-Live-2E7D32?logo=apple&logoColor=white)](https://apps.apple.com/app/id6781303837)
-![Privacy](https://img.shields.io/badge/privacy-Data%20Not%20Collected-2E7D32)
-[![License](https://img.shields.io/badge/license-AGPL--3.0-2E7D32)](LICENSE)
-[![Co-created with AI](https://madebyhuman.iamjarl.com/badges/co-created-white.svg)](https://madebyhuman.iamjarl.com)
-
-A calm, private, evidence-based **step & walking tracker for iPhone and Apple Watch**. Walkful adds a meaningful motivation layer on top of Apple Health — and keeps **everything on your device**: no accounts, no servers, no ads, no data collection.
-
-Made by **IAMJARL** · [walkful.iamjarl.com](https://walkful.iamjarl.com)
-
-<p align="center">
-  <img src="docs/assets/today-light.png" width="232" alt="Today screen, light mode" />
-  <img src="docs/assets/today-dark.png" width="232" alt="Today screen, dark mode" />
-  <img src="docs/assets/insights-dark.png" width="232" alt="Insights screen, dark mode" />
+<!-- IAMJARL README store block for Walkful (en). Generated from apps.json, v1.34.0. Do not edit. -->
+<p>
+  <a href="https://apps.apple.com/app/id6781303837?pt=128512007&amp;ct=github&amp;mt=8"><picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JarlLyng/iamjarl-design/v1.34.0/badges/app-store-white-en-us.svg">
+    <img src="https://raw.githubusercontent.com/JarlLyng/iamjarl-design/v1.34.0/badges/app-store-black-en-us.svg" alt="Download on the App Store" width="120" height="40">
+  </picture></a>
+  <br>
+  Free · iOS 18 or later · <a href="https://walkful.iamjarl.com">walkful.iamjarl.com</a>
 </p>
 
----
+<p>
+  <img src="appstore/1.1.3/en/iphone-6.9-1.png" alt="Steps with meaning, not just a count. The Today screen, 10,720 steps against a 7,000-step goal, with the health benefit that level is linked to." width="240">
+  <img src="appstore/1.1.3/en/iphone-6.9-2.png" alt="One payment. No subscription, no ads, no accounts. The Insights tab, offering a year of trends and a consistency heatmap as a one-time Pro unlock." width="240">
+</p>
 
-## Status
+Every step counts. Walkful reads the steps your iPhone and Apple Watch already record in Apple Health, and shows what the day's walking does for your health, measured against about 7,000 steps rather than the 10,000 myth. It's for anyone who wants to walk a little more at their own pace, with no leaderboards and no pressure. The app is free, widgets and gentle move reminders included, and Walkful Pro is a one-time unlock with no subscription that adds Insights, the interval-walking coach and CSV export. Your health data stays on your iPhone: there's no account, no server and no ads, and the App Store privacy label reads Data Not Collected.
 
-- 🎉 **Live on the [App Store](https://apps.apple.com/app/id6781303837)** — v1.1.4, in English and Danish. Free app + a one-time **Walkful Pro** unlock.
-- Shipped: interval-walking coach, sedentary-aware nudges, Home/Lock Screen widgets, a shareable progress card, a deep Pro **Insights** tab (week/month/year trends, year heatmap, mobility & fitness, longevity-zone card, records, monthly recap, CSV export), the **Aurora** visual design, and full **accessibility** (Dynamic Type, VoiceOver, Reduced Motion).
-- 🚧 Next: Apple Watch app/complication, step de-dup with Apple Watch, ASO. See **[GitHub Issues](../../issues)** for the live backlog.
+## For developers
 
-## What makes it different
+<p>
+  <a href="https://madebyhuman.iamjarl.com"><picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://madebyhuman.iamjarl.com/badges/co-created-white.svg">
+    <img src="https://madebyhuman.iamjarl.com/badges/co-created-black.svg" alt="Co-created with AI" width="120" height="40"></picture></a>
+  <a href="https://github.com/JarlLyng/walkful/actions/workflows/ci.yml"><img src="https://github.com/JarlLyng/walkful/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/JarlLyng/walkful" alt="AGPL-3.0 License"></a>
+</p>
 
-- **Meaning over numbers** — progress is paired with what it means for your health, grounded in research (2025 Lancet Public Health; Bente Klarlund Pedersen), not the 10,000-steps myth.
-- **Private by architecture** — all data is read from Apple Health and processed on-device. App Store privacy label: *Data Not Collected*.
-- **Calm, no manipulation** — no pace-shaming, no social leaderboards, no dark patterns. You compete against your own records.
+The developer half: what's in the app, how to build and run it, how it is put together, how to contribute, and the license.
 
-The reasoning behind these lives in the private [strategy hub](https://github.com/JarlLyng/iamjarl-strategy), along with audience and market research. For how the app is actually built, see [ARCHITECTURE.md](ARCHITECTURE.md).
+### What's in it
 
----
+- **Today:** a progress ring with a line on what the day's steps mean, distance, active minutes, floors, this week's bars and a streak card.
+- **Insights (Pro):** week, month and year trends, a full-year consistency heatmap, mobility and fitness, records, a monthly recap and a longevity-zone card.
+- **Interval-walking coach (Pro):** guided easy and brisk sessions with haptics.
+- **Widgets:** Home Screen (small, and a medium "This week") and Lock Screen.
+- **Gentle nudges:** local reminders when you've been sitting a while, within the hours you choose.
+- **Sharing and export:** a progress card rendered on the device, and CSV export with Pro.
+- **English and Danish,** with Dynamic Type, VoiceOver and Reduce Motion support.
 
-## Tech stack
+What's next is tracked in [GitHub Issues](https://github.com/JarlLyng/walkful/issues).
 
-| | |
-|---|---|
-| Language / UI | Swift 5 (language mode), SwiftUI |
-| Min OS | iOS 18 |
-| Health data | HealthKit (read-only) |
-| Local storage | SwiftData |
-| Notifications | UserNotifications (local only) |
-| Background | BackgroundTasks (sedentary check) + App Group (widget sharing) |
-| Widgets | WidgetKit (Home Screen + Lock Screen) |
-| Monetization | StoreKit 2 — one-time non-consumable ("Walkful Pro") |
-| Diagnostics | MetricKit (Apple-native, no third-party SDK) |
-| Design system | [IAMJARLDesignTokens](https://github.com/JarlLyng/iamjarl-design) via SPM |
-| Project generation | [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`project.yml`) |
-
-There is **no backend** — by design.
-
-## Getting started
+### Build and run
 
 Prerequisites: **Xcode 26+** and **XcodeGen** (`brew install xcodegen`).
 
 ```bash
-# 1. Generate the Xcode project (it is git-ignored — project.yml is the source of truth)
+# 1. Generate the Xcode project (it is git-ignored; project.yml is the source of truth)
 xcodegen generate
 
 # 2. Open and run
@@ -73,12 +65,38 @@ xcodebuild -project Walkful.xcodeproj -scheme Walkful \
   -destination 'generic/platform=iOS Simulator' build
 ```
 
-> ℹ️ The `.xcodeproj` is **generated** and git-ignored. Never edit it by hand — change `project.yml` and re-run `xcodegen generate`. See [CONTRIBUTING.md](CONTRIBUTING.md).
+The `.xcodeproj` is **generated** and git-ignored. Never edit it by hand: change `project.yml` and re-run `xcodegen generate`. Tests are the `WalkfulTests` target, run through the `Walkful` scheme. See [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Project structure
+### Architecture
+
+How the code is organised and how data flows is in [ARCHITECTURE.md](ARCHITECTURE.md).
+
+**Principles:**
+
+- **Meaning over numbers.** Progress is paired with what it means for your health, grounded in research (2025 Lancet Public Health; Bente Klarlund Pedersen), not the 10,000-steps myth.
+- **Private by architecture.** All data is read from Apple Health and processed on the device. HealthKit access is read-only, and there is **no backend**, by design.
+- **Calm, no manipulation.** No pace-shaming, no social leaderboards, no dark patterns. You compete against your own records.
+
+#### Tech stack
+
+| | |
+|---|---|
+| Language / UI | Swift 5 (language mode), SwiftUI |
+| Min OS | iOS 18 |
+| Health data | HealthKit (read-only) |
+| Local storage | SwiftData |
+| Notifications | UserNotifications (local only) |
+| Background | BackgroundTasks (sedentary check) + App Group (widget sharing) |
+| Widgets | WidgetKit (Home Screen + Lock Screen) |
+| Monetization | StoreKit 2, one-time non-consumable ("Walkful Pro") |
+| Diagnostics | MetricKit (Apple-native, no third-party SDK) |
+| Design system | [IAMJARLDesignTokens](https://github.com/JarlLyng/iamjarl-design) via SPM |
+| Project generation | [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`project.yml`) |
+
+#### Project structure
 
 ```
-walking-app/
+walkful/
 ├─ project.yml              # XcodeGen project definition (source of truth)
 ├─ Walkful.storekit         # Local StoreKit config (testing only)
 ├─ Walkful/                 # App source
@@ -88,15 +106,16 @@ walking-app/
 │  │  ├─ Health/            # HealthKitService
 │  │  ├─ Persistence/       # AppSettings (@Model)
 │  │  ├─ Notifications/     # NudgeScheduler + SedentaryMonitor (BackgroundTasks)
-│  │  ├─ Store/             # Store (StoreKit 2 — Walkful Pro)
+│  │  ├─ Store/             # Store (StoreKit 2, Walkful Pro)
 │  │  ├─ Shared/            # SharedStore (App Group snapshot for the widget)
 │  │  ├─ Diagnostics/       # MetricsSubscriber (MetricKit)
 │  │  ├─ Theme/             # WalkfulTheme (IAMJARL tokens) + Components
 │  │  └─ Formatters.swift
-│  ├─ Features/             # Onboarding / Today / Insights / Coach / Paywall / Settings
+│  ├─ Features/             # Onboarding / Today / Insights / Coach / Paywall / Settings / Share
 │  └─ Resources/            # Assets.xcassets (layered app icon)
 ├─ WalkfulWidget/           # WidgetKit extension (Home + Lock Screen)
 ├─ Tests/                   # WalkfulTests unit tests (run via the Walkful scheme)
+├─ appstore/                # App Store posters: raw captures, manifest, composed sets
 ├─ website/                 # Marketing site (static, SEO/GEO)
 ├─ docs/                    # Process docs (roadmap, release guide, device checklist)
 ├─ docs/history/            # Superseded pre-launch specs (Danish, June 2026)
@@ -105,29 +124,29 @@ walking-app/
 └─ ARCHITECTURE.md CONTRIBUTING.md CHANGELOG.md   # Developer docs (English)
 ```
 
-> Generated and git-ignored: `Walkful.xcodeproj`, `Walkful/Info.plist`, `WalkfulWidget/Info.plist`. Run `xcodegen generate` after pulling.
+Generated and git-ignored: `Walkful.xcodeproj`, `Walkful/Info.plist`, `WalkfulWidget/Info.plist`. Run `xcodegen generate` after pulling.
 
-## Documentation
+#### Documentation
 
-- **[ARCHITECTURE.md](ARCHITECTURE.md)** — how the code is organised and how data flows.
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** — setup, conventions, workflow, release.
-- **[docs/ROADMAP.md](docs/ROADMAP.md)** — project status, how work is tracked, and where to start (handoff).
-- **[docs/app-store-release.md](docs/app-store-release.md)** — App Store listing copy + submit checklist.
-- **[docs/device-checklist.md](docs/device-checklist.md)** — what to verify on a physical iPhone/Watch (the things the simulator can't).
-- **[CHANGELOG.md](CHANGELOG.md)** — notable changes.
-- **[AGENTS.md](AGENTS.md)** — quick-start context for developers and coding agents, whichever you use.
-- **[docs/history/](docs/history/)** — the pre-launch product and technical specs (Danish, June 2026). Kept for context; they describe what was planned, not what shipped.
-- **[website/](website/)** — marketing site + privacy policy.
-- **Strategy & audience** (target audience, positioning, pricing, SEO/ASO, marketing) lives in the private [iamjarl-strategy](https://github.com/JarlLyng/iamjarl-strategy) hub (folder `Walkful/`), not in this public repo.
+- **[ARCHITECTURE.md](ARCHITECTURE.md):** how the code is organised and how data flows.
+- **[CONTRIBUTING.md](CONTRIBUTING.md):** setup, conventions, workflow, release.
+- **[docs/ROADMAP.md](docs/ROADMAP.md):** project status, how work is tracked, and where to start (handoff).
+- **[docs/app-store-release.md](docs/app-store-release.md):** App Store listing copy and the submit checklist.
+- **[docs/device-checklist.md](docs/device-checklist.md):** what to verify on a physical iPhone or Watch, the things the simulator can't show.
+- **[appstore/README.md](appstore/README.md):** how the App Store posters are captured and composed.
+- **[CHANGELOG.md](CHANGELOG.md):** notable changes.
+- **[AGENTS.md](AGENTS.md):** quick-start context for developers and coding agents, whichever you use.
+- **[docs/history/](docs/history/):** the pre-launch product and technical specs (Danish, June 2026). Kept for context; they describe what was planned, not what shipped.
+- **[website/](website/):** the marketing site and the privacy policy.
 
-## Privacy
+### Privacy
 
-Walkful collects nothing. Health data is read from Apple Health with explicit, granular permission, used only on-device, and never transmitted. See [website/privacy.html](website/privacy.html).
+Walkful collects nothing. Health data is read from Apple Health with explicit, granular permission, used only on the device, and never transmitted. See [website/privacy.html](website/privacy.html).
 
-## Security
+### Contributing
 
-Found a vulnerability? Please report it privately — see [SECURITY.md](SECURITY.md) — rather than opening a public issue.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) first. Bugs, feature requests and tasks are [GitHub Issues](https://github.com/JarlLyng/walkful/issues) on this repo, and the [Code of Conduct](CODE_OF_CONDUCT.md) applies. Found a vulnerability? Report it privately through [SECURITY.md](SECURITY.md) rather than in a public issue.
 
-## License
+### License
 
-[AGPL-3.0](LICENSE) © 2026 IAMJARL. Open source. Contributions welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
+[AGPL-3.0](LICENSE). Walkful is made by Jarl at [IAMJARL](https://iamjarl.com).
