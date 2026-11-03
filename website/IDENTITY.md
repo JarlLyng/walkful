@@ -1,7 +1,7 @@
 # Site identity
 
 Six decisions about how walkful.iamjarl.com looks, made on purpose rather than
-inherited. The strategy hub holds the same table for every site in the portfolio.
+inherited.
 
 Since 2026-10-11 Walkful is the flagship of the portfolio's new site design: each app
 gets its own personality, built on the design system's marketing kit (#200).
