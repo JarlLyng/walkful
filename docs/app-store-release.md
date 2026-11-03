@@ -3,8 +3,7 @@
 The living reference for Walkful's App Store presence: listing copy, privacy-label
 answers, review notes, and the submit checklist. Originally the launch guide (#8);
 the app has been **live since June 2026** (id [6781303837](https://apps.apple.com/app/id6781303837)).
-Keep this in sync when the listing changes in App Store Connect.
-(The **Danish** localized listing lives in the private strategy hub — `iamjarl-strategy/Walkful/aso.md`.)
+Keep this in sync when the listing changes in App Store Connect. The Danish listing is in §2b.
 
 App: **Walkful** · Bundle ID `com.iamjarl.walkful` · Team: IAMJARL (`KDWZ3WNLDK`)
 Category: **Health & Fitness** · Age rating: **4+** · Sign-in required: **No**
@@ -147,9 +146,8 @@ Made by IAMJARL.
 ## 2b. Danish listing (copy-paste)
 
 The Danish localization has its own name, subtitle, keywords, promotional text and
-description. They used to live in `docs/aso.md`, which left this repo when the strategy
-moved to the private hub, so every release they had to be reconstructed from memory. They
-belong here: this is the copy itself, not the reasoning behind it.
+description. They used to live in a file that left this repo, so every release they had to be
+reconstructed from memory. They belong here: this is the copy itself, not the reasoning behind it.
 
 Name, subtitle and description below are what is **live**, read back with the lookup command
 in the note further down, not what an old plan proposed. The em-dashes are removed, so

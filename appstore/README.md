@@ -1,8 +1,8 @@
 # App Store screenshots
 
-Posters for the App Store listing, built with the portfolio standard in the private hub
-(`DESIGN.md` → "App Store screenshots", implemented by `tools/appstore_screenshots.py`).
-Capture happens here, composition happens there, so every IAMJARL app shares one look.
+Posters for the App Store listing. The captures and the manifest live here. The posters are
+composed by the maintainer's poster tool, which lives outside this repo and gives every IAMJARL
+app the same look.
 
 ## Layout
 
@@ -14,7 +14,7 @@ Superseded release folders are deleted rather than kept. Git history has them.
 
 ## Walkful's settings
 
-From the per-app table in `DESIGN.md`, so nobody re-derives them:
+Written down here so nobody re-derives them:
 
 | Setting | Value | Why |
 |---|---|---|
@@ -28,7 +28,7 @@ are a candidate improvement.
 
 ## Shot order
 
-Ordered by proof then objection, per `DESIGN.md`, not as a feature tour:
+Ordered by proof then objection, not as a feature tour:
 
 1. **Today** — the wedge: steps paired with what they mean, on an evidence-based goal.
 2. **Pro / pay-once** — removes the biggest objection for a paid app: one payment, no subscription, no accounts.
@@ -38,11 +38,8 @@ Ordered by proof then objection, per `DESIGN.md`, not as a feature tour:
 
 ## Rebuilding the set
 
-From the repo root, with the hub cloned alongside and Pillow installed in `.venv`:
-
-```bash
-.venv/bin/python <hub>/tools/appstore_screenshots.py batch appstore/manifest.json
-```
+The poster tool reads `manifest.json` and the raws and writes the release folder. It is not part
+of this repo, so the maintainer runs it.
 
 Re-capturing the raws needs the app's screenshot mode. Two things to know:
 
@@ -56,7 +53,7 @@ Re-capturing the raws needs the app's screenshot mode. Two things to know:
 
 App Store Connect validates per slot: `iphone-6.9-*.png` (1320×2868) belongs in the 6.9" slot,
 `iphone-6.5-*.png` (1284×2778) in the 6.5" one. Both sizes are on Apple's accepted list, alongside
-the smaller 1290×2796 and 1242×2688 the 1.1.0 set used; the hub's tool moved to the larger ones. Uploading the wrong size to a slot is what the
+the smaller 1290×2796 and 1242×2688 the 1.1.0 set used; the poster tool moved to the larger ones. Uploading the wrong size to a slot is what the
 "dimensions of one or more screenshots are wrong" error means. `da/` goes under the Danish
 localization on the version page.
 
