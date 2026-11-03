@@ -33,7 +33,7 @@ WalkfulApp (@main)
 | `Core/Store/Store.swift` | StoreKit 2 (`@MainActor @Observable`). One-time "Walkful Pro" unlock; `isPro` from `Transaction.currentEntitlements`; `purchase()`/`restore()` + updates listener; `purchaseError` surfaces failed/unverified/pending purchases to the paywall. |
 | `Core/CSVExport.swift` | Builds the step-history CSV for the Pro export in Settings (share sheet). |
 | `Core/Haptics.swift` | Small haptics helpers (goal celebration, coach phase changes). |
-| `Core/Shared/SharedStore.swift` | Writes today's snapshot (steps + goal) to the App Group (`group.com.iamjarl.walkful`) for the widget. Compiled into both the app and the widget. |
+| `Shared/SharedStore.swift` | Writes today's snapshot (steps + goal) to the App Group (`group.com.iamjarl.walkful`) for the widget. Compiled into both the app and the widget. |
 | `Core/Diagnostics/MetricsSubscriber.swift` | MetricKit subscriber — crash/performance payloads delivered by the OS (no third-party SDK, no servers). |
 | `Core/Theme/WalkfulTheme.swift` | `Tokens` facade over `IAMJARLDesignTokens`; light/dark-adaptive `Color`s, the **Aurora** layer (`Tokens.Gradient.ring/bars/heroBackdrop`), and scalable `Tokens.TextStyle.*` (Dynamic Type). |
 | `Core/Theme/Components.swift` | Reusable views: `Card`/`.glassCard()`, `PrimaryButton`, `ProgressRing` (gradient + glow, respects Reduce Motion), `StatChip`, `WeekBars`, `TrendChartView`. |

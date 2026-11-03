@@ -13,12 +13,11 @@ WalkfulWidget/Info.plist
 .DS_Store
 /screenshots/
 
-# Python venv for the hub's screenshot tool
+# Python venv for the poster tooling
 .venv/
 
 # Agent and editor tooling stays local. The repos are indifferent to which AI is
-# used; AGENTS.md is the one agent-context file. List from the hub's
-# _template/.gitignore (2026-09-19).
+# used; AGENTS.md is the one agent-context file.
 .claude/
 CLAUDE.md
 CLAUDE.local.md

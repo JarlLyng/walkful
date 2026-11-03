@@ -107,18 +107,17 @@ walkful/
 │  │  ├─ Persistence/       # AppSettings (@Model)
 │  │  ├─ Notifications/     # NudgeScheduler + SedentaryMonitor (BackgroundTasks)
 │  │  ├─ Store/             # Store (StoreKit 2, Walkful Pro)
-│  │  ├─ Shared/            # SharedStore (App Group snapshot for the widget)
 │  │  ├─ Diagnostics/       # MetricsSubscriber (MetricKit)
 │  │  ├─ Theme/             # WalkfulTheme (IAMJARL tokens) + Components
 │  │  └─ Formatters.swift
+│  ├─ Shared/               # SharedStore (App Group snapshot for the widget)
 │  ├─ Features/             # Onboarding / Today / Insights / Coach / Paywall / Settings / Share
 │  └─ Resources/            # Assets.xcassets (layered app icon)
 ├─ WalkfulWidget/           # WidgetKit extension (Home + Lock Screen)
 ├─ Tests/                   # WalkfulTests unit tests (run via the Walkful scheme)
 ├─ appstore/                # App Store posters: raw captures, manifest, composed sets
 ├─ website/                 # Marketing site (static, SEO/GEO)
-├─ docs/                    # Process docs (roadmap, release guide, device checklist)
-├─ docs/history/            # Superseded pre-launch specs (Danish, June 2026)
+├─ docs/                    # Process docs (release guide, device checklist)
 ├─ ci_scripts/              # Xcode Cloud post-clone (xcodegen + SwiftPM resolve)
 ├─ .github/                 # CI workflow, Pages deploy, issue/PR templates
 └─ ARCHITECTURE.md CONTRIBUTING.md CHANGELOG.md   # Developer docs (English)
@@ -130,13 +129,11 @@ Generated and git-ignored: `Walkful.xcodeproj`, `Walkful/Info.plist`, `WalkfulWi
 
 - **[ARCHITECTURE.md](ARCHITECTURE.md):** how the code is organised and how data flows.
 - **[CONTRIBUTING.md](CONTRIBUTING.md):** setup, conventions, workflow, release.
-- **[docs/ROADMAP.md](docs/ROADMAP.md):** project status, how work is tracked, and where to start (handoff).
 - **[docs/app-store-release.md](docs/app-store-release.md):** App Store listing copy and the submit checklist.
 - **[docs/device-checklist.md](docs/device-checklist.md):** what to verify on a physical iPhone or Watch, the things the simulator can't show.
 - **[appstore/README.md](appstore/README.md):** how the App Store posters are captured and composed.
 - **[CHANGELOG.md](CHANGELOG.md):** notable changes.
 - **[AGENTS.md](AGENTS.md):** quick-start context for developers and coding agents, whichever you use.
-- **[docs/history/](docs/history/):** the pre-launch product and technical specs (Danish, June 2026). Kept for context; they describe what was planned, not what shipped.
 - **[website/](website/):** the marketing site and the privacy policy.
 
 ### Privacy

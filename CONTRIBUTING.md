@@ -8,7 +8,7 @@ Walkful is open source (AGPL-3.0) and maintained by one person. Contributions ar
 welcome, with two asks:
 
 - **Open an issue before a large PR** — the app is deliberately small and calm, and
-  not every good feature fits it (see the guardrails in [docs/ROADMAP.md](docs/ROADMAP.md)).
+  not every good feature fits it (see the guardrails under Code conventions).
   A quick issue saves you from building something that won't be merged.
 - By submitting a contribution you agree it's licensed under the project's
   [AGPL-3.0](LICENSE) license.
@@ -66,7 +66,9 @@ xcodebuild -project Walkful.xcodeproj -scheme Walkful -destination "id=$SIM" tes
 - **UI strings are localizable.** English is the source language; see Localization below. Anything user-facing that isn't a SwiftUI literal must be `LocalizedStringResource`, never `String`. Code comments may be Danish.
 - **Reuse components** in `Core/Theme/Components.swift` before adding new ones.
 - **Privacy is non-negotiable.** No networking, no analytics SDKs, no data leaving the device.
-- Round any displayed number; respect locale via `Int.stepsFormatted`.
+- **Meaning over vanity metrics.** A feature should help people move more, not maximise time in the app. No streak guilt, no leaderboards.
+- **Honest health claims.** Keep the "associated with" phrasing. Walkful is not a medical device.
+- Round any displayed number; respect locale via `Int.stepsFormatted` and `Double.oneDecimal()`.
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for module layout and the "add a new metric" recipe.
 
