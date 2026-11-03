@@ -86,17 +86,19 @@ struct RootView: View {
         }
         .task {
             if LaunchArgs.screenshots { return }
-            // Genetabler HealthKit-adgang ved cold launch. authState er ikke
-            // persisteret, og read-auth kan ikke aflæses — så et nyt kald er
-            // idempotent: iOS viser ikke systemarket igen hvis adgang allerede
-            // er givet, men authState bliver .authorized og dashboardet vises.
+            // Re-establish HealthKit access on a cold launch. authState is not
+            // persisted, and read authorization can't be queried, so asking
+            // again is how the app learns it may read. The call is idempotent:
+            // iOS doesn't show its sheet again once the user has answered, but
+            // authState becomes .authorized and the dashboard shows. Today's
+            // own load waits for that change (#194).
             if health.authState == .unknown { await health.requestAuthorization() }
             // A cold launch has no walk in progress, so any coach cues left by
             // an earlier process are orphans the user could not stop. The old
             // remove-everything in reschedule cleared these by accident; clear
             // them on purpose, here only, and not when nudge settings change.
             await SystemCueScheduler().removeAll()
-            // Hold planlagte nudges + sedentary-monitor i sync ved app-start.
+            // Keep the nudge settings and the sedentary monitor in sync at launch.
             await NudgeScheduler.reschedule(enabled: settings.nudgesEnabled,
                                             startHour: settings.nudgeStartHour,
                                             endHour: settings.nudgeEndHour)
