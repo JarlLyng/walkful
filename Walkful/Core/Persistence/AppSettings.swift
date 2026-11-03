@@ -1,8 +1,8 @@
 import Foundation
 import SwiftData
 
-/// Brugerens indstillinger — gemt on-device med SwiftData.
-/// Vi behandler den som en singleton (én række).
+/// The user's settings, stored on the device with SwiftData.
+/// Treated as a singleton: there is exactly one row (RootContainer makes it).
 @Model
 final class AppSettings {
     // NB: inline default values are REQUIRED for SwiftData lightweight migration.
@@ -13,26 +13,28 @@ final class AppSettings {
     var nudgesEnabled: Bool = true
     var hasOnboarded: Bool = false
 
-    /// Aktiv-tidsvindue for nudges (quiet hours uden for). 24-timers ur.
+    /// The active-hours window for nudges, on a 24-hour clock. A nudge can fire
+    /// when `nudgeStartHour <= hour < nudgeEndHour`, so the end hour itself is
+    /// already quiet, and every hour outside the window is quiet too.
     var nudgeStartHour: Int = 9
     var nudgeEndHour: Int = 21
 
-    /// Vis afstand i miles i stedet for kilometer.
+    /// Show distance in miles instead of kilometres.
     var useImperial: Bool = false
 
-    /// Lad det daglige mål stige gradvist når dit snit vokser (kun opad).
+    /// Let the daily goal rise in steps as the recent average grows. It never falls.
     var adaptiveGoal: Bool = false
 
-    /// Dagen vi sidst fejrede at målet blev nået — så haptikken kun udløses
-    /// én gang om dagen, ikke ved hvert app-start.
+    /// The day the goal was last celebrated, so the success haptic fires once a
+    /// day, not on every launch.
     var lastGoalCelebrationDay: Date = Date.distantPast
 
-    /// Vi beder kun om en App Store-anmeldelse én gang (ved et positivt øjeblik).
+    /// The App Store review prompt is asked for once ever, at a good moment.
     var hasRequestedReview: Bool = false
 
-    /// Dagen målet sidst blev ændret (manuelt eller adaptivt). Bruges til at
-    /// begrænse adaptive-justering til én gang om dagen og til at respektere
-    /// et manuelt sat mål samme dag.
+    /// The day the goal last changed, by hand or adaptively. It limits the
+    /// adaptive goal to one change a day, and keeps it from overriding a goal
+    /// the user set by hand that same day.
     var lastGoalAdjustmentDay: Date = Date.distantPast
 
     init(dailyGoal: Int = 7_000,
