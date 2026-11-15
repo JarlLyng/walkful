@@ -22,13 +22,26 @@ Category: **Health & Fitness** · Age rating: **4+** · Sign-in required: **No**
 
 ## 1. App Privacy ("nutrition label")
 
-App Store Connect → **App Privacy** → answer **"Data Not Collected"**.
+Since the release that ships Sentry (#222), the label is **no longer "Data Not Collected"**.
+Change it on release day, not before the build is live. App Store Connect → **App Privacy** →
+Edit, then answer that the app collects data, and declare exactly these:
 
-- Walkful reads Apple Health data **on-device only**; it is never transmitted, so it is *not collected*.
-- No analytics/advertising SDKs in the app. (Crash/perf via Apple MetricKit is handled by Apple under the user's existing system consent — not data you collect.)
+| Category | Data type | Linked to the user? | Used for tracking? | Purpose |
+|---|---|---|---|---|
+| Diagnostics | Crash Data | No | No | App Functionality |
+| Diagnostics | Performance Data | No | No | App Functionality |
+| Usage Data | Product Interaction | No | No | Analytics |
+
+The label then reads **Data Not Linked to You: Diagnostics, Usage Data**.
+
+- Health data is read from Apple Health **on-device only** and never transmitted. It is not
+  collected and appears nowhere on the label.
+- Product Interaction is the two counts: a main screen opened (from a fixed list) and move
+  reminders turned on. If the counts are ever removed, drop that row.
+- Nothing is linked: one shared Sentry user `anonymous`, no installation, device or vendor ID,
+  no IP address stored (docs/SENTRY.md). It must stay that way for "No" to be true.
+- `Walkful/PrivacyInfo.xcprivacy` declares the same three types; keep the two in step.
 - The marketing website uses cookieless Umami analytics, but that is the website, not the app.
-
-Result: the label reads **Data Not Collected** — a genuine differentiator.
 
 ---
 
@@ -49,24 +62,21 @@ Calm, private step tracker
 **Promotional text** (≤170 chars). The only listing field that can be changed
 without a submission, including while a version is in review, so it is where a
 new message can go out first. Jarl pastes it on every submission, so each release
-gets one. Current, live since 1.1.4 (read back from the store on 2026-10-13), 165 chars:
+gets one. Live since 1.1.4 (read back from the store on 2026-10-13), 165 chars. **It says
+"Nothing leaves your iPhone", which stops being true when the Sentry build ships**, so replace
+it on that release day:
 ```
 Every step counts. A calm, private walking tracker that turns your steps into meaning. Nothing leaves your iPhone, and Pro is one payment the whole family can share.
+```
+For the Sentry release and after, 164 chars:
+```
+Every step counts. A calm, private walking tracker that turns your steps into meaning. Your health data stays on your iPhone, and Pro is one payment for the family.
 ```
 Used for 1.1.3, the coach line, 164 chars:
 ```
 Every step counts. A calm, private walking tracker that turns your steps into meaning. The interval coach now guides you even with your phone locked in your pocket.
 ```
-The evergreen version to go back to once the coach news is old, 143 chars:
-```
-Every step counts. A calm, private walking tracker that turns your steps into meaning. No ads, no accounts, and nothing ever leaves your phone.
-```
-Alternative that leads with Family Sharing, 160 chars. Family Sharing is on for
-the Pro unlock and appears nowhere else in the listing until a description
-update ships:
-```
-Every step counts. A calm, private walking tracker that turns your steps into meaning. One purchase covers the whole family, and nothing ever leaves your phone.
-```
+Older lines that said "nothing ever leaves your phone" are retired with #222; don't reuse them.
 The trade is "no ads, no accounts" for the family line. Not much is lost: the
 subtitle and the description both still carry the no-subscription point, and
 privacy stays in the closing clause. The family line is carried nowhere else.
@@ -88,7 +98,7 @@ Apple Health gives you the numbers. Walkful gives them meaning: progress paired 
 
 WHY WALKFUL
 • Meaning over numbers. See what your activity means, not just a count.
-• Private by design. Everything stays on your device. No accounts, no servers, no ads, no data collection.
+• Private by design. Your health data stays on your device. No accounts, no ads, no tracking.
 • Calm, never pushy. No pace-shaming, no leaderboards, no dark patterns. You compete only against your own records.
 • Evidence-based. A suggested ~7,000-step goal, grounded in recent research.
 
@@ -108,7 +118,7 @@ WALKFUL PRO (one-time purchase, no subscription)
 
 Walkful Pro supports Family Sharing, so one purchase covers everyone in your Family Sharing group.
 
-Walkful collects nothing. Your health data is read from Apple Health, used only on your device, and never shared or sold.
+Your health data is read from Apple Health, used only on your device, and never sent, shared or sold. To fix bugs, Walkful sends anonymous crash reports and two usage counts, with no ID and nothing from Apple Health.
 
 Made by IAMJARL.
 ```
@@ -163,24 +173,20 @@ Walkful: Skridttæller
 Privat gå-app, ingen reklamer
 ```
 
-**Promotional text** (≤170). Current, live since 1.1.4 (read back 2026-10-13), 154 chars:
+**Promotional text** (≤170). Live since 1.1.4 (read back 2026-10-13), 154 chars. Like the
+English one, it stops being true with the Sentry build, so replace it on that release day:
 ```
 Hvert skridt tæller. En rolig, privat gå-app der gør dine skridt til mening. Intet forlader din iPhone, og Pro er én betaling, som hele familien kan dele.
+```
+For the Sentry release and after, 157 chars:
+```
+Hvert skridt tæller. En rolig, privat gå-app der gør dine skridt til mening. Dine sundhedsdata bliver på din iPhone, og Pro er én betaling for hele familien.
 ```
 Used for 1.1.3, the coach line, 146 chars:
 ```
 Hvert skridt tæller. En rolig, privat gå-app der gør dine skridt til mening. Intervalgang-coachen guider dig nu, også med telefonen låst i lommen.
 ```
-The evergreen version, 147 chars:
-```
-Hvert skridt tæller. En rolig, privat gå-app der gør dine skridt til mening. Ingen reklamer, ingen konti, og intet forlader nogensinde din telefon.
-```
-Alternative that leads with Family Sharing, also 147 chars. Use it in step with
-the English one rather than on its own, so the two storefronts say the same
-thing:
-```
-Hvert skridt tæller. En rolig, privat gå-app der gør dine skridt til mening. Ét køb dækker hele familien, og intet forlader nogensinde din telefon.
-```
+Older lines with "intet forlader nogensinde din telefon" are retired with #222.
 
 **Keywords** (≤100, this is 88). Unverified: the lookup API does not return the keyword
 field, so this is the 1.0.3 plan rather than a reading of what is live. Check it against
@@ -197,7 +203,7 @@ Apple Health giver dig tallene. Walkful giver dem mening: fremskridt koblet med 
 
 HVORFOR WALKFUL
 • Mening frem for tal. Se hvad din aktivitet betyder, ikke bare en optælling.
-• Privat i selve arkitekturen. Alt bliver på din enhed. Ingen konti, ingen servere, ingen reklamer, ingen dataindsamling.
+• Privat i selve arkitekturen. Dine sundhedsdata bliver på din enhed. Ingen konti, ingen reklamer, ingen sporing.
 • Rolig, aldrig anmassende. Ingen fart-skam, ingen ranglister, ingen manipulation. Du konkurrerer kun mod dine egne rekorder.
 • Evidensbaseret. Et foreslået mål på ca. 7.000 skridt, baseret på nyere forskning.
 
@@ -217,7 +223,7 @@ WALKFUL PRO (engangskøb, intet abonnement)
 
 Walkful Pro understøtter Family Sharing, så ét køb dækker alle i din familiedeling.
 
-Walkful indsamler ingenting. Dine sundhedsdata læses fra Apple Health, bruges kun på din enhed og bliver aldrig delt eller solgt.
+Dine sundhedsdata læses fra Apple Health, bruges kun på din enhed og bliver aldrig sendt, delt eller solgt. For at rette fejl sender Walkful anonyme crashrapporter og to optællinger af brug, uden ID og uden noget fra Apple Health.
 ```
 
 The CSV-export bullet is **new**. The live Danish description omits it while the English one
@@ -250,7 +256,7 @@ Suggested set (5–6), each with a short caption:
 3. Insights trends + year heatmap (dark) — "See your year at a glance."
 4. Mobility & fitness — "Health that matters: speed, steadiness, cardio fitness."
 5. Records + monthly recap — "Beat your own best."
-6. Privacy — "Everything stays on your phone. Data Not Collected."
+6. Privacy: "Your health data stays on your phone."
 
 Tip: use the framed brand colours (purple light / lime dark). Keep captions short.
 
@@ -276,8 +282,10 @@ non-consumable unlock. It unlocks the Insights tab and the interval-walking
 coach (reached from the Today tab). Both are otherwise locked behind a paywall.
 Please test the purchase via Sandbox.
 
-Privacy: all data is processed on-device. There are no servers, no accounts and
-no analytics. App privacy label: Data Not Collected.
+Privacy: health data is processed on-device and never transmitted. There are
+no accounts. The app sends anonymous crash reports, diagnostics and two usage
+counts to Sentry, with no identifier and nothing from HealthKit. App privacy
+label: Diagnostics and Usage Data, not linked to the user, not used for tracking.
 ```
 
 ---
@@ -293,4 +301,4 @@ no analytics. App privacy label: Data Not Collected.
 
 - Cut the CHANGELOG `[Unreleased]` section to a version heading with the date.
 - Tag the release (`git tag vX.Y.Z && git push --tags`) and update the status line in README/AGENTS.md.
-- Watch MetricKit crash reports in Xcode Organizer.
+- Watch crash reports and hangs in Sentry (project `walkful`, environment `production`).

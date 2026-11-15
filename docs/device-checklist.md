@@ -83,5 +83,6 @@ Watch where noted) before each App Store submission.
 - [ ] **Reduce Motion**: animations are suppressed (see Delight above).
 
 ## Crash/metrics
-- [ ] MetricKit subscriber is active (no third-party SDK) — nothing leaves the
-      device; "Data Not Collected" stays honest.
+- [ ] With a DSN in `Config/Sentry.local.xcconfig`, a crash shows up in Sentry
+      (environment `debug`) with user `anonymous`, no `device_app_hash`, and no
+      file paths. Nothing from Apple Health in the event (docs/SENTRY.md).

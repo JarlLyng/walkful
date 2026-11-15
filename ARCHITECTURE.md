@@ -1,6 +1,6 @@
 # Architecture
 
-Walkful is a small, single-target SwiftUI app with **no backend**. Privacy is an architectural property: there is no network layer, no accounts, and no database beyond on-device storage.
+Walkful is a small, single-target SwiftUI app with **no backend**. Privacy is an architectural property: there are no accounts and no database beyond on-device storage, and health data never leaves the device. The one thing that talks to the network is the anonymous crash and diagnostics reporting in `Core/Diagnostics/Telemetry.swift` (Sentry), which never carries an ID or anything from HealthKit ([docs/SENTRY.md](docs/SENTRY.md)).
 
 ## Principles
 
@@ -19,7 +19,7 @@ WalkfulApp (@main)
         └─ RootView         (if hasOnboarded)        // TabView: Today / Insights / Settings
 ```
 
-- `WalkfulApp.init()` starts `MetricsSubscriber` (MetricKit) and registers the `SedentaryMonitor` background task.
+- `WalkfulApp.init()` starts `Telemetry` (anonymous Sentry, only when the build has a DSN) and registers the `SedentaryMonitor` background task.
 - `RootContainer` owns the single `HealthKitService` and `Store` instances and injects them into the tabs (and `HealthKitService` into onboarding), so authorization and Pro entitlement are shared app-wide. It calls `store.load()` on appear.
 
 ## Modules
@@ -34,7 +34,7 @@ WalkfulApp (@main)
 | `Core/CSVExport.swift` | Builds the step-history CSV for the Pro export in Settings (share sheet). |
 | `Core/Haptics.swift` | Small haptics helpers (goal celebration, coach phase changes). |
 | `Shared/SharedStore.swift` | Writes today's snapshot (steps + goal) to the App Group (`group.com.iamjarl.walkful`) for the widget. Compiled into both the app and the widget. |
-| `Core/Diagnostics/MetricsSubscriber.swift` | MetricKit subscriber — crash/performance payloads delivered by the OS (no third-party SDK, no servers). |
+| `Core/Diagnostics/Telemetry.swift` | Anonymous Sentry: crashes, hangs, crash-free sessions, MetricKit diagnostics, and two counts (`screen.opened` from a fixed list, `reminders.turned_on`). One shared user, device IDs dropped, binary paths cut to file names, automatic breadcrumbs off, nothing from HealthKit. Off without a DSN, under XCTest and in screenshot mode. |
 | `Core/Theme/WalkfulTheme.swift` | `Tokens` facade over `IAMJARLDesignTokens`; light/dark-adaptive `Color`s, the **Aurora** layer (`Tokens.Gradient.ring/bars/heroBackdrop`), and scalable `Tokens.TextStyle.*` (Dynamic Type). |
 | `Core/Theme/Components.swift` | Reusable views: `Card`/`.glassCard()`, `PrimaryButton`, `ProgressRing` (gradient + glow, respects Reduce Motion), `StatChip`, `WeekBars`, `TrendChartView`. |
 | `Core/Screenshots/ScreenshotSupport.swift` | `LaunchArgs` — `-screenshots`/`-screen` flags for DEBUG sample-data captures (`-screen paywall` shows the locked Insights state). |

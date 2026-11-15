@@ -22,7 +22,7 @@ Calm, private step tracker
   <img src="appstore/1.1.3/en/iphone-6.9-2.png" alt="One payment. No subscription, no ads, no accounts. The Insights tab, offering a year of trends and a consistency heatmap as a one-time Pro unlock." width="240">
 </p>
 
-Every step counts. Walkful reads the steps your iPhone and Apple Watch already record in Apple Health, and shows what the day's walking does for your health, measured against about 7,000 steps rather than the 10,000 myth. It's for anyone who wants to walk a little more at their own pace, with no leaderboards and no pressure. The app is free, widgets and gentle move reminders included, and Walkful Pro is a one-time unlock with no subscription that adds Insights, the interval-walking coach and CSV export. Your health data stays on your iPhone: there's no account, no server and no ads, and the App Store privacy label reads Data Not Collected.
+Every step counts. Walkful reads the steps your iPhone and Apple Watch already record in Apple Health, and shows what the day's walking does for your health, measured against about 7,000 steps rather than the 10,000 myth. It's for anyone who wants to walk a little more at their own pace, with no leaderboards and no pressure. The app is free, widgets and gentle move reminders included, and Walkful Pro is a one-time unlock with no subscription that adds Insights, the interval-walking coach and CSV export. Your health data stays on your iPhone: there's no account, no server of its own and no ads. The app sends only anonymous crash reports and two usage counts, and the App Store privacy label reads Data Not Linked to You.
 
 ## For developers
 
@@ -89,7 +89,7 @@ How the code is organised and how data flows is in [ARCHITECTURE.md](ARCHITECTUR
 | Background | BackgroundTasks (sedentary check) + App Group (widget sharing) |
 | Widgets | WidgetKit (Home Screen + Lock Screen) |
 | Monetization | StoreKit 2, one-time non-consumable ("Walkful Pro") |
-| Diagnostics | MetricKit (Apple-native, no third-party SDK) |
+| Diagnostics | Sentry (sentry-cocoa), anonymous by recipe: crashes, hangs, MetricKit diagnostics and two counts. See [docs/SENTRY.md](docs/SENTRY.md) |
 | Design system | [IAMJARLDesignTokens](https://github.com/JarlLyng/iamjarl-design) via SPM |
 | Project generation | [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`project.yml`) |
 
@@ -100,14 +100,14 @@ walkful/
 ├─ project.yml              # XcodeGen project definition (source of truth)
 ├─ Walkful.storekit         # Local StoreKit config (testing only)
 ├─ Walkful/                 # App source
-│  ├─ WalkfulApp.swift      # @main, SwiftData container, MetricKit, BG task register
+│  ├─ WalkfulApp.swift      # @main, SwiftData container, Telemetry, BG task register
 │  ├─ RootView.swift        # RootContainer (routing) + RootView (tabs)
 │  ├─ Core/
 │  │  ├─ Health/            # HealthKitService
 │  │  ├─ Persistence/       # AppSettings (@Model)
 │  │  ├─ Notifications/     # NudgeScheduler + SedentaryMonitor (BackgroundTasks)
 │  │  ├─ Store/             # Store (StoreKit 2, Walkful Pro)
-│  │  ├─ Diagnostics/       # MetricsSubscriber (MetricKit)
+│  │  ├─ Diagnostics/       # Telemetry (anonymous Sentry)
 │  │  ├─ Theme/             # WalkfulTheme (IAMJARL tokens) + Components
 │  │  └─ Formatters.swift
 │  ├─ Shared/               # SharedStore (App Group snapshot for the widget)
@@ -138,7 +138,7 @@ Generated and git-ignored: `Walkful.xcodeproj`, `Walkful/Info.plist`, `WalkfulWi
 
 ### Privacy
 
-Walkful collects nothing. Health data is read from Apple Health with explicit, granular permission, used only on the device, and never transmitted. See [website/privacy.html](website/privacy.html).
+Health data is read from Apple Health with explicit, granular permission, used only on the device, and never transmitted. The app sends anonymous crash reports, diagnostics and two feature counts to Sentry: one shared user `anonymous` on every install, no device or installation ID, nothing from Apple Health, and nothing stored on the phone just to measure. In the App Store that is Diagnostics and Usage Data, not linked to you and not used for tracking. How it's kept anonymous is in [docs/SENTRY.md](docs/SENTRY.md); the policy is [website/privacy.html](website/privacy.html).
 
 ### Contributing
 

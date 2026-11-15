@@ -28,10 +28,10 @@ Out of scope:
 
 Walkful is a single-purpose walking app with a deliberately small attack surface:
 
-- **No backend.** No server, no database, no API endpoints. All data stays on the device.
+- **No backend.** No server of our own, no database, no API endpoints. Health data stays on the device.
 - **No accounts.** No sign-up, no authentication, no password storage.
 - **HealthKit is read on-device only.** Walkful reads step/activity data from HealthKit to show your progress; nothing is uploaded or sent off-device.
-- **No tracking.** No analytics in the app. The marketing website uses aggregate, cookieless analytics only.
+- **No tracking.** The app sends anonymous crash reports, diagnostics and two feature counts to Sentry: no ID, no IP address stored, nothing from HealthKit ([docs/SENTRY.md](docs/SENTRY.md)). The DSN is a public client key; the Sentry auth token lives only in Xcode Cloud. The marketing website uses aggregate, cookieless analytics only.
 - **Payments via Apple.** The one-time Pro unlock goes through StoreKit / Apple; the app stores no card or payment data.
 
 If you find a way to break any of those guarantees, I want to know.

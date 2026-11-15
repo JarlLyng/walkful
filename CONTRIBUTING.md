@@ -65,7 +65,7 @@ xcodebuild -project Walkful.xcodeproj -scheme Walkful -destination "id=$SIM" tes
 - **Accessibility:** label meaningful views; hide decorative charts (`accessibilityHidden`) when their values exist as text; respect Reduce Motion.
 - **UI strings are localizable.** English is the source language; see Localization below. Anything user-facing that isn't a SwiftUI literal must be `LocalizedStringResource`, never `String`. Code comments may be Danish.
 - **Reuse components** in `Core/Theme/Components.swift` before adding new ones.
-- **Privacy is non-negotiable.** No networking, no analytics SDKs, no data leaving the device.
+- **Privacy is non-negotiable.** Health data never leaves the device. The only network traffic is anonymous Sentry reporting through `Core/Diagnostics/Telemetry.swift`, and nothing from HealthKit may ever go into it: no event, breadcrumb, tag, attribute or count carries a step, a goal or a date. No other networking, no other analytics SDK. See [docs/SENTRY.md](docs/SENTRY.md).
 - **Meaning over vanity metrics.** A feature should help people move more, not maximise time in the app. No streak guilt, no leaderboards.
 - **Honest health claims.** Keep the "associated with" phrasing. Walkful is not a medical device.
 - Round any displayed number; respect locale via `Int.stepsFormatted` and `Double.oneDecimal()`.

@@ -7,8 +7,11 @@ Quick-start context for developers and AI assistants. How the app is actually bu
 Walkful is a calm, private step & walking tracker for iPhone. It reads your
 activity from Apple Health and turns it into meaningful daily progress and
 insights, grounded in walking science (~7,000 steps, not the 10,000 myth).
-Everything is processed and stored **on the device** — no accounts, no servers,
-no ads, no data collection. Its App Store privacy label is "Data Not Collected".
+Health data is processed and stored **on the device** and never leaves it: no
+accounts, no servers of its own, no ads. The app sends only anonymous crash reports,
+diagnostics and two feature counts to Sentry, with no ID and nothing from HealthKit
+(#222). Its App Store privacy label is Diagnostics and Usage Data, "Data Not Linked
+to You", not used for tracking.
 
 - **Developer:** Jarl / [IAMJARL](https://iamjarl.com)
 - **Website:** [walkful.iamjarl.com](https://walkful.iamjarl.com)
@@ -86,7 +89,7 @@ tracked in the hub's Walkful backlog; fold it into the next touch.
 
 ### Features that do NOT exist (common hallucination targets)
 - No accounts, login, servers, backend, or cloud sync — all on-device.
-- No ads, no subscription, no third-party analytics/tracking SDKs (crash/perf via Apple **MetricKit** only, on-device).
+- No ads, no subscription, no tracking. **Sentry is the only third-party SDK**, for anonymous crash reports, MetricKit diagnostics and two counts, under the portfolio's anonymous recipe (`docs/SENTRY.md`). No other analytics SDK, no session replay, no screenshots, no installation or device ID.
 - No social features, leaderboards, friends or challenges (you compete with your own records).
 - **No standalone Apple Watch app or complication yet** — Watch data flows in via Apple Health, but there is no Watch target.
 - No Android, no GPS route/map tracking, no calorie/diet tracking.
@@ -106,5 +109,5 @@ tracked in the hub's Walkful backlog; fold it into the next touch.
 
 ## Conventions
 - Design tokens come from the `IAMJARLDesignTokens` SPM package (Aurora layer on top). No hardcoded colors/spacing/radius/type.
-- Privacy-first by architecture: HealthKit is **read-only**; nothing leaves the device. Keep the "Data Not Collected" posture.
+- Privacy-first by architecture: HealthKit is **read-only**, and health data never leaves the device. **Nothing read from HealthKit or derived from it** (steps, distance, goals, streaks, dates) may go into any Sentry event, breadcrumb, tag, attribute or count. Telemetry changes go through `Core/Diagnostics/Telemetry.swift` and `docs/SENTRY.md`, and a new kind of data needs `PrivacyInfo.xcprivacy`, the privacy policy and the store label changed with it.
 - SwiftUI + SwiftData + HealthKit + StoreKit 2 + WidgetKit + BackgroundTasks. iOS 18 minimum.
