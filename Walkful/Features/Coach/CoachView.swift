@@ -26,6 +26,7 @@ struct CoachView: View {
             // timing the moment the screen comes back (#83).
             if newPhase == .active { coach.tick() }
         }
+        .onAppear { Telemetry.screenOpened(.coach) }
         #if DEBUG
         .onAppear {
             if LaunchArgs.screenshots && LaunchArgs.screen == "coach" {

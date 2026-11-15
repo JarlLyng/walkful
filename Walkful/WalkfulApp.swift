@@ -4,7 +4,7 @@ import SwiftData
 @main
 struct WalkfulApp: App {
     init() {
-        MetricsSubscriber.shared.start()
+        Telemetry.start()             // first, so a crash at launch is reported
         SedentaryMonitor.register()   // must register before launch completes
     }
 

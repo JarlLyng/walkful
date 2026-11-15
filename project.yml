@@ -22,6 +22,11 @@ packages:
   IAMJARLDesignTokens:
     url: https://github.com/JarlLyng/iamjarl-design
     from: 1.6.0
+  # Anonymous crash reports and feature counts (#222). App target only, never the
+  # widget. The recipe that keeps it anonymous is Walkful/Core/Diagnostics/Telemetry.swift.
+  Sentry:
+    url: https://github.com/getsentry/sentry-cocoa
+    from: 9.34.0
 targets:
   Walkful:
     type: application
@@ -30,7 +35,11 @@ targets:
       - path: Walkful
     dependencies:
       - package: IAMJARLDesignTokens
+      - package: Sentry
       - target: WalkfulWidget
+    configFiles:
+      Debug: Config/Sentry.xcconfig
+      Release: Config/Sentry.xcconfig
     entitlements:
       path: Walkful/Walkful.entitlements
       properties:
@@ -47,7 +56,9 @@ targets:
         UILaunchScreen: {}
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
-        NSHealthShareUsageDescription: "Walkful reads your steps, distance and stairs from Apple Health to show your daily progress. Your data never leaves your device."
+        NSHealthShareUsageDescription: "Walkful reads your steps, distance and stairs from Apple Health to show your daily progress. Your health data never leaves your device."
+        # Empty unless Config/Sentry.local.xcconfig sets it; Sentry then stays off.
+        SentryDSN: "$(SENTRY_DSN)"
         NSHealthUpdateUsageDescription: "Walkful only reads your activity to show your progress — it does not write any data to Apple Health."
         UIBackgroundModes:
           - fetch

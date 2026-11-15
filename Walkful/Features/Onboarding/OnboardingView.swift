@@ -54,7 +54,7 @@ struct OnboardingView: View {
         case 1:
             textBlock(
                 "Connect Apple Health",
-                "Walkful reads your steps, distance and stairs to show your progress. Your data never leaves your device, because we have no servers."
+                "Walkful reads your steps, distance and stairs to show your progress. Your health data never leaves your device."
             )
         case 2:
             VStack(alignment: .leading, spacing: Tokens.Spacing.xl) {

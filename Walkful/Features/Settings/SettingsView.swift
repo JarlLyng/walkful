@@ -47,7 +47,10 @@ struct SettingsView: View {
 
             Section("Nudges") {
                 Toggle("Move reminders", isOn: $settings.nudgesEnabled)
-                    .onChange(of: settings.nudgesEnabled) { _, _ in resync() }
+                    .onChange(of: settings.nudgesEnabled) { _, isOn in
+                        resync()
+                        if isOn { Telemetry.remindersTurnedOn() }
+                    }
 
                 if settings.nudgesEnabled {
                     Picker("From", selection: $settings.nudgeStartHour) {
@@ -148,9 +151,13 @@ struct SettingsView: View {
             }
 
             Section {
-                Label("All data stays on your device", systemImage: "lock.fill")
+                Label("Your health data stays on your device", systemImage: "lock.fill")
                     .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textSecondary)
+                // Said plainly, where the user looks for it (#222).
+                Text("Walkful sends anonymous crash reports and two usage counts, so bugs get fixed. They carry no ID and nothing from Apple Health.")
+                    .font(Tokens.TextStyle.caption)
+                    .foregroundStyle(Tokens.Palette.textTertiary)
             } header: {
                 Text("Privacy")
             } footer: {

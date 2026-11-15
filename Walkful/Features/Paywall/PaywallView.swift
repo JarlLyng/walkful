@@ -7,7 +7,7 @@ struct PaywallView: View {
     private let benefits: [(icon: String, title: LocalizedStringResource, body: LocalizedStringResource)] = [
         ("chart.bar.fill", "Insights", "Consistency heatmap, best time of day, brisk-minute trends and your lifetime distance."),
         ("figure.walk.motion", "Interval-walking coach", "Guided easy/brisk sessions with haptics. The evidence-based way to boost fitness."),
-        ("lock.shield.fill", "Still 100% private", "One payment. No subscription, no ads, nothing leaves your device.")
+        ("lock.shield.fill", "Still private", "One payment. No subscription, no ads, and your health data never leaves your device.")
     ]
 
     var body: some View {
@@ -78,6 +78,7 @@ struct PaywallView: View {
         // Launch-time load may have failed while the user was offline. They are
         // looking at the paywall now, so this is the moment to try again.
         .task { if !store.isProductAvailable { await store.loadProduct() } }
+        .onAppear { Telemetry.screenOpened(.paywall) }
         .alert("Purchase", isPresented: Binding(
             get: { store.purchaseError != nil },
             set: { if !$0 { store.clearPurchaseError() } }

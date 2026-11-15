@@ -37,4 +37,17 @@ SWIFTPM_DIR="Walkful.xcodeproj/project.xcworkspace/xcshareddata/swiftpm"
 mkdir -p "$SWIFTPM_DIR"
 cp "$(dirname "$0")/Package.resolved" "$SWIFTPM_DIR/Package.resolved"
 
+# The Sentry DSN (#222) comes from the SENTRY_DSN secret on the workflow and never
+# from git. It goes into Config/Sentry.local.xcconfig, which Config/Sentry.xcconfig
+# includes. An xcconfig reads "//" as a comment, so the URL's slashes are written
+# as $(SLASH). Without the secret the file isn't written and the DSN stays empty:
+# builds and tests run, Sentry stays off, and ci_pre_xcodebuild.sh stops an
+# archive, so a release can't ship without crash reports unnoticed.
+if [ -n "${SENTRY_DSN}" ]; then
+  printf 'SENTRY_DSN = %s\n' "$(printf '%s' "${SENTRY_DSN}" | sed 's#//#$(SLASH)$(SLASH)#')" > Config/Sentry.local.xcconfig
+  echo "ci_post_clone: wrote Config/Sentry.local.xcconfig from SENTRY_DSN"
+else
+  echo "ci_post_clone: SENTRY_DSN is not set, so this build has no Sentry DSN"
+fi
+
 echo "ci_post_clone: done — generated $(ls -d *.xcodeproj); Package.resolved in place: $(ls "$SWIFTPM_DIR/Package.resolved" 2>/dev/null || echo MISSING)"

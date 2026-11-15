@@ -3,6 +3,15 @@
 All notable changes to Walkful are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/); this project uses semantic-ish versioning.
 
+## [Unreleased]
+
+### Added
+- **Anonymous crash reports, with Sentry.** When the app crashes or hangs, a report goes to Sentry so the bug can be found and fixed, along with Apple's daily performance diagnostics and two counts: which main screen was opened, and that move reminders were turned on. Every install reports as the same anonymous user, with no installation ID, device ID or IP address, and nothing from Apple Health goes into any of it. Screenshots, session replay and automatic breadcrumbs are off. What is sent and how it was checked is in `docs/SENTRY.md` (#222).
+- **A privacy manifest** (`PrivacyInfo.xcprivacy`) declaring exactly that: crash data, performance data, other diagnostic data and product interaction, none linked to you, none used for tracking.
+
+### Changed
+- **The privacy wording everywhere now says what is true:** your health data never leaves your device, and the app sends anonymous crash reports and two usage counts. That covers Settings, onboarding, the paywall, the Health permission text, the privacy policy, the site and the store copy. The App Store privacy label moves from Data Not Collected to Data Not Linked to You with the release.
+
 ## [1.1.4] — 2026-10-12 — the week shows up, and a way to write
 
 ### Fixed

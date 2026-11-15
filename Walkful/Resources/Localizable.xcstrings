@@ -205,16 +205,6 @@
         }
       }
     },
-    "All data stays on your device": {
-      "localizations": {
-        "da": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alle data bliver på din enhed"
-          }
-        }
-      }
-    },
     "Alternate easy and brisk walking. A few brisk intervals can meaningfully boost your fitness. No running, no lycra required.": {
       "localizations": {
         "da": {
@@ -815,12 +805,12 @@
         }
       }
     },
-    "One payment. No subscription, no ads, nothing leaves your device.": {
+    "One payment. No subscription, no ads, and your health data never leaves your device.": {
       "localizations": {
         "da": {
           "stringUnit": {
             "state": "translated",
-            "value": "Én betaling. Intet abonnement, ingen reklamer, og intet forlader din enhed."
+            "value": "Én betaling. Intet abonnement, ingen reklamer, og dine sundhedsdata forlader aldrig din enhed."
           }
         }
       }
@@ -1095,12 +1085,12 @@
         }
       }
     },
-    "Still 100% private": {
+    "Still private": {
       "localizations": {
         "da": {
           "stringUnit": {
             "state": "translated",
-            "value": "Stadig 100 % privat"
+            "value": "Stadig privat"
           }
         }
       }
@@ -1375,22 +1365,32 @@
         }
       }
     },
-    "Walkful reads your steps to show today's progress. Your data never leaves your device, because we have no servers.": {
+    "Walkful reads your steps to show today's progress. Your health data never leaves your device.": {
       "localizations": {
         "da": {
           "stringUnit": {
             "state": "translated",
-            "value": "Walkful læser dine skridt for at vise dagens fremskridt. Dine data forlader aldrig din enhed, for vi har ingen servere."
+            "value": "Walkful læser dine skridt for at vise dagens fremskridt. Dine sundhedsdata forlader aldrig din enhed."
           }
         }
       }
     },
-    "Walkful reads your steps, distance and stairs to show your progress. Your data never leaves your device, because we have no servers.": {
+    "Walkful reads your steps, distance and stairs to show your progress. Your health data never leaves your device.": {
       "localizations": {
         "da": {
           "stringUnit": {
             "state": "translated",
-            "value": "Walkful læser dine skridt, distance og etager for at vise dit fremskridt. Dine data forlader aldrig din enhed, for vi har ingen servere."
+            "value": "Walkful læser dine skridt, distance og etager for at vise dit fremskridt. Dine sundhedsdata forlader aldrig din enhed."
+          }
+        }
+      }
+    },
+    "Walkful sends anonymous crash reports and two usage counts, so bugs get fixed. They carry no ID and nothing from Apple Health.": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Walkful sender anonyme crashrapporter og to optællinger af brug, så fejl kan blive rettet. De har intet ID og intet fra Apple Health."
           }
         }
       }
@@ -1581,6 +1581,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dit mål stiger i små trin, når dit gennemsnit vokser, og aldrig nedad. Du kan justere det når som helst."
+          }
+        }
+      }
+    },
+    "Your health data stays on your device": {
+      "localizations": {
+        "da": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dine sundhedsdata bliver på din enhed"
           }
         }
       }
