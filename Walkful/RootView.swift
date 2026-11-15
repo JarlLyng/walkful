@@ -75,6 +75,13 @@ struct RootView: View {
                 .tag(Tab.settings)
                 .tabItem { Label("Settings", systemImage: "gearshape") }
         }
+        .onChange(of: tab, initial: true) { _, tab in
+            switch tab {
+            case .today: Telemetry.screenOpened(.today)
+            case .insights: Telemetry.screenOpened(.insights)
+            case .settings: Telemetry.screenOpened(.settings)
+            }
+        }
         .onAppear {
             if LaunchArgs.screenshots {
                 switch LaunchArgs.screen {

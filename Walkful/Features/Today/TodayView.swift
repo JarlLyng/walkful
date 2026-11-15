@@ -347,7 +347,7 @@ struct TodayView: View {
                 Text("Connect Apple Health")
                     .font(Tokens.TextStyle.title)
                     .foregroundStyle(Tokens.Palette.textPrimary)
-                Text("Walkful reads your steps to show today's progress. Your data never leaves your device, because we have no servers.")
+                Text("Walkful reads your steps to show today's progress. Your health data never leaves your device.")
                     .font(Tokens.TextStyle.subheadline)
                     .foregroundStyle(Tokens.Palette.textSecondary)
                 PrimaryButton(title: "Continue") {

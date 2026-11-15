@@ -1,0 +1,11 @@
+// The Sentry DSN for the app target (#222). The real value is never committed.
+//
+// Locally: create Config/Sentry.local.xcconfig (git-ignored), copied from
+// Sentry.local.xcconfig.example. On Xcode Cloud, ci_scripts/ci_post_clone.sh
+// writes that file from the SENTRY_DSN secret.
+//
+// An xcconfig reads "//" as the start of a comment, so the DSN's two slashes are
+// written as $(SLASH)$(SLASH).
+SLASH = /
+SENTRY_DSN =
+#include? "Sentry.local.xcconfig"

@@ -9,6 +9,9 @@ Walkful.xcodeproj/
 Walkful/Info.plist
 WalkfulWidget/Info.plist
 
+# The Sentry DSN stays out of git (#222); see Config/Sentry.xcconfig
+Config/Sentry.local.xcconfig
+
 # macOS
 .DS_Store
 /screenshots/

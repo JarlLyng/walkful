@@ -1,0 +1,4 @@
+// Copy to Config/Sentry.local.xcconfig (git-ignored) to send a local build's
+// crash reports to Sentry. Without it, Sentry stays off. The DSN is under
+// Sentry → Settings → Projects → walkful → Client Keys.
+SENTRY_DSN = https:$(SLASH)$(SLASH)<key>@<org>.ingest.sentry.io/<project>
