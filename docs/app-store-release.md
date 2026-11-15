@@ -30,6 +30,7 @@ Edit, then answer that the app collects data, and declare exactly these:
 |---|---|---|---|---|
 | Diagnostics | Crash Data | No | No | App Functionality |
 | Diagnostics | Performance Data | No | No | App Functionality |
+| Diagnostics | Other Diagnostic Data | No | No | App Functionality |
 | Usage Data | Product Interaction | No | No | Analytics |
 
 The label then reads **Data Not Linked to You: Diagnostics, Usage Data**.
@@ -40,7 +41,11 @@ The label then reads **Data Not Linked to You: Diagnostics, Usage Data**.
   reminders turned on. If the counts are ever removed, drop that row.
 - Nothing is linked: one shared Sentry user `anonymous`, no installation, device or vendor ID,
   no IP address stored (docs/SENTRY.md). It must stay that way for "No" to be true.
-- `Walkful/PrivacyInfo.xcprivacy` declares the same three types; keep the two in step.
+- Other Diagnostic Data is MetricKit's diagnostics and hangs. Sentry's own manifest declares it,
+  and every portfolio app with Sentry does too.
+- `Walkful/PrivacyInfo.xcprivacy` declares the same four types; keep the two in step.
+- **The same day, after the label: merge the site PR (#224).** It carries the privacy policy and
+  site wording for this release, and the site deploys on every push to main.
 - The marketing website uses cookieless Umami analytics, but that is the website, not the app.
 
 ---

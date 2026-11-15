@@ -28,9 +28,10 @@ Nothing else. In particular:
   the day's steps, and an automatic breadcrumb can carry a control's on-screen text.
 - **No performance traces** (`tracesSampleRate = 0`).
 
-The App Store label for this is Diagnostics (Crash Data, Performance Data) and Usage Data
-(Product Interaction), all "Data Not Linked to You" and not used for tracking. The same three
-types are declared in [`Walkful/PrivacyInfo.xcprivacy`](../Walkful/PrivacyInfo.xcprivacy).
+The App Store label for this is Diagnostics (Crash Data, Performance Data, Other Diagnostic
+Data) and Usage Data (Product Interaction), all "Data Not Linked to You" and not used for
+tracking. Other Diagnostic Data is MetricKit's diagnostics and hangs. The same four types are
+declared in [`Walkful/PrivacyInfo.xcprivacy`](../Walkful/PrivacyInfo.xcprivacy).
 
 ## The recipe
 
@@ -74,6 +75,12 @@ Info.plist as `SentryDSN`, where `Telemetry` reads it.
 `SENTRY_DSN` is unset, isn't shaped like `https://<key>@<host>/<project>`, or didn't make it into
 `Config/Sentry.local.xcconfig` with the `$(SLASH)` form. Otherwise a release would ship with crash
 reports silently off. Builds and tests without an archive still run without it.
+
+**And the value the archive actually holds.** After the archive, `ci_scripts/ci_post_xcodebuild.sh`
+reads `SentryDSN` from the built app's Info.plist inside the archive and fails the build unless it
+is shaped `https://<key>@<host>/<project>`. That is the check that counts: it catches a DSN lost
+anywhere between the secret and the binary, however Xcode Cloud happens to build. A failed
+post-build script fails the build, so nothing goes on to TestFlight.
 
 ## Symbols
 
@@ -140,7 +147,8 @@ Any change to telemetry goes through `Telemetry.swift` and this file. A new kind
 needs, in the same pull request:
 
 - `Walkful/PrivacyInfo.xcprivacy`,
-- the privacy policy (`website/privacy.html`),
+- the privacy policy (`website/privacy.html`), in a separate pull request merged on the day
+  the release goes live, since the site deploys on every push to main,
 - the in-app privacy caption in Settings,
 - and the App Store privacy label, changed on the day the release goes out
   (`docs/app-store-release.md`).

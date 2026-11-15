@@ -22,7 +22,7 @@ Calm, private step tracker
   <img src="appstore/1.1.3/en/iphone-6.9-2.png" alt="One payment. No subscription, no ads, no accounts. The Insights tab, offering a year of trends and a consistency heatmap as a one-time Pro unlock." width="240">
 </p>
 
-Every step counts. Walkful reads the steps your iPhone and Apple Watch already record in Apple Health, and shows what the day's walking does for your health, measured against about 7,000 steps rather than the 10,000 myth. It's for anyone who wants to walk a little more at their own pace, with no leaderboards and no pressure. The app is free, widgets and gentle move reminders included, and Walkful Pro is a one-time unlock with no subscription that adds Insights, the interval-walking coach and CSV export. Your health data stays on your iPhone: there's no account, no server of its own and no ads. The app sends only anonymous crash reports and two usage counts, and the App Store privacy label reads Data Not Linked to You.
+Every step counts. Walkful reads the steps your iPhone and Apple Watch already record in Apple Health, and shows what the day's walking does for your health, measured against about 7,000 steps rather than the 10,000 myth. It's for anyone who wants to walk a little more at their own pace, with no leaderboards and no pressure. The app is free, widgets and gentle move reminders included, and Walkful Pro is a one-time unlock with no subscription that adds Insights, the interval-walking coach and CSV export. Your health data stays on your iPhone: there's no account, no server of its own and no ads. The app sends only anonymous crash reports and two usage counts, never linked to you.
 
 ## For developers
 
