@@ -110,10 +110,19 @@ final class Store {
     func forcePro() { isPro = true }
     #endif
 
+    /// Transactions that arrive later: an Ask to Buy a parent approves, a
+    /// purchase or restore on another device in the family, a refund. StoreKit
+    /// also hands over any transaction left unfinished at launch. Each verified
+    /// one is finished once Pro reflects it, as Apple asks, or StoreKit delivers
+    /// it again at every launch. One that doesn't verify stays unfinished.
     private func listenForTransactions() -> Task<Void, Never> {
         Task { [weak self] in
-            for await _ in Transaction.updates {
-                await self?.refreshEntitlement()
+            for await result in Transaction.updates {
+                guard let self else { return }
+                await self.refreshEntitlement()
+                if case .verified(let transaction) = result {
+                    await transaction.finish()
+                }
             }
         }
     }
