@@ -122,7 +122,7 @@ d.text((M, 222), "Every step counts.", font=fraunces(56), fill=CHARCOAL)
 
 facts_f = font(26, "Regular")
 y = 330
-for line in wrap(d, "A calm, private step tracker for iPhone. It all stays on your phone, and nothing scolds you for a quiet day.", facts_f, col_w):
+for line in wrap(d, "A calm, private step tracker for iPhone. Your health data stays on your phone, and nothing scolds you for a quiet day.", facts_f, col_w):
     d.text((M, y), line, font=facts_f, fill=SECONDARY)
     y += 38
 
